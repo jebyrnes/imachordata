@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Huabing Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Ecological SEMs and Composite Variables: What, Why, and How" />
+    <meta property="og:title" content="Ecological SEMs and Composite Variables: What, Why, and How" />
+    <meta property="twitter:title" content="Ecological SEMs and Composite Variables: What, Why, and How" />
+    
+
+    
+    <meta name="description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Ecological SEMs and Composite Variables: What, Why, and How-赵化冰的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/ecological-sems-and-composite-variables-what-why-and-how/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huabing Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/#scifund">#scifund</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/announcements">announcements</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/ascidians">ascidians</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/blog">blog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/climate-change">climate-change</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/feedback">feedback</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/field-notes">field-notes</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/food-web-networks-and-extinctions">food-web-networks-and-extinctions</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/howto">howto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/linkage">linkage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/meetings">meetings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/neat">neat</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/networks">networks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/openpub">openpub</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/paper-review">paper-review</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/professional-musings">professional-musings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/publishing">publishing</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/r">r</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/rantish">rantish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/research">research</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science">science</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-music-videos">science-music-videos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-online">science-online</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-parent">science-parent</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/sem">sem</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/shout-out">shout-out</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/silly">silly</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/statistics">statistics</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/talks">talks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tunicate-culinary-adventures">tunicate-culinary-adventures</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Ecological SEMs and Composite Variables: What, Why, and How</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Jarrett Byrnes
+			 
+			on 
+			Monday, May 2, 2011
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                <p>I&rsquo;m a HUGE fan of <a href="http://www.statsoft.com/textbook/structural-equation-modeling/">Structural Equation Modeling</a>.  For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.</p>
+
+<ol>
+<li><p>It&rsquo;s a method of teasing apart direct and indirect interactions in your data.</p></li>
+
+<li><p>It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.</p></li>
+
+<li><p>As it&rsquo;s formally presented, with path diagrams showing connections between variables, it&rsquo;s SUPER easy to link conceptual models with your data.  See <a href="http://dx.doi.org/10.1890/09-0464.1">Grace et al. 2010</a> for a handy guide to this.</p></li>
+</ol>
+
+<p>Also, there is a quite simple and intuitive R package for fitting SEMs, <a href="http://lavaan.org">lavaan</a> (LAtent VAriable Analysis). Disclaimer, I just hopped on board as a lavaan developer (yay!).  I&rsquo;ve also recently started a small project to find cool examples of SEM in the Ecological literature, and then using the provided information, <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan">post the models coded up in lavaan</a> so that others can see how to put some of these models together.</p>
+
+<p>As Ecologists, we often use latent variables to incorporate known measurement error of a quantity - i.e., a latent variable with a single indicator and fixed variance.  We&rsquo;re often not interested in the full power of latent variables - latents with multiple indicators.  Typically, this is because we&rsquo;ve actually measured everything we want to measure.  We&rsquo;re not like political scientists who have to quantify fuzzy things like Democracy, or Authoritarianism, or Gastronomicism.  (note, I want to live in a political system driven by gastronomy - a gastronomocracy!)</p>
+
+<p>However, we&rsquo;re still fascinated by the idea of bundling different variables together into a single causal effect, and maybe evaluating the relative contribution of each of those variables within a model.  In SEM, this is known as the creation of a Composite Variable.  This composite is still an unmeasured quantity - like a latent variable - but with no error variance, and with &ldquo;indicators&rdquo; actually driving the variable, rather than having the unmeasured variable causing the expression of its indicators.</p>
+
+<p>Let me give you an example.  Let&rsquo;s say we want to measure the effect of nutrients on diatom species richness in a stream.  You&rsquo;re particularly concerned about nitrogen.  However, you can&rsquo;t bring water samples back to the lab, so, you&rsquo;re relying on some moderately accurate nitrogen color strips, the biomass of algae (more algae = more nitrogen!), and your lab tech, Stu, who claims he can taste nitrogen in water (and has been proved to be stunningly accurate in the past).  In this case, you have a <strong>latent variable</strong>.  The true nitrogen content of the water is causing the readings by these three different indicators.</p>
+
+<p>A <strong>composite variable</strong> is a different beast.  Let&rsquo;s say we have the same scenario.  But, now you have really good measurements of nitrogen.  In fact, you have good measurements of both ammonium (NH4) and nitrate (NO3).  You want to estimate a &ldquo;nitrogen effect&rdquo;, but, you know that both of these different forms of N will contribute to the effect in a slightly different way.  You could just construct a model with effects going from both NO3 and NH4 to species richness.  If you want to represent the total &ldquo;Nitrogen Effect&rdquo; in your model, however, and evaluate the effect of each form of nitrogen on its total effect, you would create a composite.    The differences become clear when looking at the path diagram of each case.</p>
+
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.11-PM-1024x697.png" alt="" /></p>
+
+<p>Here, I&rsquo;m adopting the custom of observed variables in squares, latent variables in ovals, and composite variables in hexagons.  Note that, as indicators of nitrogen in the latent variable model, each observed indicator has some additional variation due to factors other than nitrogen - δi.  There is no such error in the composite variable model.  Also, I&rsquo;m showing that the error in the Nitrogen Effect in the composite variable model is indeed set to 0.  There are sometimes reasons where that shouldn&rsquo;t be 0, but that&rsquo;s another topic for another time.</p>
+
+<p>This may still seem abstract to you.  So, let&rsquo;s look at an example in practice.  One way we often use composites is to bring together a linear and nonlinear effect of a single variable.  For example, we know that often nutrient supply rates have a humped shape effect on species richness - i.e., the highest richness happens at intermediate supply rates.  One nice example of that is in a paper by Cardinale et al. in 2009 looking at relationships between <a href="http://dx.doi.org/10.1890/08-1038.1">manipulated nutrient supply, species richness, and algal productivity</a>.   To capture that relationship with a composite variable, one would have a &lsquo;nitrogen effect&rsquo; affected by N and N2.  This nitrogen effect would then affect local species richness.</p>
+
+<p>So, how would you code this model up in lavaan, and then evaluate it.</p>
+
+<p>Well, hey, <a href="http://www.esapubs.org/archive/ecol/E090/079/suppl-1.htm">the data from this paper are freely available</a>, so, let&rsquo;s use this as an example.  For a full replication of the model presented in the paper <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/cardinale_et_al_2008.r">see here</a>.  However, Cardinale et al. didn&rsquo;t use any composite variables, so, let&rsquo;s create a model of our own capturing the Nitrogen-Richness relationship while also accounting for local species richness being influenced by regional species richness.</p>
+
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.19-PM-1024x506.png" alt="" /></p>
+
+<p>In the figure above, we have the relationship between resource supply rate and local species richness on an agar plate to the left.  Separate lines are for separate streams.  The black line is the average fit with the supplied equation.  On the right, we have a path diagram representing this relationship, as well as the influence of regional species richness.</p>
+
+<p>So, we have a path diagram.  Now comes the tricky part.  Coding.  One thing about the current version of lavaan (0.4-8) is that it does not have a way to represent composite variables.  This will change in the future (believe me), but, it may take a while, so, let me walk you through the tricks of incorporating latent variables now.  Basically, there are four steps.</p>
+
+<ol>
+<li><p>Define the variable as a regression, where the composite is determined by it&rsquo;s causal variables.  Also, fix one of the effects to 1.  This gives your composite variable a scale.</p></li>
+
+<li><p>Specify that the composite has an error variance of 0.</p></li>
+
+<li><p>Now treat the composite as a latent variable.  It&rsquo;s indicators are it&rsquo;s response variables.  This may seem odd.  However, it&rsquo;s all just ways of specifying causal pathways - an indicator pathway and a regression pathway have the same meaning in terms of causality.  The software just needs something specified so that it doesn&rsquo;t go looking for our composite variable in our data.  Hence, defining it as a latent variable whose indicators are endogenous responses.  I actually find this helpful, as it also makes me think more carefully about what a composite variable is, and how too many responses may make my model not identified.</p></li>
+
+<li><p>Lastly, because we don&rsquo;t want to fix the effect of our composite on its response to 1, we&rsquo;ll have to include an argument in the fitting function that makes it not force the first latent variable loading to be set to 1.  We&rsquo;ll also have to specify that we then want the variance of the response to latent variables freely estimated.  Yeah, I know.  Note: this all can play havoc when you have both latent and composite variables, so be careful.  See <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/grace_bollen_2006.r">here</a> for an example.</p></li>
+
+<li><p>Everything else - other regression relationships, showing that nonlinearities are derived quantities, etc.</p></li>
+</ol>
+
+<p>OK, that&rsquo;s a lot.  How&rsquo;s it work in practice?  Below is the code to fit the model in the path diagram.  I&rsquo;ve labeled the steps in comments, and, included the regional ~ local richness relationship as well as the relationship showing that logN2 was derived from logN.  Note, this is a centered squared variable.  And, yes, all nitrogen values have been log transformed here.</p>
+
+<pre><code class="language-r">#simple SA model with N and regional SR using a composite
+#Variables: logN = log nutrient supply rate, logNcen2 = log supply rate squared
+# SA = Species richness on a patch of Agar, SR = stream-wide richness
+compositeModel&lt;-'
+	#1) define the composite, scale to logN
+	Nitrogen ~ 1*logN + logNcen2 #loading on the significant path!
+
+	#2) Specify 0 error variance
+	Nitrogen ~~ 0*Nitrogen
+
+  	#3) now, because we need to represent this as a latent variable
+  	#show how species richness is an _indicator_ of nitrogen
+  	Nitrogen =~ SA
+
+	#4) BUT, make sure the variance of SA is estimated
+  	SA ~~ SA
+
+	#Regional Richness also has an effect
+	SA ~ SR
+
+	#And account for the derivation of the square term from the linear term
+	logNcen2 ~ logN
+  	'
+
+ # we specify std.lv=T so that the Nitrogen-SA relationship isn't fixed to 1
+ compositeFit &lt;- sem(compositeModel, data=cards, std.lv=T)
+</code></pre>
+
+<p>Great!  It should fit just fine.  I&rsquo;m not going to focus on the regional relationship, as it is predictable and positive.  Moreover, when we look at the results, two things immediately pop out at us about the effect of nutrient supply rate.</p>
+
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA                0.362    0.438    0.827    0.408
+
+Regressions:
+  Nitrogen ~
+    logN              1.000
+    logNcen2         -1.311    1.373   -0.955    0.340
+</code></pre>
+
+<p>Wait, what?  The Nitrogen effect was not detectably different from 0?  Nor was there a nonlinear effect?  What&rsquo;s going on here?</p>
+
+<p>What&rsquo;s going on is that the scale of the composite is affecting our results.  We&rsquo;ve set it to 1.  Whenever you are fixing scales, you should always check and see, what would happen if you changed which path was set to 1.  So, we can simply set the scale to the nonlinear variable, refit the model, and see if this makes a difference.  If it doesn&rsquo;t, then that means there is no nitrogen effect at all!</p>
+
+<p>So, change</p>
+
+<pre><code class="language-r">Nitrogen ~ 1*logN + logNcen2
+</code></pre>
+
+<p>to</p>
+
+<pre><code class="language-r">Nitrogen ~ logN + 1*logNcen2
+</code></pre>
+
+<p>And, now let&rsquo;s see the results&hellip;..</p>
+
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA               -0.474    0.239   -1.989    0.047
+
+Regressions:
+  Nitrogen ~
+    logN             -0.763    0.799   -0.955    0.340
+    logNcen2          1.000
+</code></pre>
+
+<p>Ah HA!  Not only is the linear effect not different from 0, but now we see that fixing the nonlinear effect allows the nutrient signal to come through.</p>
+
+<p>But wait, you may say, that effect is negative?  Well, remember that the scale of the nitrogen effect is the same as the nonlinear scale.  And, a positive hump-shaped relationship will have a negative squared term.  So, given how we&rsquo;ve setup the model, yes, that should be negative.</p>
+
+<p><em>whew!</em>  That was a lot.  And this for a very simile model involving composites and nonlinearities.  I thought I&rsquo;d throw that out as it&rsquo;s a common use of composites, and interpreting nonlinearities in SEMs is always a little tricky and worth bending your brain around.  Other uses of composites include summing up a lot of <em>linear</em> quantities, a composite for the application of treatments, and more.  But, this should give you a good sense of what they are, how to code them in lavaan, and how to use them in the future.</p>
+
+<p>For a more in depth treatment of this topic, and latent variables versus composites, I urge you to check out <a href="http://pubs.usgs.gov/of/2006/1363/">this excellent piece by Jim Grace and Ken Bollen</a>.  Happy model fitting!</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />Huabing Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/easy-upgrading-of-r/" data-toggle="tooltip" data-placement="top" title="Easy Upgrading of R">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/yo-were-climate-scientists/" data-toggle="tooltip" data-placement="top" title="Yo!  We&#39;re Climate Scientists! ">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ascidian" title="ascidian">
+                            ascidian
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blog" title="blog">
+                            blog
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/climate-change" title="climate-change">
+                            climate-change
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/experiment" title="experiment">
+                            experiment
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/food-web" title="food-web">
+                            food-web
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ggplot2" title="ggplot2">
+                            ggplot2
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kelp-forest" title="kelp-forest">
+                            kelp-forest
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/power-analysis" title="power-analysis">
+                            power-analysis
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="r">
+                            r
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rb-editor-selection" title="rb-editor-selection">
+                            rb-editor-selection
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/sea-squirt" title="sea-squirt">
+                            sea-squirt
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/tunicate" title="tunicate">
+                            tunicate
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/urchins" title="urchins">
+                            urchins
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="Huabing Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Huabing Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

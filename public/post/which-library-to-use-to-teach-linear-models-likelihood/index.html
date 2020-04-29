@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Huabing Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Which library to use to teach linear models &amp; likelihood" />
+    <meta property="og:title" content="Which library to use to teach linear models &amp; likelihood" />
+    <meta property="twitter:title" content="Which library to use to teach linear models &amp; likelihood" />
+    
+
+    
+    <meta name="description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Which library to use to teach linear models &amp; likelihood-赵化冰的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/which-library-to-use-to-teach-linear-models-likelihood/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huabing Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/#scifund">#scifund</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/announcements">announcements</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/ascidians">ascidians</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/blog">blog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/climate-change">climate-change</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/feedback">feedback</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/field-notes">field-notes</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/food-web-networks-and-extinctions">food-web-networks-and-extinctions</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/howto">howto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/linkage">linkage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/meetings">meetings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/neat">neat</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/networks">networks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/openpub">openpub</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/paper-review">paper-review</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/professional-musings">professional-musings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/publishing">publishing</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/r">r</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/rantish">rantish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/research">research</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science">science</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-music-videos">science-music-videos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-online">science-online</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-parent">science-parent</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/sem">sem</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/shout-out">shout-out</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/silly">silly</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/statistics">statistics</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/talks">talks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tunicate-culinary-adventures">tunicate-culinary-adventures</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Which library to use to teach linear models &amp; likelihood</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Jarrett Byrnes
+			 
+			on 
+			Monday, January 9, 2017
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                <p>I&rsquo;ve been teaching likelihood to grad students for the past few years using the wonderful <a href="https://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a> package from Ben Bolker. I really love it&rsquo;s flexibility and the way you can get students into fitting anything their imagination can countenance. But there&rsquo;s a small cost to that. First, their imagination, when they first meet likelihood, is&hellip;.not ready. I teach linear models using least squares, then likelihood, then Bayes, in order to show the full range of inferential possibilities. In the past, when I got to likelihood not only did I showcase the possibilities for fitting a straight line with a normal error distribution, but I also inserted the possibility of other error distributions and at least hinted at the possibility of other shapes of lines.</p>
+
+<p>I also taught them the canned &ldquo;formula&rdquo; interface to the <em>mle2</em> function as well as how to write a function for a model - thus introducing them to the wild world of optimizers.</p>
+
+<p>In this year&rsquo;s iteration, I&rsquo;ve been trying to pair a lot back, and move from teaching loops and the like to teaching <em>dplyr</em> and a more functional programming style. We hadn&rsquo;t even hit functions by the time we hit likelihood (and didn&rsquo;t ever - but that&rsquo;s partially due to this being v 2.0 of my intro class, and functions will be hit in v 2.1). So I only taught straight lines with a normal error distribution using the formula interface.</p>
+
+<p>It&hellip;went OK. Given that we move next into <a href="http://mc-stan.org/interfaces/rstanarm">rstanarm</a> for Bayes, the lack of a common syntax with both least squares and our Bayesian efforts was a bit more jarring this year. Particularly given the need to supply start values, coefficient names, and the issues one quickly runs into when you need to put limits on parameters, like standard deviations.</p>
+
+<p>So in thinking about what to do, I went back to <em>glm</em> as an easier way to introduce fitting linear models with likelihood - particularly as then it&rsquo;s an easy slide to _stan<em>glm</em>. But <a href="https://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a> provides some nice tools - it&rsquo;s implementation of <em>profile</em> is so straightforward - although I make students do that by hand anyway. In <em>glm</em>, the resulting profile plots are kinda wonky and take too much explanation.</p>
+
+<p>But&hellip;. then someone pointed out the <em>offset</em> argument that lets you fix. So, let&rsquo;s say you have the following data frame.</p>
+
+<pre><code>library(dplyr)
+adf %
+  mutate(y=rnorm(100, 5*x, 90))
+</code></pre>
+
+<p>You can fit this with glm and check out the coefficients</p>
+
+<pre><code>summary(glm(y ~ x, data=adf, family=gaussian())
+</code></pre>
+
+<p>But, what if you want to get the profile likelihood for the intercept? Using offset, you can fix a coefficient value. Say, to 1 or 2, for the slope.</p>
+
+<pre><code class="language-r">glm(y ~ 1, offset=2*x, data=adf)
+glm(y ~ 1, offset=1*x, data=adf)
+</code></pre>
+
+<p>Vundebar!</p>
+
+<p>Now, we can wrap this in with dplyr. I&rsquo;m going to do this inefficiently (fit the model twice) as I&rsquo;m trying to figure out how to do this without map. Which also was not a huge success - I need to give it more time. Functions and map. These are what needs to be hit next year a bit more solidly.</p>
+
+<pre><code>### Fit a bunch of slope coefficients to make a profile
+### for the intercept
+coefFrame %
+  rowwise() %&gt;%
+  mutate(int = coef(glm(y ~ 1, offset=b1*x, data=adf)),
+         LL = logLik(glm(y ~ 1, offset=b1*x, data=adf))[1])
+
+plot(LL ~ b1, data=coefFrame)
+</code></pre>
+
+<p><a href="http://www.imachordata.com/?attachment_id=1814"><img src="http://www.imachordata.com/wp-content/uploads/2017/01/Rplot03-300x185.jpeg" alt="rplot03" /></a></p>
+
+<p>Works great!</p>
+
+<p>Now we can get the upper and lower 95% CI.</p>
+
+<pre><code>critVal %
+  filter(LL&gt;critVal) %&gt;%
+  slice(c(1,n()))
+</code></pre>
+
+<p>Again, straightforward.</p>
+
+<p>Hrm.</p>
+
+<p>Given that I&rsquo;m not using the full power of bbmle, and getting into the nitty gritty of algorithms, etc., slows things down - and that by jettisoning that weight I think I can fill it with a jump right into AIC rather than wait until we hit with MLR, this simple example makes me thing that next year&hellip; yeah, it&rsquo;s time to introduce the GLM function sooner and leave bbmle for semester 2.</p>
+
+<p>Note, you can do this with <em>lm</em> and an offset argument as well. But, by introducing, as I ponder this, I think that perhaps we can begin to think about non-normality earlier? Maybe? I need to ponder this.</p>
+
+<p>Code in <a href="https://gist.github.com/jebyrnes/37f01b1c231c17e7dfff888ca5392825">https://gist.github.com/jebyrnes/37f01b1c231c17e7dfff888ca5392825</a></p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />Huabing Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/linear-model-power-analysis-with-dplyr/" data-toggle="tooltip" data-placement="top" title="Linear Model Power Analysis with Dplyr">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/introducing-the-open-derby-guest-post/" data-toggle="tooltip" data-placement="top" title="Introducing the Open Derby (guest post)">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ascidian" title="ascidian">
+                            ascidian
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blog" title="blog">
+                            blog
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/climate-change" title="climate-change">
+                            climate-change
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/experiment" title="experiment">
+                            experiment
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/food-web" title="food-web">
+                            food-web
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ggplot2" title="ggplot2">
+                            ggplot2
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kelp-forest" title="kelp-forest">
+                            kelp-forest
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/power-analysis" title="power-analysis">
+                            power-analysis
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="r">
+                            r
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rb-editor-selection" title="rb-editor-selection">
+                            rb-editor-selection
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/sea-squirt" title="sea-squirt">
+                            sea-squirt
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/tunicate" title="tunicate">
+                            tunicate
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/urchins" title="urchins">
+                            urchins
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="Huabing Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Huabing Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

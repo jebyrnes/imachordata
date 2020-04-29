@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Huabing Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?" />
+    <meta property="og:title" content="A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?" />
+    <meta property="twitter:title" content="A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?" />
+    
+
+    
+    <meta name="description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?-赵化冰的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huabing Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/#scifund">#scifund</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/announcements">announcements</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/ascidians">ascidians</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/blog">blog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/climate-change">climate-change</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/feedback">feedback</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/field-notes">field-notes</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/food-web-networks-and-extinctions">food-web-networks-and-extinctions</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/howto">howto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/linkage">linkage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/meetings">meetings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/neat">neat</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/networks">networks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/openpub">openpub</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/paper-review">paper-review</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/professional-musings">professional-musings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/publishing">publishing</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/r">r</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/rantish">rantish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/research">research</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science">science</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-music-videos">science-music-videos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-online">science-online</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-parent">science-parent</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/sem">sem</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/shout-out">shout-out</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/silly">silly</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/statistics">statistics</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/talks">talks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tunicate-culinary-adventures">tunicate-culinary-adventures</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Jarrett Byrnes
+			 
+			on 
+			Tuesday, December 27, 2011
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                <p><em>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions.  For an introduction and list of other posts, <a href="http://www.imachordata.com/?p=951">see here</a>.</em></p>
+
+<p>So, in my <a href="http://www.imachordata.com/?p=965">last post</a> (notebook entry?), I introduced a new framework for understanding how the food web structure of a predator-prey food web can affect the consequences of extinction for the ability of predators to control their prey. Nice, no? But two things stick out. 1) Really? I mean, this is pretty and such, but does this match anything we&rsquo;ve seen in nature? 2) So&hellip;what if we don&rsquo;t know the precise structure of a food web, but, rather, just some <a href="http://en.wikipedia.org/wiki/Ecological_network">statistical properties</a>, like linkage density, or degree distribution? What&rsquo;s your fancy theory going to do for us now?</p>
+
+<p>So, keeping our &ldquo;Master Food Web&rdquo; in mind, and that we&rsquo;re zooming on on a particular component, I&rsquo;ll address those two questions with a little simulation, a little probability math, and hopefully have you convinced, excited for more, and coming up with all of your own spin off ideas. Or, you can show me how I&rsquo;m full of it.</p>
+
+<p>[caption id=&ldquo;attachment_969&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;457&rdquo; caption=&ldquo;Let&rsquo;s zoom in on one part of the general food web&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2011/11/2-level-zoom.png" alt="" />[/caption]</p>
+
+<p>First, a quick review for those of you who didn&rsquo;t commit to memory the discussion from <a href="http://www.imachordata.com/?p=965">last time</a>. We&rsquo;re interested in knowing the change in the probability of prey being eaten given some number, E, of predator extinctions. I showed that we can calculate the average probability of extinction for each prey item if we know it&rsquo;s number of predators (Di for prey item i) and the diversity of predators (Sp) using the density function of the hypergeometric distribution (dh) such that</p>
+
+<p>p(eaten | E) = 1-dh(0; Di, Sp-Di, Sp-E)    <em>(1)</em></p>
+
+<p>We can then average this over all prey to get the average probability of being eaten for all prey. And, remember, if it&rsquo;s just predator extinctions we&rsquo;re concerned with, then the probability of energy getting to the predator trophic level is the same as p(eaten).</p>
+
+<p><strong>Verification</strong>
+Great, so, can we trust this approach? Consider the results of a <a href="http://dx.doi.org/10.1126/science.1160854">totally awesome paper</a> by Finke and colleagues where they were able to manipulate diet breadth of three species of parasitoid. Broadly, the found that with all generalists, diversity didn&rsquo;t matter bupkiss for the control of prey. But with specialists, mixtures of parasitoids were better able to control prey. So, one would predict that as average number of prey consumed per predator increases, the relationship between number of predator species and the probability of prey being eaten should go from being linear to quickly saturating at 1.</p>
+
+<p>So, let&rsquo;s take three food webs. In web 1, we have all specialists. In web 2, we have one specialist, and two predators that eat two prey. In web 3, we have all generalists.</p>
+
+<p>Based on the insights of Finke et al.&rsquo;s work, we would predict that in web 1, we should have a nice linear relationship between predator species richness (that&rsquo;s species left after extinction). In web 2, we should start to see some curvature, as p(eaten) increases at lower levels of predator species richness. And in web 3, the only time we should see a value other than 1 is if there are no predators left - total predator extinction! And, indeed, that&rsquo;s precisely what we see in the figure below.</p>
+
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/12/Screen-shot-2011-12-07-at-2.55.57-PM.png" alt="" /></p>
+
+<p>And to see this over a much wider range of possible food webs, here&rsquo;s a figure showing curves for all possible five predator, five prey food webs. I&rsquo;ve colored the lines for each simulation by linkage density (that&rsquo;s number of feeding links divided by total number of species). I&rsquo;m plotting this with E on the x-axis again (brain flip!) for my own clarity. If you want to follow along at home, <a href="https://gist.github.com/1445197">here&rsquo;s the simulation code</a>.</p>
+
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/12/pEatenAllLD.png" alt="" /></p>
+
+<p>As you can see, the higher linkage density, the more quickly saturating the relationship.</p>
+
+<p><strong>Getting Away from Specific Food Web Structures</strong>
+OK, but, we don&rsquo;t always know the diet of every single species in a food web. Indeed, we often only know the general statistical properties of a web. Robust though that data may be, how can we incorporate it into our the framework we have here?</p>
+
+<p>Now, Di seems to be the place where statistical properties of a food web may enter the picture. It would be great if we could somehow use the average value of Di, or maybe it&rsquo;s mean and variance, or the power coefficient, or something. The sticking point is that this is a nonlinear equation, so, Jensen&rsquo;s inequality says, &ldquo;Nope!&rdquo; to just plugging in something in place of Di. However, we can use the knowledge that Di is limited to be equal to or less than Sp, and that Di is discrete. We can then just apply some simple probability math - namely, how to estimate a mean from an arbitrary discrete distribution. Let&rsquo;s assume that the in-degree distribution of the prey (i.e., their number of predators) follows some statistical distribution, F(D). We can then get the average value of p(eaten) with the following:</p>
+
+<p>$latex p(eaten | E) = 1-\sum\limits<em>{D=1}^{S</em>{p}}{p(eaten|E, D)F(D)} $    <em>(3)</em></p>
+
+<p>So, as long as you know the degree distribution, the number of predators and prey, you can plug in anything you&rsquo;d like. Simplicity itself, no? You can also use this approach to solve for other <a href="http://en.wikipedia.org/wiki/Moment_(mathematics)">moments</a>, such as the variance or more.  I like it.  OK, onwards to thinking about prey extinction, and then to more hairy territory.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />Huabing Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/a-probabilistic-look-at-predators-prey-and-extinctions/" data-toggle="tooltip" data-placement="top" title="A Probabilistic Look at Predators, Prey, and Extinctions">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/prey-loss-in-different-food-web-structures-weve-been-here-before/" data-toggle="tooltip" data-placement="top" title="Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ascidian" title="ascidian">
+                            ascidian
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blog" title="blog">
+                            blog
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/climate-change" title="climate-change">
+                            climate-change
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/experiment" title="experiment">
+                            experiment
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/food-web" title="food-web">
+                            food-web
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ggplot2" title="ggplot2">
+                            ggplot2
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kelp-forest" title="kelp-forest">
+                            kelp-forest
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/power-analysis" title="power-analysis">
+                            power-analysis
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="r">
+                            r
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rb-editor-selection" title="rb-editor-selection">
+                            rb-editor-selection
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/sea-squirt" title="sea-squirt">
+                            sea-squirt
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/tunicate" title="tunicate">
+                            tunicate
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/urchins" title="urchins">
+                            urchins
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="Huabing Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Huabing Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

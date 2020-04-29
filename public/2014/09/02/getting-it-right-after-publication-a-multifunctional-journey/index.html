@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Getting it Right - after Publication: A Multifunctional Journey?" />
+<meta property="og:description" content="Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.
+Earlier this year, along with a great cohort of colleagues, I birthed a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions. We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&rsquo;t matter." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/" />
+<meta property="article:published_time" content="2014-09-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2014-09-02T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Getting it Right - after Publication: A Multifunctional Journey?"/>
+<meta name="twitter:description" content="Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.
+Earlier this year, along with a great cohort of colleagues, I birthed a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions. We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&rsquo;t matter."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/">
+
+    
+    <title>Getting it Right - after Publication: A Multifunctional Journey? &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Getting it Right - after Publication: A Multifunctional Journey?</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Sep 2, 2014</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p>Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.</p>
+<p>Earlier this year, along with a <a href="https://www.nceas.ucsb.edu/projects/12560">great cohort of colleagues</a>, I birthed <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12143/abstract">a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions</a>.  We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&rsquo;t matter.</p>
+<p>This was a problem that had been vexing the field of biodiversity-ecosystem-function, or, really, anyone who wanted to look at multiple functions. Our group spent multiple sessions bashing our heads against a wall trying to derive a solid analytic strategy to look at changes in so-called <em>multifunctionality</em> and in the end came up with something that I&rsquo;m pretty proud of.  The basic idea of our approach was to look at the slope of the relationship between a predictor and the number of functions ≥ some threshold of their maximum - but then do it for lots of thresholds.  Why is it important to looks at lots of thresholds?  Well, if you look at the lines for each choice of threshold, you get something like this:</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/lineplot.jpeg" alt="lineplot"></p>
+<p>Note, that&rsquo;s from the <a href="https://github.com/jebyrnes/multifunc">multifunc R package</a> vignette, and its the analysis from our paper.</p>
+<p>Anyway, you can see how the slope and intercept change with different threshold choices. We eventually looked at how slope changes with threshold, and used that to divine a fingerprint of multifunctionality. But, a plot of threshold v. slope - it&rsquo;s kind of abstract, and can be hard to parse.  It was the best we could do, though, as we thought and thought about it.</p>
+<p>While working on a recent analysis, I began to wonder - one of the key numbers we want is something like, how does multifunctionality change with the addition or removal of one species?  We can look at how one function changes with diversity - but we still don&rsquo;t have a good something with our predictor on the X-axis.  And yet, the question I want to answer is key if we want to think about the consequences of, say, losing species for a multifunctional world.</p>
+<p>Discussing this with Jon Lefcheck, I was suddenly struck by something he had done in a figure on a manuscript. He drew a plot like the one I showed above, only, he also put a line across the top at the maximum number of functions observed in an experiment. I noticed that as my eye moved across the plot - from low to high diversity - I could see the color change along the line, indicating that the maximum number of functions were able to hit progressively higher levels of function. At low levels, nothing was able to hit any threshold. At high levels, a few were.  So&hellip;one could in theory plot diversity against the highest threshold that all of the observed functions could hit all at once.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/lines2.jpeg" alt="Lines drawn on top of the same figure for 5 functions and for 2 functions. Let your eye wander along them and note the change in color. Also, note the weird optical illusion at F=2. Yes, that line is actually straight."></p>
+<!-- raw HTML omitted -->
+<p>Moreover, if I were to, say, draw a line at a lower number of functions, I would see the same pattern - but the relationship would change. Now, higher thresholds could be reached by a lower number of functions - but, eyeballing it, it looked like the linearity changed. In some ways, it made me think of, in the BEF literature, if we have only one function, we get a saturating curved relationship between diversity and function. But for multifunction, a few of us have long wondered if we might get a more linear relationship.</p>
+<p>So, for the German example, I decided to whip up some <a href="https://gist.github.com/jebyrnes/24621cd599e64594b0f6">simple code</a> to explore the relationship between diversity, number of functions, and maximum threshold those functions can achieve. I used the fitted model, and then just calculated which thresholds could achieve some number of functions at a given level of diversity, and grabbed the maximum. The results are interesting.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/newmf.jpeg" alt="newmf"></p>
+<p>You can see that fewer functions can simultaneously achieve a higher threshold - this is predictable. But there&rsquo;s a suggestion that the curvilinearity of the relationship switches from linear to concave-up as more functions are considered.  That&rsquo;s it&rsquo;s linear to begin with is notable, as with few functions I would expect more concave-down-ness. And you kinda get that if you run it down to one function, but, this site in general in earlier papers didn&rsquo;t have an incredibly strong saturating relationship compared to some other classic examples.</p>
+<p>Overall, while it takes a bit of a moment to realize what&rsquo;s going on, I think this is a far more interpretable graph than what we presented in the paper.  I haven&rsquo;t subjected it to the same in-depth can-this-be-fooled simulations that we did for the MEE paper, but, I have to admit&hellip;I kind of like this, and think it might be the answer we tried to get at oh so long ago.</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

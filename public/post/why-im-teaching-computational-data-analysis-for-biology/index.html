@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Huabing Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Why I&#39;m Teaching Computational Data Analysis for Biology" />
+    <meta property="og:title" content="Why I&#39;m Teaching Computational Data Analysis for Biology" />
+    <meta property="twitter:title" content="Why I&#39;m Teaching Computational Data Analysis for Biology" />
+    
+
+    
+    <meta name="description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Why I&#39;m Teaching Computational Data Analysis for Biology-赵化冰的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/why-im-teaching-computational-data-analysis-for-biology/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huabing Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/#scifund">#scifund</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/announcements">announcements</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/ascidians">ascidians</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/blog">blog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/climate-change">climate-change</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/feedback">feedback</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/field-notes">field-notes</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/food-web-networks-and-extinctions">food-web-networks-and-extinctions</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/howto">howto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/linkage">linkage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/meetings">meetings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/neat">neat</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/networks">networks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/openpub">openpub</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/paper-review">paper-review</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/professional-musings">professional-musings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/publishing">publishing</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/r">r</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/rantish">rantish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/research">research</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science">science</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-music-videos">science-music-videos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-online">science-online</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-parent">science-parent</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/sem">sem</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/shout-out">shout-out</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/silly">silly</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/statistics">statistics</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/talks">talks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tunicate-culinary-adventures">tunicate-culinary-adventures</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Why I&#39;m Teaching Computational Data Analysis for Biology</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Jarrett Byrnes
+			 
+			on 
+			Tuesday, September 11, 2012
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                <p>_This is a <a href="http://learningdata.wordpress.com/2012/09/10/why-im-teaching-computational-data-analysis-for-biology/">x-post</a> from the blog I&rsquo;ve setup for <a href="http://learningdata.wordpress.com/">my course blog</a>.  As my first class at UMB, I&rsquo;m teaching <a href="http://jarrettbyrnes.info/biol697/">An Introduction to Computational Data Analysis for Biology</a> - basically mixing teaching statistics and basic programming.  It&rsquo;s something I&rsquo;ve thought a long time about teaching - although the rubber meeting the road has been fascinating.</p>
+
+<p>As part of the course, I&rsquo;m adapting an exercise that I learned while taking English courses - in particular from a course on Dante&rsquo;s <em>Divine Comedy</em>.  I ask that students write 1 page weekly to demonstrate that they are having a meaningful interaction with the material.  I give them a few pages from  <a href="http://www.amazon.com/p-value-Stories-Actually-Understand-Statistics/dp/0321629302">this book</a> as a prompt, but really they can write about anything.  One student will post on the blog per week (and I&rsquo;m encouraging them to use the blog for posting other materials as well - we shall see, it&rsquo;s an experiment).  After they post, I hope that it will start a conversation, at least amongst participants in the class.  I also think this post might pair well with some of Brian McGill&rsquo;s comments on <a href="http://dynamicecology.wordpress.com/2012/09/11/statistical-machismo/">statistical machismo</a> to show you a brief sketch of my own evolution as a data analyst._</p>
+
+<p>I&rsquo;ll be honest, I&rsquo;m excited. I&rsquo;m excited to be teaching Computational Data Analysis to a fresh crop of graduate students. I&rsquo;m excited to try and take what I have learned over the past decade of work in science, and share that knowledge. I am excited to share lessons learned and help others benefit from the strange explorations I&rsquo;ve had into the wild world of data.</p>
+
+<p>I&rsquo;m ready to get beyond the cookbook approach to data. When I began learning data analysis, way back in an undergraduate field course, it was all ANOVA all the time (with brief diversions to regression or ANCOVA). There was some point and click software that made it easy, so long as you knew the right recipe for the shape of your data. The more complex the situation, the more creative you had to be in getting an accurate sample, and then in determining what was the right incantation of sums of squares to get a meaningful test statistic. And woe be it if your p value from your research was 0.051.</p>
+
+<p>I think I enjoyed this because it was fitting a puzzle together. That, and I love to cook, so, who doesn&rsquo;t want to follow a good recipe?</p>
+
+<p>Still, there was something that always nagged me. This approach - which I encountered again and again - seemed stale. The body of analysis was beautiful, but it seemed divorced from the data sets that I saw starting to arrive on the horizon - data sets that were so large, or chocked full of so many different variables, that something seemed amiss.</p>
+
+<p>The answer rippled over me in waves. First, comments from an editor - <a href="http://en.wikipedia.org/wiki/Ransom_A._Myers">Ram Meyers</a> - for a paper of mine began to lift the veil. I had done all of my analyses as taught (and indeed even used for a class) using ANOVA and regression, multiple comparison, etc. etc. in the classic vein. Ram asked why, particularly given that the Biological processes that generated my data should in no way generate something with a normal - or even log-normal - distribution. While he agreed that the approximation was good enough, he made me go back, and jump off the cliff into the world of generalized linear models. It was bracing. But he walked me through it - over the phone even.</p>
+
+<p>So, a new recipe, yes? But it seemed like something more was looming.</p>
+
+<p>Then, an expiration of a JMP site license with one week left on a paper revision left me bereft. The only free tool I could turn to that seemed to do what I wanted it to do was <a href="http://r-project.org">R</a>.</p>
+
+<p>Wonderful, messy, idiosyncratic R.</p>
+
+<p>I jumped in and learned the bare minimum of what I needed to know to do my analysis&hellip;and lost myself.</p>
+
+<p>I had taken computer science in college, and even written the backend of a number of websites in PERL (also wonderful, messy, and idiosyncratic). What I enjoyed most about programming was that you could not hide from how you manipulated information. Programming has a functional aspect at the core where an input must be translated into a meaningful output according to the rules that you craft.</p>
+
+<p>Working with R, I was crafting rules to generate meaningful statistical output. But what were those rules but my assumptions about how nature worked. The fundamentals of what I was doing all along - fitting a line to data with an error distribution - that should be based in biology, not arbitrary assumptions - was laid all the more bare. Some grumblingly lovely help from statistical denizens on the R help boards helped to bring this in sharp focus.</p>
+
+<p>So, I was ready when, for whatever reason, fate thrust me into a series of workshops on Bayesian statistics, AIC analysis, hierarchical modeling, time series analysis, data visualization, meta-analysis, and last - Structural Equation Modeling.</p>
+
+<p>I was delighted to learn more and more of how statistical analysis had grown beyond what I had been taught. I drank deeply of it. I know, that&rsquo;s pretty nerdy, but, there you have it.</p>
+
+<p>The new techniques all shared a common core - that they were engines of inference about biological processes. How I, as the analyst, made assumptions about how the world worked was up to me. Once I had a model of how my system worked in mind - sketched out, filled with notes on error distributions, interactions, and more, I could sit back and think about what inferential tools would give me the clearest answers I needed.</p>
+
+<p>I had moved instead of finding the one right recipe in a giant cookbook to choosing the right tools out of a toolbox. And then using the tools of computer science - optimizing algorithms, thinking about efficient data storage, etc - to let my tools work bring data and biological models together.</p>
+
+<p>It&rsquo;s exciting. And that&rsquo;s the core philosophy I&rsquo;m trying to convey in this semester. (N.B. the spellchecker tried to change convey to convert - there&rsquo;s something there).</p>
+
+<p>Think about biology. Think about a line. Think about a probability distribution. Put them together, and find out what stories your data can tell you about the world.</p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />Huabing Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/bertness-lab-anthem/" data-toggle="tooltip" data-placement="top" title="Bertness Lab Anthem">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/discussion-of-sea-level-rise-on-the-us-west-coast/" data-toggle="tooltip" data-placement="top" title="Discussion of Sea Level Rise on the US West Coast">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ascidian" title="ascidian">
+                            ascidian
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blog" title="blog">
+                            blog
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/climate-change" title="climate-change">
+                            climate-change
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/experiment" title="experiment">
+                            experiment
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/food-web" title="food-web">
+                            food-web
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ggplot2" title="ggplot2">
+                            ggplot2
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kelp-forest" title="kelp-forest">
+                            kelp-forest
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/power-analysis" title="power-analysis">
+                            power-analysis
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="r">
+                            r
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rb-editor-selection" title="rb-editor-selection">
+                            rb-editor-selection
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/sea-squirt" title="sea-squirt">
+                            sea-squirt
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/tunicate" title="tunicate">
+                            tunicate
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/urchins" title="urchins">
+                            urchins
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="Huabing Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Huabing Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

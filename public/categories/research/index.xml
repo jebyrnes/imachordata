@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>research on I&#39;m a Chordata! Urochordata!</title>
+    <link>/categories/research/</link>
+    <description>Recent content in research on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 25 Sep 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/research/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Positive Multifunctionality ≠ All Functions Are Positive</title>
+      <link>/2014/09/25/positive-multifunctionality-all-functions-are-positive/</link>
+      <pubDate>Thu, 25 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/09/25/positive-multifunctionality-all-functions-are-positive/</guid>
+      <description>Positive Multifunctionality ≠ All Functions Are Positive
+I was dismayed this morning to read Bradford et al.&amp;lsquo;s recently accepted paper Discontinuity in the responses of ecosystem processes and multifunctionality to altered soil community composition in PNAS for several reasons.
+The paper itself is really cool. They manipulated community complexity and nutrient conditions in the Ecotron, and then looked at five soil ecosystem functions. They then looked at whether complexity influenced multi functionality (as well as N), and found, indeed, it did!</description>
+    </item>
+    
+    <item>
+      <title>Getting it Right - after Publication: A Multifunctional Journey?</title>
+      <link>/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/</guid>
+      <description>Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.
+Earlier this year, along with a great cohort of colleagues, I birthed a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions. We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&amp;rsquo;t matter.</description>
+    </item>
+    
+    <item>
+      <title>A Kelpy Time Machine</title>
+      <link>/2014/08/11/a-kelpy-time-machine/</link>
+      <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/08/11/a-kelpy-time-machine/</guid>
+      <description>This is x-posted from my guest post at Deep Sea News about the new Floating Forests citizen science project I&amp;rsquo;m part of. If you&amp;rsquo;re excited about it, go check out http://www.floatingforests.org/!
+There&amp;rsquo;s something I&amp;rsquo;ve always wanted. Something that would take kelp forest science to a new level. Something that would let me do the kind of work that I dream about, quietly, secretly, peering into the mysteries of kelpiness.
+It is something impossible.</description>
+    </item>
+    
+    <item>
+      <title>Marshall the generalists! Generalize the marshallists!</title>
+      <link>/2013/07/09/marshall-the-generalists-generalize-the-marshallists/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/09/marshall-the-generalists-generalize-the-marshallists/</guid>
+      <description>While working more on the bacterial network stuff, Jen and I realized I was wrong. Yep, I was wrong on the internet. Namely, in my post on bacterial networks, I got the answer wrong on the abundance of OTUs with different degrees of specialization. I had a rowSum after inverting a matrix instead of before, producing wonky vertex sizes. Jen cleverly discovered it when totaling up some of the data by hand, and after alerting me to the issue I produced the following plot which doesn&amp;rsquo;t agree with the network at all:</description>
+    </item>
+    
+    <item>
+      <title>Beautiful Bacterial Networks in the Marsh</title>
+      <link>/2013/06/26/beautiful-bacterial-networks-in-the-marsh/</link>
+      <pubDate>Wed, 26 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/26/beautiful-bacterial-networks-in-the-marsh/</guid>
+      <description>&amp;ldquo;So,&amp;rdquo; I&amp;rsquo;m sure you aren&amp;rsquo;t wondering, how did that creating &amp;lsquo;ecospecies&amp;rsquo; from bacterial sequences based on sequence similarity, co-occurrence, and network theory work out for you?&amp;rdquo;
+Quite well, thanks for asking! Heck, have a git repository, why dontcha!
+Jen is furiously writing the manuscript, but, the technique indeed seems to indicate that 12% sequence similarity was the optimal number.
+Once we got that down, and started plotting the network with individual Operational Taxonomic Units (OTU) each connected to one or more of the 8 plots they were found in, we started seeing some neat things.</description>
+    </item>
+    
+    <item>
+      <title>Walkin&#39; in an Invasive Wonderland</title>
+      <link>/2013/06/13/walkin-in-an-invasive-wonderland/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/13/walkin-in-an-invasive-wonderland/</guid>
+      <description>Last day of dives before heading back. We hit two sites on either side of the northern head of Appledore. It&amp;rsquo;s a remarkable break, as on one side you have fairly decent expsore to waves from the West. On the other, things are fairly protected. So, there&amp;rsquo;s a strong physical gradient. And, though perhaps just a few hundred meters apart, the two sites could not be more different. At the first site, the photos didn&amp;rsquo;t come out terribly well, but this gives you a general sense -</description>
+    </item>
+    
+    <item>
+      <title>Undersea Carpets?</title>
+      <link>/2013/06/12/undersea-carpets/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/12/undersea-carpets/</guid>
+      <description>The second site of the day was a surprise. 10 years ago, Smith&amp;rsquo;s Cove was a mixed mussel bed and urchin barren. Previous, it has been a Codium meadow. Now&amp;hellip; It&amp;rsquo;s just a giant red algal carpet. Wall to wall. Thick, easily fragmenting, ubiquitous, invasive red Heterosiphonia japonica. Also, big tufts of Ulva. And some other bushy filamentous algae scattered about, along with a few crabs.
+What a weird landscape. What is that red carpet doing?</description>
+    </item>
+    
+    <item>
+      <title>The Morning Algal IDs</title>
+      <link>/2013/06/11/the-morning-algal-ids/</link>
+      <pubDate>Tue, 11 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/11/the-morning-algal-ids/</guid>
+      <description>When it&amp;rsquo;s wavy out&amp;hellip;
+Coffee, laptop, scope, and a red alga that looks pretty much like every other red alga in the tank&amp;hellip;time for some IDs.
+SCIENCE!</description>
+    </item>
+    
+    <item>
+      <title>Day 1: Back in the field!</title>
+      <link>/2013/06/10/day-1-back-in-the-field/</link>
+      <pubDate>Mon, 10 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/10/day-1-back-in-the-field/</guid>
+      <description>Well, today was it. After a 2 year hiatus behind my computer screen, my skin now softer and more delicate from its soothing rays, I hopped back in the water FOR SCIENCE! Not only that, but it was my return to dry suit diving. Oh, dry suit diving. I really didn&amp;rsquo;t miss you and your weird buoyancy tricks (note to self, get ankle weights, as old ones have desintegrated).
+It was a great day, despite feeling kinda like the first day back at school.</description>
+    </item>
+    
+    <item>
+      <title>Living a Dream: Back to SML</title>
+      <link>/2013/05/20/living-a-dream-back-to-sml/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/20/living-a-dream-back-to-sml/</guid>
+      <description>So, today, I&amp;rsquo;m going to catch a ferry out to the Shoals Marine Lab. I&amp;rsquo;m just going to be out for a day to meet with the undergrad intern I&amp;rsquo;m mentoring. I&amp;rsquo;ll be back later this summer to work with her and setup some permanent monitoring transects.
+I have to be honest, this is one of those moments in my life where I am watching a dream come through. I went to SML in the summer of 1999 to take some classes.</description>
+    </item>
+    
+    <item>
+      <title>Best Peer Review Experience Ever</title>
+      <link>/2013/05/10/best-peer-review-experience-ever/</link>
+      <pubDate>Fri, 10 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/10/best-peer-review-experience-ever/</guid>
+      <description>So, I recently submitted a piece regarding the future of scholarly publishing in Ecology &amp;amp; Evolutionary Biology. Simultaneous to posting, I put up a preprint in PeerJ Preprints and also put it on Google Docs for line by line commentary (which you are welcome to give!). I asked in both places that commenters identify themselves, unless they felt deeply uncomfortable.
+OMG the experience has been amazing!
+At PeerJ you can comment on the main page of the article, and others can rate it - which is fantastic - and I&amp;rsquo;ve gotten some wonderful feedback there (thanks Lars!</description>
+    </item>
+    
+    <item>
+      <title>A Preprint Experiment: Four Pillars and a Foundation for the Future of Scholarly Publishing</title>
+      <link>/2013/05/07/a-preprint-experiment-four-pillars-and-a-foundation-for-the-future-of-scholarly-publishing/</link>
+      <pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/07/a-preprint-experiment-four-pillars-and-a-foundation-for-the-future-of-scholarly-publishing/</guid>
+      <description>x-post from the OpenPub Project blog
+So, we got together, had two working group meetings to discuss the future of scholarly publishing in Ecology, Evolutionary Biology, and the Earth and Ocean Sciences. What were were thinking that entire time?
+We&amp;rsquo;ve just submitted a piece that brings together our broad ideas (some of which have been seen before), but, simultaneous to publication, we&amp;rsquo;ve also decided to put up a preprint. Why? Simply put, immediate access is one of our four pillars of the future of scholarly publication.</description>
+    </item>
+    
+    <item>
+      <title>Favorite Wave Sensor?</title>
+      <link>/2013/04/23/favorite-wave-sensor/</link>
+      <pubDate>Tue, 23 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/23/favorite-wave-sensor/</guid>
+      <description>So, Internet, I&amp;rsquo;m setting up a number of monitoring sites this summer. I&amp;rsquo;m hoping to get good wave height measurements from them to look at disturbance. I have yet to find something like the CDIP swell height model for the Gulf of Maine (although, I&amp;rsquo;d love to hear that this is due to a failure of my google-fu). So, I&amp;rsquo;m casting about for some good wave height sensors.
+The problem I face is that I&amp;rsquo;d like to deploy a lot of them, and in some highly variable conditions, secured to subtidal transects.</description>
+    </item>
+    
+    <item>
+      <title>More on Bacteria and Groups</title>
+      <link>/2013/04/12/more-on-bacteria-and-groups/</link>
+      <pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/12/more-on-bacteria-and-groups/</guid>
+      <description>Continuing with bacterial group-a-palooza&amp;hellip;
+I followed Ed&amp;rsquo;s suggestions and tried both a binomial distribution and a Poisson distribution for abundance such that the probability of a density of one species s in one group g in one plot r where there are S_g species in group gis
+[latex]A_rgs ~ Poisson(\frac{A_rg}{S_g})[/latex]
+In the analysis I&amp;rsquo;m doing, interesting, the results do change a bit such that the original network only results are confirmed.</description>
+    </item>
+    
+    <item>
+      <title>Groupapalooza: Adapting Food Web Trophic Group Methods for Defining Bacterial &#34;Species&#34;</title>
+      <link>/2013/04/08/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/</link>
+      <pubDate>Mon, 08 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/08/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/</guid>
+      <description>_The following is some notes on a technique I&amp;rsquo;m developing for a cool collaboration between me, Jen Bowen, and David Weisman. I think it has some generality to it, and I&amp;rsquo;d love any feedback from the more mathematical crowd&amp;hellip;I also wrote it to make sure I knew what I was doing - translating scribbled equations to code to results - so it does freeflow a bit. It may change based on feedback - consider this a working document.</description>
+    </item>
+    
+    <item>
+      <title>Transect Tape Love</title>
+      <link>/2013/03/14/transect-tape-love/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/14/transect-tape-love/</guid>
+      <description>Field supplies for the summer starting to come in&amp;hellip;
+LET&amp;rsquo;S ROLL OUT SOME TRANSECTS!</description>
+    </item>
+    
+    <item>
+      <title>Scallopocalypse</title>
+      <link>/2012/11/19/scallopocalypse/</link>
+      <pubDate>Mon, 19 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/11/19/scallopocalypse/</guid>
+      <description>Everyone has been pretty shocked by the devastation wreaked by Sandy. Here in New England, we also got a Nor&amp;rsquo;easter following a few days later. That&amp;rsquo;s a lot of intense storm action in a short period of time.
+So I was quite curious as I ventured out into the field last weekend to see how things looked. I went on a potential field site scouting trip to UMB&amp;rsquo;s field station in Nantucket.</description>
+    </item>
+    
+    <item>
+      <title>Does Synthesis Ecology Exist as a Scientific Discipline?</title>
+      <link>/2012/04/17/does-synthesis-ecology-exist-as-a-scientific-discipline/</link>
+      <pubDate>Tue, 17 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/04/17/does-synthesis-ecology-exist-as-a-scientific-discipline/</guid>
+      <description>Does Synthesis Ecology exist? Is it a discipline? If so, what is it? If not, why not?
+As a part of the Trends in Ecological Analysis and Synthesis symposium here at NCEAS, several postdocs past and present organized by Jennifer &amp;ldquo;Firestarter&amp;rdquo; Balch got together and sent this survey to the last 15 years of NCEAS postdocs. The survey asks what current and former NCEAS postdocs thought were the most important contributions in Synthesis Ecology and what they thought were the most exciting future directions in Synthesis Ecology.</description>
+    </item>
+    
+    <item>
+      <title>A Need to Understand Climate Change&#39;s Indirect Effects</title>
+      <link>/2012/01/31/a-deficit-of-understanding-of-climate-changes-indirect-effects/</link>
+      <pubDate>Tue, 31 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/31/a-deficit-of-understanding-of-climate-changes-indirect-effects/</guid>
+      <description>We know that warming, storms, drought, acidification, and the myriad of other effects of climate change will impact natural ecosystems. Most of our studies have concentrated on direct effects, though. For example, if you change temperature, you alter herbivore grazing rates. But what about indirect effects? For example, I&amp;rsquo;ve found that increased intense storm frequency may remove kelp which will have an indirect effect on the structure of kelp forest food webs.</description>
+    </item>
+    
+    <item>
+      <title>Food Web Structure and Changing Diversity at Two Levels</title>
+      <link>/2012/01/09/food-web-structure-and-changing-diversity-at-two-levels/</link>
+      <pubDate>Mon, 09 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/09/food-web-structure-and-changing-diversity-at-two-levels/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+OK, last but on two-level food webs for the moment. I&amp;rsquo;ve examined how food web structure can change the effects of predator or prey extinctions on both top-down and bottom-up control. A number of folk (including me) have theorized that changes in diversity at two trophic levels should interact - that the consequences of predator diversity loss should change as prey species are lost.</description>
+    </item>
+    
+    <item>
+      <title>Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before</title>
+      <link>/2012/01/03/prey-loss-in-different-food-web-structures-weve-been-here-before/</link>
+      <pubDate>Tue, 03 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/03/prey-loss-in-different-food-web-structures-weve-been-here-before/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+OK, only two more entries (I think) on simple two-level food webs before we jump into the great unkown (and you&amp;rsquo;ll see how unknown it is). So far I&amp;rsquo;ve been talking about the consequences of losing predator species for predation and energy transfer.</description>
+    </item>
+    
+    <item>
+      <title>A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?</title>
+      <link>/2011/12/27/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/</link>
+      <pubDate>Tue, 27 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/27/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+So, in my last post (notebook entry?), I introduced a new framework for understanding how the food web structure of a predator-prey food web can affect the consequences of extinction for the ability of predators to control their prey.</description>
+    </item>
+    
+    <item>
+      <title>A Probabilistic Look at Predators, Prey, and Extinctions</title>
+      <link>/2011/12/19/a-probabilistic-look-at-predators-prey-and-extinctions/</link>
+      <pubDate>Mon, 19 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/19/a-probabilistic-look-at-predators-prey-and-extinctions/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+To begin tackling the question of &amp;ldquo;How does the structure of a food web influence the consequences of extinction? let&amp;rsquo;s begin by thinking about how changes in the number of predator species in a simple 2-level predator-prey food web can influence 1) the probability of prey being eaten and 2) the amount of energy transfered to the predator group.</description>
+    </item>
+    
+    <item>
+      <title>Food Web Network Structure and Extinction: The Start of an Open Notebook</title>
+      <link>/2011/12/16/food-web-network-structure-and-extinction-the-start-of-an-open-notebook/</link>
+      <pubDate>Fri, 16 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/16/food-web-network-structure-and-extinction-the-start-of-an-open-notebook/</guid>
+      <description>So, we know that species are going extinct at a pretty stunning rate. Mostly by human activities. The natural question is, will this affect the function of the natural world? You may well say &amp;lsquo;Duh! Of course!&amp;rsquo; as a first instinctive pass, but, the issue isn&amp;rsquo;t so clear cut - will species that survive simply take up the slack? What&amp;rsquo;s the value of a &amp;lsquo;species&amp;rsquo; anyway?
+Starting in the late &amp;rsquo;90s the field of diversity-function research has tackled this topic, largely using manipulations plant species number.</description>
+    </item>
+    
+    <item>
+      <title>Seeing Through the Measurement Error</title>
+      <link>/2011/11/11/seeing-through-the-measurement-error/</link>
+      <pubDate>Fri, 11 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/11/11/seeing-through-the-measurement-error/</guid>
+      <description>I am part of an incredibly exciting project - the #SciFund Challenge. #SciFund is an attempt to have scientists link their work to the general public through crowdfunding. As I&amp;rsquo;m one of the organizers, I thought I should have some skin in the game. But what skin?
+Well, people are pitching some incredibly sexy projects - tracking puffin migrations, coral reefs conservation,snake-squirrel interactions (WITH ROBOSQUIRRELS!), mathematical modeling of movements like Occupy Wall Street, and many many more.</description>
+    </item>
+    
+    <item>
+      <title>The Story Behind the Paper: Climate Change and Kelp Forest Food Webs</title>
+      <link>/2011/07/11/the-story-of-a-paper-climate-change-and-kelp-forest-food-webs/</link>
+      <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/07/11/the-story-of-a-paper-climate-change-and-kelp-forest-food-webs/</guid>
+      <description>Yay! First paper of my postdoc is out in the August 2011 issue of Global Change Biology!
+Woohoo!
+So, what have I been doing for the past few years of my life?
+In brief summary: Kelp. Food webs. Climate change. A potent combination.
+And if you want the punchline without digging into the rest of this article, it is this: the diverse, complex food webs of southern California kelp forest will likely be greatly simplified if climate change leads to big storms every year.</description>
+    </item>
+    
+    <item>
+      <title>My Dissertation in Under 7 Minutes</title>
+      <link>/2010/04/01/my-dissertation-in-under-7-minutes/</link>
+      <pubDate>Thu, 01 Apr 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/04/01/my-dissertation-in-under-7-minutes/</guid>
+      <description>I recently attended the DISCCRS symposium for recent PhDs of a wide variety of disciplines whose work (past or present) deals with climate change. The week-long meeting was phenomenal, seeding me with thoughts, ideas, and basically making me feel quite good about the work I&amp;rsquo;m doing (if also very pessimistic about how society is dealing with Climate Change). Perhaps one of the most interesting exercises of the whole thing was something we had to do as a sort of getting-to-know-you.</description>
+    </item>
+    
+    <item>
+      <title>I&#39;ve Got the Power!</title>
+      <link>/2009/07/20/ive-got-the-power/</link>
+      <pubDate>Mon, 20 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/20/ive-got-the-power/</guid>
+      <description>There is nothing like that pain of taking a first look at fresh precious new data from a carefully designed experiment which took months of planning and construction, 8 divers working full days, and a lot of back-and-forth with colleagues, and then you find absolutely no patterns of interest.
+Yup, it&amp;rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment. Fortunately, I was on my way to a 4th of July dinner with my family up in the mountains of Colorado, so, I wasn&amp;rsquo;t quite going to commit hari-kari on the spot.</description>
+    </item>
+    
+    <item>
+      <title>Mapping the Sasquatch</title>
+      <link>/2009/07/01/mapping-the-sasquatch/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/01/mapping-the-sasquatch/</guid>
+      <description>I love modeling! I love modeling! Modeling will solve everything!
+Let&amp;rsquo;s model the spatial distribution of Bigfoot!
+WAIT, WHAT?!
+Figure 1 from the paper. Foots denote sighting of Sasquatch footprints. Circles for just visual/auditory sightings. I ask, how does one know what Bigfoot sounds like?
+Yes, it sounds silly, but in the current issue of the Journal of Biogegraphy, Lozier et al give us their stunning contribution Predicting the distribution of Sasquatch in western North America: anything goes with ecological niche modelling.</description>
+    </item>
+    
+    <item>
+      <title>Going Topless with Urchins</title>
+      <link>/2009/06/01/going-topless-with-urchins/</link>
+      <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/06/01/going-topless-with-urchins/</guid>
+      <description>There&amp;rsquo;s nothing so satisfying as pulling back and seeing your brand new experiment out there in the water.
+It&amp;rsquo;s been a crazy week or three getting this up and running, but now my first big postdoctoral experiment is soaking in the water, with urchins grazing away.
+I&amp;rsquo;m testing some ideas regarding how diversity mediates the impact of disturbance by urchin grazing, and vice-versa - how disturbance by grazing can alter diversity.</description>
+    </item>
+    
+    <item>
+      <title>Can you see the matrix?</title>
+      <link>/2009/05/07/can-you-see-the-matrix/</link>
+      <pubDate>Thu, 07 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/07/can-you-see-the-matrix/</guid>
+      <description>Lately, I&amp;rsquo;ve been dreaming of webs.
+I&amp;rsquo;ve been asking myself, how do we visualize the hidden complexity of the natural world? This is not an idle question, but draws on some of my current research. It is vital to how we think about ecosystems when we attempt to preserve and restore them. It is inherently beautiful, in and of itself.
+Most of us are familiar with the concept of a food chain.</description>
+    </item>
+    
+    <item>
+      <title>If the internet says it, it must be true</title>
+      <link>/2009/02/09/if-the-internet-says-it-it-must-be-true/</link>
+      <pubDate>Mon, 09 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/09/if-the-internet-says-it-it-must-be-true/</guid>
+      <description>Oh! Excitement! My dissertation has been posted online by Proquest. Clearly, according to the internet, I must actually be a Doctor. Thanks, Internet!
+Of course, looking at the page, the internet also thinks I am a Limnologist, but, well, we&amp;rsquo;ll let that one slide.
+(now if only those copies of the dissertation that I ordered months ago would show up&amp;hellip;)</description>
+    </item>
+    
+  </channel>
+</rss>

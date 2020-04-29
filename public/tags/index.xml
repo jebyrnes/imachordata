@@ -1,0 +1,582 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on I&#39;m a Chordata! Urochordata!</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>dplyr</title>
+      <link>/tags/dplyr/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/dplyr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>power analysis</title>
+      <link>/tags/power-analysis/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/power-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse</title>
+      <link>/tags/tidyverse/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plot</title>
+      <link>/tags/plot/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/plot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Markdown</title>
+      <link>/tags/r-markdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/r-markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regression</title>
+      <link>/tags/regression/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/regression/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>culinary</title>
+      <link>/tags/culinary/</link>
+      <pubDate>Fri, 13 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/culinary/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>climate change</title>
+      <link>/tags/climate-change/</link>
+      <pubDate>Wed, 19 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/climate-change/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>howto</title>
+      <link>/tags/howto/</link>
+      <pubDate>Sat, 03 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/howto/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>food web</title>
+      <link>/tags/food-web/</link>
+      <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/food-web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kelp forest</title>
+      <link>/tags/kelp-forest/</link>
+      <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/kelp-forest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rb editor selection</title>
+      <link>/tags/rb-editor-selection/</link>
+      <pubDate>Tue, 20 Jul 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rb-editor-selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>biodiversity and ecosystem function</title>
+      <link>/tags/biodiversity-and-ecosystem-function/</link>
+      <pubDate>Thu, 01 Apr 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/biodiversity-and-ecosystem-function/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>extinction</title>
+      <link>/tags/extinction/</link>
+      <pubDate>Thu, 01 Apr 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/extinction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fouling community</title>
+      <link>/tags/fouling-community/</link>
+      <pubDate>Thu, 01 Apr 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/fouling-community/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>history</title>
+      <link>/tags/history/</link>
+      <pubDate>Fri, 05 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/history/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>statistics</title>
+      <link>/tags/statistics/</link>
+      <pubDate>Fri, 05 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>structural equation modeling</title>
+      <link>/tags/structural-equation-modeling/</link>
+      <pubDate>Fri, 05 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/structural-equation-modeling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>p-value</title>
+      <link>/tags/p-value/</link>
+      <pubDate>Mon, 15 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/p-value/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>researchblogging</title>
+      <link>/tags/researchblogging/</link>
+      <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/researchblogging/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>eating tunicates</title>
+      <link>/tags/eating-tunicates/</link>
+      <pubDate>Tue, 01 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eating-tunicates/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csf sustainability</title>
+      <link>/tags/csf-sustainability/</link>
+      <pubDate>Fri, 06 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/csf-sustainability/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chanties</title>
+      <link>/tags/chanties/</link>
+      <pubDate>Fri, 16 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/chanties/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tall ships</title>
+      <link>/tags/tall-ships/</link>
+      <pubDate>Fri, 16 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tall-ships/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>philosophy</title>
+      <link>/tags/philosophy/</link>
+      <pubDate>Tue, 22 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/philosophy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>science!</title>
+      <link>/tags/science/</link>
+      <pubDate>Tue, 22 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>trophic cascade</title>
+      <link>/tags/trophic-cascade/</link>
+      <pubDate>Tue, 22 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/trophic-cascade/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>acidification</title>
+      <link>/tags/acidification/</link>
+      <pubDate>Thu, 10 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/acidification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>paper review</title>
+      <link>/tags/paper-review/</link>
+      <pubDate>Thu, 10 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/paper-review/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bdef</title>
+      <link>/tags/bdef/</link>
+      <pubDate>Wed, 09 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bdef/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nytimes</title>
+      <link>/tags/nytimes/</link>
+      <pubDate>Wed, 09 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/nytimes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>popular press</title>
+      <link>/tags/popular-press/</link>
+      <pubDate>Wed, 09 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/popular-press/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggplot2</title>
+      <link>/tags/ggplot2/</link>
+      <pubDate>Thu, 03 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggplot2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>blog</title>
+      <link>/tags/blog/</link>
+      <pubDate>Mon, 31 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/blog/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lter</title>
+      <link>/tags/lter/</link>
+      <pubDate>Mon, 31 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>researchblogging.org</title>
+      <link>/tags/researchblogging.org/</link>
+      <pubDate>Thu, 06 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/researchblogging.org/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oystersgarter</title>
+      <link>/tags/oystersgarter/</link>
+      <pubDate>Mon, 03 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/oystersgarter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>seaplex</title>
+      <link>/tags/seaplex/</link>
+      <pubDate>Mon, 03 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/seaplex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>trash gyre</title>
+      <link>/tags/trash-gyre/</link>
+      <pubDate>Mon, 03 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/trash-gyre/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>experiment</title>
+      <link>/tags/experiment/</link>
+      <pubDate>Mon, 20 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/experiment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>urchins</title>
+      <link>/tags/urchins/</link>
+      <pubDate>Mon, 20 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/urchins/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coding</title>
+      <link>/tags/coding/</link>
+      <pubDate>Fri, 10 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plyr</title>
+      <link>/tags/plyr/</link>
+      <pubDate>Fri, 10 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/plyr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ecological niche modeling</title>
+      <link>/tags/ecological-niche-modeling/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ecological-niche-modeling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sasquatch</title>
+      <link>/tags/sasquatch/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/sasquatch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ascidian</title>
+      <link>/tags/ascidian/</link>
+      <pubDate>Mon, 15 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ascidian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sashimi</title>
+      <link>/tags/sashimi/</link>
+      <pubDate>Mon, 15 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/sashimi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sea squirt</title>
+      <link>/tags/sea-squirt/</link>
+      <pubDate>Mon, 15 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/sea-squirt/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tunicate</title>
+      <link>/tags/tunicate/</link>
+      <pubDate>Mon, 15 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tunicate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>feedback</title>
+      <link>/tags/feedback/</link>
+      <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/feedback/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>genial gene</title>
+      <link>/tags/genial-gene/</link>
+      <pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/genial-gene/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>penis fencing</title>
+      <link>/tags/penis-fencing/</link>
+      <pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/penis-fencing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sexual selection</title>
+      <link>/tags/sexual-selection/</link>
+      <pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/sexual-selection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>craft</title>
+      <link>/tags/craft/</link>
+      <pubDate>Tue, 12 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/craft/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ethics</title>
+      <link>/tags/ethics/</link>
+      <pubDate>Sun, 10 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ethics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>open access</title>
+      <link>/tags/open-access/</link>
+      <pubDate>Sun, 10 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/open-access/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>publishing</title>
+      <link>/tags/publishing/</link>
+      <pubDate>Sun, 10 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/publishing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>complexity</title>
+      <link>/tags/complexity/</link>
+      <pubDate>Thu, 07 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/complexity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>network</title>
+      <link>/tags/network/</link>
+      <pubDate>Thu, 07 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/network/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>manova</title>
+      <link>/tags/manova/</link>
+      <pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/manova/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mistakes I have made</title>
+      <link>/tags/mistakes-i-have-made/</link>
+      <pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/mistakes-i-have-made/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jobs</title>
+      <link>/tags/jobs/</link>
+      <pubDate>Thu, 23 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/jobs/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

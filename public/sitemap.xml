@@ -1,0 +1,1535 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/2017/12/21/bayesian-sem-with-brms/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/sem/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2017-12-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/03/31/introducing-the-open-derby-guest-post/</loc>
+    <lastmod>2017-03-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/</loc>
+    <lastmod>2017-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post_old/2016-12-30-hello-markdown/</loc>
+    <lastmod>2016-12-30T21:49:57-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dplyr/</loc>
+    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/10/18/linear-model-power-analysis-with-dplyr/</loc>
+    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/power-analysis/</loc>
+    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/02/05/you-complete-me/</loc>
+    <lastmod>2016-02-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/climate-change/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/01/21/other-writings-about-parenting-climate-change-by-scientists/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2016/01/21/parenting-as-a-scientist-in-the-age-of-climate-change/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/rantish/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/science-parent/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/science/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post_old/2015-07-23-r-rmarkdown/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/plot/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-markdown/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/professional-musings/</loc>
+    <lastmod>2015-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/06/01/rafe-sagarin-and-passion-in-the-life-scientific/</loc>
+    <lastmod>2015-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/</loc>
+    <lastmod>2015-03-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/03/28/meow-its-marine-ecoregions-in-r-2/</loc>
+    <lastmod>2015-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2015/01/14/space-and-sems-2/</loc>
+    <lastmod>2015-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post_old/2015-01-01-lorem-ipsum/</loc>
+    <lastmod>2015-01-01T13:09:13-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/11/14/talking-kelps-and-climate-change-at-the-new-england-aquarium/</loc>
+    <lastmod>2014-11-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/talks/</loc>
+    <lastmod>2014-11-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/paper-review/</loc>
+    <lastmod>2014-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/09/25/positive-multifunctionality-all-functions-are-positive/</loc>
+    <lastmod>2014-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/research/</loc>
+    <lastmod>2014-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/</loc>
+    <lastmod>2014-09-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/08/12/kelp-german-metal/</loc>
+    <lastmod>2014-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/science-music-videos/</loc>
+    <lastmod>2014-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/08/11/a-kelpy-time-machine/</loc>
+    <lastmod>2014-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/08/07/the-beatles-and-kelp/</loc>
+    <lastmod>2014-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/07/20/damn-thats-some-big-kelp/</loc>
+    <lastmod>2014-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/field-notes/</loc>
+    <lastmod>2014-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/07/17/the-launch-of-the-rv-botryllid/</loc>
+    <lastmod>2014-07-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/neat/</loc>
+    <lastmod>2014-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/science-online/</loc>
+    <lastmod>2014-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/02/26/two-urchins-similar-but-not/</loc>
+    <lastmod>2014-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/02/02/best-kelp-barplot-ever/</loc>
+    <lastmod>2014-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2014/01/03/aint-nuthin-but-a-green-crab-thang/</loc>
+    <lastmod>2014-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/howto/</loc>
+    <lastmod>2013-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/12/19/searching-for-opportunities-in-ecology-environmental-science-for-recent-grads/</loc>
+    <lastmod>2013-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/12/12/fourth-annual-chemical-ecology-film-fest/</loc>
+    <lastmod>2013-12-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/</loc>
+    <lastmod>2013-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/10/03/statistics-made-marvellous/</loc>
+    <lastmod>2013-10-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/announcements/</loc>
+    <lastmod>2013-09-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/shout-out/</loc>
+    <lastmod>2013-09-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/09/26/wanna-join-my-department-tenure-track-job-posting-in-disease-ecologyevolution/</loc>
+    <lastmod>2013-09-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/silly/</loc>
+    <lastmod>2013-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/09/25/sponge-meme-square-memes/</loc>
+    <lastmod>2013-09-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/09/13/cocktail-week-dark-n-stormy-effects-on-kelps/</loc>
+    <lastmod>2013-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/culinary/</loc>
+    <lastmod>2013-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/09/05/an-open-letter-to-isi-web-of-knowledge-google-scholar-and-sciverse-scopus/</loc>
+    <lastmod>2013-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/publishing/</loc>
+    <lastmod>2013-09-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/08/07/chris-lorties-esa-ignite-talk-on-preprints-the-future-of-publishing/</loc>
+    <lastmod>2013-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/26/saving-the-white-abalone/</loc>
+    <lastmod>2013-07-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/ascidians/</loc>
+    <lastmod>2013-07-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/23/dramatic-predator-tunicate-is-dramatic/</loc>
+    <lastmod>2013-07-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/14/proxy-server-bookmarklet/</loc>
+    <lastmod>2013-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/12/which-social-media-platform-should-i-use-for-science/</loc>
+    <lastmod>2013-07-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/09/marshall-the-generalists-generalize-the-marshallists/</loc>
+    <lastmod>2013-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/07/05/giving-honest-resources-to-prospective-students/</loc>
+    <lastmod>2013-07-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/26/beautiful-bacterial-networks-in-the-marsh/</loc>
+    <lastmod>2013-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/18/les-miserables-larides/</loc>
+    <lastmod>2013-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/13/peerj-turns-one/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/13/walkin-in-an-invasive-wonderland/</loc>
+    <lastmod>2013-06-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/12/kelp-on-a-ledge/</loc>
+    <lastmod>2013-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/12/undersea-carpets/</loc>
+    <lastmod>2013-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/11/the-morning-algal-ids/</loc>
+    <lastmod>2013-06-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/11/the-view-after-the-storm/</loc>
+    <lastmod>2013-06-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/10/day-1-back-in-the-field/</loc>
+    <lastmod>2013-06-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/06/07/true-facts-about-marine-life/</loc>
+    <lastmod>2013-06-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/05/20/living-a-dream-back-to-sml/</loc>
+    <lastmod>2013-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/05/10/best-peer-review-experience-ever/</loc>
+    <lastmod>2013-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/05/07/a-preprint-experiment-four-pillars-and-a-foundation-for-the-future-of-scholarly-publishing/</loc>
+    <lastmod>2013-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/04/23/favorite-wave-sensor/</loc>
+    <lastmod>2013-04-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/04/16/on-acceptance-and-rejection-in-publishing/</loc>
+    <lastmod>2013-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/linkage/</loc>
+    <lastmod>2013-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/04/12/more-on-bacteria-and-groups/</loc>
+    <lastmod>2013-04-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/04/08/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/</loc>
+    <lastmod>2013-04-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/networks/</loc>
+    <lastmod>2013-04-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/03/29/im-a-grazer-baby/</loc>
+    <lastmod>2013-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/03/15/parasite-ecology-explained/</loc>
+    <lastmod>2013-03-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/03/14/transect-tape-love/</loc>
+    <lastmod>2013-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/03/06/postdoc-in-the-byrnes-lab/</loc>
+    <lastmod>2013-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/03/05/the-real-world-scallop-science/</loc>
+    <lastmod>2013-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/#scifund/</loc>
+    <lastmod>2013-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/02/25/i-want-to-know-what-you-think-about-review-preprints-and-publication/</loc>
+    <lastmod>2013-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/openpub/</loc>
+    <lastmod>2013-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/02/23/extracting-p-values-from-different-fit-r-objects/</loc>
+    <lastmod>2013-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/</loc>
+    <lastmod>2013-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/02/06/aaas-webinar-on-science-crowdfunding/</loc>
+    <lastmod>2013-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/02/04/scio13-and-beyond/</loc>
+    <lastmod>2013-02-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/01/28/crowdfunding-in-the-peer-reviewed-literature/</loc>
+    <lastmod>2013-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2013/01/24/linkage-a-field-guide-to-privilege-in-marine-science/</loc>
+    <lastmod>2013-01-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/12/18/a-quick-note-in-weighting-with-nlme/</loc>
+    <lastmod>2012-12-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/11/19/scallopocalypse/</loc>
+    <lastmod>2012-11-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/climate-change/</loc>
+    <lastmod>2012-09-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/09/19/discussion-of-sea-level-rise-on-the-us-west-coast/</loc>
+    <lastmod>2012-09-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/09/11/why-im-teaching-computational-data-analysis-for-biology/</loc>
+    <lastmod>2012-09-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/09/09/bertness-lab-anthem/</loc>
+    <lastmod>2012-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/meetings/</loc>
+    <lastmod>2012-08-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/15/taking-the-ecological-conversation-online/</loc>
+    <lastmod>2012-08-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/10/final-friday-at-esa2012/</loc>
+    <lastmod>2012-08-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/09/thursday-esa2012-schedule/</loc>
+    <lastmod>2012-08-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/08/day-3-at-esa-2012-decisions-decisions/</loc>
+    <lastmod>2012-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/07/tentative-esa2012-tuesday/</loc>
+    <lastmod>2012-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/08/06/my-esa2012-monday/</loc>
+    <lastmod>2012-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/07/19/when-mild-mannered-who-is-datacuratorhulk/</loc>
+    <lastmod>2012-07-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/07/09/scifund-round-1-results-ravings/</loc>
+    <lastmod>2012-07-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/07/06/post-publication-commentary-a-google-hangout-discussion/</loc>
+    <lastmod>2012-07-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/06/12/peerj-launches-open-access-into-a-new-realm/</loc>
+    <lastmod>2012-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/06/04/scifund-round-2-ftw/</loc>
+    <lastmod>2012-06-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/05/15/moving-on-up-the-academic-food-chain/</loc>
+    <lastmod>2012-05-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/05/11/beware-of-the-teeny-tiny-crabs-they-will-cut-you/</loc>
+    <lastmod>2012-05-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/05/08/spring-is-sproinging-earlier-than-we-thought/</loc>
+    <lastmod>2012-05-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/05/02/diversity-loss-v-environmental-change-the-story-of-the-paper/</loc>
+    <lastmod>2012-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/05/01/scifund-2-has-launched/</loc>
+    <lastmod>2012-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/04/29/tuba-pteropod-the-deep-by-pes/</loc>
+    <lastmod>2012-04-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/04/24/a-watermelon-for-the-aquanauts/</loc>
+    <lastmod>2012-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/04/17/does-synthesis-ecology-exist-as-a-scientific-discipline/</loc>
+    <lastmod>2012-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/31/how-to-prepare-for-scifund-by-crowdfunding-science/</loc>
+    <lastmod>2012-03-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/23/marine-biology-james-bond/</loc>
+    <lastmod>2012-03-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/20/running-openbugs-on-a-mac-running-osx/</loc>
+    <lastmod>2012-03-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/08/predatory-tunicate-art/</loc>
+    <lastmod>2012-03-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/06/missing-my-statsy-goodness-check-out-scifund/</loc>
+    <lastmod>2012-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/03/03/scifund-2-launches/</loc>
+    <lastmod>2012-03-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/02/13/open-haus-conclusions-peer-review-or-bust/</loc>
+    <lastmod>2012-02-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/02/10/open-haus-the-future-of-scholarly-publishing/</loc>
+    <lastmod>2012-02-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/01/31/a-deficit-of-understanding-of-climate-changes-indirect-effects/</loc>
+    <lastmod>2012-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/01/31/a-vision-for-the-future-of-scholarly-publishing/</loc>
+    <lastmod>2012-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</loc>
+    <lastmod>2012-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/food-web-networks-and-extinctions/</loc>
+    <lastmod>2012-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/01/09/food-web-structure-and-changing-diversity-at-two-levels/</loc>
+    <lastmod>2012-01-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2012/01/03/prey-loss-in-different-food-web-structures-weve-been-here-before/</loc>
+    <lastmod>2012-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/27/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/</loc>
+    <lastmod>2011-12-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/19/a-probabilistic-look-at-predators-prey-and-extinctions/</loc>
+    <lastmod>2011-12-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/16/scifund-is-over/</loc>
+    <lastmod>2011-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/16/food-web-network-structure-and-extinction-the-start-of-an-open-notebook/</loc>
+    <lastmod>2011-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/13/wont-you-scifund/</loc>
+    <lastmod>2011-12-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/08/awww-yeah-chemical-ecology-music-video-extravaganza/</loc>
+    <lastmod>2011-12-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/03/how-to-make-a-dancing-yeti-crab-video-with-music/</loc>
+    <lastmod>2011-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/howto/</loc>
+    <lastmod>2011-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/12/02/dancing-yeti-crabs-now-with-soundtrack/</loc>
+    <lastmod>2011-12-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/11/22/can-we-reduce-the-carbon-cost-of-scientific-mega-meetings/</loc>
+    <lastmod>2011-11-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/11/11/seeing-through-the-measurement-error/</loc>
+    <lastmod>2011-11-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/10/25/morning-kelp-forest-jam/</loc>
+    <lastmod>2011-10-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/10/24/scifund-preview/</loc>
+    <lastmod>2011-10-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/10/06/thanks-steve-for-helping-science/</loc>
+    <lastmod>2011-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/08/08/astrophysicists-parasitized-killifish/</loc>
+    <lastmod>2011-08-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/08/01/a-grand-experiment-can-crowdfunding-work-for-science/</loc>
+    <lastmod>2011-08-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/07/21/cufflinks-for-the-well-dressed-marine-scientist/</loc>
+    <lastmod>2011-07-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/food-web/</loc>
+    <lastmod>2011-07-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kelp-forest/</loc>
+    <lastmod>2011-07-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/07/11/the-story-of-a-paper-climate-change-and-kelp-forest-food-webs/</loc>
+    <lastmod>2011-07-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/blog/</loc>
+    <lastmod>2011-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/05/20/oikos-in-the-online-hizzy/</loc>
+    <lastmod>2011-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/05/18/should-we-eat-fish-the-online-discussion/</loc>
+    <lastmod>2011-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/05/12/yo-were-climate-scientists/</loc>
+    <lastmod>2011-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/</loc>
+    <lastmod>2011-05-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/04/15/easy-upgrading-of-r/</loc>
+    <lastmod>2011-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/04/07/extra-extra-get-your-gridextra/</loc>
+    <lastmod>2011-04-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/04/01/michaelis-menten-rules-in-a-simple-lotka-volterra-world/</loc>
+    <lastmod>2011-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/03/29/diversity-it-matters-for-plants/</loc>
+    <lastmod>2011-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/03/17/ecological-nerd-musique/</loc>
+    <lastmod>2011-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/03/17/more-please/</loc>
+    <lastmod>2011-03-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/03/15/happy-2-day/</loc>
+    <lastmod>2011-03-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/03/01/rstudio-an-ide-for-the-masses/</loc>
+    <lastmod>2011-03-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/02/25/promoting-ecology-on-the-web/</loc>
+    <lastmod>2011-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/02/18/a-brief-residency-at-deep-sea-news/</loc>
+    <lastmod>2011-02-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/01/31/word-to-your-tree-ring/</loc>
+    <lastmod>2011-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/01/28/diversity-function-brought-to-life/</loc>
+    <lastmod>2011-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/01/24/merge-me-baby-one-more-time/</loc>
+    <lastmod>2011-01-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/01/18/get-your-reef-on/</loc>
+    <lastmod>2011-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2011/01/18/i-need-some-scat-prey-base-where-you-at/</loc>
+    <lastmod>2011-01-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/12/11/kids-marine-biology-awesome/</loc>
+    <lastmod>2010-12-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/11/17/the-fingerprint-of-fishing/</loc>
+    <lastmod>2010-11-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/11/13/wsn-2010-online/</loc>
+    <lastmod>2010-11-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/10/26/deeper-and-curiouser/</loc>
+    <lastmod>2010-10-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/10/08/vicious-predator-of-the-deep/</loc>
+    <lastmod>2010-10-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/10/06/choose-to-support-marine-education/</loc>
+    <lastmod>2010-10-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/09/13/finding-truth-in-a-messy-world/</loc>
+    <lastmod>2010-09-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/07/20/privatizing-the-reviewer-commons/</loc>
+    <lastmod>2010-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/rb-editor-selection/</loc>
+    <lastmod>2010-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/06/29/in-the-grass-on-the-reef-vlogging-research/</loc>
+    <lastmod>2010-06-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/06/28/how-a-scientist-sees-the-world/</loc>
+    <lastmod>2010-06-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tunicate-culinary-adventures/</loc>
+    <lastmod>2010-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/06/25/tunicate-whiskey/</loc>
+    <lastmod>2010-06-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/06/17/do-not-log-transform-count-data-bitches/</loc>
+    <lastmod>2010-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/biodiversity-and-ecosystem-function/</loc>
+    <lastmod>2010-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/extinction/</loc>
+    <lastmod>2010-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/fouling-community/</loc>
+    <lastmod>2010-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/04/01/my-dissertation-in-under-7-minutes/</loc>
+    <lastmod>2010-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/03/31/our-future-hot-n-tasty/</loc>
+    <lastmod>2010-03-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/history/</loc>
+    <lastmod>2010-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2010-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/structural-equation-modeling/</loc>
+    <lastmod>2010-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/03/05/the-map-of-science/</loc>
+    <lastmod>2010-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/p-value/</loc>
+    <lastmod>2010-02-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/02/15/viva-la-neo-fisherian-liberation-front/</loc>
+    <lastmod>2010-02-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/02/12/low-down-poor-abused-data-blues/</loc>
+    <lastmod>2010-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/01/21/the-conservation-horizon/</loc>
+    <lastmod>2010-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/01/20/research-blogging-awards/</loc>
+    <lastmod>2010-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/researchblogging/</loc>
+    <lastmod>2010-01-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2010/01/06/ecology-in-2020/</loc>
+    <lastmod>2010-01-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eating-tunicates/</loc>
+    <lastmod>2009-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/12/01/tunicates-on-bizarre-foods/</loc>
+    <lastmod>2009-12-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/11/06/csas-for-the-sea/</loc>
+    <lastmod>2009-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/csf-sustainability/</loc>
+    <lastmod>2009-11-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/chanties/</loc>
+    <lastmod>2009-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/10/16/help-kids-learn-sea-chanties/</loc>
+    <lastmod>2009-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tall-ships/</loc>
+    <lastmod>2009-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/10/14/whos-your-academic-daddy/</loc>
+    <lastmod>2009-10-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/22/lawrence-slobodkin-trophic-pioneer/</loc>
+    <lastmod>2009-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/philosophy/</loc>
+    <lastmod>2009-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/science/</loc>
+    <lastmod>2009-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/trophic-cascade/</loc>
+    <lastmod>2009-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/18/web-based-multilevel-modeling/</loc>
+    <lastmod>2009-09-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/acidification/</loc>
+    <lastmod>2009-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/paper-review/</loc>
+    <lastmod>2009-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/10/sea-stars-on-acid/</loc>
+    <lastmod>2009-09-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bdef/</loc>
+    <lastmod>2009-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/nytimes/</loc>
+    <lastmod>2009-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/popular-press/</loc>
+    <lastmod>2009-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/09/the-new-york-times-recognizes-that-what-i-do-is-hard/</loc>
+    <lastmod>2009-09-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2009-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/09/03/lets-all-go-down-to-the-barplot/</loc>
+    <lastmod>2009-09-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/blog/</loc>
+    <lastmod>2009-08-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lter/</loc>
+    <lastmod>2009-08-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/31/the-lters-get-hip/</loc>
+    <lastmod>2009-08-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/14/first-you-get-the-urchins-then-you-get-the-power-then-you-get-the-data/</loc>
+    <lastmod>2009-08-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/06/im-an-editor/</loc>
+    <lastmod>2009-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/researchblogging.org/</loc>
+    <lastmod>2009-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/oystersgarter/</loc>
+    <lastmod>2009-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/seaplex/</loc>
+    <lastmod>2009-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/trash-gyre/</loc>
+    <lastmod>2009-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/08/03/tweeting-a-trashy-voyage/</loc>
+    <lastmod>2009-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/experiment/</loc>
+    <lastmod>2009-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/20/ive-got-the-power/</loc>
+    <lastmod>2009-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/urchins/</loc>
+    <lastmod>2009-07-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/16/simple-data-visualization/</loc>
+    <lastmod>2009-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/12/lytechinus-pack-wolf-of-the-sea/</loc>
+    <lastmod>2009-07-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/coding/</loc>
+    <lastmod>2009-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/plyr/</loc>
+    <lastmod>2009-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/10/sometimes-you-just-need-to-use-a-plyr/</loc>
+    <lastmod>2009-07-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ecological-niche-modeling/</loc>
+    <lastmod>2009-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/07/01/mapping-the-sasquatch/</loc>
+    <lastmod>2009-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sasquatch/</loc>
+    <lastmod>2009-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ascidian/</loc>
+    <lastmod>2009-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/15/ascidians-in-vanity-fair/</loc>
+    <lastmod>2009-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sashimi/</loc>
+    <lastmod>2009-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sea-squirt/</loc>
+    <lastmod>2009-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tunicate/</loc>
+    <lastmod>2009-06-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/08/ocean-day-and-cob-25/</loc>
+    <lastmod>2009-06-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/03/sir-sea-squirt/</loc>
+    <lastmod>2009-06-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/feedback/</loc>
+    <lastmod>2009-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/feedback/</loc>
+    <lastmod>2009-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/06/01/going-topless-with-urchins/</loc>
+    <lastmod>2009-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/genial-gene/</loc>
+    <lastmod>2009-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/penis-fencing/</loc>
+    <lastmod>2009-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/18/penis-fencing-deadly-or-decadent/</loc>
+    <lastmod>2009-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/sexual-selection/</loc>
+    <lastmod>2009-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/craft/</loc>
+    <lastmod>2009-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/12/crocheted-tunicate/</loc>
+    <lastmod>2009-05-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ethics/</loc>
+    <lastmod>2009-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/10/new-ideas-in-ecology-and-reviewing/</loc>
+    <lastmod>2009-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/open-access/</loc>
+    <lastmod>2009-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/publishing/</loc>
+    <lastmod>2009-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/07/can-you-see-the-matrix/</loc>
+    <lastmod>2009-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/complexity/</loc>
+    <lastmod>2009-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/network/</loc>
+    <lastmod>2009-05-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/05/05/carnival-of-the-blue-24/</loc>
+    <lastmod>2009-05-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/30/well-my-genes-play-well-with-others/</loc>
+    <lastmod>2009-04-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/24/snails-going-nom-nom-nom-productive-diverse-tidepools/</loc>
+    <lastmod>2009-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/15/tweet-your-data/</loc>
+    <lastmod>2009-04-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/14/bringing-the-grey-to-light/</loc>
+    <lastmod>2009-04-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/04/01/when-italian-film-stars-go-prawn/</loc>
+    <lastmod>2009-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/manova/</loc>
+    <lastmod>2009-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mistakes-i-have-made/</loc>
+    <lastmod>2009-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/03/09/when-not-to-manova/</loc>
+    <lastmod>2009-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/14/what-do-squids-want/</loc>
+    <lastmod>2009-02-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/12/darwin-day/</loc>
+    <lastmod>2009-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/09/if-the-internet-says-it-it-must-be-true/</loc>
+    <lastmod>2009-02-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/08/baby-got-stats/</loc>
+    <lastmod>2009-02-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/03/rum-sea-squirts-and-the-lash/</loc>
+    <lastmod>2009-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/02/02/a-paen-to-the-blue-world-21/</loc>
+    <lastmod>2009-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/01/31/invasive-sea-squirt-a-palooza/</loc>
+    <lastmod>2009-01-31T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2009/01/28/the-light-the-heat-the-feedback/</loc>
+    <lastmod>2009-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/15/happy-holidays-from-haeckel/</loc>
+    <lastmod>2008-12-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/11/my-brain-is-a-ska-band-with-a-mutant-algal-walrus-as-a-mascot/</loc>
+    <lastmod>2008-12-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/06/5-things-meme/</loc>
+    <lastmod>2008-12-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/12/04/i-shall-return/</loc>
+    <lastmod>2008-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2008-11-25T18:51:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2008-11-25T18:51:22+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/jobs/</loc>
+    <lastmod>2008-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2008/10/23/who-am-i-job-hunting-edition/</loc>
+    <lastmod>2008-10-23T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>history on I&#39;m a Chordata! Urochordata!</title>
+    <link>/tags/history/</link>
+    <description>Recent content in history on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Mar 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/history/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Map of Science</title>
+      <link>/2010/03/05/the-map-of-science/</link>
+      <pubDate>Fri, 05 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/03/05/the-map-of-science/</guid>
+      <description>Why does it take so long for awesome cutting-edge statistical to make their way over to ecology? There are a myriad of techniques out there that have been around for 20, 30, 40, or more years that could help so many ecologists from banging their head into a wall over and over and over and&amp;hellip;well, you get the point. But, it takes quite a while for them to percolate over to us.</description>
+    </item>
+    
+  </channel>
+</rss>

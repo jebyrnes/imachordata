@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Here a Tau, there a Tau... Plotting Quantile Regressions" />
+<meta property="og:description" content="I&rsquo;ve ended up digging into quantile regression a bit lately (see this excellent gentle introduction to quantile regression for ecologists [pdf] for what it is and some great reasons why to use it -see also here and here). In R this is done via the quantreg package, which is pretty nice, and has some great plotting diagnostics, etc. But what it doesn&rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/" />
+<meta property="article:published_time" content="2013-12-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2013-12-04T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Here a Tau, there a Tau... Plotting Quantile Regressions"/>
+<meta name="twitter:description" content="I&rsquo;ve ended up digging into quantile regression a bit lately (see this excellent gentle introduction to quantile regression for ecologists [pdf] for what it is and some great reasons why to use it -see also here and here). In R this is done via the quantreg package, which is pretty nice, and has some great plotting diagnostics, etc. But what it doesn&rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/">
+
+    
+    <title>Here a Tau, there a Tau... Plotting Quantile Regressions &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Here a Tau, there a Tau... Plotting Quantile Regressions</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Dec 4, 2013</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p>I&rsquo;ve ended up digging into quantile regression a bit lately (see this excellent <a href="http://www.fort.usgs.gov/Products/Publications/21137/21137.pdf">gentle introduction to quantile regression
+for ecologists</a> [pdf] for what it is and some great reasons why to use it -see also <a href="http://www.econ.uiuc.edu/~roger/research/intro/rq.pdf">here</a> and <a href="http://www.ats.ucla.edu/stat/stata/faq/quantreg.htm">here</a>).  In R this is done via the <a href="http://cran.r-project.org/web/packages/quantreg/index.html">quantreg</a> package, which is pretty nice, and has some great plotting diagnostics, etc.  But what it doesn&rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau.</p>
+<p>The documentation has a nice example of how to do it, but it&rsquo;s long tedious code.  And I had to quickly whip up a few plots for different models.</p>
+<p>So, meh, I took the tedious code and wrapped it into a quickie function.  Which I dorp here for your delectation.  Unless you have some better fancier way to do it (which I&rsquo;d love to see - especially for ggplot&hellip;.)</p>
+<p>Here&rsquo;s the function:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">quantRegLines <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(rq_obj, lincol<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, <span style="color:#66d9ef">...</span>){
+  <span style="color:#75715e">#get the taus</span>
+  taus <span style="color:#f92672">&lt;-</span> rq_obj<span style="color:#f92672">$</span>tau
+
+  <span style="color:#75715e">#get x</span>
+  x <span style="color:#f92672">&lt;-</span> rq_obj<span style="color:#f92672">$</span>x[,<span style="color:#ae81ff">2</span>] <span style="color:#75715e">#assumes no intercept</span>
+  xx <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#a6e22e">min</span>(x, na.rm<span style="color:#f92672">=</span>T),<span style="color:#a6e22e">max</span>(x, na.rm<span style="color:#f92672">=</span>T),<span style="color:#ae81ff">1</span>)
+
+  <span style="color:#75715e">#calculate y over all taus</span>
+  f <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">coef</span>(rq_obj)
+  yy <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#ae81ff">1</span>,xx)<span style="color:#f92672">%*%</span>f
+
+  <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">length</span>(lincol)<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>) lincol<span style="color:#f92672">=</span><span style="color:#a6e22e">rep</span>(lincol, <span style="color:#a6e22e">length</span>(taus))
+  <span style="color:#75715e">#plot all lines</span>
+  <span style="color:#a6e22e">for</span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#a6e22e">length</span>(taus)){
+    <span style="color:#a6e22e">lines</span>(xx,yy[,i], col<span style="color:#f92672">=</span>lincol[i], <span style="color:#66d9ef">...</span>)
+  }
+
+}
+</code></pre></div><p>And an example use.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">data</span>(engel)
+<span style="color:#a6e22e">attach</span>(engel)
+
+taus <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">.05</span>,<span style="color:#ae81ff">.1</span>,<span style="color:#ae81ff">.25</span>,<span style="color:#ae81ff">.75</span>,<span style="color:#ae81ff">.9</span>,<span style="color:#ae81ff">.95</span>)
+<span style="color:#a6e22e">plot</span>(income,foodexp,xlab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Household Income&#34;</span>,
+     ylab<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Food Expenditure&#34;</span>,
+     pch<span style="color:#f92672">=</span><span style="color:#ae81ff">19</span>, col<span style="color:#f92672">=</span><span style="color:#a6e22e">alpha</span>(<span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#ae81ff">0.5</span>))
+
+rq_fit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rq</span>((foodexp)<span style="color:#f92672">~</span>(income),tau<span style="color:#f92672">=</span>taus)
+
+<span style="color:#a6e22e">quantRegLines</span>(rq_fit)
+</code></pre></div><p><img src="https://raw.github.com/jebyrnes/quantRegLines/master/figure/unnamed-chunk-1.png" alt=""></p>
+<p>Oh, and I set it up to make pretty colors in plots, too.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(income, foodexp, xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Household Income&#34;</span>,
+    ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Food Expenditure&#34;</span>,
+    pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">19</span>, col <span style="color:#f92672">=</span> <span style="color:#a6e22e">alpha</span>(<span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#ae81ff">0.5</span>))
+
+<span style="color:#a6e22e">quantRegLines</span>(rq_fit, <span style="color:#a6e22e">rainbow</span>(<span style="color:#ae81ff">6</span>))
+<span style="color:#a6e22e">legend</span>(<span style="color:#ae81ff">4000</span>, <span style="color:#ae81ff">1000</span>, taus, <span style="color:#a6e22e">rainbow</span>(<span style="color:#ae81ff">6</span>), title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tau&#34;</span>)
+</code></pre></div><p><img src="https://raw.github.com/jebyrnes/quantRegLines/master/figure/unnamed-chunk-2.png" alt=""></p>
+<p>All of this is in a repo over at <a href="https://github.com/jebyrnes/quantRegLines">github</a> (natch), so, fork and play.</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

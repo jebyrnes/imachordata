@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on I&#39;m a Chordata! Urochordata!</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 21 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bayesian SEM with BRMS</title>
+      <link>/2017/12/21/bayesian-sem-with-brms/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/bayesian-sem-with-brms/</guid>
+      <description>Note: for the most up to date version of this, see this post on rpubs
+Background So, it looks like brms version 2.0 implements multivariate responses - and hence piecewise Structural Equation Modeling in a Bayesian framework. After https://github.com/paul-buerkner/brms/issues/303, it became clear that while one cannot do tests of D-separation, WAIC, LOO, etc., are all available. Let&amp;rsquo;s take a peak with a familiar example.
+As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible with model forms, that I think it&amp;rsquo;s an excellent way to approach the problem that gives a lot more breathing room.</description>
+    </item>
+    
+    <item>
+      <title>Which library to use to teach linear models &amp; likelihood</title>
+      <link>/2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/</guid>
+      <description>I&amp;rsquo;ve been teaching likelihood to grad students for the past few years using the wonderful bbmle package from Ben Bolker. I really love it&amp;rsquo;s flexibility and the way you can get students into fitting anything their imagination can countenance. But there&amp;rsquo;s a small cost to that. First, their imagination, when they first meet likelihood, is&amp;hellip;.not ready. I teach linear models using least squares, then likelihood, then Bayes, in order to show the full range of inferential possibilities.</description>
+    </item>
+    
+    <item>
+      <title>Linear Model Power Analysis with Dplyr</title>
+      <link>/2016/10/18/linear-model-power-analysis-with-dplyr/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/10/18/linear-model-power-analysis-with-dplyr/</guid>
+      <description>I really liked the power analysis example I gave in class today. I feel like I&amp;rsquo;m finally firing on all cylinders with the tidyverse. So I thought I would post it here, in case it was of use to anyone!
+Power OK, we can fit and evluate linear regression models, but what about their power? Let&amp;rsquo;s look at our seal fit again - maybe we want to know what would have happened with a lower sample size?</description>
+    </item>
+    
+    <item>
+      <title>You Complete Me</title>
+      <link>/2016/02/05/you-complete-me/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/02/05/you-complete-me/</guid>
+      <description>There&amp;rsquo;s a feature that is either new or I haven&amp;rsquo;t noticed before in the new release of tidyr that is making me giddy with giddiness. The complete function.
+This seems odd. Why would just one function make you giddy, Jarrett? Why not all of them?
+It&amp;rsquo;s making me so happy as it solves a problem that just took a substantial degree of thought and waaaay to many lines of code to solve in a massive meta-analysis of kelp abundances I&amp;rsquo;m working on with colleagues.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post_old/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post_old/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>Spicier Analyses with Interactive R Leaflet Maps</title>
+      <link>/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/</link>
+      <pubDate>Tue, 31 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/</guid>
+      <description>Who wants to make a kickass, public-friendly, dynamic, online appendix with a map for their papers? ME! (and you, right?) Let&amp;rsquo;s talk about a cool way to make your data sing to a much broader audience than a static image.
+Last time, I mentioned that I had also been playing the Rstudio&amp;rsquo;s Leaflet package. For those who don&amp;rsquo;t know, Leaflet is a javascript library for generating interactive maps. I don&amp;rsquo;t know javascript (really), but I do know R, so this library is incredibly powerful for someone like me - particularly when paired with Rstudio&amp;rsquo;s HTMLwidgets or Shiny for publishing things.</description>
+    </item>
+    
+    <item>
+      <title>MEOW! It&#39;s Marine Ecoregions in R!</title>
+      <link>/2015/03/28/meow-its-marine-ecoregions-in-r-2/</link>
+      <pubDate>Sat, 28 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/03/28/meow-its-marine-ecoregions-in-r-2/</guid>
+      <description>So, I&amp;rsquo;m on paternity leave (yay! more on that another day - but HOMG, you guys, my daughter is amazing!) and while my daughter is amazing, there are many hours in the day and wee morning where I find myself rocking slowly back and forth, knowing that if I stop even for a second, this little bundle of cute sleeping away in the wrap will wake and howl.
+So, what&amp;rsquo;s a guy on leave to do?</description>
+    </item>
+    
+    <item>
+      <title>Space and SEMs</title>
+      <link>/2015/01/14/space-and-sems-2/</link>
+      <pubDate>Wed, 14 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/01/14/space-and-sems-2/</guid>
+      <description>WARNING: AS OF 10/1/2016 LAVAAN DOES NOT PRODUCE CORRECT CASEWISE RESIDUALS. PLEASE CALCULATE YOUR RESIDUALS BY HAND. HOPEFULLY THIS WILL BE FIXED SHORTLY, AND I WILL REMOVE THIS WARNING WHEN IT IS.
+One question that comes up time and time again when I teach my SEM class is, &amp;ldquo;What do I do if I have spatially structured data?&amp;rdquo; Maybe you have data that was sampled on a grid, and you know there are spatial gradients.</description>
+    </item>
+    
+    <item>
+      <title>Here a Tau, there a Tau... Plotting Quantile Regressions</title>
+      <link>/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/</link>
+      <pubDate>Wed, 04 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/</guid>
+      <description>I&amp;rsquo;ve ended up digging into quantile regression a bit lately (see this excellent gentle introduction to quantile regression for ecologists [pdf] for what it is and some great reasons why to use it -see also here and here). In R this is done via the quantreg package, which is pretty nice, and has some great plotting diagnostics, etc. But what it doesn&amp;rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau.</description>
+    </item>
+    
+    <item>
+      <title>More on Bacteria and Groups</title>
+      <link>/2013/04/12/more-on-bacteria-and-groups/</link>
+      <pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/12/more-on-bacteria-and-groups/</guid>
+      <description>Continuing with bacterial group-a-palooza&amp;hellip;
+I followed Ed&amp;rsquo;s suggestions and tried both a binomial distribution and a Poisson distribution for abundance such that the probability of a density of one species s in one group g in one plot r where there are S_g species in group gis
+[latex]A_rgs ~ Poisson(\frac{A_rg}{S_g})[/latex]
+In the analysis I&amp;rsquo;m doing, interesting, the results do change a bit such that the original network only results are confirmed.</description>
+    </item>
+    
+    <item>
+      <title>Extracting p-values from different fit R objects</title>
+      <link>/2013/02/23/extracting-p-values-from-different-fit-r-objects/</link>
+      <pubDate>Sat, 23 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/23/extracting-p-values-from-different-fit-r-objects/</guid>
+      <description>Let&amp;rsquo;s say you want to extract a p-value and save it as a variable for future use from a linear or generalized linear model - mixed or non! This is something you might want to do if, say, you were calculating Fisher&amp;rsquo;s C from an equation-level Structural Equation Model. Here&amp;rsquo;s how to extract the effect of a variable from multiple different fit models. We&amp;rsquo;ll start with a data set with x, y, z, and a block effect (we&amp;rsquo;ll see who in a moment).</description>
+    </item>
+    
+    <item>
+      <title>Filtering Out Exogenous Pairs of Variables from a Basis Set</title>
+      <link>/2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/</link>
+      <pubDate>Sat, 23 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/</guid>
+      <description>Sometimes in an SEM for which you&amp;rsquo;re calculating a test of D-Separation, you want all exogenous variables to covary. If you have a large model with a number of exogenous variables, coding that into your basis set can be a pain, and hence, you can spend a lot of time filtering out elements that aren&amp;rsquo;t part of your basis set, particularly with the ggm library. Here&amp;rsquo;s a solution - a function I&amp;rsquo;m calling filterExoFromBasiSet</description>
+    </item>
+    
+    <item>
+      <title>A Quick Note in Weighting with nlme</title>
+      <link>/2012/12/18/a-quick-note-in-weighting-with-nlme/</link>
+      <pubDate>Tue, 18 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/12/18/a-quick-note-in-weighting-with-nlme/</guid>
+      <description>I&amp;rsquo;ve been doing a lot of meta-analytic things lately. More on that anon. But one quick thing that came up was variance weighting with mixed models in R, and after a few web searches, I wanted to post this, more as a note-to-self and others than anything. Now, in a simple linear model, weighting by variance or sample size is straightforward.
+#variance lm(y ~ x, data = dat, weights = 1/v) #sample size lm(y ~ x, data = dat, weights = n) You can use the same sort of weights argument with lmer.</description>
+    </item>
+    
+    <item>
+      <title>Running OpenBUGS on a Mac Running OSX</title>
+      <link>/2012/03/20/running-openbugs-on-a-mac-running-osx/</link>
+      <pubDate>Tue, 20 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/20/running-openbugs-on-a-mac-running-osx/</guid>
+      <description>After writing up my tutorial regarding getting WinBUGS running on a Mac in R, a friend sent me this fantastic simple tutorial on the same thing for OpenBUGS on a mac in R. So, for those that want it, install away! Looks a good bit simpler, actually!</description>
+    </item>
+    
+    <item>
+      <title>Missing my Statsy Goodness? Check out #SciFund!</title>
+      <link>/2012/03/06/missing-my-statsy-goodness-check-out-scifund/</link>
+      <pubDate>Tue, 06 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/06/missing-my-statsy-goodness-check-out-scifund/</guid>
+      <description>I know, I know, I have been kinda lame about posting here lately. But that&amp;rsquo;s because my posting muscle has been focused on the new analyses for what makes a succesful #SciFund proposal. I&amp;rsquo;ve been posting them at the #SciFund blog under the Analysis tag - so check it out. There&amp;rsquo;s some fun stats, and you get to watch me be a social scientist for a minute. Viva la interdisciplinarity! </description>
+    </item>
+    
+    <item>
+      <title>Running R2WinBUGS on a Mac Running OSX</title>
+      <link>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</link>
+      <pubDate>Wed, 18 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</guid>
+      <description>I have long used JAGS to do all of my Bayesian work on my mac. Early on, I tried to figure out how to install WinBUGS and OpenBUGS and their accompanying R libraries on my mac, but, to no avail. I just had too hard of a time getting them running and gave up.
+But, it would seem that some things have changed with Wine lately, and it is now possible to not only get WinBUGS itself running nicely on a mac, but to also get R2WinBUGS to run as well.</description>
+    </item>
+    
+    <item>
+      <title>Ecological SEMs and Composite Variables: What, Why, and How</title>
+      <link>/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/</link>
+      <pubDate>Mon, 02 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/</guid>
+      <description>I&amp;rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&amp;rsquo;s awesome for three main reasons.
+  It&amp;rsquo;s a method of teasing apart direct and indirect interactions in your data.
+  It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.
+  As it&amp;rsquo;s formally presented, with path diagrams showing connections between variables, it&amp;rsquo;s SUPER easy to link conceptual models with your data.</description>
+    </item>
+    
+    <item>
+      <title>Easy Upgrading of R</title>
+      <link>/2011/04/15/easy-upgrading-of-r/</link>
+      <pubDate>Fri, 15 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/04/15/easy-upgrading-of-r/</guid>
+      <description>For those who are excited about the new 2.13.0 release of R (particularly the compiler package) but are grumbling about having to remember what packages they have and re-install them, see this great advice or this piece on upgrading in osx for how to automate the process.</description>
+    </item>
+    
+    <item>
+      <title>Extra! Extra! Get Your gridExtra!</title>
+      <link>/2011/04/07/extra-extra-get-your-gridextra/</link>
+      <pubDate>Thu, 07 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/04/07/extra-extra-get-your-gridextra/</guid>
+      <description>The more I use it, the deeper I fall in love with ggplot2. I know, some of you have heard me kvel about it ad nauseum (oh, yiddish and latin in one sentence - extra points!). But the graphs really look great, and once you wrap your head around a few concepts, it&amp;rsquo;s surprisingly easy to make it do most anything you want.
+Except for one thing.
+One thing I loved about the old R plotting functions was the ability to setup panels easily, and fill them with totally different graphs.</description>
+    </item>
+    
+    <item>
+      <title>More, Please!</title>
+      <link>/2011/03/17/more-please/</link>
+      <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/17/more-please/</guid>
+      <description>Thanks to Jim, I&amp;rsquo;ve been using R in the shell more and more - in concert with vi. It&amp;rsquo;s been fun, and nice to integrate my workflows all on the server (although I haven&amp;rsquo;t had to do much graphing yet - I&amp;rsquo;m sure I&amp;rsquo;ll start kvetching then and return to a nice gui).
+One thing that has frustrated me is that large dumps of output - say, a list composed of elements that are 100 lines each - just whip past me without an ability to scroll through more slowly.</description>
+    </item>
+    
+    <item>
+      <title>RStudio - An IDE for the Masses!</title>
+      <link>/2011/03/01/rstudio-an-ide-for-the-masses/</link>
+      <pubDate>Tue, 01 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/01/rstudio-an-ide-for-the-masses/</guid>
+      <description>I&amp;rsquo;ll admit it. There&amp;rsquo;s one thing that always makes me sad working on a mac. R. How does R make me sad on a mac? I look over at my compatriots in Windows using fun Integrated Development Environments (IDEs) like Tinn-R, and I sigh. On the other hand, I just had the sad little text editor and shell. Sure, it was enough, and I had wrung some sweet sweet code from that simple setup, but windows would get lost, I&amp;rsquo;d lose track of what file was where, what plot window was open, and would sometimes even forget which instance of R I was working in when I was working on two projects at the same time (one for simulation, one for analysis).</description>
+    </item>
+    
+    <item>
+      <title>Merge Me Baby One More Time!</title>
+      <link>/2011/01/24/merge-me-baby-one-more-time/</link>
+      <pubDate>Mon, 24 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/24/merge-me-baby-one-more-time/</guid>
+      <description>OK - has this ever happened to you? You are working with a team of collaborators all using a common dataset - maybe from an Agency, and LTER, or someone else&amp;rsquo;s data altogether. Each of you has some task - incorporating new data, running fancy models and putting the results back into the data for later analysis, etc.
+Months later you come back, ready to put it all together to execute your master plan of analysis, when suddenly you realize that you&amp;rsquo;ve all been working on slightly different versions of the original dataset.</description>
+    </item>
+    
+    <item>
+      <title>Do Not Log-Transform Count Data, Bitches!</title>
+      <link>/2010/06/17/do-not-log-transform-count-data-bitches/</link>
+      <pubDate>Thu, 17 Jun 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/06/17/do-not-log-transform-count-data-bitches/</guid>
+      <description>OK, so, the title of this article is actually Do not log-transform count data, but, as @ascidacea mentioned, you just can&amp;rsquo;t resist adding the &amp;ldquo;bitches&amp;rdquo; to the end.
+Onwards.
+If you&amp;rsquo;re like me, when you learned experimental stats, you were taught to worship at the throne of the Normal Distribution. Always check your data and make sure it is normally distributed! Or, make sure that whatever lines you fit to it have normally distributed error around them!</description>
+    </item>
+    
+    <item>
+      <title>Web-Based Multilevel Modeling</title>
+      <link>/2009/09/18/web-based-multilevel-modeling/</link>
+      <pubDate>Fri, 18 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/18/web-based-multilevel-modeling/</guid>
+      <description>This is tremendously cool. A nice intuitive web-based interface for the lme4 package in R (and you neither need to know R or understand the intricacies of the lme4 package) that gives you pdf output and plots. If you just want to play around and not worry about coding things up, it&amp;rsquo;s a great little option. Be sure to check out the demo video.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s All Go Down to the Barplot!</title>
+      <link>/2009/09/03/lets-all-go-down-to-the-barplot/</link>
+      <pubDate>Thu, 03 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/03/lets-all-go-down-to-the-barplot/</guid>
+      <description>I&amp;rsquo;m back for another pean to ANOVA-loving experimental ecology. Barplots (or point-range plots - but which is better is a discussion for a different time) are the thing! And a friend of mine was recently asking me how to do a decent barplot with ggplot2 for data of moderate complexity (e.g., a 2-way ANOVA).
+So I tried it.
+And then I hit my head against a wall for a little while.</description>
+    </item>
+    
+    <item>
+      <title>Simple Data Visualization</title>
+      <link>/2009/07/16/simple-data-visualization/</link>
+      <pubDate>Thu, 16 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/16/simple-data-visualization/</guid>
+      <description>OK, so, I know I already raved about one Hadley Wickham project and how it has changed my life last week. But what can I say, the man is a genius. And if you are using R (and let&amp;rsquo;s face it, you should be) and you want simple sexy graphs made quick, the man has you covered once again.
+I first learned about ggplot2 while scanning through some slides of the LA Area RUG meetings (that I missed - I still haven&amp;rsquo;t been to any!</description>
+    </item>
+    
+    <item>
+      <title>Sometimes, you just need to use a plyr</title>
+      <link>/2009/07/10/sometimes-you-just-need-to-use-a-plyr/</link>
+      <pubDate>Fri, 10 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/10/sometimes-you-just-need-to-use-a-plyr/</guid>
+      <description>I haven&amp;rsquo;t posted anything about R-nerdery in quite some time. But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier. The plyr package.
+R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives. This returns another vector or list.
+This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions.</description>
+    </item>
+    
+    <item>
+      <title>Baby Got Stats!</title>
+      <link>/2009/02/08/baby-got-stats/</link>
+      <pubDate>Sun, 08 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/08/baby-got-stats/</guid>
+      <description>I was completely tickled last year with the oh so amusing Statz Rappers. It kept me and my nerdy stats friends laughing for days. Rapping. Stats. The Internet.
+Good times.
+But little did I know that rapping about statistics was really just hitting its stride on youtube. This is Why We Plot began my trip down the rabbit hole. Quite a nice effort. I followed this with that Stats Rap - not bad, and oh so mellow.</description>
+    </item>
+    
+  </channel>
+</rss>

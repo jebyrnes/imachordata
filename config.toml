@@ -1,0 +1,62 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "I'm a Chordata! Urochordata!"
+theme = "hugo-material-blog"
+googleAnalytics = ""
+disqusShortname = "im-a-chordata-urochordata"
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+relativeURLs = true
+
+
+# Pagination
+paginate = 3
+paginatePath = "page"
+
+
+
+[outputs]
+home = ["HTML", "RSS"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+
+
+[params]
+    description = "A website built through Hugo and blogdown."
+
+
+    friends = false
+    bookmarks = false
+    about_me = true
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+
+[[params.addtional_menus]]
+      title =  "BOOKS"
+      href =  "/top/books/"
+[[params.addtional_menus]]
+      title =  "ABOUT"
+      href =  "/top/about/"
+
+
+[params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "Logo"
+
+
+[params.social]
+    rss            = true
+    #email          = "youremail@gmail.com"
+    twitter       = "http://twitter.com/jebyrnes"
+    github         = "https://github.com/jebyrnes"

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>power analysis on I&#39;m a Chordata! Urochordata!</title>
+    <link>/tags/power-analysis/</link>
+    <description>Recent content in power analysis on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 18 Oct 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/power-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linear Model Power Analysis with Dplyr</title>
+      <link>/2016/10/18/linear-model-power-analysis-with-dplyr/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/10/18/linear-model-power-analysis-with-dplyr/</guid>
+      <description>I really liked the power analysis example I gave in class today. I feel like I&amp;rsquo;m finally firing on all cylinders with the tidyverse. So I thought I would post it here, in case it was of use to anyone!
+Power OK, we can fit and evluate linear regression models, but what about their power? Let&amp;rsquo;s look at our seal fit again - maybe we want to know what would have happened with a lower sample size?</description>
+    </item>
+    
+    <item>
+      <title>I&#39;ve Got the Power!</title>
+      <link>/2009/07/20/ive-got-the-power/</link>
+      <pubDate>Mon, 20 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/20/ive-got-the-power/</guid>
+      <description>There is nothing like that pain of taking a first look at fresh precious new data from a carefully designed experiment which took months of planning and construction, 8 divers working full days, and a lot of back-and-forth with colleagues, and then you find absolutely no patterns of interest.
+Yup, it&amp;rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment. Fortunately, I was on my way to a 4th of July dinner with my family up in the mountains of Colorado, so, I wasn&amp;rsquo;t quite going to commit hari-kari on the spot.</description>
+    </item>
+    
+  </channel>
+</rss>

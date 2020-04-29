@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenPub on I&#39;m a Chordata! Urochordata!</title>
+    <link>/categories/openpub/</link>
+    <description>Recent content in OpenPub on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 25 Feb 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/openpub/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>I want to know what *YOU* think about review, preprints, and publication</title>
+      <link>/2013/02/25/i-want-to-know-what-you-think-about-review-preprints-and-publication/</link>
+      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/25/i-want-to-know-what-you-think-about-review-preprints-and-publication/</guid>
+      <description>As part of the OpenPub project, we&amp;rsquo;re soliciting folk to send us videos about their experience with the scholarly publication process. We want to use these to try and crowdfund the development of OpenPub - our preprint server with robust tools for discussion and interaction. Interested? Check out the full request over here and/or email me!</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <meta property="og:site_name" content="Huabing Blog">
+    <meta property="og:type" content="article">
+
+    
+    <meta property="og:image" content="//img/home-bg-jeep.jpg">
+    <meta property="twitter:image" content="//img/home-bg-jeep.jpg" />
+    
+
+    
+    <meta name="title" content="Diversity Loss v. Environmental Change: The Story of the Paper" />
+    <meta property="og:title" content="Diversity Loss v. Environmental Change: The Story of the Paper" />
+    <meta property="twitter:title" content="Diversity Loss v. Environmental Change: The Story of the Paper" />
+    
+
+    
+    <meta name="description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。">
+    <meta property="og:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    <meta property="twitter:description" content="赵化冰，程序员, 开源爱好者，生活探险家 | 这里是 赵化冰 的博客，与你一起发现更大的世界。" />
+    
+
+    
+    <meta property="twitter:card" content="summary" />
+    
+    
+
+    <meta name="keyword"  content="赵化冰, zhaohuabing, Zhaohuabing, , 赵化冰的网络日志, 赵化冰的博客, Zhaohuabing Blog, 博客, 个人网站, 互联网, Web, 云原生, PaaS, Istio, Kubernetes, 微服务, Microservice">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>Diversity Loss v. Environmental Change: The Story of the Paper-赵化冰的博客 | Zhaohuabing Blog</title>
+
+    <link rel="canonical" href="/post/diversity-loss-v-environmental-change-the-story-of-the-paper/">
+
+    <link rel="stylesheet" href="/css/iDisqus.min.css"/>
+	
+    
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    
+    <link rel="stylesheet" href="/css/zanshang.css">
+
+    
+    <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    
+    <script src="/js/jquery.min.js"></script>
+    
+    
+    <script src="/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/hux-blog.min.js"></script>
+	
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/docco.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Huabing Blog</a>
+        </div>
+
+        
+        
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/#scifund">#scifund</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/announcements">announcements</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/ascidians">ascidians</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/blog">blog</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/climate-change">climate-change</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/feedback">feedback</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/field-notes">field-notes</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/food-web-networks-and-extinctions">food-web-networks-and-extinctions</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/howto">howto</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/linkage">linkage</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/meetings">meetings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/neat">neat</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/networks">networks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/openpub">openpub</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/paper-review">paper-review</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/professional-musings">professional-musings</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/publishing">publishing</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/r">r</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/rantish">rantish</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/research">research</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science">science</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-music-videos">science-music-videos</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-online">science-online</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/science-parent">science-parent</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/sem">sem</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/shout-out">shout-out</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/silly">silly</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/statistics">statistics</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/talks">talks</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/categories/tunicate-culinary-adventures">tunicate-culinary-adventures</a>
+                    </li>
+                    
+                    
+		    
+                        <li><a href="/top/books/">BOOKS</a></li>
+                    
+                        <li><a href="/top/about/">ABOUT</a></li>
+                    
+
+                    
+		    <li>
+                        <a href="/search">SEARCH <img src="/img/search.png" height="15" style="cursor: pointer;" alt="Search"></a>
+		    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    
+</nav>
+<script>
+    
+    
+    
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        
+            $navbar.className = " ";
+            
+            setTimeout(function(){
+                
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+
+
+<style type="text/css">
+    header.intro-header {
+        background-image: url('/img/home-bg-jeep.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                    </div>
+                    <h1>Diversity Loss v. Environmental Change: The Story of the Paper</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+			Posted by 
+			
+			    Jarrett Byrnes
+			 
+			on 
+			Wednesday, May 2, 2012
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+<article>
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                
+                <header>
+                    <h2>TOC</h2>
+                </header>
+                
+                
+                <p><a href="http://www.researchblogging.org"><img src="http://www.researchblogging.org/public/citation_icons/rb2_large_gray.png" alt="ResearchBlogging.org" /></a>Just over a year and a half ago, I was lucky enough to be in a room with <a href="http://www.nceas.ucsb.edu/projects/12560">some of the world&rsquo;s top authorities</a> on the consequences of species loss at the National Center for Ecological Analysis and Synthesis. We were worried. When Brad Cardinale asked, &ldquo;So, where does diversity loss rank? As important as climate change? Rampant nutrient runoff from agriculture? I mean, come on, how important is it, <em>really</em>?&ldquo;, none of us knew the answer.</p>
+
+<p>But now we do.</p>
+
+<p>As our group has <a href="http://dx.doi.org/10.1038/nature11118">just published in Nature</a>, species loss matters quite a bit - as much as many of the major drivers of environmental change.</p>
+
+<p>[caption id=&ldquo;attachment_1220&rdquo; align=&ldquo;alignright&rdquo; width=&ldquo;250&rdquo; caption=&ldquo;Will losing one or more of these algae matter as much as the rapid rise in global temperature?&rdquo;]<a href="http://www.imachordata.com/wp-content/uploads/2012/04/diversity_algae.jpeg"><img src="http://www.imachordata.com/wp-content/uploads/2012/04/diversity_algae-225x300.jpg" alt="" /></a>[/caption]Let me back up. As species continue to go extinct across the globe, one has to ask - will there be any consequences? We&rsquo;ve spent the last 15 years answering this question, and it is, yes. Losing species, at the bare minimum, reduces the ability of fields of plants or algae to most efficiently turn sunlight and nutrients into new production. Losing some of the myriad of species responsible for munching their way through dead detrital material will slow that whole process down. More questions remain, but diversity loss seems to be altering a wide variety of ecosystem properties.</p>
+
+<p>But how important is that loss, really? In the grand scheme of climate change, pollution, and other forms of environmental change, is losing species important? Or is it just the icing on the cake of environmental degradation?</p>
+
+<p>[caption id=&ldquo;attachment_1229&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;188&rdquo; caption=&ldquo;What would results from experiments like this one with flumes full of many different combinations of algae tel us about how diversity and the environment both shape primary production?&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-11.06.47-AM-188x300.jpg" alt="" />[/caption]Realizing that there was no good answer to this, we sat down, rolled up our digital sleeves, and got to work. Led by the ever steady Dave Hooper and always insightful Carol Adair, we began to dig into the literature - to see what information was out there about the impacts of these different forms of environmental change. We were armed with the hugely revised and updated version of Brad&rsquo;s monster database (in no small part due to the Epic efforts of the unflappable Kristin Matulich at UC Irvine) documenting nearly every experiment that has measured the consequences of diversity loss ever conducted. Most of the data was from experiments describing changes to plant or algal productivity &amp; decomposition. So we had a starting point.</p>
+
+<p>How will diversity loss compare to the plethora of other forms of environmental change in altering these basic processes?</p>
+
+<p>The answer came from what we called the Meta-Meta. (Come on, say it 10 times fast). We assembled a huge database of <a href="http://en.wikipedia.org/wiki/Meta-analysis">meta-analyses</a> - statistical summaries of previous experimental results much like our own diversity set - that examined the effect of, say, nutrient addition or warming on plant productivity and decomposition. Carol then did some statistical wizardry, calculating <a href="http://en.wikipedia.org/wiki/Bootstrapping_(statistics)">bootstrapped</a> effect sizes of each from these previous meta-analyses. Hence, we had Meta-Meta-Analytic results that we could compare with our own meta-analytic results.  There was a lot of meta.</p>
+
+<p>But we had a problem. The measurements in our diversity experiment database looked at the consequences of having 1 species versus many species in a plot for productivity. That number of &lsquo;many&rsquo; species varied from experiment to experiment. And, besides, what&rsquo;s the right diversity loss scenario to compare to climate change. 10% species loss? 50%? 95%? Only 1 last species left, clinging tenaciously to the earth?</p>
+
+<p>We actually argued about this for a long time as only scientists can when they want to get something dead-on right. But the solution ended up being delightfully elegant.</p>
+
+<p>Why not look at the whole range of species loss scenarios. Bruce Hungate, Carol, Dave and I figured out a way to look at slices of the data that simulate some relevant range of species loss and applied a nonlinear model shown to fit species loss data quite well to generate a loss-productivity curve. The curve showed that, if you lose a few species, meh! Some productivity is lost, but no big whoop. But as you start losing more and more, the problem of species loss starts to compound. Like the interest rate from hell, more species lost means exponentially more plant production lost.</p>
+
+<p>We still struggled with visualization (hey, infographics people, any ideas), but the figure that we ended up producing I think gets the point across nicely.</p>
+
+<p>[caption id=&ldquo;attachment_1224&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;600&rdquo; caption=&ldquo;Changes in primary production as a function of per cent local species loss or the application of an environmental change treatment. The line with the confidence interval around it shows the effect of diversity loss. The think no-CI curve is its mirror image so that we can easily compare effect magnitude to types of environmental change that differ in the sign of their effect. Anything in red is a negative effect on productivity. E.g., drought and diversity loss both have negative effects. Anything in blue is a positive effect. E.g., if you add nitrogen and phosphorous, you boost productivity by quite a bit. Y-axis is in units of log response ratios. Any designers in the house with an even slicker way of presenting this, email me!&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-10.46.10-AM.jpg" alt="Figure 1 from the paper" />[/caption]</p>
+
+<p>So, now you can compare the effect of some environmental change to some percentage of species loss. For example, ~50% species loss has an equivalent impact to dousing a plot in acid rain.</p>
+
+<p>Of all of the types of environmental change out there, a lot of them are roughly equivalent to between 30-70% species loss for production and decomposition. And, some additional review work we did showed that predictions of local extinctions (i.e., within a plot) range pretty widely, but, the upper end of that range is ~41-60% - so, right in our range of observations.</p>
+
+<p>&ldquo;Oh-ho!&rdquo;, I hear some of you saying (and some in the group said - I&rsquo;m looking at you, Lars). &ldquo;Aren&rsquo;t the effects of environmental change in your Meta-Meta actually including any loss of species in experiments? I want a cleaner result!&rdquo;</p>
+
+<p>Well, we thought of that.</p>
+
+<p>Kristin, Dave, and I did some data-sorting kung-fu on the diversity experiment data set, and turned up several studies that not only manipulated species number, but also crossed that with a manipulation of some form of environmental change - things like drought, nutrient enrichment, and more. This was a much smaller set of data, and a smaller set of environmental change manipulations. But, the results are compelling, and show that we&rsquo;ve got the story right.</p>
+
+<p>[caption id=&ldquo;attachment_1233&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;640&rdquo; caption=&ldquo;Figure S4 from the supplement.  All is as it was before in the above figure, but, this data is from experiments that cross changes in number of species with one or more other forms of environmental change.&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-11.15.06-AM-1024x741.jpg" alt="" />[/caption]</p>
+
+<p>Those careful factorial crossed experiments show that once the diversity signal is taken out, the size of many of those environmental effects gets smaller relative to diversity. For example, the average effect of a CO2 increase is of the same magnitude as 20% species loss (although opposite in sign). The effect of drought, one of the biggest from the Meta-Meta, drops waaaay back as well -  although for both of these, the confidence intervals overlap 0 due to low sample sizes (and the 2 or the three drought datapoints come from mosses, so, more factorial experiments are needed!). Still, it&rsquo;s pretty darned suggestive that there are some interesting indirect effects hidden in the meta-meta.</p>
+
+<p>At the very least, the experimental data pretty clearly backs up the conclusion that loss of species appears to have effects on primary productivity that is similar to other sources of environmental change. And more intriguingly, it suggests that if environmental change ALSO causes loss of species, ecosystem functions like productivity are going to get hit with a 1-2 punch.</p>
+
+<p>The team noted a few caveats and open questions to this. When multiple kinds of environmental change were present - say, multiple kinds of fertilizers - the effects are way stronger than diversity loss. But we don&rsquo;t have a great handle on those kinds of synergistic effects overall. We also don&rsquo;t know how they&rsquo;ll affect diversity and then indirectly alter function. Also, because we were working with meta-analyses, we don&rsquo;t have, say, the ability to compare 30% species loss to a 30% increase in temperature, or something comparable. It would be awesome to be able to compare two continuous curves, but we&rsquo;re not there yet. Our results (deep inside the supplement) also show that composition - which species go extinct - can matter a great deal. But that was ancillary to our overall question of diversity loss. And there&rsquo;s all sorts of ancillary questions about scaling and interaction between diversity loss and environmental change - but that&rsquo;s work that Andy Gonzalez and Mary O&rsquo;Connor are following up on in a massive multilevel modeling extravaganza.</p>
+
+<p>Overall, we felt like this told a pretty tight story. Sure, as we came up with question after question, we accumulated a lot of figures and explanatory materials that made their way into the supplementary material, but the big story was pretty clear and compelling. In working group meeting 3, we really shaped this sucker, and then bounced revisions back and forth, wrenching the text back and forth. I&rsquo;ve never been part of such a large collaboration (save for our earlier <a href="http://dx.doi.org/10.3732/ajb.1000364">first paper</a>), so it was an inspiring process to see big ideas hashed out, thrown aside, revised, and made into clearer cleanly crafted pieces all on the screen of my word processor.</p>
+
+<p>I&rsquo;m pretty psyched that <a href="http://dx.doi.org/10.1038/nature11118">the paper</a> is now out, and I hope you all enjoy it as well. There&rsquo;s more to come from the working group, so stay tuned!</p>
+
+<p>[caption id=&ldquo;attachment_1231&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;500&rdquo; caption=&ldquo;The working group at our first meeting.&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2012/04/wg_small.jpeg" alt="" />[/caption]</p>
+
+<p>(Oh, and, final note - to anyone who wants to look at this data, or for R-nerds who want to see how we created these awesome figures, it&rsquo;s all available  <a href="http://knb.ecoinformatics.org/knb/metacat/nceas.984/nceas">here</a>.)</p>
+
+<p><em>References</em>
+Cardinale, Bradley J.; Matulich, Kristin L.; Hooper, David U.; Byrnes, Jarrett E.; Duffy, Emmett; Gamfeldt, Lars; Balvanera, Patricia; O&rsquo;Connor, Mary I.; Gonzalez, Andrew. 2011. The functional role of producer diversity in ecosystems. American Journal of Botany. 98:572-592. <a href="http://dx.doi.org/10.3732/ajb.1000364">10.3732/ajb.1000364</a></p>
+
+<p>Hooper, David U., Adair, E. Carol, Cardinale, Bradley J., Byrnes, Jarrett E.K., Hungate, Bruce A., Matulich, Kristin L., Gonzalez, Andrew, Duffy, J.E., Gamfeldt, Lars, O&rsquo;Connor, Mary I. 2012. Biodiversity loss ranks as a major driver of ecosystem change. Nature. <a href="http://dx.doi.org/10.1038/nature11118">10.1038/nature11118</a></p>
+
+<p><a href="http://www.credit-and-collections.com/">cheap cialis online</a></p>
+
+
+                
+                
+<div class="entry-shang text-center">
+    
+	    <p>「真诚赞赏，手留余香」</p>
+	
+	<button class="zs show-zs btn btn-bred">赞赏支持</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+	<div class="zs-modal-head">
+		<button type="button" class="close">×</button>
+		<span class="author"><a href="/"><img src="/img/favicon.png" />Huabing Blog</a></span>
+        
+	        <p class="tip"><i></i><span>真诚赞赏，手留余香</span></p>
+		
+ 
+	</div>
+	<div class="zs-modal-body">
+		<div class="zs-modal-btns">
+			<button class="btn btn-blink" data-num="2">2元</button>
+			<button class="btn btn-blink" data-num="5">5元</button>
+			<button class="btn btn-blink" data-num="10">10元</button>
+			<button class="btn btn-blink" data-num="50">50元</button>
+			<button class="btn btn-blink" data-num="100">100元</button>
+			<button class="btn btn-blink" data-num="1">任意金额</button>
+		</div>
+		<div class="zs-modal-pay">
+			<button class="btn btn-bred" id="pay-text">2元</button>
+			<p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+			<img src="/img/reward/wechat-2.png"  id="pay-image"/>
+		</div>
+	</div>
+	<div class="zs-modal-footer">
+		<label><input type="radio" name="zs-type" value="wechat" class="zs-type" checked="checked"><span ><span class="zs-wechat"><img src="/img/reward/wechat-btn.png"/></span></label>
+		<label><input type="radio" name="zs-type" value="alipay" class="zs-type" class="zs-alipay"><img src="/img/reward/alipay-btn.png"/></span></label>
+	</div>
+</div>
+<script type="text/javascript" src="/js/reward.js"></script>
+
+                
+
+                <hr>
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/post/scifund-2-has-launched/" data-toggle="tooltip" data-placement="top" title="#SciFund 2 has launched!">&larr;
+                            Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/post/spring-is-sproinging-earlier-than-we-thought/" data-toggle="tooltip" data-placement="top" title="Spring is sproinging earlier than we thought">Next
+                            Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+<div id="disqus-comment"></div>
+
+
+
+            </div>
+            
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                
+                
+                <section>
+                    <hr class="hidden-sm hidden-xs">
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ascidian" title="ascidian">
+                            ascidian
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/blog" title="blog">
+                            blog
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/climate-change" title="climate-change">
+                            climate-change
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/experiment" title="experiment">
+                            experiment
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/food-web" title="food-web">
+                            food-web
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/ggplot2" title="ggplot2">
+                            ggplot2
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/kelp-forest" title="kelp-forest">
+                            kelp-forest
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/power-analysis" title="power-analysis">
+                            power-analysis
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/r" title="r">
+                            r
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/rb-editor-selection" title="rb-editor-selection">
+                            rb-editor-selection
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/sea-squirt" title="sea-squirt">
+                            sea-squirt
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/statistics" title="statistics">
+                            statistics
+                        </a>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <a href="/tags/tunicate" title="tunicate">
+                            tunicate
+                        </a>
+                        
+                        
+                        
+                        <a href="/tags/urchins" title="urchins">
+                            urchins
+                        </a>
+                        
+                        
+                    </div>
+                </section>
+                
+
+                
+                
+                <section>
+                    <hr>
+                    <h5>FRIENDS</h5>
+                    <ul class="list-inline">
+                        
+                        <li><a target="_blank" href="https://zhaozhihan.com">Linda的博客</a></li>
+                        
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                   
+                   <li>
+                       <a href="" rel="alternate" type="application/rss+xml" title="Huabing Blog" >
+                           <span class="fa-stack fa-lg">
+                               <i class="fa fa-circle fa-stack-2x"></i>
+                               <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                           </span>
+                       </a>
+                   </li>
+                   
+                    
+                    <li>
+                        <a href="mailto:youremail@gmail.com">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    
+                    
+                    
+
+                    
+
+		    
+                    
+                    <li>
+                        <a target="_blank" href="/your%20wechat%20qr%20code%20image">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-wechat fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://github.com/yourgithub">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/yourlinkedinid">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+		    
+                    
+                </ul>
+		<p class="copyright text-muted">
+                    Copyright &copy; Huabing Blog 2019
+                    <br>
+                    <a href="https://themes.gohugo.io/hugo-theme-cleanwhite">CleanWhite Hugo Theme</a> by <a href="https://zhaohuabing.com">Huabing</a> |
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="100px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=zhaohuabing&repo=hugo-theme-cleanwhite&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+
+
+
+
+
+<script>
+    
+    if($('#tag_cloud').length !== 0){
+        async("/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+
+<script>
+    async("https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Spicier Analyses with Interactive R Leaflet Maps" />
+<meta property="og:description" content="Who wants to make a kickass, public-friendly, dynamic, online appendix with a map for their papers? ME! (and you, right?) Let&rsquo;s talk about a cool way to make your data sing to a much broader audience than a static image.
+Last time, I mentioned that I had also been playing the Rstudio&rsquo;s Leaflet package. For those who don&rsquo;t know, Leaflet is a javascript library for generating interactive maps. I don&rsquo;t know javascript (really), but I do know R, so this library is incredibly powerful for someone like me - particularly when paired with Rstudio&rsquo;s HTMLwidgets or Shiny for publishing things." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/" />
+<meta property="article:published_time" content="2015-03-31T00:00:00+00:00" />
+<meta property="article:modified_time" content="2015-03-31T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spicier Analyses with Interactive R Leaflet Maps"/>
+<meta name="twitter:description" content="Who wants to make a kickass, public-friendly, dynamic, online appendix with a map for their papers? ME! (and you, right?) Let&rsquo;s talk about a cool way to make your data sing to a much broader audience than a static image.
+Last time, I mentioned that I had also been playing the Rstudio&rsquo;s Leaflet package. For those who don&rsquo;t know, Leaflet is a javascript library for generating interactive maps. I don&rsquo;t know javascript (really), but I do know R, so this library is incredibly powerful for someone like me - particularly when paired with Rstudio&rsquo;s HTMLwidgets or Shiny for publishing things."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/">
+
+    
+    <title>Spicier Analyses with Interactive R Leaflet Maps &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Spicier Analyses with Interactive R Leaflet Maps</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Mar 31, 2015</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p>Who wants to make a kickass, public-friendly, dynamic, online appendix with a map for their papers? ME! (and you, right?) Let&rsquo;s talk about a cool way to make your data sing to a much broader audience than a static image.</p>
+<p>Last time, I mentioned that I had also been playing the Rstudio&rsquo;s Leaflet package. For those who don&rsquo;t know, Leaflet is a <a href="http://leafletjs.com/">javascript library</a> for generating interactive maps. I don&rsquo;t know javascript (really), but I do know R, so this library is <em>incredibly</em> powerful for someone like me - particularly when paired with Rstudio&rsquo;s <a href="http://www.htmlwidgets.org/">HTMLwidgets</a> or Shiny for publishing things.</p>
+<p>So, what is leaflet? How does it work? Let&rsquo;s start with a simple example. First, install the thing!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">if </span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;devtools&#39;</span>)) <span style="color:#a6e22e">install.packages</span>(<span style="color:#e6db74">&#39;devtools&#39;</span>)
+devtools<span style="color:#f92672">::</span><span style="color:#a6e22e">install_github</span>(<span style="color:#e6db74">&#39;rstudio/leaflet&#39;</span>)
+</code></pre></div><p>Now, at its core, leaflet makes maps. And then puts data on them. It uses the <a href="https://github.com/smbache/magrittr">magrittr</a> for pipes as syntax, which may be a bit daunting at first, but I think you&rsquo;ll see that it&rsquo;s all prety straightforward.</p>
+<p>Let&rsquo;s start with a super-basic simple map.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(leaflet)
+<span style="color:#a6e22e">leaflet</span>() <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">addTiles</span>()
+</code></pre></div><p>Oh! Map! Scrollable! Easy to use! And you can zoom down to streets. What&rsquo;s going on here?</p>
+<p>First, leaflet() starts the whole process. You can feed it arguments of data frames and such for later use. Second, addTiles says &ldquo;OK, go to a map server that feeds up image tiles, and grab &lsquo;em!&rdquo; It defaults to <a href="http://www.openstreetmap.org/">OpenStreetMap</a>, but there are others. For example, ESRI has a tile server with satellite imagery.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">leaflet</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">addTiles</span>(urlTemplate<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}&#34;</span>)
+</code></pre></div><p>There are a number of arguments and functions you could string after addTiles to zoom around, start in a certain area, manipulate the basic map widget in different ways, but I&rsquo;d like to focus on two common applications for folk like us. First, site maps! Let&rsquo;s say you had some awesome data from over 100 sites around the world, and you wanted to show it off. Maybe you wanted people to really be able to zoom in and see what the environment was like around your data (i.e., why I went and found the ESRI tile server). How would you do this?</p>
+<p>Well, leaflet provides a few different ways to put this stuff on a map. You can add circles, markers, circlemarkers, and much more. Let&rsquo;s give an example on a basic map. Note the formula interface for supplying values to latitude and longitude.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#fake some data</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">100</span>)
+myData <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(Latitude <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">-80</span>,<span style="color:#ae81ff">80</span>),
+                     Longitude <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">-180</span>,<span style="color:#ae81ff">180</span>),
+                     measurement1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">-3</span>, <span style="color:#ae81ff">2</span>),
+                     Year <span style="color:#f92672">=</span> <span style="color:#a6e22e">round</span>(<span style="color:#a6e22e">runif</span>(<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">1975</span>,<span style="color:#ae81ff">2015</span>)))
+<span style="color:#75715e">#map it!</span>
+<span style="color:#a6e22e">leaflet</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">addTiles</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">addCircles</span>(data<span style="color:#f92672">=</span>myData, lat <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>Latitude, lng <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>Longitude)
+</code></pre></div><p>Awesome! But we know there&rsquo;s information in that thar data. There&rsquo;s a Year and a Measurement. How can we communicate this information via our map? Well, there are a few ways. Note those circles had a color and a size? We can use that. Circles and markers are also clickable. So, we can add some additional information to our data and feed that into the map. Let&rsquo;s start with a popup message.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#round for readability</span>
+myData<span style="color:#f92672">$</span>info <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;Year: &#34;</span>, myData<span style="color:#f92672">$</span>Year,
+                      <span style="color:#e6db74">&#34;&lt;br&gt; Value: &#34;</span>, <span style="color:#a6e22e">round</span>(myData<span style="color:#f92672">$</span>measurement1, <span style="color:#ae81ff">3</span>))
+</code></pre></div><p>Note the use of some HTML in there. That&rsquo;s because leaflet displays things in a web browser, so, we need to use HTML tags for text formatting and line breaks.</p>
+<p>OK, great. Now what about a color? This can get a bit trickier with continuous values, as you&rsquo;ll need to roll your own gradients. Kind of a pain in the ass. If you just wanted one or two colors (say, positive or negative), you can just do something simple, or even feed a single value to the color argument - say, &ldquo;red&rdquo; - but let&rsquo;s get a little fancy. The classInt library is perfect for gradient construction. Here&rsquo;s an example. We&rsquo;ll start with grabbing a palette and making it a color ramp.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#grab a palette</span>
+<span style="color:#a6e22e">library</span>(RColorBrewer)
+
+pal <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">11</span>, <span style="color:#e6db74">&#34;Spectral&#34;</span>)
+
+<span style="color:#75715e">#now make it more continuous</span>
+<span style="color:#75715e">#as a colorRamp</span>
+pal <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">colorRampPalette</span>(pal)
+</code></pre></div><p>Great! Now we can use classInt to map the palette to our measurement values.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#now, map it to your values</span>
+<span style="color:#a6e22e">library</span>(classInt)
+palData <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">classIntervals</span>(myData<span style="color:#f92672">$</span>measurement1, style<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;quantile&#34;</span>)
+
+<span style="color:#75715e">#note, we use pal(100) for a smooth palette here</span>
+<span style="color:#75715e">#but you can play with this</span>
+myData<span style="color:#f92672">$</span>colors <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">findColours</span>(palData, <span style="color:#a6e22e">pal</span>(<span style="color:#ae81ff">100</span>))
+</code></pre></div><p>Now that we have info, colors, and, well, let&rsquo;s say we want to make the circles bigger - let&rsquo;s put it all together!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Put it on a map!</span>
+newMap <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">leaflet</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">addTiles</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">addCircleMarkers</span>(data<span style="color:#f92672">=</span>myData, lat <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>Latitude, lng <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>Longitude,
+             color <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>colors, popup <span style="color:#f92672">=</span> <span style="color:#f92672">~</span>info, radius <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+
+newMap
+</code></pre></div><p>Very cool! With different properties for zooming, filling, sizing points, different styles of markers, and more, I think the possibilities for online apendicies for papers - or outreach objects - are pretty endless here. Go forth, ye, and play!</p>
+<p>Also, check out the code in <a href="https://gist.github.com/jebyrnes/349f513c902590f20945">this gist</a>!</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

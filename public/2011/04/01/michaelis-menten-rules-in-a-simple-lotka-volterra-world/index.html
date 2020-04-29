@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Why Michaelis-Menten Rules in a (simple) Lotka-Volterra World" />
+<meta property="og:description" content="WARNING: This blog entry contains me awkwardly groping with math. It&rsquo;s not pretty. It&rsquo;s not done elegantly - indeed, for problems of even moderate complexity I fired up maxima (which is totally awesome!) rather than screw up the algebra on paper. And there are a few leaps that I make that I&rsquo;m sure someone could write a proof for, but, well&hellip; While I fall somewhere in the middle of the theoretical - experimental axis of scientists, that doesn&rsquo;t mean it&rsquo;s something I do every day, so, expect some turbulence." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2011/04/01/michaelis-menten-rules-in-a-simple-lotka-volterra-world/" />
+<meta property="article:published_time" content="2011-04-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2011-04-01T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Why Michaelis-Menten Rules in a (simple) Lotka-Volterra World"/>
+<meta name="twitter:description" content="WARNING: This blog entry contains me awkwardly groping with math. It&rsquo;s not pretty. It&rsquo;s not done elegantly - indeed, for problems of even moderate complexity I fired up maxima (which is totally awesome!) rather than screw up the algebra on paper. And there are a few leaps that I make that I&rsquo;m sure someone could write a proof for, but, well&hellip; While I fall somewhere in the middle of the theoretical - experimental axis of scientists, that doesn&rsquo;t mean it&rsquo;s something I do every day, so, expect some turbulence."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2011/04/01/michaelis-menten-rules-in-a-simple-lotka-volterra-world/">
+
+    
+    <title>Why Michaelis-Menten Rules in a (simple) Lotka-Volterra World &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Why Michaelis-Menten Rules in a (simple) Lotka-Volterra World</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Apr 1, 2011</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p><strong>WARNING:</strong>  This blog entry contains me awkwardly groping with math.  It&rsquo;s not pretty.  It&rsquo;s not done elegantly - indeed, for problems of even moderate complexity I fired up <a href="http://maxima.sourceforge.net/">maxima</a> (which is totally awesome!) rather than screw up the algebra on paper.  And there are a few leaps that I make that I&rsquo;m sure someone could write a proof for, but, well&hellip;  While I fall somewhere in the middle of the theoretical - experimental axis of scientists, that doesn&rsquo;t mean it&rsquo;s something I do every day, so, expect some turbulence.  I welcome comments and suggestions.</p>
+<p>And, indeed, despite my lit searching, I&rsquo;m not entirely convinced that someone hasn&rsquo;t done this before, so, I may be re-inventing a very old wheel.  But I thought it might be interesting to post these thoughts, if only for my own processing of recent research results.</p>
+<p>I also admit, showing some (clumsy) mathematical thoughts publically makes me feel, well, like I&rsquo;m not wearing any pants.  Oh well.  Onwards!  With or without pants!</p>
+<p>So, I was intrigued by Kyle&rsquo;s comment on my entry about the AJB diversity function paper. He said that surely theory must lead us to conclude that, due to only a limited number of species being able to pack into a space, a plot may never achieve some theoretical maximum amount of productivity as predicted by some curve.</p>
+<p>This led me to think more about diversity effects, and why are they saturating, anyway?  Should they be?  It&rsquo;s not Kyle&rsquo;s original question, but, it&rsquo;s an interesting one and leads down similar theoretical pathways (I think).</p>
+<p>So I decided to go back to basic competition theory - the Lotka-Volterra competition equations.  <!-- raw HTML omitted -->These equations are a simple hieuristic.  They&rsquo;re not mechanistic, but, they tell us something about coexistence between species that has held true across many different more nuanced competition models.  Namely, for species to coexist, competition within a species must be stronger that competition between species.</p>
+<p>These infamous equations have a general form familiar to pretty much anyone in ecology.  Namely</p>
+<p>[latex]\frac{dn_1}{dt}=rn_1\left(1-a_{11}n_1-a_{12}n_2\right)[/latex]</p>
+<p>[latex]\frac{dn_2}{dt}=rn_1\left(1-a_{22}n_2-a_{21}n_1\right)[/latex]</p>
+<p>where n1 and n2 are the population size (for our purposes, let&rsquo;s say, biomass) of a given organism, a11 and a22 are the effects of species 1 and 2 on themselves(1/the carrying capacity - aka 1/K1 and 1/K2 for those of you more familiar with that notation), respectively, and the other a values are between species competition coefficients.</p>
+<p>At equilibrium, we can solve for the density of, say, species 1.</p>
+<p>[latex]n_1=\frac{1-a_{12}n_2}{a_{11}}[/latex]</p>
+<p>and things look the same for species 2 - just change a few subscripts.  But, what is the sum total of the biomass in a plot, then.  What is Big N, as it were?  So, we sum both n1 and n2 at equilibrium and get&hellip;</p>
+<p>[latex]N=\frac{a_{22}+a_{11}-a_{12}-a_{21}}{a_{11}a_{22}-a_{12}a_{21}}[/latex]</p>
+<p>Oh, looks like a nice general statement about the balance of within versus between species interactions! This leads one to wonder, what about the S species version?  Can you scale up and make general conclusions about the total amount of biomass when you have S species in a system?  Fortunately, the generalized LV competition equation is simple.  Just</p>
+<p>[latex]\frac{dn_{i}}{dt}=r_{i}n_{i}\left(1-\sum\limits_{j=0}^S a_{ij}n_{j}\right)[/latex]</p>
+<p>So, surely there must be an easy way to generalize this to the total biomass, N, with S species, right?</p>
+<p>Well, maybe.  I admit, my algebra started to pooch out here in terms of finding a general relationship.  What?  I don&rsquo;t do this very much.  I turned to <a href="http://maxima.sourceforge.net/">maxima</a> to examine the three species answer, and, well, it wasn&rsquo;t heartening.  Here&rsquo;s N for 3 species (that&rsquo;s n1+n2+n3) at equilibrium</p>
+<p>[latex] N=[/latex]
+[latex]({{\left(a_{22}-a_{21}-a_{12}+a_{11}\right)a_{33}+
+\left(-a_{23}+a_{21}+a_{13}-a_{11}\right)a_{32} }}[/latex]</p>
+<p>[latex]{{+left(a_{23}-
+a_{22}-a_{13}+a_{12}right)a_{31}+left(a_{12}-a_{11}\right),
+a_{23}+\left(a_{11}-a_{13}right),a_{22}+\left(a_{13}-a_{12}\right)
+a_{21}})\over{left(a_{11}a_{22}-a_{12}a_{21}\right)a_{33}+
+\left(a_{13}a_{21}-a_{11}a_{23}\right)a_{32}+\left(a_{12}
+a_{23}-a_{13}a_{22}\right)a_{31}}}
+[/latex]</p>
+<p>Yeah, I&rsquo;m guessing if I thought long and hard about that, I could come up with a neat general elegant recursive relationship.  I feel certain it must be there in this equation, but, I&rsquo;m just not seeing it off of the top of my head.  Anyone?  Anyone?  Bueller?  What am I missing?</p>
+<p>But to go forward, I decided to simplify things a bit.  We know that in order for coexistence to happen, that within species competition needs to be stronger than between species competition.  Let&rsquo;s assume that within species competition occurs with strength a.  That the a11=a22=a33&hellip;etc.  And let&rsquo;s define the strength of between species interactions as b.  So, b=a12=a21=a13=a31=a32&hellip;etc.  I went back and looked at the 2 and 3 species cases again, and found that the answer was elegantly simple.</p>
+<p>For 2 species, N=2/(b+a).  For 3 species, N=3/(2b+a).  Etc.</p>
+<p>So, in general, for a system with S species,</p>
+<p>[latex]N=\frac{S}{(S-1)b+a}[/latex]</p>
+<p>I don&rsquo;t know about you, but this looks suspiciously like the famous <a href="http://en.wikipedia.org/wiki/Michaelis-Menten_kinetics">Michaelis-Menten</a> equation for enzyme kinetics - and, indeed, the relationship that we used in the AJB diversity function paper (as well as in <a href="http://dx.doi.org/10.1038/nature05202">Cardinale et al. 2006</a>).  To review, in the MM equation</p>
+<p>[latex]
+v_{o}=\frac{v_{max}C}{K+C}
+[/latex]</p>
+<p>where vo is some reaction rate, vmax is the maximum rate, C is the current concentration of a substrate, and K is the half-saturation concentration of the substrate - the concentration at which v=vmax/2.</p>
+<p>Re-arranging the Lotka-Volterra result for total biomass, we see something quite similar.</p>
+<p>[latex]N=\frac{frac{1}{b}S}{(\frac{a}{b}-1)+S}[/latex]</p>
+<p>So, here we see that the maximum amount of biomass a system can produce, it&rsquo;s vmax as it were, is simply the inverse of the strength of between species competition.  This is intuitively satisfying as, if competition between species is weaker, then the more total biomass it should produce.  On the other hand, the half-saturation point is  determined by the ratio of within to between species competition minus 1.  If within species competition is high, that half-saturation point will be large.  Increasing the strength of between species competition has the opposite effect (although it also decreases the maximum biomass yield).</p>
+<p>So, assuming that species behave similarly, and that between species interactions are weaker than within species interactions, and that all other Lotka-Volterra assumptions are met (homogeneity of space, time, etc., etc., etc.) we would expect that the relationship between species richness and maximum biomass production to be saturating and of the Michaelis-Menten form.  It backs up the rivet hypothesis - that total yield will saturate - and if we can calculate the strength of competition within versus between species, we should be able to make some basic predictions about how much diversity is needed to maximize yield.  Emphasis on VERY basic.</p>
+<p>But to provide an example, let&rsquo;s say within species competition is 10 times stronger than between species competition.  Well, then one needs roughly 9 species to achieve 1/2 of production.  What if they&rsquo;re near equal?  Then more than half of the total biomass of a system may well be achieved by just 1 species.  Sobering thought, but, it reconnects our biomass-curve fits to actual competition theory.</p>
+<p>Reality will of course be different.  Coefficients will be all over the place (which makes me wonder about just taking averages - thoughts?) (I&rsquo;m also guessing that there must be a nice recursive form of the equation for N), heterogeneity will play nasty tricks, facilitation is likely to play a role, and a Lotka-Volterra model is likely far too simple.  Still, I think this is a useful null expectation for a system with coevolved coexisting species that have relatively similar properties.  At the very least, it does provide some cover-fire for a justification in using the MM equation to fit the relationship.</p>
+<p>And with that, I&rsquo;ll put away my pencil and paper, close maxima, and go back to working on other papers.  Intellectual itch, consider yourself scratched (until someone says something so intriguing I can&rsquo;t ignore).</p>
+<p><strong>Refs</strong>
+Cardinale, B., Matulich, K., Hooper, D., Byrnes, J., Duffy, E., Gamfeldt, L., Balvanera, P., O&rsquo;Connor, M., &amp; Gonzalez, A. (2011). The functional role of producer diversity in ecosystems American Journal of Botany, 98 (3), 572-592 DOI: <a href="http://dx.doi.org/10.3732/ajb.1000364">10.3732/ajb.1000364</a></p>
+<p>Cardinale, B., Srivastava, D., Emmett Duffy, J., Wright, J., Downing, A., Sankaran, M., &amp; Jouseau, C. (2006). Effects of biodiversity on the functioning of trophic groups and ecosystems Nature, 443 (7114), 989-992 DOI: <a href="http://dx.doi.org/10.1038/nature05202">10.1038/nature05202</a></p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

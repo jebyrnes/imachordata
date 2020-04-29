@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Extra! Extra! Get Your gridExtra!" />
+<meta property="og:description" content="The more I use it, the deeper I fall in love with ggplot2. I know, some of you have heard me kvel about it ad nauseum (oh, yiddish and latin in one sentence - extra points!). But the graphs really look great, and once you wrap your head around a few concepts, it&rsquo;s surprisingly easy to make it do most anything you want.
+Except for one thing.
+One thing I loved about the old R plotting functions was the ability to setup panels easily, and fill them with totally different graphs." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2011/04/07/extra-extra-get-your-gridextra/" />
+<meta property="article:published_time" content="2011-04-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2011-04-07T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Extra! Extra! Get Your gridExtra!"/>
+<meta name="twitter:description" content="The more I use it, the deeper I fall in love with ggplot2. I know, some of you have heard me kvel about it ad nauseum (oh, yiddish and latin in one sentence - extra points!). But the graphs really look great, and once you wrap your head around a few concepts, it&rsquo;s surprisingly easy to make it do most anything you want.
+Except for one thing.
+One thing I loved about the old R plotting functions was the ability to setup panels easily, and fill them with totally different graphs."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2011/04/07/extra-extra-get-your-gridextra/">
+
+    
+    <title>Extra! Extra! Get Your gridExtra! &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Extra! Extra! Get Your gridExtra!</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Apr 7, 2011</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p>The more I use it, the deeper I fall in love with <a href="http://had.co.nz/ggplot2/">ggplot2</a>.  I know, some of you have heard me kvel about it ad nauseum (oh, yiddish and latin in one sentence - extra points!).  But the graphs really look great, and once you wrap your head around a few concepts, it&rsquo;s surprisingly easy to make it do most anything you want.</p>
+<p>Except for one thing.</p>
+<p>One thing I loved about the old R plotting functions was the ability to setup panels easily, and fill them with totally different graphs.  Ye olde par(mfrow=c(2,2)) for a 2 x 2 grid, for example.</p>
+<p>Enter <a href="http://code.google.com/p/gridextra/">gridExtra</a>.  Let the games begin.</p>
+<p>What exactly do I mean?  Let&rsquo;s say I&rsquo;m working with the soil chemistry data in the <a href="http://vegan.r-forge.r-project.org/">vegan</a> package.  First, maybe I just want to eyeball the historgrams of both the hummus depth and bare soil columns.</p>
+<p>To do this in ggplot2, and with a single commend to put them in a single window, first you need to melt the data with reshape2 so that the column names are actually grouping variables, and then you can plot it.  In the process, you create an additional data frame.  And, you also have to do some extra specifying of scales, facets, etc. etc.  Here&rsquo;s the code and graphs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2) <span style="color:#75715e">#for plotting</span>
+<span style="color:#a6e22e">library</span>(reshape2) <span style="color:#75715e">#for data reshaping</span>
+
+<span style="color:#a6e22e">library</span>(vegan) <span style="color:#75715e">#for the data</span>
+<span style="color:#a6e22e">data</span>(varechem)
+
+<span style="color:#75715e">#First, reshape the data so that Hummus depth and Bare soil are your grouping variables</span>
+vMelt<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">melt</span>(varechem, measure.vars<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Humdepth&#34;</span>, <span style="color:#e6db74">&#34;Baresoil&#34;</span>))
+
+<span style="color:#75715e">#Now plot it.  Use fill to color things differently, facet_wrap to split this into two panels,</span>
+<span style="color:#75715e">#And don&#39;t forget that the x scales are different - otherwise things look odd</span>
+<span style="color:#a6e22e">qplot</span>(value, data<span style="color:#f92672">=</span>vMelt, fill<span style="color:#f92672">=</span>variable)<span style="color:#f92672">+</span><span style="color:#a6e22e">facet_wrap</span>( facets<span style="color:#f92672">=~</span>variable, scale<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;free_x&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2011/04/hist11.png" alt=""></p>
+<p>This produces a nice graph.  But, man, I had to think about reshaping things, and all of those scales?  What if I just wanted to make two historgrams, and slam &lsquo;em together.  This is where gridExtra is really nice.  Through its function grid.arrange, you can make a multi-paneled graph using ggplot2 plots, lattice plots, and more (although, not regular R plots&hellip;I think).</p>
+<p>So, let&rsquo;s see the same example, but with gridExtra.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(gridExtra)
+
+<span style="color:#75715e">#make two separate ggplot2 objects</span>
+humDist<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">qplot</span>(Humdepth, data<span style="color:#f92672">=</span>varechem, fill<span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;red&#34;</span>))
+bareDist<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">qplot</span>(Baresoil, data<span style="color:#f92672">=</span>varechem, fill<span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(<span style="color:#e6db74">&#34;blue&#34;</span>))
+
+<span style="color:#75715e">#Now use grid.arrange to put them all into one figure.</span>
+<span style="color:#75715e">#Note the use of ncol to specify two columns.  Things are nicely flexible here.</span>
+<span style="color:#a6e22e">grid.arrange</span>(humDist, bareDist, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2011/04/hist2.png" alt=""></p>
+<p>&ldquo;Oh, what a trivial problem,&rdquo; you may now be saying.  But, if you want to, say, plot up 5 different correlations, or, say, the same scatterplot with 4 different model fits, this is a life-saver - if nothing else, in terms of readability of your code for later use.</p>
+<p>This is all well and good, but, simple.  Let&rsquo;s get into more fun multi-panel figures.  Let&rsquo;s say we wanted a bivariate scatter-plot of Hummus Depth and Bare Soil with a linear fit.  But, we also wanted to plot the histograms of each variable in adjacent panels. Oh, and flip the histogram of whatever is on the y-axis.  Sexy, no?  This is pretty straightforward.  We can use the ggplot2 objects we already have, flip the co-ordinates on one, create a bivariate plot with a fit, and fill in one final panel with something blank.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#First, the correlation.  I&#39;m using size just to make bigger points.  And then I&#39;ll add a smoothed fit.</span>
+corPlot<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">qplot</span>(Humdepth, Baresoil, data<span style="color:#f92672">=</span>varechem, size<span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(<span style="color:#ae81ff">3</span>))<span style="color:#f92672">+</span><span style="color:#a6e22e">stat_smooth</span>(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lm&#34;</span>)
+
+<span style="color:#75715e">#OK, we&#39;ll need a blank panel.  gridExtra can make all sorts of shapes, so, let&#39;s make a white box</span>
+blankPanel<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">grid.rect</span>(gp<span style="color:#f92672">=</span><span style="color:#a6e22e">gpar</span>(col<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;white&#34;</span>))
+
+<span style="color:#75715e">#Now put it all together, but don&#39;t forget to flip the Baresoil histogram</span>
+<span style="color:#a6e22e">grid.arrange</span>(humDist, blankPanel, corPlot, bareDist, ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2011/04/three_panel.png" alt=""></p>
+<p>Nice.  Note the use of the grid.rect.  gridExtra is loaded with all sorts of interesting ways to place shapes and <a href="http://code.google.com/p/gridextra/">other objects</a> into your plots - including my favorite - grid.table, for when you don&rsquo;t want to deal with text.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">a<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">anova</span>(<span style="color:#a6e22e">lm</span>(Baresoil <span style="color:#f92672">~</span> Humdepth, data<span style="color:#f92672">=</span>varechem))
+<span style="color:#a6e22e">grid.table</span>(<span style="color:#a6e22e">round</span>(a, digits<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>))
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2011/04/Screen-shot-2011-04-07-at-11.51.40-AM.png" alt="">
+Or, heck, if you want to make that part of the above plot, use tableGrob instead of grid.table, and then slot it in where the blank panel is.  The possibilities are pretty endless!</p>
+<p><strong>UPDATE</strong>: Be sure to see <a href="http://inundata.org">Karthik</a>&lsquo;s <a href="http://www.imachordata.com/?p=730#comment-5325">comment below</a> about alternatively using viewports.  Quite flexible, and very nice, if a hair more complex.</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

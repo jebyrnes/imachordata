@@ -1,0 +1,2100 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>I&#39;m a Chordata! Urochordata!</title>
+    <link>/</link>
+    <description>Recent content on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 25 Nov 2008 18:51:22 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bayesian SEM with BRMS</title>
+      <link>/2017/12/21/bayesian-sem-with-brms/</link>
+      <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/12/21/bayesian-sem-with-brms/</guid>
+      <description>Note: for the most up to date version of this, see this post on rpubs
+Background So, it looks like brms version 2.0 implements multivariate responses - and hence piecewise Structural Equation Modeling in a Bayesian framework. After https://github.com/paul-buerkner/brms/issues/303, it became clear that while one cannot do tests of D-separation, WAIC, LOO, etc., are all available. Let&amp;rsquo;s take a peak with a familiar example.
+As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible with model forms, that I think it&amp;rsquo;s an excellent way to approach the problem that gives a lot more breathing room.</description>
+    </item>
+    
+    <item>
+      <title>Introducing the Open Derby (guest post)</title>
+      <link>/2017/03/31/introducing-the-open-derby-guest-post/</link>
+      <pubDate>Fri, 31 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/03/31/introducing-the-open-derby-guest-post/</guid>
+      <description>Ensuring openness and reproducibility in ecology is an ongoing challenge, although open tools (e.g., R Studio, Github) are free to use, and user support is everywhere. To illustrate how ecology collaborations can fit within an open science framework, we had the idea of running an &amp;lsquo;Open Derby&amp;rsquo;. Similar to a research derby, where grad students and post-docs from different academic departments and universities collaborate together to solve a conservation problem, our idea extends the derby concept to working fully openly: learning version control in GitHub, writing and analysing data in RMarkdown, and publishing all project development in an open notebook.</description>
+    </item>
+    
+    <item>
+      <title>Which library to use to teach linear models &amp; likelihood</title>
+      <link>/2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/</link>
+      <pubDate>Mon, 09 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/</guid>
+      <description>I&amp;rsquo;ve been teaching likelihood to grad students for the past few years using the wonderful bbmle package from Ben Bolker. I really love it&amp;rsquo;s flexibility and the way you can get students into fitting anything their imagination can countenance. But there&amp;rsquo;s a small cost to that. First, their imagination, when they first meet likelihood, is&amp;hellip;.not ready. I teach linear models using least squares, then likelihood, then Bayes, in order to show the full range of inferential possibilities.</description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>/post_old/2016-12-30-hello-markdown/</link>
+      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
+      
+      <guid>/post_old/2016-12-30-hello-markdown/</guid>
+      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
+ You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
+    </item>
+    
+    <item>
+      <title>Linear Model Power Analysis with Dplyr</title>
+      <link>/2016/10/18/linear-model-power-analysis-with-dplyr/</link>
+      <pubDate>Tue, 18 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/10/18/linear-model-power-analysis-with-dplyr/</guid>
+      <description>I really liked the power analysis example I gave in class today. I feel like I&amp;rsquo;m finally firing on all cylinders with the tidyverse. So I thought I would post it here, in case it was of use to anyone!
+Power OK, we can fit and evluate linear regression models, but what about their power? Let&amp;rsquo;s look at our seal fit again - maybe we want to know what would have happened with a lower sample size?</description>
+    </item>
+    
+    <item>
+      <title>You Complete Me</title>
+      <link>/2016/02/05/you-complete-me/</link>
+      <pubDate>Fri, 05 Feb 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/02/05/you-complete-me/</guid>
+      <description>There&amp;rsquo;s a feature that is either new or I haven&amp;rsquo;t noticed before in the new release of tidyr that is making me giddy with giddiness. The complete function.
+This seems odd. Why would just one function make you giddy, Jarrett? Why not all of them?
+It&amp;rsquo;s making me so happy as it solves a problem that just took a substantial degree of thought and waaaay to many lines of code to solve in a massive meta-analysis of kelp abundances I&amp;rsquo;m working on with colleagues.</description>
+    </item>
+    
+    <item>
+      <title>Other Writings about Parenting &amp; Climate Change by Scientists</title>
+      <link>/2016/01/21/other-writings-about-parenting-climate-change-by-scientists/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/01/21/other-writings-about-parenting-climate-change-by-scientists/</guid>
+      <description>OK, so, I spoke too soon. There are at least a few stabs by scientists writing about being a parent who studies climate/environmental change. As folk send me more, I&amp;rsquo;ll try and keep this list updated. While there&amp;rsquo;s some great stuff here, I feel like this is an empty niche for some great writing. Maybe you want to contribute, too? Towards that end, anyone who has a yen, I will be happy to post, repost, or link your own writings here under my science parent category.</description>
+    </item>
+    
+    <item>
+      <title>Parenting as a Scientist in the Age of Climate Change</title>
+      <link>/2016/01/21/parenting-as-a-scientist-in-the-age-of-climate-change/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/2016/01/21/parenting-as-a-scientist-in-the-age-of-climate-change/</guid>
+      <description>An old friend with a new child asked me if I know any climate change scientists or global change biologists who are parents and have written cogently about being parents in the era of climate change. Off of the top of my head, I couldn&amp;rsquo;t think of any (prove me wrong, internet), but, heck, I&amp;rsquo;m one myself. Here I am, staring down the barrel of hitting one year since HD&amp;rsquo;s arrival.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post_old/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post_old/2015-07-23-r-rmarkdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>Rafe Sagarin and Passion in The Life Scientific</title>
+      <link>/2015/06/01/rafe-sagarin-and-passion-in-the-life-scientific/</link>
+      <pubDate>Mon, 01 Jun 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/06/01/rafe-sagarin-and-passion-in-the-life-scientific/</guid>
+      <description>How to process something like Rafe Sagarin&amp;rsquo;s senseless passing? For those who never encountered him, Rafe was a wonderful marine ecologist whose body of work was as varied and eclectic as can be, from classic papers on long-term effects of climate change in Science and Ecological Monograph to books on how the natural world can help us deal with risk, like terrorist attacks, to working at Biosphere2. He&amp;rsquo;s even got a wonderful youtube channel that works, as he always did, outside of the box.</description>
+    </item>
+    
+    <item>
+      <title>Spicier Analyses with Interactive R Leaflet Maps</title>
+      <link>/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/</link>
+      <pubDate>Tue, 31 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/03/31/spicier-analyses-with-interactive-r-leaflet-maps/</guid>
+      <description>Who wants to make a kickass, public-friendly, dynamic, online appendix with a map for their papers? ME! (and you, right?) Let&amp;rsquo;s talk about a cool way to make your data sing to a much broader audience than a static image.
+Last time, I mentioned that I had also been playing the Rstudio&amp;rsquo;s Leaflet package. For those who don&amp;rsquo;t know, Leaflet is a javascript library for generating interactive maps. I don&amp;rsquo;t know javascript (really), but I do know R, so this library is incredibly powerful for someone like me - particularly when paired with Rstudio&amp;rsquo;s HTMLwidgets or Shiny for publishing things.</description>
+    </item>
+    
+    <item>
+      <title>MEOW! It&#39;s Marine Ecoregions in R!</title>
+      <link>/2015/03/28/meow-its-marine-ecoregions-in-r-2/</link>
+      <pubDate>Sat, 28 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/03/28/meow-its-marine-ecoregions-in-r-2/</guid>
+      <description>So, I&amp;rsquo;m on paternity leave (yay! more on that another day - but HOMG, you guys, my daughter is amazing!) and while my daughter is amazing, there are many hours in the day and wee morning where I find myself rocking slowly back and forth, knowing that if I stop even for a second, this little bundle of cute sleeping away in the wrap will wake and howl.
+So, what&amp;rsquo;s a guy on leave to do?</description>
+    </item>
+    
+    <item>
+      <title>Space and SEMs</title>
+      <link>/2015/01/14/space-and-sems-2/</link>
+      <pubDate>Wed, 14 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/2015/01/14/space-and-sems-2/</guid>
+      <description>WARNING: AS OF 10/1/2016 LAVAAN DOES NOT PRODUCE CORRECT CASEWISE RESIDUALS. PLEASE CALCULATE YOUR RESIDUALS BY HAND. HOPEFULLY THIS WILL BE FIXED SHORTLY, AND I WILL REMOVE THIS WARNING WHEN IT IS.
+One question that comes up time and time again when I teach my SEM class is, &amp;ldquo;What do I do if I have spatially structured data?&amp;rdquo; Maybe you have data that was sampled on a grid, and you know there are spatial gradients.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>/post_old/2015-01-01-lorem-ipsum/</link>
+      <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
+      
+      <guid>/post_old/2015-01-01-lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Talking Kelps and Climate Change at the New England Aquarium</title>
+      <link>/2014/11/14/talking-kelps-and-climate-change-at-the-new-england-aquarium/</link>
+      <pubDate>Fri, 14 Nov 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/11/14/talking-kelps-and-climate-change-at-the-new-england-aquarium/</guid>
+      <description>It&amp;rsquo;s always a bit painful to watch yourself talk, but I think this came off pretty well. A public lecture at the New England Aquarium. It was an interesting one to put together, and I&amp;rsquo;m still working on my style for public non-academic lectures, but all in all, not too shabby&amp;hellip; I hope.</description>
+    </item>
+    
+    <item>
+      <title>Positive Multifunctionality ≠ All Functions Are Positive</title>
+      <link>/2014/09/25/positive-multifunctionality-all-functions-are-positive/</link>
+      <pubDate>Thu, 25 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/09/25/positive-multifunctionality-all-functions-are-positive/</guid>
+      <description>Positive Multifunctionality ≠ All Functions Are Positive
+I was dismayed this morning to read Bradford et al.&amp;lsquo;s recently accepted paper Discontinuity in the responses of ecosystem processes and multifunctionality to altered soil community composition in PNAS for several reasons.
+The paper itself is really cool. They manipulated community complexity and nutrient conditions in the Ecotron, and then looked at five soil ecosystem functions. They then looked at whether complexity influenced multi functionality (as well as N), and found, indeed, it did!</description>
+    </item>
+    
+    <item>
+      <title>Getting it Right - after Publication: A Multifunctional Journey?</title>
+      <link>/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/</link>
+      <pubDate>Tue, 02 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/09/02/getting-it-right-after-publication-a-multifunctional-journey/</guid>
+      <description>Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.
+Earlier this year, along with a great cohort of colleagues, I birthed a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions. We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&amp;rsquo;t matter.</description>
+    </item>
+    
+    <item>
+      <title>Kelp &amp; German Death Metal</title>
+      <link>/2014/08/12/kelp-german-metal/</link>
+      <pubDate>Tue, 12 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/08/12/kelp-german-metal/</guid>
+      <description>I have no words for how amazing this is. New lab theme song?</description>
+    </item>
+    
+    <item>
+      <title>A Kelpy Time Machine</title>
+      <link>/2014/08/11/a-kelpy-time-machine/</link>
+      <pubDate>Mon, 11 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/08/11/a-kelpy-time-machine/</guid>
+      <description>This is x-posted from my guest post at Deep Sea News about the new Floating Forests citizen science project I&amp;rsquo;m part of. If you&amp;rsquo;re excited about it, go check out http://www.floatingforests.org/!
+There&amp;rsquo;s something I&amp;rsquo;ve always wanted. Something that would take kelp forest science to a new level. Something that would let me do the kind of work that I dream about, quietly, secretly, peering into the mysteries of kelpiness.
+It is something impossible.</description>
+    </item>
+    
+    <item>
+      <title>The Beatles and Kelp</title>
+      <link>/2014/08/07/the-beatles-and-kelp/</link>
+      <pubDate>Thu, 07 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/08/07/the-beatles-and-kelp/</guid>
+      <description>For a blog post somewhere else, I&amp;rsquo;m trying to re-work the Beatle&amp;rsquo;s classic Kelp!, er, I mean, Help!. But my first draft got all urchin-y. I love it, though, so I thought I&amp;rsquo;d post it here.
+KELP! (from the perspective of a growing urchin)
+Kelp! I need some algae. Kelp! not just any algae Kelp! You know I need some kelp!
+When I was younger (So much younger than) so much younger than today (I never needed) I never needed any growing kelp in any way (Now) But now these days are gone (These days are gone), I don&amp;rsquo;t eat just diatoms (I know I&amp;rsquo;ve found) Now I find I&amp;rsquo;ve changed my mind and opened up my jaws</description>
+    </item>
+    
+    <item>
+      <title>Damn, That&#39;s Some Big Kelp!</title>
+      <link>/2014/07/20/damn-thats-some-big-kelp/</link>
+      <pubDate>Sun, 20 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/07/20/damn-thats-some-big-kelp/</guid>
+      <description>I&amp;rsquo;m not sure what it is this year, but the kelp we&amp;rsquo;re seeing in the Southern Gulf of Maine is just fracking huge. Last year, yeah, there were kelpy areas, and there were kelps that were ~1-1.5 meters long, which, you know, impressive. But this year&amp;hellip;
+It started when Team Dive (this summer, we have Team Marsh - #marshlife - and Team Dive going on) hit up the outer Boston Harbor Islands.</description>
+    </item>
+    
+    <item>
+      <title>The Launch of the R/V Botryllid</title>
+      <link>/2014/07/17/the-launch-of-the-rv-botryllid/</link>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/07/17/the-launch-of-the-rv-botryllid/</guid>
+      <description>Woohoo! It&amp;rsquo;s another amazing research season out here at the Shoals Marine Lab. We&amp;rsquo;re in the midst of our push to sample SML, Salem Sound, and the Boston Harbor Islands. The weather is glorious, and the water is&amp;hellip;ok, not warm. 47F this year. Last summer at this time it was a good 5 degrees F warmer. But, either way, here we go on our summer Shoals sampling adventure!</description>
+    </item>
+    
+    <item>
+      <title>Two Urchins, Similar but Not</title>
+      <link>/2014/02/26/two-urchins-similar-but-not/</link>
+      <pubDate>Wed, 26 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/02/26/two-urchins-similar-but-not/</guid>
+      <description>Great stuff from Sofia Castello y Tickell and Robert Lamb based on research from my alma mater, the Witman lab!</description>
+    </item>
+    
+    <item>
+      <title>Best Kelp Barplot Ever</title>
+      <link>/2014/02/02/best-kelp-barplot-ever/</link>
+      <pubDate>Sun, 02 Feb 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/02/02/best-kelp-barplot-ever/</guid>
+      <description>If you&amp;rsquo;re looking at growth in Laminaria (or Saccharina) kelps, and need to make a barplot&amp;hellip;why bother with the bar, really? Why not make it a kelp plot!
+This from: Parke, M. 1948. Studies on British Laminariaceae. I. Growth in Laminaria saccharina (L.) Lamour. J. Mar. Biol. Ass. UK 27:709. DOI:10.1017/S0025315400056071
+Pure kelpy awesomeness.</description>
+    </item>
+    
+    <item>
+      <title>Ain&#39;t Nuthin&#39; but a Green Crab Thang</title>
+      <link>/2014/01/03/aint-nuthin-but-a-green-crab-thang/</link>
+      <pubDate>Fri, 03 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/2014/01/03/aint-nuthin-but-a-green-crab-thang/</guid>
+      <description>Who knew Carcinus maenas could be so funky fresh? More awesomeness from Eric Axelman and folk from the Bertness lab.
+Waring, NSFGC (or, you know, NSF_CM_)</description>
+    </item>
+    
+    <item>
+      <title>Searching for Opportunities in Ecology &amp; Environmental Science for Recent Grads</title>
+      <link>/2013/12/19/searching-for-opportunities-in-ecology-environmental-science-for-recent-grads/</link>
+      <pubDate>Thu, 19 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/12/19/searching-for-opportunities-in-ecology-environmental-science-for-recent-grads/</guid>
+      <description>So, you&amp;rsquo;re graduating with a biology or environmental science or marine bio degree! Hurray! You&amp;rsquo;ve finished your stint at college, and you&amp;rsquo;ve gained a lot of new skills. Maybe you&amp;rsquo;ve done some time in research, maybe not (!!!), but now that you&amp;rsquo;ve wrapped up, you want to find a job in the environmental sciences. Something that will give you research experience, and help you on your way to either a career or deciding whether you want to go into research.</description>
+    </item>
+    
+    <item>
+      <title>Fourth Annual Chemical Ecology Film Fest!!!</title>
+      <link>/2013/12/12/fourth-annual-chemical-ecology-film-fest/</link>
+      <pubDate>Thu, 12 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/12/12/fourth-annual-chemical-ecology-film-fest/</guid>
+      <description>It&amp;rsquo;s my most favorite time of year! Time for the science music video extravaganza known as the Annual Chemical Ecology Filmfest! It&amp;rsquo;s the fourth one! Congrats to Jeremy Long and all of his students for keeping this source of awesomeness going. Sit back, and take a look at a few here, or go over and watch the whole thing.</description>
+    </item>
+    
+    <item>
+      <title>Here a Tau, there a Tau... Plotting Quantile Regressions</title>
+      <link>/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/</link>
+      <pubDate>Wed, 04 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/12/04/here-a-tau-there-a-tau-plotting-quantile-regressions/</guid>
+      <description>I&amp;rsquo;ve ended up digging into quantile regression a bit lately (see this excellent gentle introduction to quantile regression for ecologists [pdf] for what it is and some great reasons why to use it -see also here and here). In R this is done via the quantreg package, which is pretty nice, and has some great plotting diagnostics, etc. But what it doesn&amp;rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau.</description>
+    </item>
+    
+    <item>
+      <title>Statistics Made Marvellous Through Dance</title>
+      <link>/2013/10/03/statistics-made-marvellous/</link>
+      <pubDate>Thu, 03 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/10/03/statistics-made-marvellous/</guid>
+      <description>You all know I&amp;rsquo;m one for silly science videos. And silly statistics videos? Well, that&amp;rsquo;s like catnip to me.
+But today my postdoc Alison introduced me to Dancing Statistics. And it is lovely.
+In short, this troupe of dancers illustrates a wide variety of statistical concepts using naught but movement.
+Now I just can&amp;rsquo;t wait until they get to p-values and Bayes&amp;rsquo; theorem.</description>
+    </item>
+    
+    <item>
+      <title>Wanna Join My Department? Tenure Track Job Posting in Disease Ecology/Evolution!</title>
+      <link>/2013/09/26/wanna-join-my-department-tenure-track-job-posting-in-disease-ecologyevolution/</link>
+      <pubDate>Thu, 26 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/09/26/wanna-join-my-department-tenure-track-job-posting-in-disease-ecologyevolution/</guid>
+      <description>So, rolling into year two here in the Biology Department at UMass Boston, I have to say I&amp;rsquo;m having a delightful time. Fabulous colleagues (who I&amp;rsquo;m already co-authoring papers with - that&amp;rsquo;s just how we roll), a easy access to multiple field sites and stations, a deliciously nerdy intellectual scene throughout Boston, a brand-spankin&amp;rsquo;-new School for the Environment, and a nice waterfront setting.
+So, I&amp;rsquo;m pleased to announce that we&amp;rsquo;re hiring a disease ecologist/evolutionary biologist type in our department.</description>
+    </item>
+    
+    <item>
+      <title>Sponge Meme Square Memes</title>
+      <link>/2013/09/25/sponge-meme-square-memes/</link>
+      <pubDate>Wed, 25 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/09/25/sponge-meme-square-memes/</guid>
+      <description>With the news that someone has found a sponge that looks like cookie monster and prodded by certain people, I really just couldn&amp;rsquo;t resist the following&amp;hellip;
+What, it&amp;rsquo;s Wednesday!
+Original images (C) Mauricio Handler</description>
+    </item>
+    
+    <item>
+      <title>Cocktail Week: Dark n&#39; Stormy Effects on Kelps</title>
+      <link>/2013/09/13/cocktail-week-dark-n-stormy-effects-on-kelps/</link>
+      <pubDate>Fri, 13 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/09/13/cocktail-week-dark-n-stormy-effects-on-kelps/</guid>
+      <description>It is cocktail week over at Deep Sea News. And it has been glorious, with marine biology themed cocktails galore. As a cocktilian myself, I felt that I had to kick in, well, a real classic. I classic that, I daresay, may lay at the root of kelp forest ecology itself. And yet may be under threat.
+&amp;ldquo;Wait, what?&amp;rdquo; I hear you saying. Let me explain.
+Kelps are incredible. I mean, this is a clade of algae with members who can grow a foot per day, that form giant forests that rival the redwoods in beauty, that embrace diversity looking like everything from a mini-palm-tree to a majestic pair of antlers 60 feet high, to a lasagna noodle.</description>
+    </item>
+    
+    <item>
+      <title>An Open Letter to ISI Web of Knowledge, Google Scholar, and SciVerse Scopus </title>
+      <link>/2013/09/05/an-open-letter-to-isi-web-of-knowledge-google-scholar-and-sciverse-scopus/</link>
+      <pubDate>Thu, 05 Sep 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/09/05/an-open-letter-to-isi-web-of-knowledge-google-scholar-and-sciverse-scopus/</guid>
+      <description>_A bit of context first. This letter arose as a result of discussions regarding citations practices in meta-analyses on Twitter several weeks ago. We all agreed citations of work within meta-analyses should be counted, but noted that many modern citation counting services disregard any citations not in the main body of a paper. Appendix citations are dropped, however. And due to a variety of restrictions, we often only cite the papers we use as data in appendices, and so are not counted.</description>
+    </item>
+    
+    <item>
+      <title>Chris Lortie&#39;s ESA IGNITE! Talk on Preprints &amp; the Future of Publishing</title>
+      <link>/2013/08/07/chris-lorties-esa-ignite-talk-on-preprints-the-future-of-publishing/</link>
+      <pubDate>Wed, 07 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/08/07/chris-lorties-esa-ignite-talk-on-preprints-the-future-of-publishing/</guid>
+      <description>This is a talk about work from the NCEAS OpenPub group that is still ongoing. Chris summarises what we&amp;rsquo;re up to quite nicely. Check it out. Crossposted here
+Slides are here.
+For the browser overlay in progress, see here</description>
+    </item>
+    
+    <item>
+      <title>Saving the White Abalone</title>
+      <link>/2013/07/26/saving-the-white-abalone/</link>
+      <pubDate>Fri, 26 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/26/saving-the-white-abalone/</guid>
+      <description>I&amp;rsquo;m so stoked that the white abalone breeding project at BML, my phdalmamater (as it were), is rocketing forward. And I&amp;rsquo;m even more excited to see Dr. Kris Aquilino, one of my former labmates, talking about the work and communicating science LIKE A BOSS!</description>
+    </item>
+    
+    <item>
+      <title>Dramatic Predator Tunicate is Dramatic</title>
+      <link>/2013/07/23/dramatic-predator-tunicate-is-dramatic/</link>
+      <pubDate>Tue, 23 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/23/dramatic-predator-tunicate-is-dramatic/</guid>
+      <description>Another fun video via Chris Mah!
+It&amp;rsquo;s a trap!</description>
+    </item>
+    
+    <item>
+      <title>Proxy Server Bookmarklet</title>
+      <link>/2013/07/14/proxy-server-bookmarklet/</link>
+      <pubDate>Sun, 14 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/14/proxy-server-bookmarklet/</guid>
+      <description>Like so many of us, when I&amp;rsquo;m off campus, in order to read journal pdfs and the like is a chore. I have to go to my university&amp;rsquo;s library website, login to their proxy server, go back to the article in question - either by surfing there from the library webpage, or adding the relevant text to the journal article URL.
+Pain in the tuchus.
+Then, the ever helpful Sean Anderson tweeted a link to a little code he&amp;rsquo;d written for a bookmarklet using Dalhousie&amp;rsquo;s ezproxy.</description>
+    </item>
+    
+    <item>
+      <title>How I Use Different Social Media Platforms for Science</title>
+      <link>/2013/07/12/which-social-media-platform-should-i-use-for-science/</link>
+      <pubDate>Fri, 12 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/12/which-social-media-platform-should-i-use-for-science/</guid>
+      <description>OK, so, you&amp;rsquo;re a scientist interested in jumping into the world of online social networking for interacting with colleagues, fun and profitbringing science to the world at large. Fantastic!
+So, you log on, and are suddenly confronted by a dizzying array of sites you could use to communicate. Facebook, Instagram, Twitter, Google+, Myspace (yes, it&amp;rsquo;s back), Blogspot, Wordpress, FriendFeed, Tumblr, &amp;hellip;. I could go on for a while. And then you may also have concerns about mixing personal and private.</description>
+    </item>
+    
+    <item>
+      <title>Marshall the generalists! Generalize the marshallists!</title>
+      <link>/2013/07/09/marshall-the-generalists-generalize-the-marshallists/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/09/marshall-the-generalists-generalize-the-marshallists/</guid>
+      <description>While working more on the bacterial network stuff, Jen and I realized I was wrong. Yep, I was wrong on the internet. Namely, in my post on bacterial networks, I got the answer wrong on the abundance of OTUs with different degrees of specialization. I had a rowSum after inverting a matrix instead of before, producing wonky vertex sizes. Jen cleverly discovered it when totaling up some of the data by hand, and after alerting me to the issue I produced the following plot which doesn&amp;rsquo;t agree with the network at all:</description>
+    </item>
+    
+    <item>
+      <title>Giving Honest Resources to Prospective Students</title>
+      <link>/2013/07/05/giving-honest-resources-to-prospective-students/</link>
+      <pubDate>Fri, 05 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/07/05/giving-honest-resources-to-prospective-students/</guid>
+      <description>A question for the peanut gallery -
+I&amp;rsquo;m starting to get a trickle of the interested-in-grad-school student emails. So far the few I&amp;rsquo;ve gotten have been great. So, I&amp;rsquo;m revising my prospective students page after noticing a few things in year one. The first was a lack of some students realizing that I wanted to know their interests beyond &amp;lsquo;marine ecology&amp;rsquo;. I wanted a research question - any question, no matter how broad - as having a question does not guarantee it&amp;rsquo;s what you&amp;rsquo;re going to follow in your graduate career.</description>
+    </item>
+    
+    <item>
+      <title>Beautiful Bacterial Networks in the Marsh</title>
+      <link>/2013/06/26/beautiful-bacterial-networks-in-the-marsh/</link>
+      <pubDate>Wed, 26 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/26/beautiful-bacterial-networks-in-the-marsh/</guid>
+      <description>&amp;ldquo;So,&amp;rdquo; I&amp;rsquo;m sure you aren&amp;rsquo;t wondering, how did that creating &amp;lsquo;ecospecies&amp;rsquo; from bacterial sequences based on sequence similarity, co-occurrence, and network theory work out for you?&amp;rdquo;
+Quite well, thanks for asking! Heck, have a git repository, why dontcha!
+Jen is furiously writing the manuscript, but, the technique indeed seems to indicate that 12% sequence similarity was the optimal number.
+Once we got that down, and started plotting the network with individual Operational Taxonomic Units (OTU) each connected to one or more of the 8 plots they were found in, we started seeing some neat things.</description>
+    </item>
+    
+    <item>
+      <title>Les Miserables Larides</title>
+      <link>/2013/06/18/les-miserables-larides/</link>
+      <pubDate>Tue, 18 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/18/les-miserables-larides/</guid>
+      <description>One of the great things about field stations is the silliness they engender. I mean, there you are, in the middle of nowhere, with no one but other scientists thinking about the wonder of the natural world. Awe and wonder can only take you so far. And then, at some point, you cross over, and start to get a little silly.
+It leads to things like dressing up as fouling panels, launching serious plans to make an &amp;lsquo;underwater office,&amp;rsquo; elaborate nail-polish-marking designs for crab carapaces, and no small number of pranks.</description>
+    </item>
+    
+    <item>
+      <title>PeerJ Turns One!</title>
+      <link>/2013/06/13/peerj-turns-one/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/13/peerj-turns-one/</guid>
+      <description>x-posted from openpub
+One year ago, one of the more intereting experiments in open access publishing - PeerJ - launched. It&amp;rsquo;s model of membership rather than paying by the article is still something people are grappling with - it&amp;rsquo;s just so different, so delightfully disruptive. Not only that, but PeerJ has stepped in to fill the void in providing a biology preprint server (which we have used), as well as coming up with a more intuitive interface for commentary on preprints and published work - along with supplying reviews alongside published work.</description>
+    </item>
+    
+    <item>
+      <title>Walkin&#39; in an Invasive Wonderland</title>
+      <link>/2013/06/13/walkin-in-an-invasive-wonderland/</link>
+      <pubDate>Thu, 13 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/13/walkin-in-an-invasive-wonderland/</guid>
+      <description>Last day of dives before heading back. We hit two sites on either side of the northern head of Appledore. It&amp;rsquo;s a remarkable break, as on one side you have fairly decent expsore to waves from the West. On the other, things are fairly protected. So, there&amp;rsquo;s a strong physical gradient. And, though perhaps just a few hundred meters apart, the two sites could not be more different. At the first site, the photos didn&amp;rsquo;t come out terribly well, but this gives you a general sense -</description>
+    </item>
+    
+    <item>
+      <title>Kelp on a Ledge!</title>
+      <link>/2013/06/12/kelp-on-a-ledge/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/12/kelp-on-a-ledge/</guid>
+      <description>Day 2 of dives with Sarah out at SML. Today we hit two sites that were quite different - both from each other and from Norwegian Cove the other day. The Ledges are in the channel between Appledore and Smuttynose, so, they get good flow running through. This was key, as it blew sediments from the previous day&amp;rsquo;s storm out fairly quickly. And viz was really quite nice. While it used to be a barren (at least on one side) 10 years ago, it appears that it&amp;rsquo;s now a mix of kelps and Desmarestia with some Chondrus, filamentous reds, and others thrown in for good measure.</description>
+    </item>
+    
+    <item>
+      <title>Undersea Carpets?</title>
+      <link>/2013/06/12/undersea-carpets/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/12/undersea-carpets/</guid>
+      <description>The second site of the day was a surprise. 10 years ago, Smith&amp;rsquo;s Cove was a mixed mussel bed and urchin barren. Previous, it has been a Codium meadow. Now&amp;hellip; It&amp;rsquo;s just a giant red algal carpet. Wall to wall. Thick, easily fragmenting, ubiquitous, invasive red Heterosiphonia japonica. Also, big tufts of Ulva. And some other bushy filamentous algae scattered about, along with a few crabs.
+What a weird landscape. What is that red carpet doing?</description>
+    </item>
+    
+    <item>
+      <title>The Morning Algal IDs</title>
+      <link>/2013/06/11/the-morning-algal-ids/</link>
+      <pubDate>Tue, 11 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/11/the-morning-algal-ids/</guid>
+      <description>When it&amp;rsquo;s wavy out&amp;hellip;
+Coffee, laptop, scope, and a red alga that looks pretty much like every other red alga in the tank&amp;hellip;time for some IDs.
+SCIENCE!</description>
+    </item>
+    
+    <item>
+      <title>The View After the Storm</title>
+      <link>/2013/06/11/the-view-after-the-storm/</link>
+      <pubDate>Tue, 11 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/11/the-view-after-the-storm/</guid>
+      <description>Worth it.</description>
+    </item>
+    
+    <item>
+      <title>Day 1: Back in the field!</title>
+      <link>/2013/06/10/day-1-back-in-the-field/</link>
+      <pubDate>Mon, 10 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/10/day-1-back-in-the-field/</guid>
+      <description>Well, today was it. After a 2 year hiatus behind my computer screen, my skin now softer and more delicate from its soothing rays, I hopped back in the water FOR SCIENCE! Not only that, but it was my return to dry suit diving. Oh, dry suit diving. I really didn&amp;rsquo;t miss you and your weird buoyancy tricks (note to self, get ankle weights, as old ones have desintegrated).
+It was a great day, despite feeling kinda like the first day back at school.</description>
+    </item>
+    
+    <item>
+      <title>True Facts About Marine Life</title>
+      <link>/2013/06/07/true-facts-about-marine-life/</link>
+      <pubDate>Fri, 07 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/06/07/true-facts-about-marine-life/</guid>
+      <description>Because there hasn&amp;rsquo;t been enough ocean silliness lately&amp;hellip;
+I&amp;rsquo;ve long been a fan of Ze Frank. But who knew that one of the next places he&amp;rsquo;d be turning his razor sharp with was on the natural world. And not only that, but, he&amp;rsquo;d make sure everything is pretty much scientifically kosher. So, I give you three things that nearly made me laugh so hard I was almost glad I wasn&amp;rsquo;t in a drysuit (because tight neck seals and laughing = no fun?</description>
+    </item>
+    
+    <item>
+      <title>Living a Dream: Back to SML</title>
+      <link>/2013/05/20/living-a-dream-back-to-sml/</link>
+      <pubDate>Mon, 20 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/20/living-a-dream-back-to-sml/</guid>
+      <description>So, today, I&amp;rsquo;m going to catch a ferry out to the Shoals Marine Lab. I&amp;rsquo;m just going to be out for a day to meet with the undergrad intern I&amp;rsquo;m mentoring. I&amp;rsquo;ll be back later this summer to work with her and setup some permanent monitoring transects.
+I have to be honest, this is one of those moments in my life where I am watching a dream come through. I went to SML in the summer of 1999 to take some classes.</description>
+    </item>
+    
+    <item>
+      <title>Best Peer Review Experience Ever</title>
+      <link>/2013/05/10/best-peer-review-experience-ever/</link>
+      <pubDate>Fri, 10 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/10/best-peer-review-experience-ever/</guid>
+      <description>So, I recently submitted a piece regarding the future of scholarly publishing in Ecology &amp;amp; Evolutionary Biology. Simultaneous to posting, I put up a preprint in PeerJ Preprints and also put it on Google Docs for line by line commentary (which you are welcome to give!). I asked in both places that commenters identify themselves, unless they felt deeply uncomfortable.
+OMG the experience has been amazing!
+At PeerJ you can comment on the main page of the article, and others can rate it - which is fantastic - and I&amp;rsquo;ve gotten some wonderful feedback there (thanks Lars!</description>
+    </item>
+    
+    <item>
+      <title>A Preprint Experiment: Four Pillars and a Foundation for the Future of Scholarly Publishing</title>
+      <link>/2013/05/07/a-preprint-experiment-four-pillars-and-a-foundation-for-the-future-of-scholarly-publishing/</link>
+      <pubDate>Tue, 07 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/05/07/a-preprint-experiment-four-pillars-and-a-foundation-for-the-future-of-scholarly-publishing/</guid>
+      <description>x-post from the OpenPub Project blog
+So, we got together, had two working group meetings to discuss the future of scholarly publishing in Ecology, Evolutionary Biology, and the Earth and Ocean Sciences. What were were thinking that entire time?
+We&amp;rsquo;ve just submitted a piece that brings together our broad ideas (some of which have been seen before), but, simultaneous to publication, we&amp;rsquo;ve also decided to put up a preprint. Why? Simply put, immediate access is one of our four pillars of the future of scholarly publication.</description>
+    </item>
+    
+    <item>
+      <title>Favorite Wave Sensor?</title>
+      <link>/2013/04/23/favorite-wave-sensor/</link>
+      <pubDate>Tue, 23 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/23/favorite-wave-sensor/</guid>
+      <description>So, Internet, I&amp;rsquo;m setting up a number of monitoring sites this summer. I&amp;rsquo;m hoping to get good wave height measurements from them to look at disturbance. I have yet to find something like the CDIP swell height model for the Gulf of Maine (although, I&amp;rsquo;d love to hear that this is due to a failure of my google-fu). So, I&amp;rsquo;m casting about for some good wave height sensors.
+The problem I face is that I&amp;rsquo;d like to deploy a lot of them, and in some highly variable conditions, secured to subtidal transects.</description>
+    </item>
+    
+    <item>
+      <title>A Gif Guide to Acceptance and Rejection in Academic Publishing</title>
+      <link>/2013/04/16/on-acceptance-and-rejection-in-publishing/</link>
+      <pubDate>Tue, 16 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/16/on-acceptance-and-rejection-in-publishing/</guid>
+      <description>It&amp;rsquo;s been a mixed week, which has caused me to reflect on two beautiful posts - and put them here so that I don&amp;rsquo;t lose them.
+First, the evolution of dealing with a paper being rejected through your career.
+And, naturally, the evolution of having your paper accepted throughout your career.</description>
+    </item>
+    
+    <item>
+      <title>More on Bacteria and Groups</title>
+      <link>/2013/04/12/more-on-bacteria-and-groups/</link>
+      <pubDate>Fri, 12 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/12/more-on-bacteria-and-groups/</guid>
+      <description>Continuing with bacterial group-a-palooza&amp;hellip;
+I followed Ed&amp;rsquo;s suggestions and tried both a binomial distribution and a Poisson distribution for abundance such that the probability of a density of one species s in one group g in one plot r where there are S_g species in group gis
+[latex]A_rgs ~ Poisson(\frac{A_rg}{S_g})[/latex]
+In the analysis I&amp;rsquo;m doing, interesting, the results do change a bit such that the original network only results are confirmed.</description>
+    </item>
+    
+    <item>
+      <title>Groupapalooza: Adapting Food Web Trophic Group Methods for Defining Bacterial &#34;Species&#34;</title>
+      <link>/2013/04/08/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/</link>
+      <pubDate>Mon, 08 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/04/08/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/</guid>
+      <description>_The following is some notes on a technique I&amp;rsquo;m developing for a cool collaboration between me, Jen Bowen, and David Weisman. I think it has some generality to it, and I&amp;rsquo;d love any feedback from the more mathematical crowd&amp;hellip;I also wrote it to make sure I knew what I was doing - translating scribbled equations to code to results - so it does freeflow a bit. It may change based on feedback - consider this a working document.</description>
+    </item>
+    
+    <item>
+      <title>I&#39;m a Grazer, Baby!</title>
+      <link>/2013/03/29/im-a-grazer-baby/</link>
+      <pubDate>Fri, 29 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/29/im-a-grazer-baby/</guid>
+      <description>You all know me. I&amp;rsquo;m a sucker for an awesome marine ecology music video. So it gives me great pleasure to present this product from the always amazing and ambitious ZEN (Zostera Experimental Network).</description>
+    </item>
+    
+    <item>
+      <title>Parasite Ecology Explained</title>
+      <link>/2013/03/15/parasite-ecology-explained/</link>
+      <pubDate>Fri, 15 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/15/parasite-ecology-explained/</guid>
+      <description>Another excellent piece describing the intricacies of a complex field of scientific inquiry from Saturday Morning Breakfast Cereal, as always.
+.
+Ah, parasitology. So glad that a certain someone makes sure it gets its day in the sun over at SMBC. And that the two of them have an awesome podcast.</description>
+    </item>
+    
+    <item>
+      <title>Transect Tape Love</title>
+      <link>/2013/03/14/transect-tape-love/</link>
+      <pubDate>Thu, 14 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/14/transect-tape-love/</guid>
+      <description>Field supplies for the summer starting to come in&amp;hellip;
+LET&amp;rsquo;S ROLL OUT SOME TRANSECTS!</description>
+    </item>
+    
+    <item>
+      <title>Seeking a Postdoc for the Byrnes Lab!</title>
+      <link>/2013/03/06/postdoc-in-the-byrnes-lab/</link>
+      <pubDate>Wed, 06 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/06/postdoc-in-the-byrnes-lab/</guid>
+      <description>All right, folks! The time has come - I&amp;rsquo;m looking for a Postdoc for the Byrnes lab! The text of the advert is below, but, to be brief - I&amp;rsquo;m looking for someone who is interested in asking questions relating to marine subtidal community ecology. These next two years I&amp;rsquo;m getting a program up and running looking at kelp forests, climate change, and food web structure around New England. But I want someone who comes in with some interesting ideas and plans.</description>
+    </item>
+    
+    <item>
+      <title>The Real World: Scallop Science</title>
+      <link>/2013/03/05/the-real-world-scallop-science/</link>
+      <pubDate>Tue, 05 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/03/05/the-real-world-scallop-science/</guid>
+      <description>I&amp;hellip;.I&amp;hellip;I&amp;hellip; Oh yes. Oh&amp;hellip;.Yes.
+Want to capture the essence of the crazy things that go down in the course of marine science? Steven Colbert is there! YEAH!
+The Colbert Report Get More: Colbert Report Full Episodes,Political Humor &amp;amp; Satire Blog,Video Archive
+Yes, folks, this really is what it&amp;rsquo;s like.</description>
+    </item>
+    
+    <item>
+      <title>I want to know what *YOU* think about review, preprints, and publication</title>
+      <link>/2013/02/25/i-want-to-know-what-you-think-about-review-preprints-and-publication/</link>
+      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/25/i-want-to-know-what-you-think-about-review-preprints-and-publication/</guid>
+      <description>As part of the OpenPub project, we&amp;rsquo;re soliciting folk to send us videos about their experience with the scholarly publication process. We want to use these to try and crowdfund the development of OpenPub - our preprint server with robust tools for discussion and interaction. Interested? Check out the full request over here and/or email me!</description>
+    </item>
+    
+    <item>
+      <title>Extracting p-values from different fit R objects</title>
+      <link>/2013/02/23/extracting-p-values-from-different-fit-r-objects/</link>
+      <pubDate>Sat, 23 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/23/extracting-p-values-from-different-fit-r-objects/</guid>
+      <description>Let&amp;rsquo;s say you want to extract a p-value and save it as a variable for future use from a linear or generalized linear model - mixed or non! This is something you might want to do if, say, you were calculating Fisher&amp;rsquo;s C from an equation-level Structural Equation Model. Here&amp;rsquo;s how to extract the effect of a variable from multiple different fit models. We&amp;rsquo;ll start with a data set with x, y, z, and a block effect (we&amp;rsquo;ll see who in a moment).</description>
+    </item>
+    
+    <item>
+      <title>Filtering Out Exogenous Pairs of Variables from a Basis Set</title>
+      <link>/2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/</link>
+      <pubDate>Sat, 23 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/</guid>
+      <description>Sometimes in an SEM for which you&amp;rsquo;re calculating a test of D-Separation, you want all exogenous variables to covary. If you have a large model with a number of exogenous variables, coding that into your basis set can be a pain, and hence, you can spend a lot of time filtering out elements that aren&amp;rsquo;t part of your basis set, particularly with the ggm library. Here&amp;rsquo;s a solution - a function I&amp;rsquo;m calling filterExoFromBasiSet</description>
+    </item>
+    
+    <item>
+      <title>AAAS Webinar on Science Crowdfunding</title>
+      <link>/2013/02/06/aaas-webinar-on-science-crowdfunding/</link>
+      <pubDate>Wed, 06 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/06/aaas-webinar-on-science-crowdfunding/</guid>
+      <description>(x-posted from the #SciFund Blog)
+Last week, Ethan Perlstein, Erica Hermsen, and I were part of a webinar from AAAS Member Central. It was an interesting peak into what the three of us thought of this new opportunity as well as a venue for a discussion for some important issues. Check it out below!</description>
+    </item>
+    
+    <item>
+      <title>#Scio13 and Beyond</title>
+      <link>/2013/02/04/scio13-and-beyond/</link>
+      <pubDate>Mon, 04 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/02/04/scio13-and-beyond/</guid>
+      <description>While I&amp;rsquo;ve been active in using online spaces for scientific activities - blogging, tweeting, crowdfunding, and much much more - for a looong time. I&amp;rsquo;ve found it&amp;rsquo;s benefitted me greatly as a scientist. I&amp;rsquo;ve also formed a deep love for the community I&amp;rsquo;ve found in the online science world (to name just a few).
+And yet, until this year, I&amp;rsquo;d never been to science online before.
+This year, I finally remedied that.</description>
+    </item>
+    
+    <item>
+      <title>Crowdfunding in the Peer Reviewed Literature</title>
+      <link>/2013/01/28/crowdfunding-in-the-peer-reviewed-literature/</link>
+      <pubDate>Mon, 28 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/01/28/crowdfunding-in-the-peer-reviewed-literature/</guid>
+      <description>(x-posted at the #SciFund Blog)
+The final version of Wheat et al.&amp;lsquo;s paper Raising money for scientific research through crowdfunding is out in Trends in Ecology and Evolution. A more hefty piece of #SciFund analysis is behind it (slowed down in no small part because of my sloooow processing of new data in fancy models). The Wheat et al. paper is a lovely short piece that Rachel and Yiwei (who crowdfunded the excellent Alaska Predator Research Expedition that has it&amp;rsquo;s new website over here) were gracious enough to ask Jai and I to participate in.</description>
+    </item>
+    
+    <item>
+      <title>Linkage: A field guide to privilege in marine science</title>
+      <link>/2013/01/24/linkage-a-field-guide-to-privilege-in-marine-science/</link>
+      <pubDate>Thu, 24 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/01/24/linkage-a-field-guide-to-privilege-in-marine-science/</guid>
+      <description>As someone who, admittedly, benefitted a great deal from Privilege growing up (it definitely lowered the barriers to my becoming a succesful marine scientist), know that this is true of MANY Ecology and Evolutionary Biology folk, and now think a good deal about how I can lower those barriers for students and mentees that come under my aegis, you should all go over and check out Miriam Goldstein&amp;rsquo;s A field guide to privilege in marine science: some reasons why we lack diversity.</description>
+    </item>
+    
+    <item>
+      <title>A Quick Note in Weighting with nlme</title>
+      <link>/2012/12/18/a-quick-note-in-weighting-with-nlme/</link>
+      <pubDate>Tue, 18 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/12/18/a-quick-note-in-weighting-with-nlme/</guid>
+      <description>I&amp;rsquo;ve been doing a lot of meta-analytic things lately. More on that anon. But one quick thing that came up was variance weighting with mixed models in R, and after a few web searches, I wanted to post this, more as a note-to-self and others than anything. Now, in a simple linear model, weighting by variance or sample size is straightforward.
+#variance lm(y ~ x, data = dat, weights = 1/v) #sample size lm(y ~ x, data = dat, weights = n) You can use the same sort of weights argument with lmer.</description>
+    </item>
+    
+    <item>
+      <title>Scallopocalypse</title>
+      <link>/2012/11/19/scallopocalypse/</link>
+      <pubDate>Mon, 19 Nov 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/11/19/scallopocalypse/</guid>
+      <description>Everyone has been pretty shocked by the devastation wreaked by Sandy. Here in New England, we also got a Nor&amp;rsquo;easter following a few days later. That&amp;rsquo;s a lot of intense storm action in a short period of time.
+So I was quite curious as I ventured out into the field last weekend to see how things looked. I went on a potential field site scouting trip to UMB&amp;rsquo;s field station in Nantucket.</description>
+    </item>
+    
+    <item>
+      <title>Discussion of Sea Level Rise on the US West Coast</title>
+      <link>/2012/09/19/discussion-of-sea-level-rise-on-the-us-west-coast/</link>
+      <pubDate>Wed, 19 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/09/19/discussion-of-sea-level-rise-on-the-us-west-coast/</guid>
+      <description>_X-posted from SeaMonster, this video is so clear, and so compelling that I thought it needed to put it up as well - 12&amp;rdquo; increase by 2050 in SoCal?! Wow. And 36&amp;rdquo; by 2100 in SoCal&amp;hellip;lots to think about. _</description>
+    </item>
+    
+    <item>
+      <title>Why I&#39;m Teaching Computational Data Analysis for Biology</title>
+      <link>/2012/09/11/why-im-teaching-computational-data-analysis-for-biology/</link>
+      <pubDate>Tue, 11 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/09/11/why-im-teaching-computational-data-analysis-for-biology/</guid>
+      <description>_This is a x-post from the blog I&amp;rsquo;ve setup for my course blog. As my first class at UMB, I&amp;rsquo;m teaching An Introduction to Computational Data Analysis for Biology - basically mixing teaching statistics and basic programming. It&amp;rsquo;s something I&amp;rsquo;ve thought a long time about teaching - although the rubber meeting the road has been fascinating.
+As part of the course, I&amp;rsquo;m adapting an exercise that I learned while taking English courses - in particular from a course on Dante&amp;rsquo;s Divine Comedy.</description>
+    </item>
+    
+    <item>
+      <title>Bertness Lab Anthem</title>
+      <link>/2012/09/09/bertness-lab-anthem/</link>
+      <pubDate>Sun, 09 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/09/09/bertness-lab-anthem/</guid>
+      <description>It&amp;rsquo;s always good to see some rockin&amp;rsquo; Science Music videos coming from my alma mater. The use of crabs here? Genius. Also great to see the Big Man Himself making a special guest appearance.
+Enjoy!</description>
+    </item>
+    
+    <item>
+      <title>Taking the Ecological Conversation Online</title>
+      <link>/2012/08/15/taking-the-ecological-conversation-online/</link>
+      <pubDate>Wed, 15 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/15/taking-the-ecological-conversation-online/</guid>
+      <description>At ESA this year, I gave a talk in a symposium about changing the culture of ecology. The talk was entitled Taking the Ecological Conversation Online and summarized what I thought were the benefits of engaging in online activities. As this was a scientific audience interested in how we might change the culture of Ecology to improve our science, I focused the talk not on what I feel are the outreach &amp;amp; public engagement benefits of going online - those are both obvious and legion.</description>
+    </item>
+    
+    <item>
+      <title>Final Friday at #ESA2012</title>
+      <link>/2012/08/10/final-friday-at-esa2012/</link>
+      <pubDate>Fri, 10 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/10/final-friday-at-esa2012/</guid>
+      <description>Here&amp;rsquo;s what I&amp;rsquo;m thinking of catching on Friday. Last day, and still lots of fantastic talks! What a wonderful meeting that this has been. (Eating at The Farm didn&amp;rsquo;t hurt either&amp;hellip;)
+8:00 COS 176-1 Cavanaugh, KC1, SL Davis1, JS Gosnell2, J Ahumada3 and S Andelman3, (1)University of California Santa Barbara, (2)University of California, Santa Barbara, (3)Conservation International. Interactions among climate, biodiversity, and ecosystem services in tropical forest ecosystems. C123
+8am SYMP 23-1Costanza, R, Portland State University.</description>
+    </item>
+    
+    <item>
+      <title>Thursday #ESA2012 Schedule</title>
+      <link>/2012/08/09/thursday-esa2012-schedule/</link>
+      <pubDate>Thu, 09 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/09/thursday-esa2012-schedule/</guid>
+      <description>ALl right - here&amp;rsquo;s my Thursday schedule (mostly for myself so I can keep track of it on my phone). I think in the morning, I just might park myself in the session on climate change &amp;amp; communities as one of my main interests for this meeting is&amp;hellip;climate change and communities. Also, I&amp;rsquo;m guessing I&amp;rsquo;ll fill in the lower right hand side of my bingo card (although I already got Bingo today on the lower line&amp;hellip;)</description>
+    </item>
+    
+    <item>
+      <title>Day 3 at #ESA 2012 - Decisions, Decisions</title>
+      <link>/2012/08/08/day-3-at-esa-2012-decisions-decisions/</link>
+      <pubDate>Wed, 08 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/08/day-3-at-esa-2012-decisions-decisions/</guid>
+      <description>Man, this afternoon is going to be interesting. There are two sessions that I want to sit all the way through! I&amp;rsquo;ll be speaking in the Growing Pains in Ecology session, so I&amp;rsquo;ll be there all afternoon, but, the NutNet session looks pretty amazing as well.
+OOS 33 - Growing Pains: Taking Ecology Into the 21st Century A106, Oregon Convention Center Organized by: C Strasser (carly.strasser@ucop.edu), J Tewksbury, S Hampton Moderator: C Strasser A discussion of the most important steps for ecology to take to address the complex problems set before our field by society.</description>
+    </item>
+    
+    <item>
+      <title>Tentative #ESA2012 Tuesday</title>
+      <link>/2012/08/07/tentative-esa2012-tuesday/</link>
+      <pubDate>Tue, 07 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/07/tentative-esa2012-tuesday/</guid>
+      <description>Tuesday looks to be pretty exciting. The number of overlapping talks all of which I want to see has jumped up, and, heck, there are overlapping symposia that I could sit through. That said, I THINK this is going to be my schedule&amp;hellip;again, just posting it for myself, but feel free to browse (loading this page on ye olde smartphone and using it to navigate was wicked convenient today).
+If there is one talk to see today, in my opinion, it&amp;rsquo;s the 10:50 COS 36-9 talk by Pamela Reynolds.</description>
+    </item>
+    
+    <item>
+      <title>My #ESA2012 Monday</title>
+      <link>/2012/08/06/my-esa2012-monday/</link>
+      <pubDate>Mon, 06 Aug 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/08/06/my-esa2012-monday/</guid>
+      <description>For the next few days, I&amp;rsquo;ll be trying to focus on two areas - 1) climate change &amp;amp; community responses and 2) biodiversity-ecosystem function - with probably a little network ecology thrown in for good measure. I&amp;rsquo;ll be posting my schedule here not because I want you to stalk me, but rather because it will be a convenient place for me to pull up on my phone to know where I&amp;rsquo;m going to go next!</description>
+    </item>
+    
+    <item>
+      <title>When Mild Mannered, Who is @DATACURATORHULK?</title>
+      <link>/2012/07/19/when-mild-mannered-who-is-datacuratorhulk/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/07/19/when-mild-mannered-who-is-datacuratorhulk/</guid>
+      <description>OK, folk on the Twitters - if you&amp;rsquo;re not following @DATACURATORHULK, I take no responsibility for what may happen to you. And if you&amp;rsquo;re not curating your data properly, or making sure that it is open?&amp;hellip;hide.
+
+Best. New. Twitter Account. Ever.</description>
+    </item>
+    
+    <item>
+      <title>#SciFund Round 1 - Results &amp; Ravings</title>
+      <link>/2012/07/09/scifund-round-1-results-ravings/</link>
+      <pubDate>Mon, 09 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/07/09/scifund-round-1-results-ravings/</guid>
+      <description>So, you want to hear my vision for what #SciFund tells us about the future of science funding &amp;amp; engagement, and back it up with data? Bam! Here you go.
+This is my talk about the results from Round 1 of #SciFund from an NCEAS Ecolunch. The slides are below the video. Enjoy!
+Slides from #SciFund talk at NCEAS Ecolunch
+View more presentations from Jarrett Byrnes</description>
+    </item>
+    
+    <item>
+      <title>Post-Publication Commentary - a Google Hangout Discussion</title>
+      <link>/2012/07/06/post-publication-commentary-a-google-hangout-discussion/</link>
+      <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/07/06/post-publication-commentary-a-google-hangout-discussion/</guid>
+      <description>After the fantastic NCEAS working group on the future of scholarly publishing in EEB (big success - stay tuned for more news on that front!), I participated in a really interesting online discussion about Post-Publication peer review with Carl Boettiger, Jamie Ashlander, and Scott Chamberlain. The conversation was great, and I think brought up a lot of interesting points - both that echoed some discussions in our group and went far beyond them.</description>
+    </item>
+    
+    <item>
+      <title>PeerJ launches open access into a new realm</title>
+      <link>/2012/06/12/peerj-launches-open-access-into-a-new-realm/</link>
+      <pubDate>Tue, 12 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/06/12/peerj-launches-open-access-into-a-new-realm/</guid>
+      <description>A service that is travelling along similar lines of what I&amp;rsquo;m interested in for open publishing has launched today. PeerJ is being pitched as a cross between PLoS ONE and arXiv and indeed the company was founded by former PLoS ONE and Mendeley folk. It&amp;rsquo;s an interesting model where authors signup with a pre-paid plan. $99 gets you unlimited public preprints and 1 peer reviewed paper per year. $169 adds unlimited private preprints and another paper per year.</description>
+    </item>
+    
+    <item>
+      <title>#SciFund Round 2 FTW!</title>
+      <link>/2012/06/04/scifund-round-2-ftw/</link>
+      <pubDate>Mon, 04 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/06/04/scifund-round-2-ftw/</guid>
+      <description>SciFund Round 2 is now complete, and it pulled in $100,345 for science! 43% of the projects achieved 100% or more of their goal - almost double of round 1 - and 60% of all funds asked for were secured. Numerous projects that didn&amp;rsquo;t fully reach their goal were above 80%. A TON of great research is going to come out of this, and I am excited!
+Science crowdfunding continues to grow as a viable source of research fund.</description>
+    </item>
+    
+    <item>
+      <title>Moving on Up the Academic Food Chain!</title>
+      <link>/2012/05/15/moving-on-up-the-academic-food-chain/</link>
+      <pubDate>Tue, 15 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/05/15/moving-on-up-the-academic-food-chain/</guid>
+      <description>Allright, folk! The final documents have been signed, sealed, and delivered. Looks like I&amp;rsquo;ll be starting a position as an Assistant Professor in the Department of Biology at UMass Boston in the fall. That&amp;rsquo;s right, soon the Byrnes Lab is going to become a reality. Get ready, Science, because this is going to be an adventure!
+GO BEACONS!</description>
+    </item>
+    
+    <item>
+      <title>Beware of the teeny tiny crabs.  They will cut you!</title>
+      <link>/2012/05/11/beware-of-the-teeny-tiny-crabs-they-will-cut-you/</link>
+      <pubDate>Fri, 11 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/05/11/beware-of-the-teeny-tiny-crabs-they-will-cut-you/</guid>
+      <description>Happy Friday, everyone. To celebrate the end of the week, I leave you with what is hands down my favorite #SciFund video from round 2. And I don&amp;rsquo;t just say this because it was made by a collaborator of mine of the #SciFund paper that we happen to be editing right this very moment (or, in half an hour or so). I say this because it is a beautiful example of the fusion of (silly) Art and Science.</description>
+    </item>
+    
+    <item>
+      <title>Spring is sproinging earlier than we thought</title>
+      <link>/2012/05/08/spring-is-sproinging-earlier-than-we-thought/</link>
+      <pubDate>Tue, 08 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/05/08/spring-is-sproinging-earlier-than-we-thought/</guid>
+      <description>Climate change is speeding up the timing of plants growing &amp;amp; flowering. It&amp;rsquo;s an old trope we&amp;rsquo;re all used to hearing by now. Spring warms up earlier, and plants shift their timing - their phenology. This shift in phenology is going to have big consequences for things like agricultural production, the ability for wildlife to find food, the ski season, etc. Important, right? Something we might want to predict. So, we&amp;rsquo;ve been running experiments for years, looking at climate change scenarios, and finding out how much earlier plants will do their thing, and we&amp;rsquo;ve gotten some pretty good results.</description>
+    </item>
+    
+    <item>
+      <title>Diversity Loss v. Environmental Change: The Story of the Paper</title>
+      <link>/2012/05/02/diversity-loss-v-environmental-change-the-story-of-the-paper/</link>
+      <pubDate>Wed, 02 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/05/02/diversity-loss-v-environmental-change-the-story-of-the-paper/</guid>
+      <description>Just over a year and a half ago, I was lucky enough to be in a room with some of the world&amp;rsquo;s top authorities on the consequences of species loss at the National Center for Ecological Analysis and Synthesis. We were worried. When Brad Cardinale asked, &amp;ldquo;So, where does diversity loss rank? As important as climate change? Rampant nutrient runoff from agriculture? I mean, come on, how important is it, really?</description>
+    </item>
+    
+    <item>
+      <title>#SciFund 2 has launched!</title>
+      <link>/2012/05/01/scifund-2-has-launched/</link>
+      <pubDate>Tue, 01 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/05/01/scifund-2-has-launched/</guid>
+      <description>Woohoo! #SciFund 2 is off to the races! I am in awe of the nearly 70 scientists who have put their work up for your enjoyment. I&amp;rsquo;ll be featuring a few marine projects in the next few days, but, for now, get on over there, check it out, and help us crowdfund some amazing science!</description>
+    </item>
+    
+    <item>
+      <title>Tuba Pteropod? The Deep by PES</title>
+      <link>/2012/04/29/tuba-pteropod-the-deep-by-pes/</link>
+      <pubDate>Sun, 29 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/04/29/tuba-pteropod-the-deep-by-pes/</guid>
+      <description>I&amp;rsquo;m not sure why, but something really caught me about this piece&amp;hellip;
+by PES
+What would your favorite found-object sea-creature be?
+cialis generico</description>
+    </item>
+    
+    <item>
+      <title>A Watermelon for the Aquanauts</title>
+      <link>/2012/04/24/a-watermelon-for-the-aquanauts/</link>
+      <pubDate>Tue, 24 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/04/24/a-watermelon-for-the-aquanauts/</guid>
+      <description>I just saw this video from the Pawlik lab doing work done in the Aquarius habitat in the Caribbean. I just adore it. There&amp;rsquo;s something about the lighthearted sense of fund and enjoyment behind the soundtrack that syncs up with the work that&amp;rsquo;s being done that captures some of the essence of what subtidal work can be (even for those of us in colder temperate climes). Enjoy this research pastiche!</description>
+    </item>
+    
+    <item>
+      <title>Does Synthesis Ecology Exist as a Scientific Discipline?</title>
+      <link>/2012/04/17/does-synthesis-ecology-exist-as-a-scientific-discipline/</link>
+      <pubDate>Tue, 17 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/04/17/does-synthesis-ecology-exist-as-a-scientific-discipline/</guid>
+      <description>Does Synthesis Ecology exist? Is it a discipline? If so, what is it? If not, why not?
+As a part of the Trends in Ecological Analysis and Synthesis symposium here at NCEAS, several postdocs past and present organized by Jennifer &amp;ldquo;Firestarter&amp;rdquo; Balch got together and sent this survey to the last 15 years of NCEAS postdocs. The survey asks what current and former NCEAS postdocs thought were the most important contributions in Synthesis Ecology and what they thought were the most exciting future directions in Synthesis Ecology.</description>
+    </item>
+    
+    <item>
+      <title>How to prepare for #SciFund - by crowdfunding science!</title>
+      <link>/2012/03/31/how-to-prepare-for-scifund-by-crowdfunding-science/</link>
+      <pubDate>Sat, 31 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/31/how-to-prepare-for-scifund-by-crowdfunding-science/</guid>
+      <description>Are you excited about seeing the 125 hot science projects that got submitted to #SciFund2? Can&amp;rsquo;t wait the additional month for those projects to post themselves online? Want to fund some awesome science right now? Maybe you signed up and want to earn some pre-#SciFund karma?
+Well fear not! The Science tag on Rockethub has been taking off! A few folk were so excited about crowdfunding their work that they couldn&amp;rsquo;t wait for #SciFund 2!</description>
+    </item>
+    
+    <item>
+      <title>Marine Biology James Bond?</title>
+      <link>/2012/03/23/marine-biology-james-bond/</link>
+      <pubDate>Fri, 23 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/23/marine-biology-james-bond/</guid>
+      <description>I&amp;rsquo;ve been pretty stoked about the This is What a Scientist Looks Like project on tumblr. So much so that I felt compelled to submit an (old) photo of me doing field work. I mean, when one things science, they often think labcoats and microscopes. When one thinks ecology, they often think hiking in a forest or working out on a sunny grassland. (note: these are impressions I&amp;rsquo;ve gotten to people when I say these words - not what I think myself, natch.</description>
+    </item>
+    
+    <item>
+      <title>Running OpenBUGS on a Mac Running OSX</title>
+      <link>/2012/03/20/running-openbugs-on-a-mac-running-osx/</link>
+      <pubDate>Tue, 20 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/20/running-openbugs-on-a-mac-running-osx/</guid>
+      <description>After writing up my tutorial regarding getting WinBUGS running on a Mac in R, a friend sent me this fantastic simple tutorial on the same thing for OpenBUGS on a mac in R. So, for those that want it, install away! Looks a good bit simpler, actually!</description>
+    </item>
+    
+    <item>
+      <title>Predatory Tunicate Art</title>
+      <link>/2012/03/08/predatory-tunicate-art/</link>
+      <pubDate>Thu, 08 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/08/predatory-tunicate-art/</guid>
+      <description>To bring the blog back to its tunicate-y roots, here&amp;rsquo;s an AWESOME piece of predatory tunicate art from Noctorunal Sea. They say they&amp;rsquo;ll have it up as at this webstore soon. I know what I&amp;rsquo;m gettin&amp;rsquo; for my office wall next!
+[caption id=&amp;quot;attachment_1163&amp;rdquo; align=&amp;quot;aligncenter&amp;rdquo; width=&amp;quot;451&amp;rdquo; caption=&amp;quot;Predatory tunicate art by Nocturnal sea. Go visit their webstore (link above) and buy some of their awesome ocean and ecology art!&amp;quot;][/caption]</description>
+    </item>
+    
+    <item>
+      <title>Missing my Statsy Goodness? Check out #SciFund!</title>
+      <link>/2012/03/06/missing-my-statsy-goodness-check-out-scifund/</link>
+      <pubDate>Tue, 06 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/06/missing-my-statsy-goodness-check-out-scifund/</guid>
+      <description>I know, I know, I have been kinda lame about posting here lately. But that&amp;rsquo;s because my posting muscle has been focused on the new analyses for what makes a succesful #SciFund proposal. I&amp;rsquo;ve been posting them at the #SciFund blog under the Analysis tag - so check it out. There&amp;rsquo;s some fun stats, and you get to watch me be a social scientist for a minute. Viva la interdisciplinarity! </description>
+    </item>
+    
+    <item>
+      <title>#SciFund 2 Launches!</title>
+      <link>/2012/03/03/scifund-2-launches/</link>
+      <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/03/03/scifund-2-launches/</guid>
+      <description>That&amp;rsquo;s right, folk, last time we had 49 scientists bring in ~1400 people to check out their hot science and fund it to the tune of $76,000. And that was when we had no idea what we were doing. And now it&amp;rsquo;s time for round 2! We&amp;rsquo;re going to have a little more community review, some training, and we have a whole boatload of lessons learned.
+So if you&amp;rsquo;re a scientist who wants to crowdfund their research, go and sign up!</description>
+    </item>
+    
+    <item>
+      <title>Open Haus Conclusion: Peer Review or Bust!</title>
+      <link>/2012/02/13/open-haus-conclusions-peer-review-or-bust/</link>
+      <pubDate>Mon, 13 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/02/13/open-haus-conclusions-peer-review-or-bust/</guid>
+      <description>Friday&amp;rsquo;s NCEAS discussion about changing the future of scientific publishing was fascinating. We had a wide variety of views about the current system, what it&amp;rsquo;s adding to our papers, if the problems really are problems, and why we got here. But there was one thing that came up again and again, that even the most skeptical status quo folk in the crowd agreed was where the true value of the current journal system lies -</description>
+    </item>
+    
+    <item>
+      <title>Open Haus: The Future of Scholarly Publishing</title>
+      <link>/2012/02/10/open-haus-the-future-of-scholarly-publishing/</link>
+      <pubDate>Fri, 10 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/02/10/open-haus-the-future-of-scholarly-publishing/</guid>
+      <description>Today at The National Center for Ecological Analysis and Synthesis we&amp;rsquo;re having an open discussion about the future of scholarly publishing. I may post some notes from it later, but, Stephanie Pau and I have compiled a list of thought questions and helpful links to help folk prep. And, as it was an interesting gathering of linkage, I thought it mide be useful more broadly. So, below is the text of my email and the useful links.</description>
+    </item>
+    
+    <item>
+      <title>A Need to Understand Climate Change&#39;s Indirect Effects</title>
+      <link>/2012/01/31/a-deficit-of-understanding-of-climate-changes-indirect-effects/</link>
+      <pubDate>Tue, 31 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/31/a-deficit-of-understanding-of-climate-changes-indirect-effects/</guid>
+      <description>We know that warming, storms, drought, acidification, and the myriad of other effects of climate change will impact natural ecosystems. Most of our studies have concentrated on direct effects, though. For example, if you change temperature, you alter herbivore grazing rates. But what about indirect effects? For example, I&amp;rsquo;ve found that increased intense storm frequency may remove kelp which will have an indirect effect on the structure of kelp forest food webs.</description>
+    </item>
+    
+    <item>
+      <title>A Vision for the Future of Scholarly Publishing</title>
+      <link>/2012/01/31/a-vision-for-the-future-of-scholarly-publishing/</link>
+      <pubDate>Tue, 31 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/31/a-vision-for-the-future-of-scholarly-publishing/</guid>
+      <description>In many ways, the Research Works Act has been a blessing (see excellent link round up here). It has taken the moderately complacent but always grousing scientific community and whipped our feelings about the current state and cost of scientific publishing into a white hot fury. Ideas are bandied about, critiques given, and people begin to take action.
+So what is the way forward? Certainly we are not getting away from journals in the near term.</description>
+    </item>
+    
+    <item>
+      <title>Running R2WinBUGS on a Mac Running OSX</title>
+      <link>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</link>
+      <pubDate>Wed, 18 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</guid>
+      <description>I have long used JAGS to do all of my Bayesian work on my mac. Early on, I tried to figure out how to install WinBUGS and OpenBUGS and their accompanying R libraries on my mac, but, to no avail. I just had too hard of a time getting them running and gave up.
+But, it would seem that some things have changed with Wine lately, and it is now possible to not only get WinBUGS itself running nicely on a mac, but to also get R2WinBUGS to run as well.</description>
+    </item>
+    
+    <item>
+      <title>Food Web Structure and Changing Diversity at Two Levels</title>
+      <link>/2012/01/09/food-web-structure-and-changing-diversity-at-two-levels/</link>
+      <pubDate>Mon, 09 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/09/food-web-structure-and-changing-diversity-at-two-levels/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+OK, last but on two-level food webs for the moment. I&amp;rsquo;ve examined how food web structure can change the effects of predator or prey extinctions on both top-down and bottom-up control. A number of folk (including me) have theorized that changes in diversity at two trophic levels should interact - that the consequences of predator diversity loss should change as prey species are lost.</description>
+    </item>
+    
+    <item>
+      <title>Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before</title>
+      <link>/2012/01/03/prey-loss-in-different-food-web-structures-weve-been-here-before/</link>
+      <pubDate>Tue, 03 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/03/prey-loss-in-different-food-web-structures-weve-been-here-before/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+OK, only two more entries (I think) on simple two-level food webs before we jump into the great unkown (and you&amp;rsquo;ll see how unknown it is). So far I&amp;rsquo;ve been talking about the consequences of losing predator species for predation and energy transfer.</description>
+    </item>
+    
+    <item>
+      <title>A Probabilistic Approach to Predator-Prey Relationships: Worth All of the Hoo-Ha?</title>
+      <link>/2011/12/27/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/</link>
+      <pubDate>Tue, 27 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/27/a-probabilistic-approach-to-predator-prey-relationships-worth-all-of-the-hoo-ha/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+So, in my last post (notebook entry?), I introduced a new framework for understanding how the food web structure of a predator-prey food web can affect the consequences of extinction for the ability of predators to control their prey.</description>
+    </item>
+    
+    <item>
+      <title>A Probabilistic Look at Predators, Prey, and Extinctions</title>
+      <link>/2011/12/19/a-probabilistic-look-at-predators-prey-and-extinctions/</link>
+      <pubDate>Mon, 19 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/19/a-probabilistic-look-at-predators-prey-and-extinctions/</guid>
+      <description>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions. For an introduction and list of other posts, see here.
+To begin tackling the question of &amp;ldquo;How does the structure of a food web influence the consequences of extinction? let&amp;rsquo;s begin by thinking about how changes in the number of predator species in a simple 2-level predator-prey food web can influence 1) the probability of prey being eaten and 2) the amount of energy transfered to the predator group.</description>
+    </item>
+    
+    <item>
+      <title>#SciFund is OVER!  </title>
+      <link>/2011/12/16/scifund-is-over/</link>
+      <pubDate>Fri, 16 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/16/scifund-is-over/</guid>
+      <description>After 45 days, with $76,230 raised from 1440 people, I am a pretty proud papa.
+My own project hit 70% bringing in $4,600 for kelp forest research. While not complete, it funds one full round of sampling trips and a little extra, so, I&amp;rsquo;m super excited! And now the data from RocketHub and #SciFund participants begins to flow in. Time to start doing some analyses on what worked, what didn&amp;rsquo;t, and begin to lay out the future of crowdfunding in science!</description>
+    </item>
+    
+    <item>
+      <title>Food Web Network Structure and Extinction: The Start of an Open Notebook</title>
+      <link>/2011/12/16/food-web-network-structure-and-extinction-the-start-of-an-open-notebook/</link>
+      <pubDate>Fri, 16 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/16/food-web-network-structure-and-extinction-the-start-of-an-open-notebook/</guid>
+      <description>So, we know that species are going extinct at a pretty stunning rate. Mostly by human activities. The natural question is, will this affect the function of the natural world? You may well say &amp;lsquo;Duh! Of course!&amp;rsquo; as a first instinctive pass, but, the issue isn&amp;rsquo;t so clear cut - will species that survive simply take up the slack? What&amp;rsquo;s the value of a &amp;lsquo;species&amp;rsquo; anyway?
+Starting in the late &amp;rsquo;90s the field of diversity-function research has tackled this topic, largely using manipulations plant species number.</description>
+    </item>
+    
+    <item>
+      <title>Won&#39;t You #SciFund?</title>
+      <link>/2011/12/13/wont-you-scifund/</link>
+      <pubDate>Tue, 13 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/13/wont-you-scifund/</guid>
+      <description>With 4 days left, Tim Bonebreak asks, won&amp;rsquo;t you #SciFund? We&amp;rsquo;ve got 6 projects fully funded, and a number that are on the verge! I am at 65% myself! So achingly close!
+So come on over and #SciFund scientific research and help affect a revolution in how scientists interact with the world around them!</description>
+    </item>
+    
+    <item>
+      <title>Awww Yeah!  Chemical Ecology Music Video Extravaganza!</title>
+      <link>/2011/12/08/awww-yeah-chemical-ecology-music-video-extravaganza/</link>
+      <pubDate>Thu, 08 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/08/awww-yeah-chemical-ecology-music-video-extravaganza/</guid>
+      <description>I&amp;rsquo;m so excited. It&amp;rsquo;s one of my favorite times of year. That&amp;rsquo;s right, it&amp;rsquo;s time for the Annual Chemical Ecology Music Video Festival! Oh, J. Long, what have your students cooked up this time?
+Pure awesomeness, that&amp;rsquo;s what. This year&amp;rsquo;s crop features a number of epic ballads, rap superstars, and more. I think I&amp;rsquo;ll highlight my current two favorites, but you should definitely go check out the whole bunch or go back and revisit last year&amp;rsquo;s (particularly Under the Boat (featuring K.</description>
+    </item>
+    
+    <item>
+      <title>How to Make a Dancing Yeti Crab Video with Music </title>
+      <link>/2011/12/03/how-to-make-a-dancing-yeti-crab-video-with-music/</link>
+      <pubDate>Sat, 03 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/03/how-to-make-a-dancing-yeti-crab-video-with-music/</guid>
+      <description>So, I&amp;rsquo;ve been getting some questions about how one can make their own Yeti-crabs-dance-to-music video. So here&amp;rsquo;s a quick guide for the interested folk who haven&amp;rsquo;t played around with audio or video before but want to try it out. So, here&amp;rsquo;s what I did, step-by-step, in 9 easy steps. All told, this took me, eh, 5 minutes.
+(This is for iMovie, and I&amp;rsquo;ll link to a few tutorials in case you need them.</description>
+    </item>
+    
+    <item>
+      <title>Dancing Yeti Crabs!  Now with a Soundtrack!</title>
+      <link>/2011/12/02/dancing-yeti-crabs-now-with-soundtrack/</link>
+      <pubDate>Fri, 02 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/02/dancing-yeti-crabs-now-with-soundtrack/</guid>
+      <description>Several years ago, when the Yeti crab, Kiwa hirsuta was first described, the world looked at a crustacean for the first time and went, &amp;ldquo;AWWWWW!!!&amp;rdquo;
+I mean, how could you know love crabs from the Kiwa genus? They have fuzzy arms! And are adorable! People immediately began paying tribute with plush toys of all manner and even decorative food arrangements.
+So what could be better than a plain ole&amp;rsquo; Yeti crab?</description>
+    </item>
+    
+    <item>
+      <title>Can We Reduce the Carbon Cost of Scientific Mega-Meetings?</title>
+      <link>/2011/11/22/can-we-reduce-the-carbon-cost-of-scientific-mega-meetings/</link>
+      <pubDate>Tue, 22 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/11/22/can-we-reduce-the-carbon-cost-of-scientific-mega-meetings/</guid>
+      <description>I admit it. I love big scientific meetings. There&amp;rsquo;s something about the intense intellectual hubbub of thousands of my fields greatest minds gathered in one place for a few days of showing off the latest, greatest, flashiest work that just fills me with joy. Also a need to sleep for a week afterwards due to my brain going at a Matrix-like pace to keep up with all of the new and interesting information while spouting off ideas, critiques, beginning collaborations, and constantly questing to understand the growing shape of the research fields that interest me.</description>
+    </item>
+    
+    <item>
+      <title>Seeing Through the Measurement Error</title>
+      <link>/2011/11/11/seeing-through-the-measurement-error/</link>
+      <pubDate>Fri, 11 Nov 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/11/11/seeing-through-the-measurement-error/</guid>
+      <description>I am part of an incredibly exciting project - the #SciFund Challenge. #SciFund is an attempt to have scientists link their work to the general public through crowdfunding. As I&amp;rsquo;m one of the organizers, I thought I should have some skin in the game. But what skin?
+Well, people are pitching some incredibly sexy projects - tracking puffin migrations, coral reefs conservation,snake-squirrel interactions (WITH ROBOSQUIRRELS!), mathematical modeling of movements like Occupy Wall Street, and many many more.</description>
+    </item>
+    
+    <item>
+      <title>Morning Kelp Forest Jam</title>
+      <link>/2011/10/25/morning-kelp-forest-jam/</link>
+      <pubDate>Tue, 25 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/10/25/morning-kelp-forest-jam/</guid>
+      <description>A fun undersea video with a fun soundtrack from Gary Hawkins who is generously providing me with some footage for my #SciFund video.
+I may have to post more of his stuff in the future because it is AWESOME.</description>
+    </item>
+    
+    <item>
+      <title>#SciFund Preview....</title>
+      <link>/2011/10/24/scifund-preview/</link>
+      <pubDate>Mon, 24 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/10/24/scifund-preview/</guid>
+      <description>Whew, it&amp;rsquo;s been a bit since I posted here. Rest assured, little sea squirts, there are some interesting new things in the works. Some things that are science-y (in which I try and use this blog as a sounding board/ lab notebook) and some things not so much.
+In the not so much category, a ton of my time has lately been going to the organizing of the #SciFund challenge - a large initiative to try and crowdfunding for science!</description>
+    </item>
+    
+    <item>
+      <title>Thanks, Steve, for helping SCIENCE!</title>
+      <link>/2011/10/06/thanks-steve-for-helping-science/</link>
+      <pubDate>Thu, 06 Oct 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/10/06/thanks-steve-for-helping-science/</guid>
+      <description>Yesterday, we lost a great innovator and someone who, even if unwittingly, has really helped science. I am a passionate Mac advocate. It&amp;rsquo;s blend of good user interface with a UNIX underpinning lets many of us just concentrate on our work rather than constantly dithering with niggling details. So, I&amp;rsquo;m going to offer up this picture as my tribute. It&amp;rsquo;s a pic of me back from my first field season when I was doing photo sampling in Monterey Bay and would have to download the files in between dives due to flash cards maxing out below 1gig in those days.</description>
+    </item>
+    
+    <item>
+      <title>Astrophysicists = Parasitized Killifish</title>
+      <link>/2011/08/08/astrophysicists-parasitized-killifish/</link>
+      <pubDate>Mon, 08 Aug 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/08/08/astrophysicists-parasitized-killifish/</guid>
+      <description>I can only assume that the authors of the every silly Saturday Morning Breakfast Cereal have taken invertebrate zoology and were fascinated by the bizarre life history cycles of trematodes and/or spent some time hanging around with Armand Kuris and Kevin Lafferty at UC Santa Barbara. Why? Because of today&amp;rsquo;s brilliant comic (see below).
+
+Update: apparently the author&amp;rsquo;s wife is IN the Kuris lab. Ha!</description>
+    </item>
+    
+    <item>
+      <title>A Grand Experiment: Can Crowdfunding Work for Science?</title>
+      <link>/2011/08/01/a-grand-experiment-can-crowdfunding-work-for-science/</link>
+      <pubDate>Mon, 01 Aug 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/08/01/a-grand-experiment-can-crowdfunding-work-for-science/</guid>
+      <description>There have been a steady stream of articles over the years stating that now is the time for Science to embrace Crowdfunding. It is the wave of the future, they state. It will link people to science directly. Abandon the shackles of the NSF and NIH, ye meek and mild mannered scientists. The internet is your salvation.
+And along with this hoopla comes a small handfull of science crowdfunding sites, but few success stories.</description>
+    </item>
+    
+    <item>
+      <title>Cufflinks for the Well Dressed Marine Scientist</title>
+      <link>/2011/07/21/cufflinks-for-the-well-dressed-marine-scientist/</link>
+      <pubDate>Thu, 21 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/07/21/cufflinks-for-the-well-dressed-marine-scientist/</guid>
+      <description>So, I&amp;rsquo;m-a-gettin&amp;rsquo; hitched in, what, just less that 6 weeks to a singularly lovely lady. As I determine the proper haute couture for the nuptials, I&amp;rsquo;ve begun to have fun with one piece in particular. Cuffilnks.
+I mean, if you&amp;rsquo;re going to go Tux (and I do so love a good tuxedo), cufflinks are a must. But what kind of cufflinks should a gentleman marine biologist wear? Why, sea-creature themed, of course.</description>
+    </item>
+    
+    <item>
+      <title>The Story Behind the Paper: Climate Change and Kelp Forest Food Webs</title>
+      <link>/2011/07/11/the-story-of-a-paper-climate-change-and-kelp-forest-food-webs/</link>
+      <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/07/11/the-story-of-a-paper-climate-change-and-kelp-forest-food-webs/</guid>
+      <description>Yay! First paper of my postdoc is out in the August 2011 issue of Global Change Biology!
+Woohoo!
+So, what have I been doing for the past few years of my life?
+In brief summary: Kelp. Food webs. Climate change. A potent combination.
+And if you want the punchline without digging into the rest of this article, it is this: the diverse, complex food webs of southern California kelp forest will likely be greatly simplified if climate change leads to big storms every year.</description>
+    </item>
+    
+    <item>
+      <title>Oikos in the Online Hizzy</title>
+      <link>/2011/05/20/oikos-in-the-online-hizzy/</link>
+      <pubDate>Fri, 20 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/05/20/oikos-in-the-online-hizzy/</guid>
+      <description>I&amp;rsquo;ve long been pretty stoked that Methods in Ecology and Evolution has a blog. And now the upstart crew over at Oikos is getting into the online game with their delightful offering. Go check it out!
+Update: Believe it or not, I titled this post before the latest at Jabberwocky. Great minds, I say.</description>
+    </item>
+    
+    <item>
+      <title>Should We Eat Fish?  The Online Discussion</title>
+      <link>/2011/05/18/should-we-eat-fish-the-online-discussion/</link>
+      <pubDate>Wed, 18 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/05/18/should-we-eat-fish-the-online-discussion/</guid>
+      <description>One of the main reasons science blogs excite me is the possibility of communication between scientists. It allows for a medium that scientists can use to hash out ideas and do so publicly. This has the added advantage that those who are not big names in a field or somesuch can listen in, as it were, or even step in and participate.
+The discussion of science between scientists here, online, also has the added advantage of allowing the public to see inside of scientific debates and discussions in realtime.</description>
+    </item>
+    
+    <item>
+      <title>Yo!  We&#39;re Climate Scientists! </title>
+      <link>/2011/05/12/yo-were-climate-scientists/</link>
+      <pubDate>Thu, 12 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/05/12/yo-were-climate-scientists/</guid>
+      <description>I realize, I have been remiss as of late posting awesome science related videos. So&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>Ecological SEMs and Composite Variables: What, Why, and How</title>
+      <link>/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/</link>
+      <pubDate>Mon, 02 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/</guid>
+      <description>I&amp;rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&amp;rsquo;s awesome for three main reasons.
+  It&amp;rsquo;s a method of teasing apart direct and indirect interactions in your data.
+  It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.
+  As it&amp;rsquo;s formally presented, with path diagrams showing connections between variables, it&amp;rsquo;s SUPER easy to link conceptual models with your data.</description>
+    </item>
+    
+    <item>
+      <title>Easy Upgrading of R</title>
+      <link>/2011/04/15/easy-upgrading-of-r/</link>
+      <pubDate>Fri, 15 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/04/15/easy-upgrading-of-r/</guid>
+      <description>For those who are excited about the new 2.13.0 release of R (particularly the compiler package) but are grumbling about having to remember what packages they have and re-install them, see this great advice or this piece on upgrading in osx for how to automate the process.</description>
+    </item>
+    
+    <item>
+      <title>Extra! Extra! Get Your gridExtra!</title>
+      <link>/2011/04/07/extra-extra-get-your-gridextra/</link>
+      <pubDate>Thu, 07 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/04/07/extra-extra-get-your-gridextra/</guid>
+      <description>The more I use it, the deeper I fall in love with ggplot2. I know, some of you have heard me kvel about it ad nauseum (oh, yiddish and latin in one sentence - extra points!). But the graphs really look great, and once you wrap your head around a few concepts, it&amp;rsquo;s surprisingly easy to make it do most anything you want.
+Except for one thing.
+One thing I loved about the old R plotting functions was the ability to setup panels easily, and fill them with totally different graphs.</description>
+    </item>
+    
+    <item>
+      <title>Why Michaelis-Menten Rules in a (simple) Lotka-Volterra World</title>
+      <link>/2011/04/01/michaelis-menten-rules-in-a-simple-lotka-volterra-world/</link>
+      <pubDate>Fri, 01 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/04/01/michaelis-menten-rules-in-a-simple-lotka-volterra-world/</guid>
+      <description>WARNING: This blog entry contains me awkwardly groping with math. It&amp;rsquo;s not pretty. It&amp;rsquo;s not done elegantly - indeed, for problems of even moderate complexity I fired up maxima (which is totally awesome!) rather than screw up the algebra on paper. And there are a few leaps that I make that I&amp;rsquo;m sure someone could write a proof for, but, well&amp;hellip; While I fall somewhere in the middle of the theoretical - experimental axis of scientists, that doesn&amp;rsquo;t mean it&amp;rsquo;s something I do every day, so, expect some turbulence.</description>
+    </item>
+    
+    <item>
+      <title>Diversity: It Matters! (for plants &amp; algae)</title>
+      <link>/2011/03/29/diversity-it-matters-for-plants/</link>
+      <pubDate>Tue, 29 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/29/diversity-it-matters-for-plants/</guid>
+      <description>Geological time has witnessed 5 extinction crises. Now we&amp;rsquo;re in the middle of the 6th - this time driven by man. What&amp;rsquo;s unprecedented, however, is the rate we are driving species extinct. For many taxa, it&amp;rsquo;s faster than we&amp;rsquo;ve seen in geological time (see here for discussion).
+So? Will vast reductions in the diversity of species on earth matter? I mean, heck, maybe we only need two or three of each taxa, and we&amp;rsquo;re all good.</description>
+    </item>
+    
+    <item>
+      <title>Ecological Nerd Musique</title>
+      <link>/2011/03/17/ecological-nerd-musique/</link>
+      <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/17/ecological-nerd-musique/</guid>
+      <description>I woke up this morning to a wonderful email in my inbox (thanks, Fergus!) letting me know about a little musical delight. A song about diurnal zooplankton migration entitled, well, Diurnal Migration. With lyrics like Much of the ocean is not yet explored/ Though submarines pootle about the sea floor, how can you go wrong? (Also, I now have an image of Dr. M. pootling about the seafloor).
+So, I went on and decided to listen to the rest of the album, Pre-Apocalyptic Love Song, by Hannah Werdmuller, an ecologist-singer-songwriter.</description>
+    </item>
+    
+    <item>
+      <title>More, Please!</title>
+      <link>/2011/03/17/more-please/</link>
+      <pubDate>Thu, 17 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/17/more-please/</guid>
+      <description>Thanks to Jim, I&amp;rsquo;ve been using R in the shell more and more - in concert with vi. It&amp;rsquo;s been fun, and nice to integrate my workflows all on the server (although I haven&amp;rsquo;t had to do much graphing yet - I&amp;rsquo;m sure I&amp;rsquo;ll start kvetching then and return to a nice gui).
+One thing that has frustrated me is that large dumps of output - say, a list composed of elements that are 100 lines each - just whip past me without an ability to scroll through more slowly.</description>
+    </item>
+    
+    <item>
+      <title>Happy τ/2 Day!</title>
+      <link>/2011/03/15/happy-2-day/</link>
+      <pubDate>Tue, 15 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/15/happy-2-day/</guid>
+      <description>Happy Half Tau Day to everyone! What&amp;rsquo;s that, you say? It&amp;rsquo;s Pi Day? Whatever. π is wrong. Need convincing? See the brilliant video by Vi Hart below and visit The Tau Manifesto.
+So go out there, and celebrate the fact that you&amp;rsquo;re halfway to the day where you can make 2 Pi!
+(And don&amp;rsquo;t worry, you should still make some π today! It&amp;rsquo;s delicious!)</description>
+    </item>
+    
+    <item>
+      <title>RStudio - An IDE for the Masses!</title>
+      <link>/2011/03/01/rstudio-an-ide-for-the-masses/</link>
+      <pubDate>Tue, 01 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/03/01/rstudio-an-ide-for-the-masses/</guid>
+      <description>I&amp;rsquo;ll admit it. There&amp;rsquo;s one thing that always makes me sad working on a mac. R. How does R make me sad on a mac? I look over at my compatriots in Windows using fun Integrated Development Environments (IDEs) like Tinn-R, and I sigh. On the other hand, I just had the sad little text editor and shell. Sure, it was enough, and I had wrung some sweet sweet code from that simple setup, but windows would get lost, I&amp;rsquo;d lose track of what file was where, what plot window was open, and would sometimes even forget which instance of R I was working in when I was working on two projects at the same time (one for simulation, one for analysis).</description>
+    </item>
+    
+    <item>
+      <title>Promoting Ecology on the Web!</title>
+      <link>/2011/02/25/promoting-ecology-on-the-web/</link>
+      <pubDate>Fri, 25 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/02/25/promoting-ecology-on-the-web/</guid>
+      <description>For the past three years, the Bulletin of the Ecological Society of America has hosted a wonderful entitled &amp;ldquo;Ecology on the Web&amp;rdquo;. Under the curation of Jeff Hollister, EoW started out and grew to provide a number of links to fantastic ecological projects on the web.
+If you&amp;rsquo;re reading this, you know that using the internet as a medium to facilitate communication between scientists is a passion of mine. So I was delighted when Jeff asked me to take over the feature.</description>
+    </item>
+    
+    <item>
+      <title>A Brief Residency at Deep Sea News</title>
+      <link>/2011/02/18/a-brief-residency-at-deep-sea-news/</link>
+      <pubDate>Fri, 18 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/02/18/a-brief-residency-at-deep-sea-news/</guid>
+      <description>Hey, all! For the rest of the month, I&amp;rsquo;m the Scientist in Residence over at The Deep Sea News! Muchas gracias to Rick, Miriam, Kevin, and the rest of the crew for bringing me on board. My first post is up where I discuss some of my work on How are extinctions and invasions shaping food webs?
+Also, contrary to what Rick may have you believe, I&amp;rsquo;m at NCEAS, not NESCent.</description>
+    </item>
+    
+    <item>
+      <title>Word to Your Tree Ring</title>
+      <link>/2011/01/31/word-to-your-tree-ring/</link>
+      <pubDate>Mon, 31 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/31/word-to-your-tree-ring/</guid>
+      <description>Sometimes, this blog is about pure science. But lately, it appears I&amp;rsquo;ll be cataloging the increasing boom in Science related music videos. Because they&amp;rsquo;re awesome.
+So be it.
+The latest to be sent to my inbox (h/t Jenn Williams) is the Ecological Dynamics Rap made for Tom Wessel&amp;lsquo;s Ecological Dynamics of Landscapes.</description>
+    </item>
+    
+    <item>
+      <title>Diversity-Function Brought to Life</title>
+      <link>/2011/01/28/diversity-function-brought-to-life/</link>
+      <pubDate>Fri, 28 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/28/diversity-function-brought-to-life/</guid>
+      <description>Last October, Colin Bates and Jeff Morales conducted a workshop on Scientific Filmmaking at my old stomping grounds, the Bodega Marine Lab. The two run an awesome organization whose sole mission is to train people in ways to tell compelling science stories via video. As someone who has worked on a scientific documentary before, film is an incredible medium to have science make a direct connection with the public. So hats off to them.</description>
+    </item>
+    
+    <item>
+      <title>Merge Me Baby One More Time!</title>
+      <link>/2011/01/24/merge-me-baby-one-more-time/</link>
+      <pubDate>Mon, 24 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/24/merge-me-baby-one-more-time/</guid>
+      <description>OK - has this ever happened to you? You are working with a team of collaborators all using a common dataset - maybe from an Agency, and LTER, or someone else&amp;rsquo;s data altogether. Each of you has some task - incorporating new data, running fancy models and putting the results back into the data for later analysis, etc.
+Months later you come back, ready to put it all together to execute your master plan of analysis, when suddenly you realize that you&amp;rsquo;ve all been working on slightly different versions of the original dataset.</description>
+    </item>
+    
+    <item>
+      <title>Get Your Reef On!</title>
+      <link>/2011/01/18/get-your-reef-on/</link>
+      <pubDate>Tue, 18 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/18/get-your-reef-on/</guid>
+      <description>And here I thought that B-b-b-b-blue Whale would be stuck in my head all day. But now comes a second awesome marine science music video!
+Two in one day! And it&amp;rsquo;s not even my birthday!
+Thanks to J. Long of the recent Inducible Defense Rapinar for the pointer.</description>
+    </item>
+    
+    <item>
+      <title>I need some scat... prey base where you at?</title>
+      <link>/2011/01/18/i-need-some-scat-prey-base-where-you-at/</link>
+      <pubDate>Tue, 18 Jan 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/01/18/i-need-some-scat-prey-base-where-you-at/</guid>
+      <description>I wish I could say something intelligible here, but, I love this so much and cannot stop rewatching it over and over&amp;hellip;the collision of marine bio nerdiness and pure awesome is a little overwhelming. Now if only there were tunicates involved&amp;hellip;
+UBC.ZOOLOGY.GAGA.WHALE from Matt Siegle on Vimeo.</description>
+    </item>
+    
+    <item>
+      <title>Kids &#43; Marine Biology = Awesome</title>
+      <link>/2010/12/11/kids-marine-biology-awesome/</link>
+      <pubDate>Sat, 11 Dec 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/12/11/kids-marine-biology-awesome/</guid>
+      <description>Hey! I&amp;rsquo;m in a book! For kids! Best of all, its&amp;rsquo; a chapter to help kids get excited about marine science. I got hooked into the world of marine biology young, and have never looked back. I mean - The ocean! Sea life! It&amp;rsquo;s awesome!
+So, I was delighted when Alisa Weinstein asked me a few years ago to contribute to her Earn My Keep project. The basic premise of the project is that we want our kids to learn about some of the interesting jobs and professions out there in the real world.</description>
+    </item>
+    
+    <item>
+      <title>The Fingerprint of Fishing</title>
+      <link>/2010/11/17/the-fingerprint-of-fishing/</link>
+      <pubDate>Wed, 17 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/11/17/the-fingerprint-of-fishing/</guid>
+      <description>How is fishing changing the ocean? This simple question has motivated a slew of fantastic research. One of the most pervasive ideas has been that of Fishing Down Marine Food Webs. Popularized by Daniel Pauly and colleagues in their 1998 paper, the idea simply states that when humans began fishing, we hit the top predators first. Gradually, as we depleted those stocks, human fishing moved down to the next trophic level.</description>
+    </item>
+    
+    <item>
+      <title>WSN 2010 Online</title>
+      <link>/2010/11/13/wsn-2010-online/</link>
+      <pubDate>Sat, 13 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/11/13/wsn-2010-online/</guid>
+      <description>For anyone interested in the latest and greatest in marine ecology right now, but who aren&amp;rsquo;t able to get to San Diego for the Western Society of Naturalists 2010 meeting, follow along as a bunch of of liveblog and livetweet talks from the meeting. Very cool new stuff on the state of the oceans and marine science.</description>
+    </item>
+    
+    <item>
+      <title>Deeper and Curiouser</title>
+      <link>/2010/10/26/deeper-and-curiouser/</link>
+      <pubDate>Tue, 26 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/10/26/deeper-and-curiouser/</guid>
+      <description>I&amp;rsquo;ve been totally stoked that Jai Ranganathan&amp;rsquo;s science podcast Voyage of the Beagle has been rebooted as Curiouser and Curiouser and that its first episode was on the science of overfishing. I contacted the folk over at DSN about it, and they kindly let me add a guest post. Yay! Check it out, and enjoy Jai&amp;rsquo;s podcasts!</description>
+    </item>
+    
+    <item>
+      <title>Vicious Predator of the Deep!</title>
+      <link>/2010/10/08/vicious-predator-of-the-deep/</link>
+      <pubDate>Fri, 08 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/10/08/vicious-predator-of-the-deep/</guid>
+      <description>Thanks to Chris Mah for sending me over to this great video of a fearsome predatory tunicate (likely Megalodicopia hians)! Happy Friday, all!</description>
+    </item>
+    
+    <item>
+      <title>Choose to Support Marine Education</title>
+      <link>/2010/10/06/choose-to-support-marine-education/</link>
+      <pubDate>Wed, 06 Oct 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/10/06/choose-to-support-marine-education/</guid>
+      <description>It&amp;rsquo;s that time of year where we ocean bloggers band together for the cause of Marine Environmental Education in US Schools. Between now and Nov 9th, we&amp;rsquo;re running a drive through Donor&amp;rsquo;s Choose in order to indoctrinate educate schoolkids in the wonders of the sea. Last year was a huge success, bringing in thousands of dollars to underfunded schools and enabling some real discovery. This donation is tax deductible, so, please, make a difference and donate (anything!</description>
+    </item>
+    
+    <item>
+      <title>Finding Truth in a Messy World</title>
+      <link>/2010/09/13/finding-truth-in-a-messy-world/</link>
+      <pubDate>Mon, 13 Sep 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/09/13/finding-truth-in-a-messy-world/</guid>
+      <description>*-note, this was derived from a combination of emails between myself and my former phd advisor. See if you can pick out who is arguing what and where. It&amp;rsquo;s fun - well, for some of you, anyway.
+How do we know the world?
+This is a seemingly simple and vast question - one with no answer. And yet, it is at the core of every single scientific endeavor. We make choices.</description>
+    </item>
+    
+    <item>
+      <title>Privatizing the Reviewer Commons</title>
+      <link>/2010/07/20/privatizing-the-reviewer-commons/</link>
+      <pubDate>Tue, 20 Jul 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/07/20/privatizing-the-reviewer-commons/</guid>
+      <description>Let&amp;rsquo;s face it. The current journal system is slowly breaking down - in Ecology if not in other disciplines as well. The number of submissions is going up exponentially. At the same time, journals are finding it harder and harder to find reviewers. Statistics such as editors contacting 10 reviewers to find 3 are not uncommon. People don&amp;rsquo;t respond, they take a long time to review, or just take a long time and THEN don&amp;rsquo;t respond leading to a need for still more reviewers to be found (this has held up 2 of my pubs for 3+ extra months).</description>
+    </item>
+    
+    <item>
+      <title>In the Grass, On the Reef - Vlogging Research</title>
+      <link>/2010/06/29/in-the-grass-on-the-reef-vlogging-research/</link>
+      <pubDate>Tue, 29 Jun 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/06/29/in-the-grass-on-the-reef-vlogging-research/</guid>
+      <description>So, you&amp;rsquo;re an ecology power-couple starting a new life. You&amp;rsquo;ve got some elegant and incredibly ambitious experiments designed, funded, and ready to go. You&amp;rsquo;re about to revolutionize the study of coastal ecosystems&amp;hellip;but where?
+Where is in the Gulf of Mexico.
+And right before your work really takes flight, the Deepwater Horizon happens.
+(add to that that one of you is taking some course from some silly guy on this thing called structural equation modeling - why would you ever do that?</description>
+    </item>
+    
+    <item>
+      <title>How a Scientist Sees the World?</title>
+      <link>/2010/06/28/how-a-scientist-sees-the-world/</link>
+      <pubDate>Mon, 28 Jun 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/06/28/how-a-scientist-sees-the-world/</guid>
+      <description>I wish I could say this is wrong, but&amp;hellip;From an excellent series on science over at Abstruse Goose.
+OK, they did get one thing wrong. There should be a few more arrows coming out of that rabbit. And the birds, too. What, you think I&amp;rsquo;m kidding? No indeed!</description>
+    </item>
+    
+    <item>
+      <title>Tunicate Whiskey</title>
+      <link>/2010/06/25/tunicate-whiskey/</link>
+      <pubDate>Fri, 25 Jun 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/06/25/tunicate-whiskey/</guid>
+      <description>From this issue of the Ascidian News comes word of something&amp;hellip;.well&amp;hellip;.awesome.
+Tunicate Whiskey.
+To wit, hollow out one Halocynthia roretzi. Fill tunic with Soju (korean whiskey). Drink.
+For some reason, I think this would work really well with Laphroaig or other Islay malts. Or, perhaps, give that nice Islay character to something more generic - spice up your Johnny walker with a little Styela.
+On second thought, a big Styela is about the size of a shot glass&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>Do Not Log-Transform Count Data, Bitches!</title>
+      <link>/2010/06/17/do-not-log-transform-count-data-bitches/</link>
+      <pubDate>Thu, 17 Jun 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/06/17/do-not-log-transform-count-data-bitches/</guid>
+      <description>OK, so, the title of this article is actually Do not log-transform count data, but, as @ascidacea mentioned, you just can&amp;rsquo;t resist adding the &amp;ldquo;bitches&amp;rdquo; to the end.
+Onwards.
+If you&amp;rsquo;re like me, when you learned experimental stats, you were taught to worship at the throne of the Normal Distribution. Always check your data and make sure it is normally distributed! Or, make sure that whatever lines you fit to it have normally distributed error around them!</description>
+    </item>
+    
+    <item>
+      <title>My Dissertation in Under 7 Minutes</title>
+      <link>/2010/04/01/my-dissertation-in-under-7-minutes/</link>
+      <pubDate>Thu, 01 Apr 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/04/01/my-dissertation-in-under-7-minutes/</guid>
+      <description>I recently attended the DISCCRS symposium for recent PhDs of a wide variety of disciplines whose work (past or present) deals with climate change. The week-long meeting was phenomenal, seeding me with thoughts, ideas, and basically making me feel quite good about the work I&amp;rsquo;m doing (if also very pessimistic about how society is dealing with Climate Change). Perhaps one of the most interesting exercises of the whole thing was something we had to do as a sort of getting-to-know-you.</description>
+    </item>
+    
+    <item>
+      <title>Our Future: Hot n&#39; Tasty?</title>
+      <link>/2010/03/31/our-future-hot-n-tasty/</link>
+      <pubDate>Wed, 31 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/03/31/our-future-hot-n-tasty/</guid>
+      <description>Climate change. It&amp;rsquo;s going to wreak no small amount of havoc on mother nature (and if you&amp;rsquo;re reading this but think all of this climate change stuff is poppycock, please visit Skeptical Science and then come back). How good of a guide is our intuition for what will happen?
+This is a great question when it comes to predator-prey relationships and the food chain. One may well think that, heck, from first principles we know that adding heat to a system speeds things up.</description>
+    </item>
+    
+    <item>
+      <title>The Map of Science</title>
+      <link>/2010/03/05/the-map-of-science/</link>
+      <pubDate>Fri, 05 Mar 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/03/05/the-map-of-science/</guid>
+      <description>Why does it take so long for awesome cutting-edge statistical to make their way over to ecology? There are a myriad of techniques out there that have been around for 20, 30, 40, or more years that could help so many ecologists from banging their head into a wall over and over and over and&amp;hellip;well, you get the point. But, it takes quite a while for them to percolate over to us.</description>
+    </item>
+    
+    <item>
+      <title>Viva la Neo-Fisherian Liberation Front!</title>
+      <link>/2010/02/15/viva-la-neo-fisherian-liberation-front/</link>
+      <pubDate>Mon, 15 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/02/15/viva-la-neo-fisherian-liberation-front/</guid>
+      <description>p≤0.05
+ Significant p-values. For so many scientists using statistics, this is your lord. Your master. Heck, it has its own facebook group filed under religious affiliations (ok, so, maybe I created that.) And it is a concept to whose slavish devotion we may have sacrificed a good bit of forward progress in science over the past half century. Time to blow up the cathedral! Or so says Stuart Hurlbert and Celia Lombardi in a recent fascinating review.</description>
+    </item>
+    
+    <item>
+      <title>Low Down Poor Abused Data Blues</title>
+      <link>/2010/02/12/low-down-poor-abused-data-blues/</link>
+      <pubDate>Fri, 12 Feb 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/02/12/low-down-poor-abused-data-blues/</guid>
+      <description>I&amp;rsquo;m having one of those days. One of those &amp;ldquo;I have a meeting that will finalize the analyses for a paper, let&amp;rsquo;s just check that ONE thing that didn&amp;rsquo;t matter in early versions of this model, so, it shouldn&amp;rsquo;t matter now, and OMGWTFBBQ everything changed!&amp;rdquo; kinds of days. Well, OK, not everything - just the new piece of the story that intrigued me the most because it was so delightfully intuitive.</description>
+    </item>
+    
+    <item>
+      <title>The Conservation Horizon</title>
+      <link>/2010/01/21/the-conservation-horizon/</link>
+      <pubDate>Thu, 21 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/01/21/the-conservation-horizon/</guid>
+      <description>Every so often, a conservation problem rears its head that, upon reflection, we realize we had some inkling of even decades ago. Global warming, biofuels, overfishing, etc. The information was there, but scarce, buried in obscurity, or seemingly counterintuitive. Why not try and recognize the crucial questions early, before the lobster is out of the trap, so to speak? (What, I&amp;rsquo;m a marine biologist!)
+Businesses has recognized the need to spot emerging trends with scant information and regularly engages in an exercise called Horizon Scanning.</description>
+    </item>
+    
+    <item>
+      <title>Research Blogging Awards!</title>
+      <link>/2010/01/20/research-blogging-awards/</link>
+      <pubDate>Wed, 20 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/01/20/research-blogging-awards/</guid>
+      <description>Well, everyone&amp;rsquo;s had a great year blogging away about the peer reviewed literature, yes? It&amp;rsquo;s time to reward those efforts! Announcing the first annual Research Blogging Awards! There are a multitude of categories, each with a $50 cash prize attached. And, here&amp;rsquo;s the kicker, the best research blog of the year will win $1,000! And with the upcoming iTablet, iPad, iSlate, iWillCallItWhatIWant tech-shininess from Apple just around the corner, it&amp;rsquo;s not a moment too soon!</description>
+    </item>
+    
+    <item>
+      <title>Ecology in 2020?</title>
+      <link>/2010/01/06/ecology-in-2020/</link>
+      <pubDate>Wed, 06 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>/2010/01/06/ecology-in-2020/</guid>
+      <description>Today&amp;rsquo;s issue of Nature rings in the New Decade with an interesting article on where Science needs to be in 2020. With respect to Ecology, Robert Holt makes the following observation:
+Um. I think that describes my research program. Except the whole isotope/bar-coding thing. Damn. Add that to the list of things I need to learn, as right now, figuring out who-eats-who can be a real show-stopper! But overall, I guess I&amp;rsquo;m on the right track.</description>
+    </item>
+    
+    <item>
+      <title>Tunicates on Bizarre Foods!</title>
+      <link>/2009/12/01/tunicates-on-bizarre-foods/</link>
+      <pubDate>Tue, 01 Dec 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/12/01/tunicates-on-bizarre-foods/</guid>
+      <description>At last, Halocynthia roretzi has made it to the Food Network! Scroll to 3:40 for the good stuff.
+&amp;ldquo;Yummy is not the word I would use to describe this&amp;hellip;&amp;rdquo; Uh oh.</description>
+    </item>
+    
+    <item>
+      <title>CSAs for the Sea</title>
+      <link>/2009/11/06/csas-for-the-sea/</link>
+      <pubDate>Fri, 06 Nov 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/11/06/csas-for-the-sea/</guid>
+      <description>Here at the Santa Barbara Farmer&amp;rsquo;s market, I&amp;rsquo;ve been delighted that we have local fish, ridgeback shrimp, mussels, and oysters. They&amp;rsquo;re amongst the tastiest seafood I&amp;rsquo;ve eaten (last week&amp;rsquo;s pumpkin shrimp risotto that I whipped up was one of the all time most amazing things I&amp;rsquo;ve ever cooked).
+One thing I&amp;rsquo;ve always admired is that the lovely fresh seasonal sustainably farmed veggies one can get at the farmers market can also be purchased via a Community Supported Agriculture organization.</description>
+    </item>
+    
+    <item>
+      <title>Help Kids Learn Sea Chanties!</title>
+      <link>/2009/10/16/help-kids-learn-sea-chanties/</link>
+      <pubDate>Fri, 16 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/10/16/help-kids-learn-sea-chanties/</guid>
+      <description>As a young tyke growing up around the decaying maritime glories of Baltimore, I was lucky to sail aboard The Lady Maryland. The feel and scent of her wooden decks, polished brass, and wet wool still haunt me, actually. Those voyages were coupled with a feisty choir teacher, John &amp;ldquo;Doc&amp;rdquo; Merrill, who taught me my first few Sea Chanties. (and we all know where that led&amp;hellip;)
+While I loved the marine world from a deeply emotional place at the time (my Aunt had been an underwater photographer before passing away), and loved science because, let&amp;rsquo;s face it, I was an enormous nerd, Tall Ships and Sea Chanties are what made me fall in love with The Sea.</description>
+    </item>
+    
+    <item>
+      <title>Who&#39;s your (academic) (great-grand) Daddy?!</title>
+      <link>/2009/10/14/whos-your-academic-daddy/</link>
+      <pubDate>Wed, 14 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/10/14/whos-your-academic-daddy/</guid>
+      <description>Science is a giant family. Each Professor gives &amp;ldquo;birth&amp;rdquo; to a litter of PhD students over time, many of whom go on to have their own students, who have their own students, and so on and so forth ad infinitum.
+While all of us know our academic parent (right?), at least some of our sciblings (depending on the age of the lab), and usually our academic grandparent, what about our great-grandparent?</description>
+    </item>
+    
+    <item>
+      <title>Lawrence Slobodkin: Trophic Pioneer</title>
+      <link>/2009/09/22/lawrence-slobodkin-trophic-pioneer/</link>
+      <pubDate>Tue, 22 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/22/lawrence-slobodkin-trophic-pioneer/</guid>
+      <description>I just learned that Lawrence Slobodkin passed away last week. Slobodkin was one of the authors of the infamous HSS paper in 1960 that has shaped how we think of the role of predators in ecosystems for decades. Indeed, it is one of the very origins of the modern concept of trophic cascades. More than that, though, this was a man with broad ranging interests in biology. I think the New York Times Obit has some interesting points about his contribution to our understanding of the world, and includes this quote from Slobodkin:</description>
+    </item>
+    
+    <item>
+      <title>Web-Based Multilevel Modeling</title>
+      <link>/2009/09/18/web-based-multilevel-modeling/</link>
+      <pubDate>Fri, 18 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/18/web-based-multilevel-modeling/</guid>
+      <description>This is tremendously cool. A nice intuitive web-based interface for the lme4 package in R (and you neither need to know R or understand the intricacies of the lme4 package) that gives you pdf output and plots. If you just want to play around and not worry about coding things up, it&amp;rsquo;s a great little option. Be sure to check out the demo video.</description>
+    </item>
+    
+    <item>
+      <title>Sea Stars on Acid</title>
+      <link>/2009/09/10/sea-stars-on-acid/</link>
+      <pubDate>Thu, 10 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/10/sea-stars-on-acid/</guid>
+      <description>As an ecologist working in temperate climes, I&amp;rsquo;ve been following the ocean acidification field with some interest. It&amp;rsquo;s always been obvious to me how acidification has enormous ramifications for coral reefs and other tropical marine ecosystems. They exist in warm waters already, often close to their thermal maxima. Acidifying the water around them at any creatures using calcium carbonate seems like a recipe for disaster.
+[caption id=&amp;quot;attachment_209&amp;rdquo; align=&amp;quot;alignright&amp;rdquo; width=&amp;quot;300&amp;rdquo; caption=&amp;quot;How not to do acidification research on Pacific salmon.</description>
+    </item>
+    
+    <item>
+      <title>The New York Times Recognizes that What I Do is Hard</title>
+      <link>/2009/09/09/the-new-york-times-recognizes-that-what-i-do-is-hard/</link>
+      <pubDate>Wed, 09 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/09/the-new-york-times-recognizes-that-what-i-do-is-hard/</guid>
+      <description>For anyone who wants a great simple explanation for why Biodiversity-Ecosystem Function research (my field) is rather daunting, check out Olivia Judson&amp;rsquo;s New York Times blog post.</description>
+    </item>
+    
+    <item>
+      <title>Let&#39;s All Go Down to the Barplot!</title>
+      <link>/2009/09/03/lets-all-go-down-to-the-barplot/</link>
+      <pubDate>Thu, 03 Sep 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/09/03/lets-all-go-down-to-the-barplot/</guid>
+      <description>I&amp;rsquo;m back for another pean to ANOVA-loving experimental ecology. Barplots (or point-range plots - but which is better is a discussion for a different time) are the thing! And a friend of mine was recently asking me how to do a decent barplot with ggplot2 for data of moderate complexity (e.g., a 2-way ANOVA).
+So I tried it.
+And then I hit my head against a wall for a little while.</description>
+    </item>
+    
+    <item>
+      <title>The LTERs Get Hip!</title>
+      <link>/2009/08/31/the-lters-get-hip/</link>
+      <pubDate>Mon, 31 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/08/31/the-lters-get-hip/</guid>
+      <description>It seems that blogs, twitter, etc, are beginning to really leak into the consciousness of ecologists! In two weeks, I&amp;rsquo;m attending the LTER All Scientists Meeting (ASM). As I browsed through the working grounp lists, I came across the following: Blogs, Posts, and Tweets: Potential Uses of Web-Based and Social Networking Media for Communicating LTER Science and Conducting Citizen Science.
+Tres cool.
+The LTER network, for those unfamiliar, is perhaps the oldest network of Long Term Ecological Research projects, well, anywhere.</description>
+    </item>
+    
+    <item>
+      <title>First you get the urchins, then you get the power, then you get the data!</title>
+      <link>/2009/08/14/first-you-get-the-urchins-then-you-get-the-power-then-you-get-the-data/</link>
+      <pubDate>Fri, 14 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/08/14/first-you-get-the-urchins-then-you-get-the-power-then-you-get-the-data/</guid>
+      <description>Well, it&amp;rsquo;s been a few weeks since I put the revised version of my diversity-disturbance experiment out in the field. I completed sampling on Monday, and, whew, my power analysis paid off! Although not entirely how I expected&amp;hellip;
+First off, kicking the maximum urchin density up to 50 per cage (as opposed to 16) was indeed helpful. Even after 1 week, there was a strong urchin effect. And after three weeks, well&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>I&#39;m an Editor?</title>
+      <link>/2009/08/06/im-an-editor/</link>
+      <pubDate>Thu, 06 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/08/06/im-an-editor/</guid>
+      <description>So, someone over at researchblogging.org was decidedly foolish, and asked me to be one of their new editors-at-large for Biology. That means, every Thursday, I&amp;rsquo;ll be posting the three biology (typically ecology and evolution) research paper reviews linked through researchblogging.org that I enjoyed the most. My first post is up, and hopefully there will be many more to come!</description>
+    </item>
+    
+    <item>
+      <title>Tweeting A Trashy Voyage</title>
+      <link>/2009/08/03/tweeting-a-trashy-voyage/</link>
+      <pubDate>Mon, 03 Aug 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/08/03/tweeting-a-trashy-voyage/</guid>
+      <description>For those who aren&amp;rsquo;t following it, the SEAPLEX cruise blog is pretty amazing. SEAPLEX is a cruise being led by none other than Miriam Goldstein of The Oyster&amp;rsquo;s Garter to explore the Great North Pacific Trash Gyre.
+[caption id=&amp;quot;attachment_186&amp;rdquo; align=&amp;quot;aligncenter&amp;rdquo; width=&amp;quot;300&amp;rdquo; caption=&amp;quot;The Seaplex Cruise Track. Not quite a three hour tour.&amp;quot;][/caption]
+OK, so, a gyre of trash may not be that great, but, you know, it&amp;rsquo;s Great. As in Awesome. By which I mean Awe-inspiring kinda Great.</description>
+    </item>
+    
+    <item>
+      <title>I&#39;ve Got the Power!</title>
+      <link>/2009/07/20/ive-got-the-power/</link>
+      <pubDate>Mon, 20 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/20/ive-got-the-power/</guid>
+      <description>There is nothing like that pain of taking a first look at fresh precious new data from a carefully designed experiment which took months of planning and construction, 8 divers working full days, and a lot of back-and-forth with colleagues, and then you find absolutely no patterns of interest.
+Yup, it&amp;rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment. Fortunately, I was on my way to a 4th of July dinner with my family up in the mountains of Colorado, so, I wasn&amp;rsquo;t quite going to commit hari-kari on the spot.</description>
+    </item>
+    
+    <item>
+      <title>Simple Data Visualization</title>
+      <link>/2009/07/16/simple-data-visualization/</link>
+      <pubDate>Thu, 16 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/16/simple-data-visualization/</guid>
+      <description>OK, so, I know I already raved about one Hadley Wickham project and how it has changed my life last week. But what can I say, the man is a genius. And if you are using R (and let&amp;rsquo;s face it, you should be) and you want simple sexy graphs made quick, the man has you covered once again.
+I first learned about ggplot2 while scanning through some slides of the LA Area RUG meetings (that I missed - I still haven&amp;rsquo;t been to any!</description>
+    </item>
+    
+    <item>
+      <title>Lytechinus: Pack Wolf of the Sea</title>
+      <link>/2009/07/12/lytechinus-pack-wolf-of-the-sea/</link>
+      <pubDate>Sun, 12 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/12/lytechinus-pack-wolf-of-the-sea/</guid>
+      <description>So, you know, I&amp;rsquo;m cruising along, trying to determine the diet of the white urchin, Lytechinus anamesus, from the literature. There&amp;rsquo;s your usual &amp;ldquo;It eats kelp&amp;rdquo; papers, a few red algae papers, and nothing else special and then - A PAPER ON LYTICHINUS EATING OTHER SPECIES OF URCHINS.
+That&amp;rsquo;s right, baby, urchin on urchin predation. Could the ocean get much weirder? [caption id=&amp;quot;attachment_168&amp;rdquo; align=&amp;quot;aligncenter&amp;rdquo; width=&amp;quot;408&amp;rdquo; caption=&amp;quot;A red urchin mobbed by the ravening horde.</description>
+    </item>
+    
+    <item>
+      <title>Sometimes, you just need to use a plyr</title>
+      <link>/2009/07/10/sometimes-you-just-need-to-use-a-plyr/</link>
+      <pubDate>Fri, 10 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/10/sometimes-you-just-need-to-use-a-plyr/</guid>
+      <description>I haven&amp;rsquo;t posted anything about R-nerdery in quite some time. But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier. The plyr package.
+R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives. This returns another vector or list.
+This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions.</description>
+    </item>
+    
+    <item>
+      <title>Mapping the Sasquatch</title>
+      <link>/2009/07/01/mapping-the-sasquatch/</link>
+      <pubDate>Wed, 01 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/07/01/mapping-the-sasquatch/</guid>
+      <description>I love modeling! I love modeling! Modeling will solve everything!
+Let&amp;rsquo;s model the spatial distribution of Bigfoot!
+WAIT, WHAT?!
+Figure 1 from the paper. Foots denote sighting of Sasquatch footprints. Circles for just visual/auditory sightings. I ask, how does one know what Bigfoot sounds like?
+Yes, it sounds silly, but in the current issue of the Journal of Biogegraphy, Lozier et al give us their stunning contribution Predicting the distribution of Sasquatch in western North America: anything goes with ecological niche modelling.</description>
+    </item>
+    
+    <item>
+      <title>Ascidians in Vanity Fair!</title>
+      <link>/2009/06/15/ascidians-in-vanity-fair/</link>
+      <pubDate>Mon, 15 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/06/15/ascidians-in-vanity-fair/</guid>
+      <description>Yes, it&amp;rsquo;s time for squirts to take the limelight in America&amp;rsquo;s most fashionable magazine! I know this is a little old, but in the 2007 article, If You Knew Sushi by Nick Tosches, the author encounters a delicacy, Halocynthia roretzi aka the Sea Pineapple. (That&amp;rsquo;s right, they&amp;rsquo;re even on wikipedia now!)
+&amp;ldquo;Sea pineapple,&amp;rdquo; he says. &amp;ldquo;Attaches to rocks in the ocean. Tastes something like iodine. Sendai people like it.&amp;rdquo;
+It looks nothing like a pineapple.</description>
+    </item>
+    
+    <item>
+      <title>Ocean Day and COB #25!</title>
+      <link>/2009/06/08/ocean-day-and-cob-25/</link>
+      <pubDate>Mon, 08 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/06/08/ocean-day-and-cob-25/</guid>
+      <description>Happy World Oceans Day to all! And to all a good&amp;hellip;night?
+In celebration of World Oceans Day, BlogFish is hosting the 25th Carnival of the Blue, that monthly feast of simply the best ocean blogging. So dive in and enjoy!</description>
+    </item>
+    
+    <item>
+      <title>Sir Sea Squirt</title>
+      <link>/2009/06/03/sir-sea-squirt/</link>
+      <pubDate>Wed, 03 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/06/03/sir-sea-squirt/</guid>
+      <description>For the fashionable marine biologist: Some months back, I fell upon a website called Sir Critter selling t-shirts of organisms bedecked by a monocle, top-hats, and cane. I asked the designer if he would create a Sir Sea Squirt. He was delighted, and just posted the resulting shirt, Sir Sea Squirt.
+
+For those of you out there who don&amp;rsquo;t think Sea Squirts are, indeed, the coolest thing on earth. ahem They also have Sir Urchin (I&amp;rsquo;m getting one with a purple S.</description>
+    </item>
+    
+    <item>
+      <title>Going Topless with Urchins</title>
+      <link>/2009/06/01/going-topless-with-urchins/</link>
+      <pubDate>Mon, 01 Jun 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/06/01/going-topless-with-urchins/</guid>
+      <description>There&amp;rsquo;s nothing so satisfying as pulling back and seeing your brand new experiment out there in the water.
+It&amp;rsquo;s been a crazy week or three getting this up and running, but now my first big postdoctoral experiment is soaking in the water, with urchins grazing away.
+I&amp;rsquo;m testing some ideas regarding how diversity mediates the impact of disturbance by urchin grazing, and vice-versa - how disturbance by grazing can alter diversity.</description>
+    </item>
+    
+    <item>
+      <title>Penis Fencing: Dangerous or Decadent?</title>
+      <link>/2009/05/18/penis-fencing-deadly-or-decadent/</link>
+      <pubDate>Mon, 18 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/18/penis-fencing-deadly-or-decadent/</guid>
+      <description>I&amp;rsquo;ve gotta, say, Roughgarden&amp;rsquo;s The Genial Gene is so far pretty awesome. It is fulfilling its promise of being meaty, laying out the real some real testable predictions for her theory of Social Selection, and also pointing out some of the logical, historical, and cultural fallacies of sexual selection. I&amp;rsquo;m going to be very curious to read some of the reviews that will come out by sexual selection advocates, but so far, I think she is presenting a fairly compelling argument.</description>
+    </item>
+    
+    <item>
+      <title>Crocheted tunicate</title>
+      <link>/2009/05/12/crocheted-tunicate/</link>
+      <pubDate>Tue, 12 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/12/crocheted-tunicate/</guid>
+      <description>Amazing! Made by gooseflesh:</description>
+    </item>
+    
+    <item>
+      <title>New Ideas in Ecology and Reviewing</title>
+      <link>/2009/05/10/new-ideas-in-ecology-and-reviewing/</link>
+      <pubDate>Sun, 10 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/10/new-ideas-in-ecology-and-reviewing/</guid>
+      <description>Recently on ecolog-l, there has been a thread going around about journal publishing - open access v. pay-for access, impact factor, elitism, reviewing, etc. The central question seems to be, is the publication system somehow broken? Do we need to fix it? Is the model of journals such as PLoS Biology or The Open Ecology Journal not enough?
+I think the answer is that in the realm of experimental or solid theoretical work, yes, the open access model of science publishing is alive and well (although I often wished that more of the journals out there, such as Research Letters in Ecology, got more attention - but the question of why to submit in a new journal, and what makes a journal high on ones priority list is a whole different ball of wax).</description>
+    </item>
+    
+    <item>
+      <title>Can you see the matrix?</title>
+      <link>/2009/05/07/can-you-see-the-matrix/</link>
+      <pubDate>Thu, 07 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/07/can-you-see-the-matrix/</guid>
+      <description>Lately, I&amp;rsquo;ve been dreaming of webs.
+I&amp;rsquo;ve been asking myself, how do we visualize the hidden complexity of the natural world? This is not an idle question, but draws on some of my current research. It is vital to how we think about ecosystems when we attempt to preserve and restore them. It is inherently beautiful, in and of itself.
+Most of us are familiar with the concept of a food chain.</description>
+    </item>
+    
+    <item>
+      <title>Carnival of the Blue #24</title>
+      <link>/2009/05/05/carnival-of-the-blue-24/</link>
+      <pubDate>Tue, 05 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/05/05/carnival-of-the-blue-24/</guid>
+      <description>Carnival of the Blue #24 is up over at the Monterey Bay Aquarium Sea Notes There are some great articles about clams, corals, and more! I&amp;rsquo;ve been a slacker on these, so it was great to participate and see how the carnival has grown into such a wide and varied range of posts!</description>
+    </item>
+    
+    <item>
+      <title>Shiny happy loci holding hands!</title>
+      <link>/2009/04/30/well-my-genes-play-well-with-others/</link>
+      <pubDate>Thu, 30 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/04/30/well-my-genes-play-well-with-others/</guid>
+      <description>A few years back, I read Evolution&amp;rsquo;s Rainbow by Joan Roughgarden, and was a huge fan. In it, she builds a compelling argument that sex and gender are two different independently assorting quantitative genetic trains. I.e., Your sex (anatomy) and gender (behavior and sexuality)? Not actually the same thing. Also, not binary. Both (yes, sex, too) are continuous traits.
+She builds a strong case for this both based on the wild variety of mating strategies out in nature (and shows how they don&amp;rsquo;t really fit into the binary gender paradigm of sexual selection) and even more thoroughly through human biology and history.</description>
+    </item>
+    
+    <item>
+      <title>snails going nom nom nom = productive diverse tidepools?</title>
+      <link>/2009/04/24/snails-going-nom-nom-nom-productive-diverse-tidepools/</link>
+      <pubDate>Fri, 24 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/04/24/snails-going-nom-nom-nom-productive-diverse-tidepools/</guid>
+      <description>The &amp;ldquo;gold standard&amp;rdquo; experimental design for asking how do changes in biodiversity change ecosystem function has been to randomly assemble communities of varying species richness, but equal abundance, and examining differences in function from one level of richness to the next.
+But let&amp;rsquo;s be honest. Changes in diversity due to impacts by man will not be random. In many ways, the early (and much maligned) designs of Tilman and colleagues are really more relevant to realistic biodiversity change scenarios than random assembly experiments.</description>
+    </item>
+    
+    <item>
+      <title>tweet your data</title>
+      <link>/2009/04/15/tweet-your-data/</link>
+      <pubDate>Wed, 15 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/04/15/tweet-your-data/</guid>
+      <description>Well, my mind has been blown. Fisheries analysis based on tweets?! How cool! In the age of LTER (n.b. I work for the sbc lter), the comingn of NEON, etc., it&amp;rsquo;s nice to see an innovative of getting large quantities of data from outside of the academic box.
+And I can think of a myriad of field science/twitter uses:
+  oceanography: get boaters to tweet for a temperature reading with a lat/long and ocean color</description>
+    </item>
+    
+    <item>
+      <title>Bringing the grey to light</title>
+      <link>/2009/04/14/bringing-the-grey-to-light/</link>
+      <pubDate>Tue, 14 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/04/14/bringing-the-grey-to-light/</guid>
+      <description>Want to know what happens when a fish is sucked into a powerplant intake from both the technical and fish&amp;rsquo;s point of view? Curious about what some of the legends in the field of taxonomy were writing when they were undergraduates? Want to track down every single fish gut contents record in the Pacific Northwest for the last century?
+Wonder no more! The gray literature, formerly that stuff that scientists hold in vague contempt but often turn to for absolutely crucial basic information, is now starting to come online.</description>
+    </item>
+    
+    <item>
+      <title>When Italian Film Stars Go Prawn</title>
+      <link>/2009/04/01/when-italian-film-stars-go-prawn/</link>
+      <pubDate>Wed, 01 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/04/01/when-italian-film-stars-go-prawn/</guid>
+      <description>Ah, Isabella Rosellini. After enlightening us last year to the strange proclivities of all manner of garden invertebrates, she&amp;rsquo;s back, filling us in on how animals, like Crepidula fornicata get down in the ocean.
+Now I&amp;rsquo;ve heard it all before, but there&amp;rsquo;s something about these bizarre little trinkets that is both beautiful, and could really wake up an invert zoo class full of sleepy students. It even has the obligatory barnacle video.</description>
+    </item>
+    
+    <item>
+      <title>when NOT to MANOVA</title>
+      <link>/2009/03/09/when-not-to-manova/</link>
+      <pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/03/09/when-not-to-manova/</guid>
+      <description>And now its time for a multivariate stats geek out.
+The statistics that we use determine the inferences we draw from our data. The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values. It&amp;rsquo;s happened to all of us, and it is rarely due to willful misconduct.</description>
+    </item>
+    
+    <item>
+      <title>What do squids want?</title>
+      <link>/2009/02/14/what-do-squids-want/</link>
+      <pubDate>Sat, 14 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/14/what-do-squids-want/</guid>
+      <description>Ah, February 14th. Couples stroll arm in arm, leaning on one another, exchanging roses and kisses, eating sumptuous dinners, and losing themselves in the moment. What moment is that, you ask? Well, it&amp;rsquo;s Squid Orgy Day!
+No, really. Now is the time for squid reproduction, and in this wonderful piece on Slate by Miriam of The Oyster&amp;rsquo;s Garter (yay! congrats on your national debut!) she lays out six secrets for those squids out there interested in making the &amp;ldquo;beast with two beaks&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Darwin Day!</title>
+      <link>/2009/02/12/darwin-day/</link>
+      <pubDate>Thu, 12 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/12/darwin-day/</guid>
+      <description>HAPPY BIRTHDAY DARWIN! On the 200th anniversary of the birth of the Lord, Master, and all around Deity of Ecology &amp;amp; Evolutionary Biology (right?), I can only offer up my humble prayers. What better place than a strange shrine to Darwin in Puerto Ayora in the Galapagos. (Yes, that is me. You have no idea how happy it made some adorable little old ladies to be asked to take this photo.</description>
+    </item>
+    
+    <item>
+      <title>If the internet says it, it must be true</title>
+      <link>/2009/02/09/if-the-internet-says-it-it-must-be-true/</link>
+      <pubDate>Mon, 09 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/09/if-the-internet-says-it-it-must-be-true/</guid>
+      <description>Oh! Excitement! My dissertation has been posted online by Proquest. Clearly, according to the internet, I must actually be a Doctor. Thanks, Internet!
+Of course, looking at the page, the internet also thinks I am a Limnologist, but, well, we&amp;rsquo;ll let that one slide.
+(now if only those copies of the dissertation that I ordered months ago would show up&amp;hellip;)</description>
+    </item>
+    
+    <item>
+      <title>Baby Got Stats!</title>
+      <link>/2009/02/08/baby-got-stats/</link>
+      <pubDate>Sun, 08 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/08/baby-got-stats/</guid>
+      <description>I was completely tickled last year with the oh so amusing Statz Rappers. It kept me and my nerdy stats friends laughing for days. Rapping. Stats. The Internet.
+Good times.
+But little did I know that rapping about statistics was really just hitting its stride on youtube. This is Why We Plot began my trip down the rabbit hole. Quite a nice effort. I followed this with that Stats Rap - not bad, and oh so mellow.</description>
+    </item>
+    
+    <item>
+      <title>Rum, Sea Squirts, and the Lash!</title>
+      <link>/2009/02/03/rum-sea-squirts-and-the-lash/</link>
+      <pubDate>Tue, 03 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/03/rum-sea-squirts-and-the-lash/</guid>
+      <description>&amp;ldquo;But assuming that the would-be scientist managed to avoid, or survive, the potentially dire consequences of scurvy, dysentery and malaria, that his ship was not sunk in bad weather or driven onto an uncharted rock or reef, and that his journals and specimens were not destroyed by shipboard fungus, insects, rodents or cow or sheep urine, he still had several major problems to overcome in order to undertake remotely adequate deep sea research.</description>
+    </item>
+    
+    <item>
+      <title>A pean to the blue world - #21</title>
+      <link>/2009/02/02/a-paen-to-the-blue-world-21/</link>
+      <pubDate>Mon, 02 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/02/02/a-paen-to-the-blue-world-21/</guid>
+      <description>Le Carnivale de bleu #21 is up over at The Oyster&amp;rsquo;s Garter. And oh my! Miriam gives us an account of all entries in verse! Now how could we turn it into a sea chanty&amp;hellip;.</description>
+    </item>
+    
+    <item>
+      <title>invasive sea-squirt-a-palooza</title>
+      <link>/2009/01/31/invasive-sea-squirt-a-palooza/</link>
+      <pubDate>Sat, 31 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/01/31/invasive-sea-squirt-a-palooza/</guid>
+      <description>Attention tunicate nerds! The Proceedings of the 2nd International Invasive Sea Squirt Symposium (I love that name) (and, OK, it&amp;rsquo;s Conference, not Symposium, but how could I resist renaming it to something more fun!) are now online! And there&amp;rsquo;s a lot there to check out.
+First off, we now know the tunicate formerly known as Didemnum sp. A, D. vestum, D. vexillum, D. lutarium, D. lahillei, D. helgolandicum, and the ever popular D.</description>
+    </item>
+    
+    <item>
+      <title>the light!  the heat!  the feedback!</title>
+      <link>/2009/01/28/the-light-the-heat-the-feedback/</link>
+      <pubDate>Wed, 28 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/01/28/the-light-the-heat-the-feedback/</guid>
+      <description>Sometimes, the devil IS in the details. I&amp;rsquo;ve been thinking about feedbacks between community community structure and function lately, and run into a few curious roadblocks, as well as one very very interesting story.
+First, the roadblocks. Just what do we mean by structure and function, particularly in reference to a biological community? Structure seems obvious - the static properties of a biological system that we can go out, stare at, and say,&amp;ldquo;Oh, yes, hello structure!</description>
+    </item>
+    
+    <item>
+      <title>Happy Holidays from Haeckel!</title>
+      <link>/2008/12/15/happy-holidays-from-haeckel/</link>
+      <pubDate>Mon, 15 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/2008/12/15/happy-holidays-from-haeckel/</guid>
+      <description>For those who need just the right holiday card for that certain someone, The Rhinobird has an excellent collection of holiday cards using the images of Ernst Haeckel for purchase at cafepress! Who knew a jellyfish could be so festive!
+Sadly, no Aurelia dreidels. Or ascidians. (hrmph!) Maybe next time.</description>
+    </item>
+    
+    <item>
+      <title>My brain is a ska band with a mutant algal walrus as a mascot</title>
+      <link>/2008/12/11/my-brain-is-a-ska-band-with-a-mutant-algal-walrus-as-a-mascot/</link>
+      <pubDate>Thu, 11 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/2008/12/11/my-brain-is-a-ska-band-with-a-mutant-algal-walrus-as-a-mascot/</guid>
+      <description>So, what am I up to? Where&amp;rsquo;s my research program going? What occupied my mind these days? I think cephalopodcast may have answered some of this with a recent post in which they linked the following movie.
+It provides a frightening insight into my current state of mind&amp;hellip;
+(lyrics)</description>
+    </item>
+    
+    <item>
+      <title>5 things meme</title>
+      <link>/2008/12/06/5-things-meme/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/2008/12/06/5-things-meme/</guid>
+      <description>Auch! I have been tagged! Memes away!
+5 Things I Was Doing 10 Years Ago:****
+  Hanging and focusing lights     Pondering leaving the theater&amp;hellip;for computer science?     Learning that, hey, I&amp;rsquo;m a pretty good cook for 20 people     Being ignorant of the meeting that was to take place in a few months that would turn me into a marine biologist, and the sea chanties that were to come after     Laying the groundwork so that I could meet miriam in a darkened theater and convince her to be the tech director for Rosencrantz and Guildenstern Are Dead   5 Things On My To-Do List Today:</description>
+    </item>
+    
+    <item>
+      <title>I shall return!</title>
+      <link>/2008/12/04/i-shall-return/</link>
+      <pubDate>Thu, 04 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/2008/12/04/i-shall-return/</guid>
+      <description>Just a quick note - after leaving Davis, the server for this blog went down. This is the new home (like the domain name?)
+The old content will be back once I get the old server in the mail. In the meantime, I have returned! New content soon&amp;hellip;</description>
+    </item>
+    
+    <item>
+      <title>about</title>
+      <link>/about/</link>
+      <pubDate>Tue, 25 Nov 2008 18:51:22 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>Scientists are a notoriously cloistered lot. We&amp;rsquo;re here in our ivory tower, publishing our research for each other. This is an old model that has been going on for generations.
+But here we are in the &amp;ldquo;information age&amp;rdquo; - can we do better? Rather than fight it out in the journals, argue in the dark corners of meetings, and have paradigms evolve and shift as slowly as the review process grinds onwards - why not open up the ivory tower and let the free-for-all of ideas, thoughts, and opinions shoot ahead at full speed?</description>
+    </item>
+    
+    <item>
+      <title>Who Am I?  Job Hunting Edition</title>
+      <link>/2008/10/23/who-am-i-job-hunting-edition/</link>
+      <pubDate>Thu, 23 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>/2008/10/23/who-am-i-job-hunting-edition/</guid>
+      <description>As I am in the thick of job hunting season, I&amp;rsquo;m writing a few applications. One of the most interesting parts of the whole process is the research statement. It&amp;rsquo;s interesting as it forces one to really be self-reflective, and ask &amp;ldquo;Who am I and why am I doing this?&amp;rdquo; The first paragraph in particular is a sort of declaration. Hopefully this will be the last one of these I write, but, who am I kidding.</description>
+    </item>
+    
+  </channel>
+</rss>

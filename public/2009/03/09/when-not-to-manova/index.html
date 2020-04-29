@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="when NOT to MANOVA" />
+<meta property="og:description" content="And now its time for a multivariate stats geek out.
+The statistics that we use determine the inferences we draw from our data. The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values. It&rsquo;s happened to all of us, and it is rarely due to willful misconduct." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2009/03/09/when-not-to-manova/" />
+<meta property="article:published_time" content="2009-03-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2009-03-09T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="when NOT to MANOVA"/>
+<meta name="twitter:description" content="And now its time for a multivariate stats geek out.
+The statistics that we use determine the inferences we draw from our data. The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values. It&rsquo;s happened to all of us, and it is rarely due to willful misconduct."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2009/03/09/when-not-to-manova/">
+
+    
+    <title>when NOT to MANOVA &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>when NOT to MANOVA</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Mar 9, 2009</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p><a href="http://www.researchblogging.org"><img src="http://www.researchblogging.org/public/citation_icons/rb2_large_gray.png" alt="ResearchBlogging.org"></a>
+And now its time for a multivariate stats geek out.</p>
+<p>The statistics that we use determine the inferences we draw from our data.  The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values.  It&rsquo;s happened to all of us, and it is rarely due to willful misconduct.  Rather, it&rsquo;s a misunderstanding, or even being taught something improperly.</p>
+<p>I was given a sharp reminder of this recently while doing some work on how to breakdown some repeated measures MANOVAs- useful for dealing with violations of sphericity, etc.  However, I fell across this wonderful little ditty by Keselman et al - <em>Statistical Practices of Educational Researchers: An Analysis of their ANOVA, MANOVA, and ANCOVA Analyses</em> (yes, as an Ecologist, I love reading stats papers from other disciplines - I actually find it often more helpful than reading ones in my own discipline).</p>
+<p>Now, everything in my own work was A-OK, but I found this note on the usage of MANOVA fascinating. (bolded phrases are mine)</p>
+<!-- raw HTML omitted -->
+<p><strong>Although it was not indicated in any article, it was surmised that researchers followed the MANOVA-univariate data analysis strategy for protection from excessive Type I errors in univariate statistical testing.</strong> This data analysis strategy may not be overly surprising, because it has been suggested by some book authors (e.g., Stevens, 1996, p. 152; Tabachnick &amp; Fidell, 1996, p. 376). There is very limited empirical support for this strategy. A counter position may be stated simply as follows: <strong>Do not conduct a MANOVA unless it is the multivariate effects that are of substantive interest.</strong> If the univariate effects are those of interest, then it is suggested that the researcher go directly to the univariate analyses and bypass MANOVA. When doing the multiple univariate analyses, if control over the overall Type I error is of concern (as it often should be), then a Bonferroni (Huberty, 1994, p. 17) adjustment or a modified Bonferroni adjustment may be made (for a more extensive discussion on the MANOVA versus multiple ANOVAs issue, see Huberty &amp; Morris, 1989). <strong>Focusing on results of multiple univariate analyses preceded by a MANOVA is no more logical than conducting an omnibus ANOVA but focusing on results of group contrast analyses (Olejnik &amp; Huberty, 1993).</strong></p>
+<!-- raw HTML omitted -->
+<p>I, for one, was dumbstruck.  This is EXACTLY why more than one of my stats teachers have told me MANOVA was most useful.  I even have advised others to do this myself - like the child of some statistically abusive parent.  But really, if the point is controlling for type I error, why not do a Bonferroni or (my personal favorite) a <a href="http://en.wikipedia.org/wiki/False_discovery_rate">False Discovery Rate</a> correction? To invoke the MANOVA like some arcane form of magic is disingenuous to your data.  Now, if you&rsquo;re interested in the canonical variables, and what they say, then by all means!  Do it!  But if not, you really have to ask whether you&rsquo;re following a blind recipe, or if you understand what you are up to.</p>
+<p>This paper is actually pretty brilliant in documenting a number of things like this that we scientists do with our ANOVA, ANCOVA, and MANOVA.  It&rsquo;s worth reading just for that, and to take a good sharp look in the statistical mirror.</p>
+<p>H. J. Keselman, C. J. Huberty, L. M. Lix, S. Olejnik, R. A. Cribbie, B. Donahue, R. K. Kowalchuk, L. L. Lowman, M. D. Petoskey, J. C. Keselman, J. R. Levin (1998). Statistical Practices of Educational Researchers: An Analysis of their ANOVA, MANOVA, and ANCOVA Analyses Review of Educational Research, 68 (3), 350-386 DOI: <a href="http://dx.doi.org/10.3102/00346543068003350">10.3102/00346543068003350</a></p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

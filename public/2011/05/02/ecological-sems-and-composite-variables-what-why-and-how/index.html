@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Ecological SEMs and Composite Variables: What, Why, and How" />
+<meta property="og:description" content="I&rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.
+  It&rsquo;s a method of teasing apart direct and indirect interactions in your data.
+  It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.
+  As it&rsquo;s formally presented, with path diagrams showing connections between variables, it&rsquo;s SUPER easy to link conceptual models with your data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/" />
+<meta property="article:published_time" content="2011-05-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2011-05-02T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Ecological SEMs and Composite Variables: What, Why, and How"/>
+<meta name="twitter:description" content="I&rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.
+  It&rsquo;s a method of teasing apart direct and indirect interactions in your data.
+  It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.
+  As it&rsquo;s formally presented, with path diagrams showing connections between variables, it&rsquo;s SUPER easy to link conceptual models with your data."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2011/05/02/ecological-sems-and-composite-variables-what-why-and-how/">
+
+    
+    <title>Ecological SEMs and Composite Variables: What, Why, and How &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Ecological SEMs and Composite Variables: What, Why, and How</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">May 2, 2011</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p>I&rsquo;m a HUGE fan of <a href="http://www.statsoft.com/textbook/structural-equation-modeling/">Structural Equation Modeling</a>.  For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.</p>
+<ol>
+<li>
+<p>It&rsquo;s a method of teasing apart direct and indirect interactions in your data.</p>
+</li>
+<li>
+<p>It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.</p>
+</li>
+<li>
+<p>As it&rsquo;s formally presented, with path diagrams showing connections between variables, it&rsquo;s SUPER easy to link conceptual models with your data.  See <a href="http://dx.doi.org/10.1890/09-0464.1">Grace et al. 2010</a> for a handy guide to this.</p>
+</li>
+</ol>
+<p>Also, there is a quite simple and intuitive R package for fitting SEMs, <a href="http://lavaan.org">lavaan</a> (LAtent VAriable Analysis). Disclaimer, I just hopped on board as a lavaan developer (yay!).  I&rsquo;ve also recently started a small project to find cool examples of SEM in the Ecological literature, and then using the provided information, <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan">post the models coded up in lavaan</a> so that others can see how to put some of these models together.</p>
+<p>As Ecologists, we often use latent variables to incorporate known measurement error of a quantity - i.e., a latent variable with a single indicator and fixed variance.  We&rsquo;re often not interested in the full power of latent variables - latents with multiple indicators.  Typically, this is because we&rsquo;ve actually measured everything we want to measure.  We&rsquo;re not like political scientists who have to quantify fuzzy things like Democracy, or Authoritarianism, or Gastronomicism.  (note, I want to live in a political system driven by gastronomy - a gastronomocracy!)</p>
+<p>However, we&rsquo;re still fascinated by the idea of bundling different variables together into a single causal effect, and maybe evaluating the relative contribution of each of those variables within a model.  In SEM, this is known as the creation of a Composite Variable.  This composite is still an unmeasured quantity - like a latent variable - but with no error variance, and with &ldquo;indicators&rdquo; actually driving the variable, rather than having the unmeasured variable causing the expression of its indicators.</p>
+<p>Let me give you an example.  Let&rsquo;s say we want to measure the effect of nutrients on diatom species richness in a stream.  You&rsquo;re particularly concerned about nitrogen.  However, you can&rsquo;t bring water samples back to the lab, so, you&rsquo;re relying on some moderately accurate nitrogen color strips, the biomass of algae (more algae = more nitrogen!), and your lab tech, Stu, who claims he can taste nitrogen in water (and has been proved to be stunningly accurate in the past).  In this case, you have a <strong>latent variable</strong>.  The true nitrogen content of the water is causing the readings by these three different indicators.</p>
+<p>A <strong>composite variable</strong> is a different beast.  Let&rsquo;s say we have the same scenario.  But, now you have really good measurements of nitrogen.  In fact, you have good measurements of both ammonium (NH4) and nitrate (NO3).  You want to estimate a &ldquo;nitrogen effect&rdquo;, but, you know that both of these different forms of N will contribute to the effect in a slightly different way.  You could just construct a model with effects going from both NO3 and NH4 to species richness.  If you want to represent the total &ldquo;Nitrogen Effect&rdquo; in your model, however, and evaluate the effect of each form of nitrogen on its total effect, you would create a composite.    The differences become clear when looking at the path diagram of each case.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.11-PM-1024x697.png" alt=""></p>
+<p>Here, I&rsquo;m adopting the custom of observed variables in squares, latent variables in ovals, and composite variables in hexagons.  Note that, as indicators of nitrogen in the latent variable model, each observed indicator has some additional variation due to factors other than nitrogen - δi.  There is no such error in the composite variable model.  Also, I&rsquo;m showing that the error in the Nitrogen Effect in the composite variable model is indeed set to 0.  There are sometimes reasons where that shouldn&rsquo;t be 0, but that&rsquo;s another topic for another time.</p>
+<p>This may still seem abstract to you.  So, let&rsquo;s look at an example in practice.  One way we often use composites is to bring together a linear and nonlinear effect of a single variable.  For example, we know that often nutrient supply rates have a humped shape effect on species richness - i.e., the highest richness happens at intermediate supply rates.  One nice example of that is in a paper by Cardinale et al. in 2009 looking at relationships between <a href="http://dx.doi.org/10.1890/08-1038.1">manipulated nutrient supply, species richness, and algal productivity</a>.   To capture that relationship with a composite variable, one would have a &lsquo;nitrogen effect&rsquo; affected by N and N2.  This nitrogen effect would then affect local species richness.</p>
+<p>So, how would you code this model up in lavaan, and then evaluate it.</p>
+<p>Well, hey, <a href="http://www.esapubs.org/archive/ecol/E090/079/suppl-1.htm">the data from this paper are freely available</a>, so, let&rsquo;s use this as an example.  For a full replication of the model presented in the paper <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/cardinale_et_al_2008.r">see here</a>.  However, Cardinale et al. didn&rsquo;t use any composite variables, so, let&rsquo;s create a model of our own capturing the Nitrogen-Richness relationship while also accounting for local species richness being influenced by regional species richness.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.19-PM-1024x506.png" alt=""></p>
+<p>In the figure above, we have the relationship between resource supply rate and local species richness on an agar plate to the left.  Separate lines are for separate streams.  The black line is the average fit with the supplied equation.  On the right, we have a path diagram representing this relationship, as well as the influence of regional species richness.</p>
+<p>So, we have a path diagram.  Now comes the tricky part.  Coding.  One thing about the current version of lavaan (0.4-8) is that it does not have a way to represent composite variables.  This will change in the future (believe me), but, it may take a while, so, let me walk you through the tricks of incorporating latent variables now.  Basically, there are four steps.</p>
+<ol>
+<li>
+<p>Define the variable as a regression, where the composite is determined by it&rsquo;s causal variables.  Also, fix one of the effects to 1.  This gives your composite variable a scale.</p>
+</li>
+<li>
+<p>Specify that the composite has an error variance of 0.</p>
+</li>
+<li>
+<p>Now treat the composite as a latent variable.  It&rsquo;s indicators are it&rsquo;s response variables.  This may seem odd.  However, it&rsquo;s all just ways of specifying causal pathways - an indicator pathway and a regression pathway have the same meaning in terms of causality.  The software just needs something specified so that it doesn&rsquo;t go looking for our composite variable in our data.  Hence, defining it as a latent variable whose indicators are endogenous responses.  I actually find this helpful, as it also makes me think more carefully about what a composite variable is, and how too many responses may make my model not identified.</p>
+</li>
+<li>
+<p>Lastly, because we don&rsquo;t want to fix the effect of our composite on its response to 1, we&rsquo;ll have to include an argument in the fitting function that makes it not force the first latent variable loading to be set to 1.  We&rsquo;ll also have to specify that we then want the variance of the response to latent variables freely estimated.  Yeah, I know.  Note: this all can play havoc when you have both latent and composite variables, so be careful.  See <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/grace_bollen_2006.r">here</a> for an example.</p>
+</li>
+<li>
+<p>Everything else - other regression relationships, showing that nonlinearities are derived quantities, etc.</p>
+</li>
+</ol>
+<p>OK, that&rsquo;s a lot.  How&rsquo;s it work in practice?  Below is the code to fit the model in the path diagram.  I&rsquo;ve labeled the steps in comments, and, included the regional ~ local richness relationship as well as the relationship showing that logN2 was derived from logN.  Note, this is a centered squared variable.  And, yes, all nitrogen values have been log transformed here.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#simple SA model with N and regional SR using a composite</span>
+<span style="color:#75715e">#Variables: logN = log nutrient supply rate, logNcen2 = log supply rate squared</span>
+<span style="color:#75715e"># SA = Species richness on a patch of Agar, SR = stream-wide richness</span>
+compositeModel<span style="color:#f92672">&lt;-</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">	#1) define the composite, scale to logN
+</span><span style="color:#e6db74">	Nitrogen ~ 1*logN + logNcen2 #loading on the significant path!
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">	#2) Specify 0 error variance
+</span><span style="color:#e6db74">	Nitrogen ~~ 0*Nitrogen
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">  	#3) now, because we need to represent this as a latent variable
+</span><span style="color:#e6db74">  	#show how species richness is an _indicator_ of nitrogen
+</span><span style="color:#e6db74">  	Nitrogen =~ SA
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">	#4) BUT, make sure the variance of SA is estimated
+</span><span style="color:#e6db74">  	SA ~~ SA
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">	#Regional Richness also has an effect
+</span><span style="color:#e6db74">	SA ~ SR
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">	#And account for the derivation of the square term from the linear term
+</span><span style="color:#e6db74">	logNcen2 ~ logN
+</span><span style="color:#e6db74">  	&#39;</span>
+
+ <span style="color:#75715e"># we specify std.lv=T so that the Nitrogen-SA relationship isn&#39;t fixed to 1</span>
+ compositeFit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sem</span>(compositeModel, data<span style="color:#f92672">=</span>cards, std.lv<span style="color:#f92672">=</span>T)
+</code></pre></div><p>Great!  It should fit just fine.  I&rsquo;m not going to focus on the regional relationship, as it is predictable and positive.  Moreover, when we look at the results, two things immediately pop out at us about the effect of nutrient supply rate.</p>
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA                0.362    0.438    0.827    0.408
+
+Regressions:
+  Nitrogen ~
+    logN              1.000
+    logNcen2         -1.311    1.373   -0.955    0.340
+</code></pre>
+<p>Wait, what?  The Nitrogen effect was not detectably different from 0?  Nor was there a nonlinear effect?  What&rsquo;s going on here?</p>
+<p>What&rsquo;s going on is that the scale of the composite is affecting our results.  We&rsquo;ve set it to 1.  Whenever you are fixing scales, you should always check and see, what would happen if you changed which path was set to 1.  So, we can simply set the scale to the nonlinear variable, refit the model, and see if this makes a difference.  If it doesn&rsquo;t, then that means there is no nitrogen effect at all!</p>
+<p>So, change</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Nitrogen <span style="color:#f92672">~</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>logN <span style="color:#f92672">+</span> logNcen2
+</code></pre></div><p>to</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Nitrogen <span style="color:#f92672">~</span> logN <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>logNcen2
+</code></pre></div><p>And, now let&rsquo;s see the results&hellip;..</p>
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA               -0.474    0.239   -1.989    0.047
+
+Regressions:
+  Nitrogen ~
+    logN             -0.763    0.799   -0.955    0.340
+    logNcen2          1.000
+</code></pre>
+<p>Ah HA!  Not only is the linear effect not different from 0, but now we see that fixing the nonlinear effect allows the nutrient signal to come through.</p>
+<p>But wait, you may say, that effect is negative?  Well, remember that the scale of the nitrogen effect is the same as the nonlinear scale.  And, a positive hump-shaped relationship will have a negative squared term.  So, given how we&rsquo;ve setup the model, yes, that should be negative.</p>
+<p><em>whew!</em>  That was a lot.  And this for a very simile model involving composites and nonlinearities.  I thought I&rsquo;d throw that out as it&rsquo;s a common use of composites, and interpreting nonlinearities in SEMs is always a little tricky and worth bending your brain around.  Other uses of composites include summing up a lot of <em>linear</em> quantities, a composite for the application of treatments, and more.  But, this should give you a good sense of what they are, how to code them in lavaan, and how to use them in the future.</p>
+<p>For a more in depth treatment of this topic, and latent variables versus composites, I urge you to check out <a href="http://pubs.usgs.gov/of/2006/1363/">this excellent piece by Jim Grace and Ken Bollen</a>.  Happy model fitting!</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>

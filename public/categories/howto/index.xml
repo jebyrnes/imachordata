@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>howto on I&#39;m a Chordata! Urochordata!</title>
+    <link>/categories/howto/</link>
+    <description>Recent content in howto on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 19 Dec 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/howto/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Searching for Opportunities in Ecology &amp; Environmental Science for Recent Grads</title>
+      <link>/2013/12/19/searching-for-opportunities-in-ecology-environmental-science-for-recent-grads/</link>
+      <pubDate>Thu, 19 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/2013/12/19/searching-for-opportunities-in-ecology-environmental-science-for-recent-grads/</guid>
+      <description>So, you&amp;rsquo;re graduating with a biology or environmental science or marine bio degree! Hurray! You&amp;rsquo;ve finished your stint at college, and you&amp;rsquo;ve gained a lot of new skills. Maybe you&amp;rsquo;ve done some time in research, maybe not (!!!), but now that you&amp;rsquo;ve wrapped up, you want to find a job in the environmental sciences. Something that will give you research experience, and help you on your way to either a career or deciding whether you want to go into research.</description>
+    </item>
+    
+    <item>
+      <title>Running R2WinBUGS on a Mac Running OSX</title>
+      <link>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</link>
+      <pubDate>Wed, 18 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>/2012/01/18/running-r2winbugs-on-a-mac-running-osx/</guid>
+      <description>I have long used JAGS to do all of my Bayesian work on my mac. Early on, I tried to figure out how to install WinBUGS and OpenBUGS and their accompanying R libraries on my mac, but, to no avail. I just had too hard of a time getting them running and gave up.
+But, it would seem that some things have changed with Wine lately, and it is now possible to not only get WinBUGS itself running nicely on a mac, but to also get R2WinBUGS to run as well.</description>
+    </item>
+    
+    <item>
+      <title>How to Make a Dancing Yeti Crab Video with Music </title>
+      <link>/2011/12/03/how-to-make-a-dancing-yeti-crab-video-with-music/</link>
+      <pubDate>Sat, 03 Dec 2011 00:00:00 +0000</pubDate>
+      
+      <guid>/2011/12/03/how-to-make-a-dancing-yeti-crab-video-with-music/</guid>
+      <description>So, I&amp;rsquo;ve been getting some questions about how one can make their own Yeti-crabs-dance-to-music video. So here&amp;rsquo;s a quick guide for the interested folk who haven&amp;rsquo;t played around with audio or video before but want to try it out. So, here&amp;rsquo;s what I did, step-by-step, in 9 easy steps. All told, this took me, eh, 5 minutes.
+(This is for iMovie, and I&amp;rsquo;ll link to a few tutorials in case you need them.</description>
+    </item>
+    
+  </channel>
+</rss>

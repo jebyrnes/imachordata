@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mistakes I have made on I&#39;m a Chordata! Urochordata!</title>
+    <link>/tags/mistakes-i-have-made/</link>
+    <description>Recent content in mistakes I have made on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 09 Mar 2009 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mistakes-i-have-made/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>when NOT to MANOVA</title>
+      <link>/2009/03/09/when-not-to-manova/</link>
+      <pubDate>Mon, 09 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>/2009/03/09/when-not-to-manova/</guid>
+      <description>And now its time for a multivariate stats geek out.
+The statistics that we use determine the inferences we draw from our data. The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values. It&amp;rsquo;s happened to all of us, and it is rarely due to willful misconduct.</description>
+    </item>
+    
+  </channel>
+</rss>

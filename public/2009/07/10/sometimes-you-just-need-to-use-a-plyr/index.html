@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta property="og:title" content="Sometimes, you just need to use a plyr" />
+<meta property="og:description" content="I haven&rsquo;t posted anything about R-nerdery in quite some time. But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier. The plyr package.
+R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives. This returns another vector or list.
+This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2009/07/10/sometimes-you-just-need-to-use-a-plyr/" />
+<meta property="article:published_time" content="2009-07-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2009-07-10T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sometimes, you just need to use a plyr"/>
+<meta name="twitter:description" content="I haven&rsquo;t posted anything about R-nerdery in quite some time. But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier. The plyr package.
+R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives. This returns another vector or list.
+This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions."/>
+
+
+    <meta name="description" content="">
+    <link rel="canonical" href="../../../../2009/07/10/sometimes-you-just-need-to-use-a-plyr/">
+
+    
+    <title>Sometimes, you just need to use a plyr &middot; I&#39;m a Chordata! Urochordata!</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="../../../../css/style.css" rel="stylesheet">
+
+    
+
+    
+
+    
+  </head>
+  <body>
+    
+      
+
+
+
+<nav class="white" role="navigation">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1">
+            
+            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
+                <i class="material-icons">menu</i>
+            </a>
+
+            
+            <ul id="nav-mobile" class="sidenav">
+                
+                
+    
+    
+
+            </ul>
+
+            
+            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
+
+            
+            <div class="nav-wrapper">
+
+                
+                <ul class="right hide-on-med-and-down">
+                    
+                    
+    
+    
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</nav>
+    
+
+    
+
+<article class="max-width">
+    
+    <section class="row">
+        <div class="col s12 m10 offset-m1 l10 offset-l1">
+            <h1>Sometimes, you just need to use a plyr</h1>
+        </div>
+    </section>
+
+    
+    
+
+    
+    <section class="row">
+        <div class="col s12 m8 offset-m2 l2 offset-l1">
+            
+
+<p class="article-meta">
+    <div class="article-meta-container">
+        <div class="article-meta-author-name">Jarrett Byrnes</div>
+        <div class="article-meta-description"></div>
+    </div>
+    <span class="article-meta-published-at grey-text text-darken-1">Jul 10, 2009</span>
+</p>
+        </div>
+        <div class="col s12 m8 offset-m2 l6">
+            <p><img src="http://plyr.had.co.nz/pliers.png" alt="">I haven&rsquo;t posted anything about <a href="http://www.r-project.ork">R</a>-nerdery in quite some time.  But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier.  The <a href="http://had.co.nz/plyr/">plyr</a> package.</p>
+<p>R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives.  This returns another vector or list.</p>
+<p>This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions.  Hence, one often resorts to a for loop.</p>
+<p>Let me give you an example.  Let&rsquo;s say I have some data from a simple experiment where I wanted to look at the effect of adding urchins, lobsters, or both on a diverse community of sessile invertebrates - mussels, squirts, etc.  Heck, let&rsquo;s say, I had <strong>one gazillion species</strong> whose responses I was interested in.  Now let&rsquo;s say I want a simple summary table of the change in the density each species - and my data has before and after values.  So, my data would look like this.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>So, each row represents the measurement for one species in one replicate either before or after the experiment.  Now, previously, to get an output table with the mean change for each species for each treatment, I would have had to do something like this:</p>
+<pre><code>#first, create blank list of vectors waiting to be filled
+#as well as blank vectors to remember what treatment
+#combinations we're looking at
+mean.list&lt;-list()
+urchin.vec&lt;-vector()
+lobster.vec&lt;-vector()
+for(i in 1:gazillion) mean.list[[paste(&quot;sp&quot;,i,sep=&quot;.&quot;)]]==vector()
+
+#then, a for loop for each combination
+for (i in levels(my.data$Urchins)){
+  for (j in levels(my.data$Lobsters)){
+    urchin.vec&lt;-c(urchin.vec,i)
+    lobster.vec&lt;-c(lobster.vec,j)
+    #get the right subset of the data
+    sub.data&lt;-subset(my.data, my.data$Urchins==i &amp; my.data$Lobster==j)
+
+    #now loop over all species
+    for (k in 1:gazillion){
+    sub.data&lt;-subset(sub.data, sub.data$Species==k)
+    before.data&lt;-subset(sub.data, sub.data$Before.After==&quot;Before&quot;)
+    after.data&lt;-subset(sub.data, sub.data$Before.After==&quot;After&quot;)
+    mean.list[[paste(&quot;sp&quot;,i-3,sep=&quot;.&quot;)]]&lt;-
+    c(mean.list[[paste(&quot;sp&quot;,i-3,sep=&quot;.&quot;)]], mean(after.data[k]-before.data[k])
+
+    }
+  }
+}
+
+#then turn it into a data frame to match back up to the right values
+mean.data&lt;-as.data.frame(mean.list)
+mean.data$urchins&lt;-as.factor(urchin.vec)
+mean.data$lobsters&lt;-as.factor(lobster.vec)
+</code></pre>
+<p>Ok, did that exhaust you as much it did me?  Now, here&rsquo;s how to get the same result using ddply (more on why it&rsquo;s called ddply in a moment)</p>
+<pre><code>#a function where, if you give it a data frame with species 1 - gazillion
+#will give you the mean for each species.  Note, the which statement
+#lets me look at before and after data separately
+#Also note the Change= in the return value.  That gives a new column name
+#for multiple return columns, just return a vector, with each
+#new column getting it's own name
+
+tab.means&lt;-function(df){ return(Change =
+            df$Density[which($Before.After==&quot;After&quot;)]
+            - df$Density[which($Before.After==&quot;Before&quot;)]) }
+
+#now use ddply
+mean.data&lt;-ddply(df, c(&quot;Urchins&quot;, &quot;Lobsters&quot;, &quot;Species&quot;), tab.means))
+
+#ok, in fairness, each species doesn't have it's own column.  But, we can
+#just use reshape
+mean.data&lt;-reshape(mean.data, timevar=&quot;Species&quot;, idvar=c(&quot;Urchins&quot;, &quot;Lobsters&quot;, direction=&quot;wide)
+</code></pre>
+<p>Um.  Whoah.  Notice a small difference there.  Now, perhaps the earlier code could have been cleaned up a bit with reshape, but still, 6 lines of code versus 18 - and most of that 18 was bookkeeping code, not something doing real useful computation.</p>
+<p>Soooo&hellip;. Check out plyr!  It will make your life a happier, more relaxed place.  Enjoy!</p>
+<p>(p.s. I&rsquo;m noticing wordpress is ignoring all of my code indenting - anyone have any quick fixes for that?)</p>
+
+        </div>
+    </section>
+</article>
+
+
+
+    
+      <footer class="page-footer grey lighten-5">
+    <div class="row max-width">
+        <div class="col s12 l10 offset-l1 clear-padding">
+            <div class="row">
+    
+        
+    
+
+    
+    
+    <div class="col s12 l12">
+        <h5 class="black-text">Footer Content</h5>
+<p class="grey-text text-darken-4">You can use rows and columns here to organize your footer content.</p>
+    </div>
+
+    
+</div>
+
+
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="row max-width" style="width: 100%;">
+            <div class="col s12 l10 offset-l1">
+                <span class="grey-text text-darken-4"></span>
+<div class="right">
+    
+</div>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="../../../../js/script.js"></script>
+  </body>
+</html>
