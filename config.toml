@@ -39,6 +39,18 @@ home = ["HTML", "RSS"]
     MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
 
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+[[menu.main]]
+    name = "Twitter"
+    url = "https://twitter.com/jebyrnes"
+[[menu.main]]    
+    name = "Lab Site"
+    url = "https://byrneslab.net"
 
 [[params.addtional_menus]]
       title =  "BOOKS"
