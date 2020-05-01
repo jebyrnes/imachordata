@@ -3,7 +3,7 @@ title: '#Scio13 and Beyond'
 author: Jarrett Byrnes
 date: '2013-02-04'
 categories:
-  - '#SciFund'
+  - SciFund
   - science online
 slug: scio13-and-beyond
 ---

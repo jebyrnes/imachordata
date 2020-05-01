@@ -3,7 +3,7 @@ title: '#SciFund 2 Launches!'
 author: Jarrett Byrnes
 date: '2012-03-03'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: scifund-2-launches
 ---
 

@@ -3,7 +3,7 @@ title: I want to know what *YOU* think about review, preprints, and publication
 author: Jarrett Byrnes
 date: '2013-02-25'
 categories:
-  - '#SciFund'
+  - SciFund
   - OpenPub
   - publishing
 slug: i-want-to-know-what-you-think-about-review-preprints-and-publication

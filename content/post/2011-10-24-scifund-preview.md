@@ -3,7 +3,7 @@ title: '#SciFund Preview....'
 author: Jarrett Byrnes
 date: '2011-10-24'
 categories:
-  - '#SciFund'
+  - SciFund
   - silly
   - statistics
 slug: scifund-preview

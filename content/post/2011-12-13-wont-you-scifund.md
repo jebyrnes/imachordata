@@ -3,7 +3,7 @@ title: 'Won''t You #SciFund?'
 author: Jarrett Byrnes
 date: '2011-12-13'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: wont-you-scifund
 ---
 

@@ -3,7 +3,7 @@ title: Beware of the teeny tiny crabs.  They will cut you!
 author: Jarrett Byrnes
 date: '2012-05-11'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: beware-of-the-teeny-tiny-crabs-they-will-cut-you
 ---
 

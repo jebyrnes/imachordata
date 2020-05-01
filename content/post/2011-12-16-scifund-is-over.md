@@ -3,7 +3,7 @@ title: '#SciFund is OVER!  '
 author: Jarrett Byrnes
 date: '2011-12-16'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: scifund-is-over
 ---
 

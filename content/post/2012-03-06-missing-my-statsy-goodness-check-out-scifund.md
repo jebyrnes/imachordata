@@ -3,7 +3,7 @@ title: 'Missing my Statsy Goodness? Check out #SciFund!'
 author: Jarrett Byrnes
 date: '2012-03-06'
 categories:
-  - '#SciFund'
+  - SciFund
   - R
   - statistics
 slug: missing-my-statsy-goodness-check-out-scifund

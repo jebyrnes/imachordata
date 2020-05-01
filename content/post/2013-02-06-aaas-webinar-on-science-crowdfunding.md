@@ -3,7 +3,7 @@ title: AAAS Webinar on Science Crowdfunding
 author: Jarrett Byrnes
 date: '2013-02-06'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: aaas-webinar-on-science-crowdfunding
 ---
 

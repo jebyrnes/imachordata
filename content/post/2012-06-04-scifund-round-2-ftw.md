@@ -3,7 +3,7 @@ title: '#SciFund Round 2 FTW!'
 author: Jarrett Byrnes
 date: '2012-06-04'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: scifund-round-2-ftw
 ---
 

@@ -3,7 +3,7 @@ title: Crowdfunding in the Peer Reviewed Literature
 author: Jarrett Byrnes
 date: '2013-01-28'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: crowdfunding-in-the-peer-reviewed-literature
 ---
 

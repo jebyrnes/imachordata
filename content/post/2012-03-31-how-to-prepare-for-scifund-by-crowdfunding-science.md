@@ -3,7 +3,7 @@ title: 'How to prepare for #SciFund - by crowdfunding science!'
 author: Jarrett Byrnes
 date: '2012-03-31'
 categories:
-  - '#SciFund'
+  - SciFund
 slug: how-to-prepare-for-scifund-by-crowdfunding-science
 ---
 

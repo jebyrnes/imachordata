@@ -3,7 +3,7 @@ title: '#SciFund Round 1 - Results & Ravings'
 author: Jarrett Byrnes
 date: '2012-07-09'
 categories:
-  - '#SciFund'
+  - SciFund
   - talks
 slug: scifund-round-1-results-ravings
 ---
