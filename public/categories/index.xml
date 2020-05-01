@@ -219,20 +219,20 @@
     </item>
     
     <item>
-      <title>#SciFund</title>
-      <link>/categories/#scifund/</link>
-      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/#scifund/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>OpenPub</title>
       <link>/categories/openpub/</link>
       <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
       
       <guid>/categories/openpub/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>SciFund</title>
+      <link>/categories/scifund/</link>
+      <pubDate>Mon, 25 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/scifund/</guid>
       <description></description>
     </item>
     
