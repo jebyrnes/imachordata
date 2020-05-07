@@ -30,6 +30,24 @@
     </item>
     
     <item>
+      <title>science online</title>
+      <link>/categories/science-online/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/science-online/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>science!</title>
+      <link>/categories/science/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>sem</title>
       <link>/categories/sem/</link>
       <pubDate>Thu, 21 Dec 2017 00:00:00 +0000</pubDate>
@@ -71,15 +89,6 @@
       <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>/categories/science-parent/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>science!</title>
-      <link>/categories/science/</link>
-      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/science/</guid>
       <description></description>
     </item>
     
@@ -143,15 +152,6 @@
       <pubDate>Wed, 26 Feb 2014 00:00:00 +0000</pubDate>
       
       <guid>/categories/neat/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>science online</title>
-      <link>/categories/science-online/</link>
-      <pubDate>Wed, 26 Feb 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/science-online/</guid>
       <description></description>
     </item>
     
