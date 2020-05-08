@@ -11,7 +11,7 @@ tags: []
 
 We want our coronavirus data! We want it now! We want it TIDY!  
 
-tl;dr Go check out the [Covid19R project](https://covid19r.github.io/covid19R/) and it's [documentation](https://covid19r.github.io/documentation/) - a way for many people to bring their unique data harvesting efforts of Covid-19 data into a single tidy data format, and then be redistributed through a single low-dependency package, [covid19R](https://covid19r.github.io/covid19R/).  
+tl;dr Go check out the [Covid19R project](https://covid19r.github.io/covid19R/) and it's [documentation](https://covid19r.github.io/documentation/) - a way for many people to bring their unique data harvesting efforts of Covid-19 data into a single tidy data format, and then be redistributed through a single low-dependency package, [covid19R](https://covid19r.github.io/covid19R/). It's all one big work-in-progress, but check it out!  
   
 ## OK, the story!  
   

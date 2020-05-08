@@ -9,7 +9,7 @@ tags: []
 ---
 
 
-Welp. It's been a spell. Time to bring ye olde blahg back.
+Welp. It's been a spell. Time to bring ye olde blahg back.  
 
 As I moved talking about marine science more on to [Deep Sea News](http://deepseanews.com), I realized that there's a huge part of my identity as a scientist that didn't work there.
 
