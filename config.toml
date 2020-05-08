@@ -12,8 +12,8 @@ relativeURLs = true
 paginate = 3
 paginatePath = "page"
 
-
-
+#theme specific
+# general
 [outputs]
 home = ["HTML", "RSS"]
 
@@ -38,6 +38,10 @@ home = ["HTML", "RSS"]
 
     MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
+
+#theme specific
+
+	subtitle = "Marine Data Science for All, Regardless of Backbone!"
 
 [[menu.main]]
     name = "About"
