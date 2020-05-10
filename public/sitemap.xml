@@ -3,17 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+    <loc>/2020/05/10/best-gf-pancakes-yet/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/covid19r/</loc>
-    <lastmod>2020-05-07T00:00:00+00:00</lastmod>
+    <loc>/tags/breakfast/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/food/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/covid19r/</loc>
     <lastmod>2020-05-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -79,11 +99,6 @@
   
   <url>
     <loc>/tags/power-analysis/</loc>
-    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2016-10-18T00:00:00+00:00</lastmod>
   </url>
   
