@@ -10,11 +10,11 @@ tags: [breakfast]
 
 I love pancakes. My wife loves pancakes. My daughter LOVES chocolate pancakes (and takes a picture with her face smeared in chocolate every time she she finishes eating chocolate chip pancakes). But... my daughter has celiac. 
 
-So, I've been working through a lot of GF pancake recipies, or using GF flour ([Cup 4 Cup](https://www.cup4cup.com/) is hands down THE BEST) with regular recipes to make them. I kept being unsatisfied, but, eventually learned a basic formula to them. To thick, to thin, too cakey, to fluffy (yes, this is a thing). This morning, I made a few adjustments, and I think hit on the right one, so I'm going to archive it here so I don't forget.
+So, I've been working through a lot of GF pancake recipies, or using GF flour ([Cup 4 Cup](https://www.cup4cup.com/) is hands down THE BEST) with regular recipes to make them. I kept being unsatisfied, but, eventually learned a basic formula to them. To thick, to thin, too cakey, to fluffy (yes, this is a thing). This morning, I made a few adjustments, and I think I hit on the right one, so I'm going to archive it here so I don't forget.
 
-<img src="/post/2020-05-10-best-gf-pancakes-yet_files/HD_pancakes.jpeg" alt="" width="400px"/ height="533px"/>
+[![](/post/2020-05-10-best-gf-pancakes-yet_files/HD_pancakes_400.jpg)](/post/2020-05-10-best-gf-pancakes-yet_files/HD_pancakes.jpeg)
 
-Also, if you are unsure of how to cook pancakges, find the [Good Eats Pancakge Episode](https://www.foodnetwork.com/shows/good-eats/videos/flap-jack-do-it-again) where Alton really teaches you how to do it right.
+Also, if you are unsure of how to cook pancakges, find the [Good Eats Pancake Episode](https://www.foodnetwork.com/shows/good-eats/videos/flap-jack-do-it-again) where Alton really teaches you how to do it right.
 
 *Best GF Pancakes Yet*
 
