@@ -1,176 +1,98 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<meta property="og:title" content="Seeing Through the Measurement Error" />
-<meta property="og:description" content="I am part of an incredibly exciting project - the #SciFund Challenge. #SciFund is an attempt to have scientists link their work to the general public through crowdfunding. As I&rsquo;m one of the organizers, I thought I should have some skin in the game. But what skin?
-Well, people are pitching some incredibly sexy projects - tracking puffin migrations, coral reefs conservation,snake-squirrel interactions (WITH ROBOSQUIRRELS!), mathematical modeling of movements like Occupy Wall Street, and many many more." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/2011/11/11/seeing-through-the-measurement-error/" />
-<meta property="article:published_time" content="2011-11-11T00:00:00+00:00" />
-<meta property="article:modified_time" content="2011-11-11T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Seeing Through the Measurement Error"/>
-<meta name="twitter:description" content="I am part of an incredibly exciting project - the #SciFund Challenge. #SciFund is an attempt to have scientists link their work to the general public through crowdfunding. As I&rsquo;m one of the organizers, I thought I should have some skin in the game. But what skin?
-Well, people are pitching some incredibly sexy projects - tracking puffin migrations, coral reefs conservation,snake-squirrel interactions (WITH ROBOSQUIRRELS!), mathematical modeling of movements like Occupy Wall Street, and many many more."/>
-
-
-    <meta name="description" content="">
-    <link rel="canonical" href="../../../../2011/11/11/seeing-through-the-measurement-error/">
-
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Seeing Through the Measurement Error &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2011/11/11/seeing-through-the-measurement-error/" />
+  
+  
+    <meta property="og:type" content="article" />
     
-    <title>Seeing Through the Measurement Error &middot; I&#39;m a Chordata! Urochordata!</title>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="../../../../css/style.css" rel="stylesheet">
-
+    <meta property="og:article:published_time" content="2011-11-11T00:00:00Z" />
     
+  
 
-    
+  <title>
+     Seeing Through the Measurement Error &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
 
-    
-  </head>
-  <body>
-    
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
       
-
-
-
-<nav class="white" role="navigation">
-    <div class="row max-width">
-        <div class="col s12 l10 offset-l1">
-            
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
-                <i class="material-icons">menu</i>
-            </a>
-
-            
-            <ul id="nav-mobile" class="sidenav">
-                
-                
-    
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
         
-            
-<li>
-    <a class="black-text" href="../../../../about/">About</a>
-</li>
-
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
         
-    
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
         
-            
-<li>
-    <a class="black-text" href="../../../../categories/">Categories</a>
-</li>
-
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
         
-    
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
         
-            
-<li>
-    <a class="black-text" href="https://byrneslab.net">Lab Site</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://twitter.com/jebyrnes">Twitter</a>
-</li>
-
-        
-    
-    
-
-            </ul>
-
-            
-            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
-
-            
-            <div class="nav-wrapper">
-
-                
-                <ul class="right hide-on-med-and-down">
-                    
-                    
-    
-        
-            
-<li>
-    <a class="black-text" href="../../../../about/">About</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="../../../../categories/">Categories</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://byrneslab.net">Lab Site</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://twitter.com/jebyrnes">Twitter</a>
-</li>
-
-        
-    
-    
-
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</nav>
-    
-
-    
-
-<article class="max-width">
-    
-    <section class="row">
-        <div class="col s12 m10 offset-m1 l10 offset-l1">
-            <h1>Seeing Through the Measurement Error</h1>
-        </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
     </section>
+  </header>
+  <main class="container">
 
-    
-    
 
-    
-    <section class="row">
-        <div class="col s12 m8 offset-m2 l2 offset-l1">
-            
 
-<p class="article-meta">
-    <div class="article-meta-container">
-        <div class="article-meta-author-name">Jarrett Byrnes</div>
-        <div class="article-meta-description"></div>
-    </div>
-    <span class="article-meta-published-at grey-text text-darken-1">Nov 11, 2011</span>
-</p>
-        </div>
-        <div class="col s12 m8 offset-m2 l6">
-            <p>I am part of an incredibly exciting project - <a href="http://scifund.wordpress.com">the #SciFund Challenge</a>. #SciFund is an attempt to have scientists link their work to the general public through <a href="http://en.wikipedia.org/wiki/Crowd_funding">crowdfunding</a>. As I&rsquo;m one of the organizers, I thought I should <a href="http://www.rockethub.com/projects/3745-hey-did-you-miss-that-fish">have some skin in the game</a>. But what skin?</p>
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Seeing Through the Measurement Error</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>I am part of an incredibly exciting project - <a href="http://scifund.wordpress.com">the #SciFund Challenge</a>. #SciFund is an attempt to have scientists link their work to the general public through <a href="http://en.wikipedia.org/wiki/Crowd_funding">crowdfunding</a>. As I&rsquo;m one of the organizers, I thought I should <a href="http://www.rockethub.com/projects/3745-hey-did-you-miss-that-fish">have some skin in the game</a>. But what skin?</p>
 <p>Well, people are pitching some incredibly sexy projects - <a href="http://www.rockethub.com/projects/3818-tracking-the-migration-of-the-atlantic-puffin">tracking puffin migrations</a>, <a href="http://www.rockethub.com/projects/3793-saving-hawaii-s-coral-reefs">coral reefs conservation</a>,<a href="http://www.rockethub.com/projects/3804-squirrel-snake-face-off"> snake-squirrel interactions (WITH ROBOSQUIRRELS!)</a>, <a href="http://www.rockethub.com/projects/3773-mathematics-of-direct-democracy">mathematical modeling of movements like Occupy Wall Street</a>, and many many <a href="http://scifund.rockethub.com">more</a>. It&rsquo;s some super sexy science stuff.</p>
 <p>So what is <a href="http://www.rockethub.com/projects/3745-hey-did-you-miss-that-fish">my project</a> going to address? Measurement error.</p>
 <p>WOOOOOOOOO MEASUREMENT ERROR!</p>
@@ -189,54 +111,88 @@ Well, people are pitching some incredibly sexy projects - tracking puffin migrat
 <p>I need this calibration data to ensure that the results I&rsquo;m seeing in my analyses of this incredible 30 year kelp forest data set are real, and not due to spurious measurement error. So I&rsquo;m hoping wonderful folk like you (or people you know - seriously, forward <a href="http://scifund.rockethub.com">http://scifund.rockethub.com</a> around to everyone you know! RIGHT NOW!) will see the video, read the project description, and pitch in to <a href="http://www.rockethub.com/projects/3745-hey-did-you-miss-that-fish">help support kelp forest research</a>.</p>
 <p>If we&rsquo;re going to use a 30 year data set to understand kelp forests and environmental change, we want to do it right, so, let&rsquo;s figure out how much variation in the data is real, and how much is <a href="http://www.rockethub.com/projects/3745-hey-did-you-miss-that-fish">mere measurement error</a>. It&rsquo;s not hard, and the benefits to marine research are huge.</p>
 
-        </div>
-    </section>
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Nov 11, 2011 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2011/10/25/morning-kelp-forest-jam/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../../2011/11/22/can-we-reduce-the-carbon-cost-of-scientific-mega-meetings/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
 </article>
+<div class="delimiter"></div>
 
-
-
-    
-      <footer class="page-footer grey lighten-5">
-    <div class="row max-width">
-        <div class="col s12 l10 offset-l1 clear-padding">
-            <div class="row">
-    
-        
-    
-
-    
-    
-    <div class="col s12 l12">
-        <h5 class="black-text">Places to visit</h5>
-<p class="grey-text text-darken-4">
-  <a href="http://byrneslab.net">My lab webpage</a><br>
-  <a href="http://deepseanews.com">Deep Sea news</a> (where I write sometimes)<br>
-  <a href="http://twitter.com/jebyrnes">@jebyrnes</a> on twitter<br>
-</p>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
     </div>
-
-    
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </div>
 
+  </footer>
 
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="row max-width" style="width: 100%;">
-            <div class="col s12 l10 offset-l1">
-                <span class="grey-text text-darken-4"></span>
-<div class="right">
-    
-</div>
-            </div>
-        </div>
-    </div>
-</footer>
-    
+  
+  
+  
 
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../../../../js/script.js"></script>
-  </body>
+  
+  
+
+  
+</body>
 </html>
+

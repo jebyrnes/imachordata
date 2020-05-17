@@ -1,174 +1,98 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<meta property="og:title" content="Introducing the Open Derby (guest post)" />
-<meta property="og:description" content="Ensuring openness and reproducibility in ecology is an ongoing challenge, although open tools (e.g., R Studio, Github) are free to use, and user support is everywhere. To illustrate how ecology collaborations can fit within an open science framework, we had the idea of running an &lsquo;Open Derby&rsquo;. Similar to a research derby, where grad students and post-docs from different academic departments and universities collaborate together to solve a conservation problem, our idea extends the derby concept to working fully openly: learning version control in GitHub, writing and analysing data in RMarkdown, and publishing all project development in an open notebook." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/2017/03/31/introducing-the-open-derby-guest-post/" />
-<meta property="article:published_time" content="2017-03-31T00:00:00+00:00" />
-<meta property="article:modified_time" content="2017-03-31T00:00:00+00:00" />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Introducing the Open Derby (guest post)"/>
-<meta name="twitter:description" content="Ensuring openness and reproducibility in ecology is an ongoing challenge, although open tools (e.g., R Studio, Github) are free to use, and user support is everywhere. To illustrate how ecology collaborations can fit within an open science framework, we had the idea of running an &lsquo;Open Derby&rsquo;. Similar to a research derby, where grad students and post-docs from different academic departments and universities collaborate together to solve a conservation problem, our idea extends the derby concept to working fully openly: learning version control in GitHub, writing and analysing data in RMarkdown, and publishing all project development in an open notebook."/>
-
-
-    <meta name="description" content="">
-    <link rel="canonical" href="../../../../2017/03/31/introducing-the-open-derby-guest-post/">
-
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Introducing the Open Derby (guest post) &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2017/03/31/introducing-the-open-derby-guest-post/" />
+  
+  
+    <meta property="og:type" content="article" />
     
-    <title>Introducing the Open Derby (guest post) &middot; I&#39;m a Chordata! Urochordata!</title>
-
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="../../../../css/style.css" rel="stylesheet">
-
+    <meta property="og:article:published_time" content="2017-03-31T00:00:00Z" />
     
+  
 
-    
+  <title>
+     Introducing the Open Derby (guest post) &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
 
-    
-  </head>
-  <body>
-    
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
       
-
-
-
-<nav class="white" role="navigation">
-    <div class="row max-width">
-        <div class="col s12 l10 offset-l1">
-            
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger black-text">
-                <i class="material-icons">menu</i>
-            </a>
-
-            
-            <ul id="nav-mobile" class="sidenav">
-                
-                
-    
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
         
-            
-<li>
-    <a class="black-text" href="../../../../about/">About</a>
-</li>
-
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
         
-    
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
         
-            
-<li>
-    <a class="black-text" href="../../../../categories/">Categories</a>
-</li>
-
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
         
-    
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
         
-            
-<li>
-    <a class="black-text" href="https://byrneslab.net">Lab Site</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://twitter.com/jebyrnes">Twitter</a>
-</li>
-
-        
-    
-    
-
-            </ul>
-
-            
-            <a href="../../../../" class="brand-logo grey-text text-darken-3">I&#39;m a Chordata! Urochordata!</a>
-
-            
-            <div class="nav-wrapper">
-
-                
-                <ul class="right hide-on-med-and-down">
-                    
-                    
-    
-        
-            
-<li>
-    <a class="black-text" href="../../../../about/">About</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="../../../../categories/">Categories</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://byrneslab.net">Lab Site</a>
-</li>
-
-        
-    
-        
-            
-<li>
-    <a class="black-text" href="https://twitter.com/jebyrnes">Twitter</a>
-</li>
-
-        
-    
-    
-
-                </ul>
-
-            </div>
-        </div>
-    </div>
-</nav>
-    
-
-    
-
-<article class="max-width">
-    
-    <section class="row">
-        <div class="col s12 m10 offset-m1 l10 offset-l1">
-            <h1>Introducing the Open Derby (guest post)</h1>
-        </div>
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
     </section>
+  </header>
+  <main class="container">
 
-    
-    
 
-    
-    <section class="row">
-        <div class="col s12 m8 offset-m2 l2 offset-l1">
-            
 
-<p class="article-meta">
-    <div class="article-meta-container">
-        <div class="article-meta-author-name">Jillian Dunic</div>
-        <div class="article-meta-description"></div>
-    </div>
-    <span class="article-meta-published-at grey-text text-darken-1">Mar 31, 2017</span>
-</p>
-        </div>
-        <div class="col s12 m8 offset-m2 l6">
-            <p>Ensuring openness and reproducibility in ecology is an ongoing challenge, although open tools (e.g., <a href="http://rmarkdown.rstudio.com/">R Studio</a>, <a href="https://github.com/">Github</a>) are free to use, and user support is everywhere. To illustrate how ecology collaborations can fit within an open science framework, we had the idea of running an &lsquo;Open Derby&rsquo;. Similar to a <a href="https://www.researchgate.net/publication/257197202_The_'Research_Derby'_A_pressure_cooker_for_creative_and_collaborative_science_the_Earth_2_Ocean_Research_Derby">research derby</a>, where grad students and post-docs from different academic departments and universities collaborate together to solve a conservation problem, our idea extends the derby concept to working fully openly: learning version control in GitHub, writing and analysing data in RMarkdown, and publishing all project development in an open notebook. Our end goal is to examine a conservation issue using open access (OA) data, and publish our findings and code in an OA journal. Ultimately, we hope to share Open Derby with other graduate students and academics across the life sciences, with the hope that we can provide a model for switching entire lab groups into open and reproducible research machines.</p>
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Introducing the Open Derby (guest post)</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>Ensuring openness and reproducibility in ecology is an ongoing challenge, although open tools (e.g., <a href="http://rmarkdown.rstudio.com/">R Studio</a>, <a href="https://github.com/">Github</a>) are free to use, and user support is everywhere. To illustrate how ecology collaborations can fit within an open science framework, we had the idea of running an &lsquo;Open Derby&rsquo;. Similar to a <a href="https://www.researchgate.net/publication/257197202_The_'Research_Derby'_A_pressure_cooker_for_creative_and_collaborative_science_the_Earth_2_Ocean_Research_Derby">research derby</a>, where grad students and post-docs from different academic departments and universities collaborate together to solve a conservation problem, our idea extends the derby concept to working fully openly: learning version control in GitHub, writing and analysing data in RMarkdown, and publishing all project development in an open notebook. Our end goal is to examine a conservation issue using open access (OA) data, and publish our findings and code in an OA journal. Ultimately, we hope to share Open Derby with other graduate students and academics across the life sciences, with the hope that we can provide a model for switching entire lab groups into open and reproducible research machines.</p>
 <p>If you are not familiar with open science tools, RMarkdown is a wonderful method of writing code into a manuscript that can be formatted into manuscripts, reports, and presentations. We use RMarkdown in tandem with GitHub, a service that allows version control of your data, analyses, and manuscripts, and is incredibly useful for managing input between collaborators. Learning these tools can be daunting but learning with friends makes it easier and more fun to build these skills. We are six PhD students from 4 institutions based in 3 countries, who are present or past members of <a href="http://baumlab.weebly.com">Dr. Julia Baum&rsquo;s marine ecology lab</a> at the University of Victoria and have come together to demo the Open Derby concept:</p>
 <p>James Robinson: PhD student in the Baum lab, studying macroecology of tropical Pacific coral reefs (defending April 2017) and leader of the Open Derby project</p>
 <p>Danielle Claar: PhD student in the Baum Lab, studying the dynamics of coral symbioses in response to environmental stressors</p>
@@ -193,54 +117,88 @@
 <p>You can find our ideas, data, and progress in our <a href="https://github.com/baumlab/open-science-project">public Github repository</a>. We welcome any suggestions that might help us to resurrect this project, and hope to inspire others to write up their failed projects. Our project lead - James Robinson - is currently developing Open Derby for general consumption as a member of <a href="https://mozilla.github.io/leadership-training/projects/">Mozilla&rsquo;s Open Science Leadership training programme</a>.</p>
 <p>But, we are now brainstorming conservation questions for our next attempt. Ecologists, please, send us your unanswered conservation problems, unanalyzed datasets, and suggestions for advancing open ecology! This time we will each bring a dataset and question to the brainstorming session. We will let you know how we progress!</p>
 
-        </div>
-    </section>
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Mar 31, 2017 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2017/01/09/which-library-to-use-to-teach-linear-models-likelihood/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../../2017/12/21/bayesian-sem-with-brms/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
 </article>
+<div class="delimiter"></div>
 
-
-
-    
-      <footer class="page-footer grey lighten-5">
-    <div class="row max-width">
-        <div class="col s12 l10 offset-l1 clear-padding">
-            <div class="row">
-    
-        
-    
-
-    
-    
-    <div class="col s12 l12">
-        <h5 class="black-text">Places to visit</h5>
-<p class="grey-text text-darken-4">
-  <a href="http://byrneslab.net">My lab webpage</a><br>
-  <a href="http://deepseanews.com">Deep Sea news</a> (where I write sometimes)<br>
-  <a href="http://twitter.com/jebyrnes">@jebyrnes</a> on twitter<br>
-</p>
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
     </div>
-
-    
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 </div>
 
+  </footer>
 
-        </div>
-    </div>
-    <div class="footer-copyright">
-        <div class="row max-width" style="width: 100%;">
-            <div class="col s12 l10 offset-l1">
-                <span class="grey-text text-darken-4"></span>
-<div class="right">
-    
-</div>
-            </div>
-        </div>
-    </div>
-</footer>
-    
+  
+  
+  
 
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="../../../../js/script.js"></script>
-  </body>
+  
+  
+
+  
+</body>
 </html>
+

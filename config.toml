@@ -1,7 +1,7 @@
 baseurl = "/"
 languageCode = "en-us"
 title = "I'm a Chordata! Urochordata!"
-theme = "hugo-material-blog"
+theme = "hamburg"
 googleAnalytics = ""
 disqusShortname = "im-a-chordata-urochordata"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
@@ -38,6 +38,9 @@ home = ["HTML", "RSS"]
 
     MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
     MathJaxVersion = "2.7.5"
+    
+    disqus = "im-a-chordata-urochordata"
+
 
 #theme specific
 
