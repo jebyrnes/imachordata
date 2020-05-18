@@ -11,7 +11,7 @@ defaultContentLanguageInSubdir = "true"
 
 
 # Pagination
-paginate = 3
+paginate = 5
 paginatePath = "page"
 
 #theme specific
