@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" MEOW! It&#39;s Marine Ecoregions in R! &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2015/03/28/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2015-03-28T00:00:00Z" />
+    
+  
+
+  <title>
+     MEOW! It&#39;s Marine Ecoregions in R! &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">MEOW! It&#39;s Marine Ecoregions in R!</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>So, I&rsquo;m on paternity leave (yay! more on that another day - but HOMG, you guys, my daughter is amazing!) and while my daughter is amazing, there are many hours in the day and wee morning where I find myself rocking slowly back and forth, knowing that if I stop even for a second, this little bundle of cute sleeping away in the wrap will wake and howl.</p>
+<p>So, what&rsquo;s a guy on leave to do? Well, why not learn some new R tricks that have been on my list for, in some cases years, but I have not had time to do otherwise. In particular, time to ramp up some of my geospatial skills. As, really, I can type while rocking. And need to do something to stay awake. (One can only watch Clone Wars for so long - and why is it so much better than the prequels?)</p>
+<p>In particular, I&rsquo;ve really wanted to become a more proficient map-maker. I&rsquo;ve been working on a few global projects lately, and wanted to visualize the results in some more powerful intuitive ways. Many of these projects have used Spalding et al.&lsquo;s 2007 <em><a href="http://www.nature.org/ourinitiatives/regions/northamerica/unitedstates/colorado/scienceandstrategy/marine-ecoregions-of-the-world.pdf">Marine Ecoregions of the World</a></em> classification (or MEOW) as a basis. So, wouldn&rsquo;t it be cool if we could make some nice plots of those regions, and maybe fill them in with colors according to some result?</p>
+<p>Where to start? Well, to begin, how does one get the geographic information in to R? Fortunately, there&rsquo;s a shapefile over <a href="http://www.marineregions.org/downloads.php">at Marineregions.org</a>.</p>
+<p>Actually, heck, there are a LOT of marine region-like shapefiles over there that we might all want to use for different maps. And everything I&rsquo;m about to say can generalize to any of those other shapefiles!</p>
+<p>Oh, for those of you as ignorant as me, a <a href="http://en.wikipedia.org/wiki/Shapefile">shapefile</a> is a geospatial file that has information about polygons with some additional data attached to them. To futz with them, we need to first load a few R libraries</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#for geospatial tools</span>
+<span style="color:#a6e22e">library</span>(rgdal)
+<span style="color:#a6e22e">library</span>(maptools)
+<span style="color:#a6e22e">library</span>(rgeos)
+
+<span style="color:#75715e">#for some data reduction</span>
+<span style="color:#a6e22e">library</span>(dplyr)
+</code></pre></div><p>These are wonderful tools that will help you load and manipulate your shapefiles. Note that I&rsquo;ve also loaded up <a href="http://cran.r-project.org/web/packages/dplyr/index.html">dplyr</a>, which I&rsquo;ve been playing with and finally learning. I&rsquo;m a huge fan of ye olde <a href="http://plyr.had.co.nz/">plyr</a> library, but dplyr has really upped my game, as it&rsquo;s weirdly more intuitive - particularly with pipes. For a tutotrial on that, see <a href="http://seananderson.ca/2014/09/13/dplyr-intro.html">here</a> - and perhaps I&rsquo;ll write more about it later.</p>
+<p>OK, so, libraries aside, how do we deal with the file we get <a href="http://www.marineregions.org/downloads.php">at Marineregions.org</a>? Well, once we download and unzip it into a folder, we can take a look at what&rsquo;s inside</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Let&#39;s see what&#39;s in this shapefile!</span>
+<span style="color:#75715e">#Note - the paths here are relative to where I</span>
+<span style="color:#75715e">#am working in this file - you may have to change them</span>
+<span style="color:#a6e22e">ogrInfo</span>(<span style="color:#e6db74">&#34;../../MEOW-TNC&#34;</span>, <span style="color:#e6db74">&#34;meow_ecos&#34;</span>)
+
+<span style="color:#75715e">## Source: &#34;../../MEOW-TNC&#34;, layer: &#34;meow_ecos&#34;</span>
+<span style="color:#75715e">## Driver: ESRI Shapefile number of rows 232</span>
+<span style="color:#75715e">## Feature type: wkbPolygon with 2 dimensions</span>
+<span style="color:#75715e">## Extent: (-180 -89.9) - (180 86.9194)</span>
+<span style="color:#75715e">## CRS: +proj=longlat +datum=WGS84 +no_defs</span>
+<span style="color:#75715e">## LDID: 87</span>
+<span style="color:#75715e">## Number of fields: 9</span>
+<span style="color:#75715e">##         name type length typeName</span>
+<span style="color:#75715e">## 1   ECO_CODE    2     19     Real</span>
+<span style="color:#75715e">## 2  ECOREGION    4     50   String</span>
+<span style="color:#75715e">## 3  PROV_CODE    2     19     Real</span>
+<span style="color:#75715e">## 4   PROVINCE    4     40   String</span>
+<span style="color:#75715e">## 5   RLM_CODE    2     19     Real</span>
+<span style="color:#75715e">## 6      REALM    4     40   String</span>
+<span style="color:#75715e">## 7   ALT_CODE    2     19     Real</span>
+<span style="color:#75715e">## 8 ECO_CODE_X    2     19     Real</span>
+<span style="color:#75715e">## 9   Lat_Zone    4     10   String</span>
+</code></pre></div><p>OK, cool! We can see that it&rsquo;s an ESRI shapefile with 232 rows - that&rsquo;s 232 ecoregions. Each row of data has a number of properties - Province, Realm (which are both higher order geospatial classifications), some numeric IDs, and information about latitudinal zone. We can also see that it&rsquo;s in the WGS84 projection - more on projections another time - and that it&rsquo;s chocked full of polygons.</p>
+<p>OK, that&rsquo;s all well and good, but let&rsquo;s load and plot the sucker!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#get an ecoregions shapefile, and from that make a provience and realm shapefile</span>
+<span style="color:#75715e">#from http://www.marineregions.org/downloads.php</span>
+<span style="color:#75715e">#http://www.marineregions.org/sources.php#meow</span>
+regions <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">readOGR</span>(<span style="color:#e6db74">&#34;../../MEOW-TNC&#34;</span>, <span style="color:#e6db74">&#34;meow_ecos&#34;</span>)
+
+<span style="color:#75715e">## OGR data source with driver: ESRI Shapefile</span>
+<span style="color:#75715e">## Source: &#34;../../MEOW-TNC&#34;, layer: &#34;meow_ecos&#34;</span>
+<span style="color:#75715e">## with 232 features and 9 fields</span>
+<span style="color:#75715e">## Feature type: wkbPolygon with 2 dimensions</span>
+
+<span style="color:#a6e22e">plot</span>(regions)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-3-1.png" alt="unnamed-chunk-3-1"></p>
+<p>WHOAH! Cool. Regions! In the ocean! Nice! What a beautiful simple little plot. Again, well and good. But&hellip;..what can we do with this? Well, a quick call to <em>class</em> shows us that regions is a <em>SpatialPolygonsDataFrame</em>. Which of course has it&rsquo;s own plotting methods, and such. So, you could fill some things, make some borders, overlay - the sky&rsquo;s the limit. But, there are two things I want to show you how to do to make your life more flexible.</p>
+<p><strong>Higher Order Geographic Regions</strong></p>
+<p>One might be to look at Provinces and Realms. In general, when you have shapefiles, if you want to make aggregted polygons, you have to go through a few steps. Let&rsquo;s say we want to look at Provinces. A province is composed of many ecoregions. Fortunately, there&rsquo;s a function to unite <em>SpatialPolygons</em> (that&rsquo;s the class we&rsquo;re dealing with here that&rsquo;s part of the SpatialPolygonsDataFrame) given some identifier.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Unite the spatial polygons for each region into one</span>
+provinces <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">unionSpatialPolygons</span>(regions, regions<span style="color:#f92672">$</span>PROVINCE)
+</code></pre></div><p>OK, great. But we still need to add some data to that. This provinces is just a SpatialPolygons object. To do that, let&rsquo;s make a new reduced data frame using dplyr.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Make a data frame that will have Province level info and above</span>
+prov_data <span style="color:#f92672">&lt;-</span> regions<span style="color:#f92672">@</span>data <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(PROVINCE) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">summarise</span>(PROV_CODE <span style="color:#f92672">=</span> PROV_CODE[1], REALM <span style="color:#f92672">=</span> REALM[1], RLM_CODE<span style="color:#f92672">=</span>RLM_CODE[1], Lat_Zone<span style="color:#f92672">=</span>Lat_Zone[1])
+</code></pre></div><p>Bueno. We now have a much smaller data frame that is for Provinces only. The last step is to make a new Spatial Polygons Data Frame by joining the data and the polygons. There are two tricks here. First, make sure the right rows in the data are joined to the right polygons. For that, we&rsquo;ll use a join statement. The second, the new data frame has to have row names matching the names of the polygons. I don&rsquo;t often use this, but in making a data frame, you can supply row names. So, here we go:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#merge the polygons with the new data file</span>
+<span style="color:#75715e">#note the row.names argument to make sure they map to each other</span>
+provinces <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SpatialPolygonsDataFrame</span>(provinces,
+                                      data<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(
+                                        <span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">data.frame</span>(PROVINCE<span style="color:#f92672">=</span><span style="color:#a6e22e">names</span>(provinces)),
+                                             prov_data),
+                                        row.names<span style="color:#f92672">=</span><span style="color:#a6e22e">row.names</span>(provinces)))
+
+<span style="color:#75715e">## Joining by: PROVINCE</span>
+</code></pre></div><p>Not gorgeous, but it gets the job done. We can of course do this for realms as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#######</span>
+<span style="color:#75715e">#make realms shapefile</span>
+<span style="color:#75715e">########</span>
+<span style="color:#75715e">#make spatial polygons for realms</span>
+realms <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">unionSpatialPolygons</span>(regions, regions<span style="color:#f92672">$</span>REALM)
+
+<span style="color:#75715e">#make new data</span>
+realm_data <span style="color:#f92672">&lt;-</span> regions<span style="color:#f92672">@</span>data <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(REALM) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">summarise</span>(RLM_CODE <span style="color:#f92672">=</span> RLM_CODE[1],  Lat_Zone<span style="color:#f92672">=</span>Lat_Zone[1])
+
+<span style="color:#75715e">#merge the two!</span>
+realms <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">SpatialPolygonsDataFrame</span>(realms,
+                                   data<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(
+                                     <span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">data.frame</span>(REALM<span style="color:#f92672">=</span><span style="color:#a6e22e">names</span>(realms)),
+                                          realm_data),
+                                     row.names<span style="color:#f92672">=</span><span style="color:#a6e22e">row.names</span>(realms)))
+
+<span style="color:#75715e">## Joining by: REALM</span>
+</code></pre></div><p>Excellent. So - did it work? And how different are these three different spatial things anyway? Well, let&rsquo;s plot them!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#########Plot them all</span>
+<span style="color:#a6e22e">par</span>(mfrow<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>), mar<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>))
+<span style="color:#a6e22e">plot</span>(regions, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Ecoregion&#34;</span>, cex.main<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>)
+<span style="color:#a6e22e">plot</span>(provinces, lwd<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, border<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;red&#34;</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Province&#34;</span>)
+<span style="color:#a6e22e">plot</span>(realms, lwd<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, border<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Realm&#34;</span>)
+<span style="color:#a6e22e">par</span>(mfrow<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>))
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-8-1.png" alt="unnamed-chunk-8-1"></p>
+<p>Lovely.</p>
+<p><strong>ggplot &lsquo;em!</strong> I admit, I&rsquo;m a [ggplot2][9] junkie. I just find it the fastest way to make publication quality graphs with little fuss or muss. Or make something quick and dirty to send to colleagues. But, you can&rsquo;t just go and plot a SpatialPointsDataFrame in ggplot2 with ease and then use it as you will. So what&rsquo;s a guy to do?</p>
+<p>I will admit, I&rsquo;m shamelessly gacking the following from <a href="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-13-2.png"><a href="https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles">https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles</a></a>. It provides a three step process where what you do, essentially, is turn the whole mess into a data frame with the polygons providing points for plotting geom_path or geom_polygon pieces.</p>
+<p>Step 1, you need an ID column in your data. Let&rsquo;s do this for both ecoregions and provinces</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">regions<span style="color:#f92672">@</span>data<span style="color:#f92672">$</span>id <span style="color:#f92672">=</span> <span style="color:#a6e22e">rownames</span>(regions<span style="color:#f92672">@</span>data)
+provinces<span style="color:#f92672">@</span>data<span style="color:#f92672">$</span>id <span style="color:#f92672">=</span> <span style="color:#a6e22e">rownames</span>(provinces<span style="color:#f92672">@</span>data)
+</code></pre></div><p>OK - step 2 is the fortify function. Fortify converts an R object into a data frame for ggplot2. In this case -</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+regions.points <span style="color:#f92672">=</span> <span style="color:#a6e22e">fortify</span>(regions, ECOREGION<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id&#34;</span>)
+
+<span style="color:#75715e">## Regions defined for each Polygons</span>
+
+provinces.points <span style="color:#f92672">=</span> <span style="color:#a6e22e">fortify</span>(provinces, PROVINCES<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id&#34;</span>)
+
+<span style="color:#75715e">## Regions defined for each Polygons</span>
+</code></pre></div><p>Great! Now that we have these two knew fortified data frames that describe the points that we&rsquo;ll be plotting, the last thing to do is to join the points with the actual, you know, data! For that, I like to use <em>join</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">regions.df <span style="color:#f92672">=</span> <span style="color:#a6e22e">join</span>(regions.points, regions<span style="color:#f92672">@</span>data, by<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id&#34;</span>)
+provinces.df <span style="color:#f92672">=</span> <span style="color:#a6e22e">join</span>(provinces.points, provinces<span style="color:#f92672">@</span>data, by<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id&#34;</span>)
+</code></pre></div><p>What&rsquo;s great about this is that, from now on, if I have another data frame of some sort that has a Ecoregion or Province as one of it&rsquo;s headings - for example, let&rsquo;s say I ran a linear model where Ecoregion was a fixed effect, I have a coefficient for each Ecoregion, and I&rsquo;ve turned the coefficient table into a data frame with Ecoregion as one of the columns - as long as the name of the identifying column in my new data frame and my data frame for plotting are the same, I can use join to add a new column to my <em>regions.df</em> or <em>provinces.df</em> for plotting.</p>
+<p>But, for now, I can show you how these would plot out in ggplot2. To do this, we use geom_polygon to define an area that we can fill as we want, and geom_path to stroke the outside of the areas and do with them what you will.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#####Make some ggplots for later visualization</span>
+base_ecoregion_ggplot <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(regions.df) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme_bw</span>() <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">aes</span>(long,lat,group<span style="color:#f92672">=</span>group) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_polygon</span>(fill<span style="color:#f92672">=</span><span style="color:#66d9ef">NA</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_path</span>(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_equal</span>()
+
+base_province_ggplot <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(provinces.df) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme_bw</span>() <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">aes</span>(long,lat,group<span style="color:#f92672">=</span>group) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_polygon</span>(fill<span style="color:#f92672">=</span><span style="color:#66d9ef">NA</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_path</span>(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">coord_equal</span>()
+</code></pre></div><p>Note that there&rsquo;s a fill=NA argument? That&rsquo;s where I could put something like coefficient from that joined data, or temperature, or whatever I&rsquo;ve tacked on to the whole shebang. Let&rsquo;s see what they look like in ggplot2.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">base_ecoregion_ggplot <span style="color:#f92672">+</span> <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;Ecoregions&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-13-1.png" alt="unnamed-chunk-13-1"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">base_province_ggplot <span style="color:#f92672">+</span> <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;Provinces&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-13-2.png" alt="unnamed-chunk-13-2"></p>
+<p>So what&rsquo;s the advantage of putting them into ggplot? Well, besides using all of the graphical aestehtics for your polygon fills and paths, you can add points (say, sites), lines, or whatnot. One example could be, let&rsquo;s say you wanted to visualize the borders of land (and countries!) on the map with ecoregions. Cool! Let&rsquo;s get the worldmap, turn it into a data frame, and then add a geom_path with the world map on it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(maps)
+worldmap <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">map</span>(<span style="color:#e6db74">&#39;world&#39;</span>, plot<span style="color:#f92672">=</span>F)
+worldmap.df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(longitude <span style="color:#f92672">=</span>worldmap<span style="color:#f92672">$</span>x,latitude<span style="color:#f92672">=</span>worldmap<span style="color:#f92672">$</span>y)
+
+base_province_ggplot<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_path</span>(data<span style="color:#f92672">=</span>worldmap.df, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>longitude, y<span style="color:#f92672">=</span>latitude, group<span style="color:#f92672">=</span><span style="color:#66d9ef">NULL</span>), color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;darkgreen&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/unnamed-chunk-14-1.png" alt="unnamed-chunk-14-1"></p>
+<p>The possibilities really are endless at this point for cool visualizations.</p>
+<p><em>EDIT</em> - OK, here&rsquo;s a cool example with filled polygons using a random &lsquo;score&rsquo; to determine fill and RColorBrewer for pretty colors!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#let&#39;s make some fancy colors</span>
+<span style="color:#a6e22e">library</span>(RColorBrewer)
+
+<span style="color:#75715e">#Make a data frame with Ecoregion as an identifier</span>
+thing <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(ECOREGION <span style="color:#f92672">=</span> regions<span style="color:#f92672">$</span>ECOREGION,
+                    score <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(<span style="color:#a6e22e">nrow</span>(regions), <span style="color:#ae81ff">-100</span>, <span style="color:#ae81ff">100</span>))
+
+<span style="color:#75715e">#merge the score data with the regions data frame</span>
+regions.df2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">merge</span>(regions.df, thing)
+
+<span style="color:#75715e">#plot!</span>
+<span style="color:#a6e22e">ggplot</span>(regions.df2) <span style="color:#f92672">+</span> <span style="color:#a6e22e">theme_bw</span>() <span style="color:#f92672">+</span>
+       <span style="color:#a6e22e">aes</span>(long,lat,group<span style="color:#f92672">=</span>group) <span style="color:#f92672">+</span>
+       <span style="color:#a6e22e">geom_polygon</span>(mapping<span style="color:#f92672">=</span><span style="color:#a6e22e">aes</span>(fill<span style="color:#f92672">=</span>score)) <span style="color:#f92672">+</span>
+       <span style="color:#a6e22e">geom_path</span>(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>) <span style="color:#f92672">+</span>
+       <span style="color:#a6e22e">coord_equal</span>() <span style="color:#f92672">+</span>
+       <span style="color:#a6e22e">scale_fill_gradientn</span>(colours<span style="color:#f92672">=</span><span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">11</span>, <span style="color:#e6db74">&#34;Spectral&#34;</span>))
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/03/Screen-Shot-2015-03-28-at-11.38.02-AM-1024x587.jpg" alt="Screen Shot 2015-03-28 at 11.38.02 AM"></p>
+<p>Next time, Leaflet! If I can figure out how to post it&rsquo;s output. And for those of you who don&rsquo;t know leaflet, prepare to be wowed.</p>
+<p>Also, all code for this example is in a <a href="https://gist.github.com/jebyrnes/0030715178ba77264268">gist over here</a>!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Mar 28, 2015 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2015/01/14/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2015/03/31/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

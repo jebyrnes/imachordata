@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" I&#39;ve Got the Power! &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/07/20/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-07-20T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="experiment" />
+    
+      <meta property="og:article:tag" content="power analysis" />
+    
+      <meta property="og:article:tag" content="urchins" />
+    
+  
+
+  <title>
+     I&#39;ve Got the Power! &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">I&#39;ve Got the Power!</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>There is nothing like that pain of taking a first look at fresh precious new data from a carefully designed experiment which took months of planning and construction, 8 divers working full days, and a lot of back-and-forth with colleagues, and then you find absolutely no patterns of interest.</p>
+<p>Yup, it&rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment.  Fortunately, I was on my way to a 4th of July dinner with my family up in the mountains of Colorado, so, I wasn&rsquo;t quite going to commit hari-kari on the spot.  Still, the moment of vertigo and neausea was somewhat impressive.</p>
+<p>Because, let&rsquo;s admit it, as much as science is about repeated failure until you get an experiment right (I mean, the word is &ldquo;experiment&rdquo; not &ldquo;interesting-meaningful-data-generating-excersise&rdquo;), it still never feels good.</p>
+<p>So, round one of my <a href="./?p=122">experiment</a> to test for feedbacks between sessile species diversity and urchin grazing showed bupkiss.  Not only was there no richness effect, but, well, there wasn&rsquo;t even a clear effect that urchins mattered.  High density urchin treatments lost about as much cover and diversity of algae and sessile inverts as treatments with low or no urchins in them.  What had gone wrong?  And can this project be salvaged?
+[caption id=&quot;attachment_179&rdquo; align=&quot;aligncenter&rdquo; width=&quot;500&rdquo; caption=&quot;Yeah, I can see a pattern here.  Sure&hellip;&quot;]<img src="http://www.imachordata.com/wp-content/uploads/2009/07/scattershot.png" alt="Yeah, I can see a pattern here.  Sure&hellip;">[/caption]</p>
+<p>Rather than immediately leaping to a brilliant biological conclusion (that was frankly not in my head) I decided to jump into something called Power Analysis.  Now, to most experimental scientists, power analysis is that thing you were told to do in your stats class to tell you how big your sample size should be, but, you know, sometimes you do it, but not always.  Because, really, it is often taught as a series of formulae with no seeming rhyme nor reason (although you know it has something to do with statistical significance).  Most folk use a few canned packages for ANOVA or regression, but the underlying mechanics seem obscure.  And hence, somewhat fear-provoking.</p>
+<p>Well, here&rsquo;s the dirty little secret of power analysis.  Really, at the end of the day, it&rsquo;s just running simulations of a model of what you THINK is going on, adding in some error, and then seeing how often your experimental design of choice will give you easily interpretable (or even correct) results.</p>
+<p>The basic mechanics are this.  Have some underlying deterministic model.  In my case, a model that described how the cover and diversity of sessile species should change given an initial diversity, cover, and number of urchins.  Then, add in random error - either process error in each effect itself, or just noise from the environment (e.g., some normal error term with mean 0 and a standard deviation).  Use this to get made-up data for your experiment.  Run your states and get parameter estimates, p values, etc.  Then, do the same thing all over again.  Over many simulations of a particular design, you can get an average coefficient estimates, the number of times you get a significant result, etc.  &ldquo;Power&rdquo; for a given effect is determined by the number of &ldquo;significant&rdquo; results (where you define if you&rsquo;re going with p=0.05 or whatnot) divided by the number of simulations.</p>
+<p>So that&rsquo;s just what I did.  I had coefficient estimates (albeit nonsignificant ones).  So, what would I need to detect them?  I started by playing with the number of replicates.  What if I had just put out more cages?  Nope.  The number of replicates I&rsquo;d need to get the power into the 0.8 range alone (and you want as close to 1 as possible) was mildly obscene.</p>
+<p>So, what about number of urchins?  What if instead of having 0 and 16 as my lowest and highest densities?</p>
+<p>Bingo.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/07/power.png" alt=""></p>
+<p>Shown above are two plots.  On the left, you see the p value for the species richness * urchin density interaction for each simulated run at a variety of maximum urchin densities.  On the right you see the power (# of simulations where p&lt;0.05 / total number of simulations).  Note that, for the densities I worked with, power is around 0.3?  And if I kicked it up to 50, well, things get much nicer.</p>
+<p>As soon as I saw this graph, the biology of the the Southern California Bight walked up behind me and whapped me over the head.  Of course.  I had been using a maximum density that corresponded to your average urchin barren.  The density of urchins that can hang out, and graze down any new growth.  But that&rsquo;s not the density of urchins that CREATED the barren in the first place.  Sure enough, looking at our long-term data, this new value of 50 corresponded to a typical front of urchins that would move through an area and lay waste to the kelp forest around it.</p>
+<p>Which is what I had been interested in the first place.</p>
+<p><em>headdesk</em></p>
+<p>So, round two is up and running now.  The cages are stocked with obscenely high densities of the little purple spikey dudes.  And we shall see what happens!  I am quite excited, and hopeful.  Because, I&rsquo;ve got the Power!</p>
+<p>(and so should you!)</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jul 20, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/experiment/">
+            #experiment
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="">
+            #power analysis
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/urchins/">
+            #urchins
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/07/16/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/08/03/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

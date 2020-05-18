@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" A Probabilistic Look at Predators, Prey, and Extinctions &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2011/12/19/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2011-12-19T00:00:00Z" />
+    
+  
+
+  <title>
+     A Probabilistic Look at Predators, Prey, and Extinctions &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">A Probabilistic Look at Predators, Prey, and Extinctions</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><em>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions.  For an introduction and list of other posts, <a href="http://www.imachordata.com/?p=951">see here</a>.</em></p>
+<p>To begin tackling the question of <a href="http://www.imachordata.com/?p=951">&ldquo;How does the structure of a food web influence the consequences of extinction?</a> let&rsquo;s begin by thinking about how changes in the number of predator species in a simple 2-level predator-prey food web can influence 1) the probability of prey being eaten and 2) the amount of energy transfered to the predator group. Looking back at our &ldquo;Master Food Web&rdquo;, we&rsquo;re zooming in on, say, the consequences of extinction in group E for group C.</p>
+<p>[caption id=&quot;attachment_969&rdquo; align=&quot;aligncenter&rdquo; width=&quot;457&rdquo; caption=&quot;Let&rsquo;s zoom in on one part of the general food web&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2011/11/2-level-zoom.png" alt="">[/caption]</p>
+<p>I&rsquo;m going to begin by thinking about whether we can solve this problem if we know the specific structure of a food web. Later on, I&rsquo;ll start talking about working from food web network properties such as degree distribution.</p>
+<p>The first thing to realize is that we&rsquo;re talking about probabilities. What&rsquo;s the probability of a prey item being eaten? What&rsquo;s the probability of energy getting to the predator trophic level? It&rsquo;s this probabilistic thinking that&rsquo;s at the centerpiece of the framework I&rsquo;m going to lay out.</p>
+<p><strong>A Probabilistic Framework for Food Webs and Predation</strong></p>
+<p>Let&rsquo;s establish some ground rules for this framework. For an arbitrary <a href="http://en.wikipedia.org/wiki/Network_topology">topology</a> (i.e., network structure), we can calculate the probability of an individual prey species being eaten quite simply. If there are any links between a prey item and any predator, that probability is 1. If there are no links, it is 0. Let&rsquo;s call this p(eaten). Control of a group of prey species can therefore be described as the average value of p(eaten) across the whole group of prey. If everyone has a predator, it&rsquo;s 1. If no one has a predator, it&rsquo;s 0. If half of the species have a predator, it&rsquo;s 0.5. And one should be able to calculate variance, etc., from that information.</p>
+<p>And just like that, we have a new network metric. p(eaten), which, really, is p(connected to the network by an incoming edge) if you want to get technical.</p>
+<p>Before we jump into numbers, let&rsquo;s look at some examples of how this p(eaten) metric works. First, a simple system with 2 predators, 2 prey. One predator eats one prey. One predator eats two prey. What&rsquo;s the average p(eaten) if 1 predator goes extinct?</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/11/22_web.png" alt=""></p>
+<p>The above figure shows 2 different possible configurations. When the generalist is knocked out, one prey item escapes consumption. p(eaten) for that extinction scenario is 1/2. When the specialist is knocked out, neither prey item escapes consumption. p(eaten) is 1. So, what&rsquo;s the average probability that a prey item will be eaten if 1 predator is going extinct? It&rsquo;s just the average of results from the two scenarios: 0.75.</p>
+<p>To hammer this home, consider the figure below for a three predator, three prey food web with two specialists and one generalists. I&rsquo;ve drawn all possible configurations for both the 1 predator extinction and the 2 predator extinction scenarios. Underneath each scenario is its p(eaten) and in bold to the left is the average p(eaten) for that number of extinctions.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/11/33_web-1024x523.png" alt=""></p>
+<p><strong>A Hypergeometric Approach to Predator-Prey Relationships. Whoah. You said Hypergeometric.</strong></p>
+<p>OK, so, the framework should be fairly clear at this point. Now, for that arbitrary topology, what will be the probability that a prey item will be eaten if some number, E, predators go extinct? First, we can calculate this for a single prey item, let&rsquo;s call it prey item i, if we know the number of predators who eat it - the prey in-degree, Di.</p>
+<p>Let&rsquo;s say there are Sp predators. Some number of them, Di, eat a single prey. We want to know the probability that, if E predators go extinct, of those that remain, what is the probability that none of them are predators of our prey item. This is p(not eaten). And then 1-p(not eaten) = p(eaten) for our little prey item.</p>
+<p>OK, so, given all of the possible combinations of predator extinctions, what is p(not eaten)? How do we find it?</p>
+<p>This is actually a special case of the <a href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">hypergeometric distribution</a>. Remember it from intro probability and statistics? No? OK. So. Briefly, let&rsquo;s say you are drawing balls from an <a href="http://en.wikipedia.org/wiki/Urn_problem">urn</a>. Some are white, some are black. What&rsquo;s the probability, if you draw X balls, that N of them will be black? This can be expressed as dh(N; # black, # white, X) since we&rsquo;re using the distributions probability density function. If you want to get into the details of it, <a href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">see here</a>.</p>
+<p>In the case of our prey item, N=0 - no predators are left that eat the prey. The number of draws is the number of species left after extinction: Sp-E. Black balls are predators of our prey item (Di), white balls are those that are, well, not. So, the probability that an individual prey item will not be eaten given E extinctions is</p>
+<p>p(eaten | E) = 1-dh(0; Di, Sp-Di, Sp-E)  <em>(1)</em></p>
+<p>To determine the average probability that a prey item will be eaten, we just average this over all prey.</p>
+<p>And if you want to get all gory with this, we can actually write down a function for the probability of being eaten given E extinctions:</p>
+<p>$latex p(eaten | E) = 1 - \overline{ \frac{ {{ S_{p}-D_{i} }\choose{ S_{p}-E }} }{  {{ S_{p} }\choose{ S_{p}-E }} }} $</p>
+<p>N.B. In putting this together, I&rsquo;ve also realized that we can use a slightly more intuitive general equation (but the gory details version is uglier).  That is, rather than thinking about the probability of having 0 predators left after E extinctions, what is the probability of having all Di predators of a prey item removed by extinction.  This is still p(not eaten).  And it leads to the following very similar, and potentially more understandable, equation.  Any preferences in the peanut gallery?</p>
+<p>p(eaten | E) = 1-dh(Di; Di, Sp-Di, E)  <em>(2)</em></p>
+<p><strong>A Last Note on Energy Transfer from Prey to Predators</strong></p>
+<p>The nice thing about this averaged function is that it is simultaneously both the average probability that the prey trophic level will be under control by predators and the average probability that energy entering the food web via prey will make its way up to the predator trophic level. Basically, p(prey eaten) = p(energy gets to predator).</p>
+<p><strong>A Final Note of Wonder and some R Code</strong></p>
+<p>So, the thing that amazes me the most about the results above is that it all hinges on the prey.  One actually doesn&rsquo;t need to know anything about the diet of individual predators.  Instead, one only needs to know how many things eat each prey item.  This makes the framework easy to code up computationally, and easy to similate, as instead of coming up with all possible adjacency matrices, one can just look at all possible combinations of Di given some number of total predators.  To demonstrate how this can be nice, here&rsquo;s the R code I use to calculate p(eaten):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Sp is the diversity of the predators</span>
+<span style="color:#75715e">#E is the number of extinctions</span>
+<span style="color:#75715e">#prey.vec is the in-degree (# of predators) of each prey species</span>
+
+pEaten<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(Sp, E, prey.vec) {
+	<span style="color:#75715e">#see ?dhyper for more on hypergeometric distributions in R</span>
+	<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">dhyper</span>(prey.vec,prey.vec, Sp<span style="color:#f92672">-</span>prey.vec, E))
+}
+
+<span style="color:#75715e">#If you find the 0 predators remaining formulation more intuitive</span>
+pEaten2<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">function</span>(Sp.max, E, prey.vec) {
+	<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span><span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">dhyper</span>(<span style="color:#ae81ff">0</span>,prey.vec, Sp.max<span style="color:#f92672">-</span>prey.vec, Sp.max<span style="color:#f92672">-</span>E))
+	}
+</code></pre></div><p>Great, and thus end-eth the big information boom. This is the kind of thinking that will underlie everything as I move forward, so read and digest this. If there is something that isn&rsquo;t clear, let me know. Once you start to think about the probability of connections, I think it becomes a good bit more transparent.  I&rsquo;ll talk validation and generalization to statistical network probabilities in my next post.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Dec 19, 2011 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2011/12/16/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2011/12/27/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

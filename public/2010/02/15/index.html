@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Viva la Neo-Fisherian Liberation Front! &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2010/02/15/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2010-02-15T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="p-value" />
+    
+      <meta property="og:article:tag" content="rb editor selection" />
+    
+      <meta property="og:article:tag" content="statistics" />
+    
+  
+
+  <title>
+     Viva la Neo-Fisherian Liberation Front! &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Viva la Neo-Fisherian Liberation Front!</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><strong>p≤0.05</strong></p>
+<p><a href="http://researchblogging.org/news/?p=992"><img src="http://www.researchblogging.org/public/citation_icons/rb_editors-selection.png" alt="This post was chosen as an Editor&rsquo;s Selection for ResearchBlogging.org"></a> Significant p-values.  For so many scientists using statistics, this is your lord.  Your master.  Heck, it has its own <a href="http://www.facebook.com/pages/p005/82030742969">facebook group filed under religious affiliations</a> (ok, so, maybe I created that.)  And it is a concept to whose slavish devotion we may have sacrificed a good bit of forward progress in science over the past half century.  Time to blow up the cathedral!  Or so says <a href="http://www.sekj.org/PDF/anz46-free/anz46-311.pdf">Stuart Hurlbert and Celia Lombardi in a recent fascinating review</a>.</p>
+<p>But first, for the uninitiated, <a href="http://en.wikipedia.org/wiki/P_value">what does it mean</a>?  Let&rsquo;s say you&rsquo;re running an experiment.  You want to see whether fertilizer affects the growth rate of plants.  You get a bunch of random plots, seed them, and add fertilizer to half of them.  You then compare the mean growth rates of the two groups of plots.  But are they really different?  In essence, a p value gives you the probability that they are the same.  And if it is very low, you can reject the idea that they are the same.  Well, sort of.</p>
+<p>A p value, as defined by the Patron Saint of Statistics for us experimental grunts, <a href="http://en.wikipedia.org/wiki/R._A._Fisher">R. A. Fisher</a>, is the probability of observing some result given that a hypothesis being tested is true.  Of, if d=data, and h=a hypothesis, p(d|h) in symbolic language - | means given.  Typically, this hypothesis being tested is a null hypothesis - that there is no difference between treatments, or the slope of a line is 0.  However, note a few things about this tricky statement.  1) It is not the probability of <em>accepting</em> the hypothesis you&rsquo;re trying to reject.  2) It makes no claims any particular hypothesis being true.  For all practical purposes, in the framework of testing a null hypothesis, however, a low p value means there is a very low probability that</p>
+<p>OK.  But what is this 0.05 thing all about?  Well, p will range from 0 to 1.  As formalized by <a href="http://en.wikipedia.org/wiki/Jerzy_Neyman">Jerzy Neyman</a> and <a href="http://en.wikipedia.org/wiki/Egon_Pearson">Egon Pearson</a> (no, not THAT <a href="http://en.wikipedia.org/wiki/Egon_Spengler">Egon</a>), the idea of Null Hypothesis Significance Testing (NHST) is one where the researcher established a critical value of p, called α.  The researcher then tests the null statistical hypothesis of interest, and if p falls at or below alpha, the results are deemed &lsquo;statistically significant&rsquo; - i.e. you can safely reject the null.  By historical accident of old ideas, copyright, a little number rounding, a lack of computational power to routinely calculate exact p values in the 30s, and some early textbooks 0.05 has become <em>the</em> standard for much of science.</p>
+<p>Indeed, it is mother&rsquo;s milk for any experimental scientist who has taken a stats course in the last 40+ years.  It is enshrined in some journal publication policies.  It is used for the quality control of a great deal of biomedical research.  It is the result we hope and yearn for whenever we run an experiment.</p>
+<p>It may also be a false god - an easy yes/no that can lead to into the comfortable trap of not thinking critically about a problem.  After all, if your test wasn&rsquo;t &ldquo;significant&rdquo;, why bother with the results?  This is a dangerous line of thinking. It can seriously retard scientific progress and certainly has led to all sorts of jerrymandering of statistical tests and datasets, or even adjusting α up to 0.10 or down to 0.01, depending on the desired result.  Or, worse, scientists misreading the stats, and claiming that a REALLY low p value meant a REALLY large effect (seriously!) or that a very high value means that one can accept a null hypothesis.</p>
+<p>Scientists are, after all, only human.  And are taught by other humans. And while they are trained in statistics, are not statisticians themselves.  All too human errors creep in.</p>
+<p>Aside from reviewing a tremendous amount of literature, Hurlbert and Lombardi perhaps best sum up the case as follows - suppose you were to look at the results of two different statistical tests.  One one, p=0.051.  In the other, p=0.049.  If we are going with the α=0.05 paradigm, then one test we would not reject the null.  In the other we would and label the effect as &lsquo;significant&rsquo;.</p>
+<p>Clearly, this is a little too arbitrary.  H&amp;L; lay out a far more elegant solution - one that is being rapidly incorporated in many fields and has been advocated for some time in the statistical literature.  It is as follows:</p>
+<ol>
+<li>Report a p-value for a test.  2) Do not assign it significance, but rather refer to the level of support it gives for rejecting a null - strong, weak, moderate, practically non-existent.  Make sure this statement of support is grounded in the design and power of the experiment.  Suspend judgement on rejecting a null if the p value is high, as p-value testing is NOT the same as giving evidence FOR a null (something so many of us forget).  3)  Use this in accumulation with other lines of evidence to draw a conclusion about a research hypothesis.</li>
+</ol>
+<p>This neoFisherian Significance Assessment (NFSA) seems so simple, so elegant.  And it puts the scientist back into the science in a way that NHST does not.</p>
+<p>There have been of course other proposals.  Many have advocated throwing out p values and reporting confidence intervals and effect sizes.  This information can be incredibly invaluable, but CIs can often be p values in disguise.  Effect sizes are great, but without an estimate of variability, they can be deceiving.  Indeed, the authors argue that p value reporting is <em>the</em> way to assess the support for rejecting a null, but that the nuance with which it is done is imperative.</p>
+<p>They also review several other alternatives and critiques - Bayesian ideas or information theoretic approaches, although I think there is some misunderstanding there that leads the authors to see conflict with their views where there actually is none.  Still, it does not distract from their main message.</p>
+<p>It should also be noted that this is one piece of a larger agenda by the authors to force scientists (and particularly ecologists) to rethink how we approach statistics.  There&rsquo;s another paper out there that demonstrates why <a href="http://dx.doi.org/10.1111/j.1442-9993.2009.01946.x">one-tailed t-tests are the devil</a> (the <a href="http://www.bio.sdsu.edu/pub/stuart/2009LombardiAppendix.pdf">appendix</a> of which is worth leading to see how conflicted even textbooks on the subject can be), and another is in review on why corrections for multiple hypothesis testing (e.g. Tukey tests and Bonferroni corrections) are in many cases quite unnecessary.</p>
+<p>Strong stuff (although who would expect less from the man who gave us the clarion call against <a href="">pseudoreplication</a>).  But intellectually, the arguments make a lot of sense.  If anything, it forces a greater concentration on the weight of evidence, rather than a black-and-white situation.  It puts the scientist back in the limelight, forcing them to build a case and apply their knowledge, skills, and creativity as a researcher.</p>
+<p>Quite liberating.  We shall see if it is adopted, and where it leads.  I leave you with an excerpt from the concluding remarks.</p>
+<!-- raw HTML omitted -->
+<p>Hurlbert, S. H., &amp; Lombardi, C. M. (2009). Final collapse of the Neyman-Pearson decision theoretic framework and rise of the neoFisherian Annales Zoologici Fennici, 46, 311-349</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Feb 15, 2010 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/p-value/">
+            #p-value
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/r/">
+            #rb editor selection
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/statistics/">
+            #statistics
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2010/02/12/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2010/03/05/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

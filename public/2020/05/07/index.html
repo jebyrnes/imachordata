@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" The Covid19R Project &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2020/05/07/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2020-05-07T00:00:00Z" />
+    
+  
+
+  <title>
+     The Covid19R Project &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">The Covid19R Project</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    
+<script src="../../../rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p>We want our coronavirus data! We want it now! We want it TIDY!</p>
+<p>tl;dr Go check out the <a href="https://covid19r.github.io/covid19R/">Covid19R project</a> and it’s <a href="https://covid19r.github.io/documentation/">documentation</a> - a way for many people to bring their unique data harvesting efforts of Covid-19 data into a single tidy data format, and then be redistributed through a single low-dependency package, <a href="https://covid19r.github.io/covid19R/">covid19R</a>. It’s all one big work-in-progress, but check it out!</p>
+<div id="ok-the-story" class="section level2">
+<h2>OK, the story!</h2>
+<p>Back in February (remember February), while teaching <a href="http://biol355.github.io">data science</a>, I was trying to think of ways to spice up the class with more relevant data. We were in the midst of data tidying, when I saw a tweet from <a href="https://twitter.com/Rami_Krispin/">Rami Krispin</a></p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">I packaged the data behind the Johns Hopkins University <a href="https://twitter.com/hashtag/CoronavirusOutbreak?src=hash&amp;ref_src=twsrc%5Etfw">#CoronavirusOutbreak</a>  dashboard into a <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/tidy?src=hash&amp;ref_src=twsrc%5Etfw">#tidy</a> format dataset package. Thanks to Johns Hopkins University Center for Systems Science and Engineering (JHU CCSE) for making the data public!<a href="https://t.co/M9iJNyzP94">https://t.co/M9iJNyzP94</a></p>&mdash; Rami Krispin (@Rami_Krispin) <a href="https://twitter.com/Rami_Krispin/status/1227613923462877188?ref_src=twsrc%5Etfw">February 12, 2020</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>Cool! A coronavirus data package. I went on to make a neat <a href="https://biol355.github.io/Labs/coronavirus.html">data tidying lab</a> - well, I think it’s neat - as well as weaving the data into other parts of the course. I also made a few pull requests on the repo to add features….as did <a href="https://twitter.com/dobbleobble">Amanda Dobbyn</a>. Rami contacted both of us, and thus a collaboration was born!</p>
+</div>
+<div id="tidy-covid-19-data" class="section level2">
+<h2>Tidy Covid-19 Data</h2>
+<p>We had been pulling from many different data sources, and found lots of difficulty in bringing them together. I had used <a href="https://docs.ropensci.org/rnaturalearth/">rnaturalearth</a> to get at unique place identifiers, but the proliferation of data sets and data aggregation efforts was bewildering. How to get a handle on the wide variety of data types, spatial location types, and more?</p>
+<p>So, we began designing a very simple long format data specification and agreed to make our data packages create data in that format. I wrote up a package to harvest the updated <a href="https://covid19r.github.io/covid19nytimes/">New York Times data</a> as an example.</p>
+<table class="table table-striped table-bordered table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+date
+</th>
+<th style="text-align:left;">
+location
+</th>
+<th style="text-align:left;">
+location_type
+</th>
+<th style="text-align:left;">
+location_code
+</th>
+<th style="text-align:left;">
+location_code_type
+</th>
+<th style="text-align:left;">
+data_type
+</th>
+<th style="text-align:right;">
+value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+cases_total
+</td>
+<td style="text-align:right;">
+8437
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+01
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+deaths_total
+</td>
+<td style="text-align:right;">
+315
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+02
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+cases_total
+</td>
+<td style="text-align:right;">
+369
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+02
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+deaths_total
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+cases_total
+</td>
+<td style="text-align:right;">
+9305
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2020-05-05
+</td>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+04
+</td>
+<td style="text-align:left;">
+fips_code
+</td>
+<td style="text-align:left;">
+deaths_total
+</td>
+<td style="text-align:right;">
+395
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="one-package-to-rule-them-all" class="section level2">
+<h2>One Package to Rule Them All</h2>
+<p>This was good - but, how would people get data?</p>
+<p>We noticed that with nearly every different data set, we needed a different approach to data manipulation. If we threw all of our efforts into a single package, the dependency tree would rapidly spiral out of control. This seemed not good.</p>
+<p>Many small packages, each specializing in unique data sets or collections of data sets seemed good, but…. how to make all of that searchable? Did we really want to make people have to install a bazillion different small packages? This seemed inefficient.</p>
+<p>So, we took a cue from the many excellent packages by the good folk at <a href="https://ropensci.org/">ropensci</a> and created a master package - <a href="https://covid19r.github.io/covid19R/">covid19R</a>. This package wouldn’t do anything, save redistribute data files. Moreover, so it didn’t have to depend on all of those little packages, and thus have all of those same problems as above, we built a separate <a href="https://github.com/Covid19R/covid19Rdata">covid19Rdata</a> package/repo that updates once daily to refresh all of the data from any package that is part of the project.</p>
+<p>So, you can get the information about what data is part of this Tidy Covid-19 data project, choose a relevant data set, and grab it, all without racking having to download tons of packages, satisfy weird dependencies, or otherwise pull your hair out!</p>
+<p>Here’s what’s part of the project at time of writing</p>
+<table class="table table-striped table-bordered table-condensed" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+data_set_name
+</th>
+<th style="text-align:left;">
+package_name
+</th>
+<th style="text-align:left;">
+function_to_get_data
+</th>
+<th style="text-align:left;">
+data_details
+</th>
+<th style="text-align:left;">
+data_url
+</th>
+<th style="text-align:left;">
+license_url
+</th>
+<th style="text-align:left;">
+data_types
+</th>
+<th style="text-align:left;">
+location_types
+</th>
+<th style="text-align:left;">
+spatial_extent
+</th>
+<th style="text-align:left;">
+has_geospatial_info
+</th>
+<th style="text-align:left;">
+get_info_passing
+</th>
+<th style="text-align:left;">
+refresh_status
+</th>
+<th style="text-align:left;">
+last_refresh_update
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+covid19nytimes_states
+</td>
+<td style="text-align:left;">
+covid19nytimes
+</td>
+<td style="text-align:left;">
+refresh_covid19nytimes_states
+</td>
+<td style="text-align:left;">
+Open Source data from the New York Times on distribution of confirmed Covid-19 cases and deaths in the US States. For more, see <a href="https://www.nytimes.com/article/coronavirus-county-data-us.html" class="uri">https://www.nytimes.com/article/coronavirus-county-data-us.html</a> or the readme at <a href="https://github.com/nytimes/covid-19-data" class="uri">https://github.com/nytimes/covid-19-data</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv" class="uri">https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/nytimes/covid-19-data/blob/master/LICENSE" class="uri">https://github.com/nytimes/covid-19-data/blob/master/LICENSE</a>
+</td>
+<td style="text-align:left;">
+cases_total, deaths_total
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+country
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+Passed
+</td>
+<td style="text-align:left;">
+2020-05-07 16:06:49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+covid19nytimes_counties
+</td>
+<td style="text-align:left;">
+covid19nytimes
+</td>
+<td style="text-align:left;">
+refresh_covid19nytimes_counties
+</td>
+<td style="text-align:left;">
+Open Source data from the New York Times on distribution of confirmed Covid-19 cases and deaths in the US by County. For more, see <a href="https://www.nytimes.com/article/coronavirus-county-data-us.html" class="uri">https://www.nytimes.com/article/coronavirus-county-data-us.html</a> or the readme at <a href="https://github.com/nytimes/covid-19-data" class="uri">https://github.com/nytimes/covid-19-data</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv" class="uri">https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/nytimes/covid-19-data/blob/master/LICENSE" class="uri">https://github.com/nytimes/covid-19-data/blob/master/LICENSE</a>
+</td>
+<td style="text-align:left;">
+cases_total, deaths_total
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+country
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+Passed
+</td>
+<td style="text-align:left;">
+2020-05-07 16:06:51
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+covid19france
+</td>
+<td style="text-align:left;">
+covid19france
+</td>
+<td style="text-align:left;">
+refresh_covid19france
+</td>
+<td style="text-align:left;">
+Open Source data from opencovid19-fr on distribution of confirmed Covid-19 cases and deaths in the US States. For more, see <a href="https://github.com/opencovid19-fr/data" class="uri">https://github.com/opencovid19-fr/data</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv" class="uri">https://raw.githubusercontent.com/opencovid19-fr/data/master/dist/chiffres-cles.csv</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/opencovid19-fr/data/blob/master/LICENSE" class="uri">https://github.com/opencovid19-fr/data/blob/master/LICENSE</a>
+</td>
+<td style="text-align:left;">
+confirmed, dead, icu, hospitalized, recovered, discovered
+</td>
+<td style="text-align:left;">
+county, region, country, overseas collectivity
+</td>
+<td style="text-align:left;">
+country
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+Passed
+</td>
+<td style="text-align:left;">
+2020-05-07 16:06:59
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CanadaC19_cases
+</td>
+<td style="text-align:left;">
+CanadaC19
+</td>
+<td style="text-align:left;">
+refresh_CanadaC19_cases
+</td>
+<td style="text-align:left;">
+Open Source data from multiple public reporting data throughout Canada. For more, see <a href="https://github.com/ishaberry/Covid19Canada" class="uri">https://github.com/ishaberry/Covid19Canada</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://raw.githubusercontent.com/ishaberry/Covid19Canada/master/cases.csv" class="uri">https://raw.githubusercontent.com/ishaberry/Covid19Canada/master/cases.csv</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/debusklaneml/CanadaC19/blob/master/LICENSE" class="uri">https://github.com/debusklaneml/CanadaC19/blob/master/LICENSE</a>
+</td>
+<td style="text-align:left;">
+cases_new
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+Passed
+</td>
+<td style="text-align:left;">
+2020-05-07 16:07:00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+covid19us
+</td>
+<td style="text-align:left;">
+covid19us
+</td>
+<td style="text-align:left;">
+refresh_covid19us
+</td>
+<td style="text-align:left;">
+Open Source data from COVID Tracking Project on the distribution of Covid-19 cases and deaths in the US. For more, see <a href="https://github.com/opencovid19-fr/data" class="uri">https://github.com/opencovid19-fr/data</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://covidtracking.com/api" class="uri">https://covidtracking.com/api</a>
+</td>
+<td style="text-align:left;">
+<a href="https://github.com/aedobbyn/covid19us/blob/master/LICENSE.md" class="uri">https://github.com/aedobbyn/covid19us/blob/master/LICENSE.md</a>
+</td>
+<td style="text-align:left;">
+positive, negative, pending, hospitalized_currently, hospitalized_cumulative, in_icu_currently, in_icu_cumulative, on_ventilator_currently, on_ventilator_cumulative, recovered, death, hospitalized, total, total_test_results, death_increase, hospitalized_increase, negative_increase, positive_increase, total_test_results_increase
+</td>
+<td style="text-align:left;">
+state
+</td>
+<td style="text-align:left;">
+country
+</td>
+<td style="text-align:left;">
+FALSE
+</td>
+<td style="text-align:left;">
+TRUE
+</td>
+<td style="text-align:left;">
+Passed
+</td>
+<td style="text-align:left;">
+2020-05-07 16:07:03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="what-is-a-covid19r-project-package" class="section level2">
+<h2>What is a Covid19R Project Package?</h2>
+<p>We have a few requirements for a package to be added to our project. First, <a href="https://github.com/Covid19R/covid19R/issues">file an issue</a> that you’re creating one! Then, take a gander at our <a href="https://covid19r.github.io/documentation/building-a-new-data-package.html">documentation on building packages</a>. We’ve provided a <a href="https://github.com/Covid19R/covid19_package_template">template</a> for you to use, if you’re new to package building.</p>
+<p>We then ask that you provide at least <a href="https://covid19r.github.io/documentation/standardized-package-functions.html">two functions in your package</a> - a <code>get_info_*()</code> function, where * is the package name, that supplies standard information that we chonk into the table y’all see above. And for each data set a <code>refresh_*()</code> function, where * is the data set name, that pulls in tasty fresh data and reformats it into our <a href="https://covid19r.github.io/documentation/data-format-standard.html">tidy Covid-19 data standard</a> using an ever-expanding <a href="https://covid19r.github.io/documentation/standardized-vocabulary.html">standardized vocabulary</a> - and you can file issues to keep expanding it.</p>
+</div>
+<div id="our-request-to-the-community" class="section level2">
+<h2>Our request to the community</h2>
+<p>We’d love this to become a much larger community - have existing Covid-19 data package developers implement our two simple functions so we can add their data to the project, provide support for people interested in creating data distribution packages - maybe their first package ever - to use our format so that data is good and tidy. We’re very interested in conversation - <a href="https://github.com/Covid19R/covid19R/issues">start one up here</a> for the moment!</p>
+</div>
+<div id="our-hope" class="section level2">
+<h2>Our Hope</h2>
+<p>What we hope is that, with many datasets going in using common best practices, we’ll be able to facilitate discovery. Data cleaning and joining is sometimes 80-90% of the effort of any data science project. With a standard format, a standardized vocabulary, and the usage of standard geospatial codes, we hope to seriously reduce that time in order to speed up other work.</p>
+<p>Won’t you join us?</p>
+</div>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          May 7, 2020 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2020/05/06/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2020/05/10/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

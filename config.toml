@@ -6,6 +6,8 @@ googleAnalytics = ""
 disqusShortname = "im-a-chordata-urochordata"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 relativeURLs = true
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = "true"
 
 
 # Pagination
@@ -23,7 +25,7 @@ home = ["HTML", "RSS"]
 
 
 [params]
-    description = "A website built through Hugo and blogdown."
+    description = "Marine Data Science for All, Regardless of Backbone! Built through Hugo and blogdown."
 
 
     friends = false
@@ -45,7 +47,11 @@ home = ["HTML", "RSS"]
 #theme specific
 
 	subtitle = "Marine Data Science for All, Regardless of Backbone!"
-
+    # Short subtitle/tagline. This is displayed in the header.
+    themecolor = "#FFFFFF" # Defines the tab color in Chrome for Android.
+    # To load additional CSS styles
+    customCSS = ['hamburg.css']
+    
 [[menu.main]]
     name = "About"
     url = "/about/"
@@ -59,13 +65,6 @@ home = ["HTML", "RSS"]
     name = "Lab Site"
     url = "https://byrneslab.net"
 
-[[params.addtional_menus]]
-      title =  "BOOKS"
-      href =  "/top/books/"
-[[params.addtional_menus]]
-      title =  "ABOUT"
-      href =  "/top/about/"
-
 
 [params.logo]
     url = "logo.png"
@@ -76,6 +75,6 @@ home = ["HTML", "RSS"]
 
 [params.social]
     rss            = true
-    #email          = "youremail@gmail.com"
+    #email          = "jarrett.byrnes@gmail.com"
     twitter       = "http://twitter.com/jebyrnes"
     github         = "https://github.com/jebyrnes"

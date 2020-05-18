@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Sometimes, you just need to use a plyr &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/07/10/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-07-10T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="coding" />
+    
+      <meta property="og:article:tag" content="plyr" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+  
+
+  <title>
+     Sometimes, you just need to use a plyr &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Sometimes, you just need to use a plyr</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><img src="http://plyr.had.co.nz/pliers.png" alt="">I haven&rsquo;t posted anything about <a href="http://www.r-project.ork">R</a>-nerdery in quite some time.  But I have to pause for a moment, and sing the praises of a relatively new package that has made my life exponentially easier.  The <a href="http://had.co.nz/plyr/">plyr</a> package.</p>
+<p>R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives.  This returns another vector or list.</p>
+<p>This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions.  Hence, one often resorts to a for loop.</p>
+<p>Let me give you an example.  Let&rsquo;s say I have some data from a simple experiment where I wanted to look at the effect of adding urchins, lobsters, or both on a diverse community of sessile invertebrates - mussels, squirts, etc.  Heck, let&rsquo;s say, I had <strong>one gazillion species</strong> whose responses I was interested in.  Now let&rsquo;s say I want a simple summary table of the change in the density each species - and my data has before and after values.  So, my data would look like this.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>So, each row represents the measurement for one species in one replicate either before or after the experiment.  Now, previously, to get an output table with the mean change for each species for each treatment, I would have had to do something like this:</p>
+<pre><code>#first, create blank list of vectors waiting to be filled
+#as well as blank vectors to remember what treatment
+#combinations we're looking at
+mean.list&lt;-list()
+urchin.vec&lt;-vector()
+lobster.vec&lt;-vector()
+for(i in 1:gazillion) mean.list[[paste(&quot;sp&quot;,i,sep=&quot;.&quot;)]]==vector()
+
+#then, a for loop for each combination
+for (i in levels(my.data$Urchins)){
+  for (j in levels(my.data$Lobsters)){
+    urchin.vec&lt;-c(urchin.vec,i)
+    lobster.vec&lt;-c(lobster.vec,j)
+    #get the right subset of the data
+    sub.data&lt;-subset(my.data, my.data$Urchins==i &amp; my.data$Lobster==j)
+
+    #now loop over all species
+    for (k in 1:gazillion){
+    sub.data&lt;-subset(sub.data, sub.data$Species==k)
+    before.data&lt;-subset(sub.data, sub.data$Before.After==&quot;Before&quot;)
+    after.data&lt;-subset(sub.data, sub.data$Before.After==&quot;After&quot;)
+    mean.list[[paste(&quot;sp&quot;,i-3,sep=&quot;.&quot;)]]&lt;-
+    c(mean.list[[paste(&quot;sp&quot;,i-3,sep=&quot;.&quot;)]], mean(after.data[k]-before.data[k])
+
+    }
+  }
+}
+
+#then turn it into a data frame to match back up to the right values
+mean.data&lt;-as.data.frame(mean.list)
+mean.data$urchins&lt;-as.factor(urchin.vec)
+mean.data$lobsters&lt;-as.factor(lobster.vec)
+</code></pre>
+<p>Ok, did that exhaust you as much it did me?  Now, here&rsquo;s how to get the same result using ddply (more on why it&rsquo;s called ddply in a moment)</p>
+<pre><code>#a function where, if you give it a data frame with species 1 - gazillion
+#will give you the mean for each species.  Note, the which statement
+#lets me look at before and after data separately
+#Also note the Change= in the return value.  That gives a new column name
+#for multiple return columns, just return a vector, with each
+#new column getting it's own name
+
+tab.means&lt;-function(df){ return(Change =
+            df$Density[which($Before.After==&quot;After&quot;)]
+            - df$Density[which($Before.After==&quot;Before&quot;)]) }
+
+#now use ddply
+mean.data&lt;-ddply(df, c(&quot;Urchins&quot;, &quot;Lobsters&quot;, &quot;Species&quot;), tab.means))
+
+#ok, in fairness, each species doesn't have it's own column.  But, we can
+#just use reshape
+mean.data&lt;-reshape(mean.data, timevar=&quot;Species&quot;, idvar=c(&quot;Urchins&quot;, &quot;Lobsters&quot;, direction=&quot;wide)
+</code></pre>
+<p>Um.  Whoah.  Notice a small difference there.  Now, perhaps the earlier code could have been cleaned up a bit with reshape, but still, 6 lines of code versus 18 - and most of that 18 was bookkeeping code, not something doing real useful computation.</p>
+<p>Soooo&hellip;. Check out plyr!  It will make your life a happier, more relaxed place.  Enjoy!</p>
+<p>(p.s. I&rsquo;m noticing wordpress is ignoring all of my code indenting - anyone have any quick fixes for that?)</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jul 10, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/coding/">
+            #coding
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/plyr/">
+            #plyr
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/07/01/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/07/12/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

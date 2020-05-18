@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Food Web Structure and Changing Diversity at Two Levels &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2012/01/09/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2012-01-09T00:00:00Z" />
+    
+  
+
+  <title>
+     Food Web Structure and Changing Diversity at Two Levels &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Food Web Structure and Changing Diversity at Two Levels</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><em>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions.  For an introduction and list of other posts, <a href="http://www.imachordata.com/?p=951">see here</a>.</em></p>
+<p>OK, last but on two-level food webs for the moment. I&rsquo;ve examined how food web structure can change the effects of predator or prey extinctions on both top-down and bottom-up control. A number of folk (including me) have theorized that changes in diversity at two trophic levels should interact - that the consequences of predator diversity loss should change as prey species are lost.</p>
+<p>So bearing in mind our master food web and the little 2-level sliver of it we&rsquo;re thinking about, let&rsquo;s interrogate this idea. (And yes, that use of the word interrogate goes out to Scott Richmond).</p>
+<p>[caption id=&quot;attachment_969&rdquo; align=&quot;aligncenter&rdquo; width=&quot;457&rdquo; caption=&quot;Let&rsquo;s zoom in on one part of the general food web&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2011/11/2-level-zoom.png" alt="">[/caption]</p>
+<p><strong>Thinking about Extinction in Our Framework Thus Far</strong></p>
+<p>Thinking about what I&rsquo;ve put together thus far, I&rsquo;m not so certain that changing diversity at two trophic levels should influence predation or energy transfer beyond our understanding what&rsquo;s happening with one trophic level. The simple probabilistic equations that I&rsquo;ve shown to describe energy transfer and predation both rest on thinking about the average consequences for individual species. Each equation rests on taking a mean value of the probability of, say, being eaten over all prey when predators go extinct. If prey are going extinct as well, that should&rsquo;t affect the outcome.</p>
+<p>Why? Think about it this way. Let&rsquo;s say you have a food web of 3 predators and 3 prey, and each trophic level is losing one species. For prey species a, the probability that it will be eaten does not change. This is because implicit in asking the question of what are the consequences of extinction for species a, we are asking what are the consequences for species a in all food webs in which it exists. Thinking further, what is, say p(eaten) for a species that does not exist? It&rsquo;s not 1, but it cannot be 0 either. We just don&rsquo;t think about it. This argument works as well when thinking about energy transfer.</p>
+<p>So, I&rsquo;d argue, that to understand p(eaten) we simply use the equations derived to understand p(eaten) under predator loss and to understand p(energy) we use the equations derived to understand energy transfer under prey species loss.</p>
+<p>Well that chain of logic is uncomfortable. I don&rsquo;t like where it led at all. I guess tacitly it suggests that maybe the variance of p(eaten) and p(energy) should somehow change&hellip; But I haven&rsquo;t so much thought about variance other than thinking it would work in a similar way to means. Maybe I&rsquo;m missing something. <em>What is the proper way to calculate variances here? How do simultaneous extinctions affect this variance?</em></p>
+<p>Still, even for the mean value of p(eaten) I&rsquo;m no so sure. Let&rsquo;s go draw some webs and see if this plays out.</p>
+<p><strong>Webs show that my Logic is Correct. Great.</strong></p>
+<p>Let&rsquo;s start with our 2 predator, 2 prey food web with 1 of each going extinct.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/12/1_1_2.png" alt=""></p>
+<p>Aaaaand - yeah, those results match exactly with what would be predicted from p(eaten) and p(energy) looking at predator or prey loss independently. The variance is larger - doubled, actually (from 0.125 to 0.25). Interesting. What about something more radical, say, a 3 predator, 3 prey web with 2 predators and 1 prey going extinct.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/12/2_1_3.png" alt=""></p>
+<p>Yup, still the same as the single-level results, although, here the variance only increases slightly (by a factor of 1.03125).</p>
+<p>So, clearly, the single-level results are true for the mean. The variance is still&hellip;yeah, I don&rsquo;t quite have that figured out.</p>
+<p><em>Comparison with the Experimental Literature</em></p>
+<p>So, this result, that you can predict the average effects of changing diversity at two trophic levels at the same time by looking at the results for changing diversity of just one trophic level - does it agree with the experimental literature?  Let&rsquo;s think about one of my favorite examples - Lars Gamfeldt&rsquo;s excellent <a href="http://dx.doi.org/10.1111/j.1461-0248.2005.00765.x">2005 Ecology Letters piece</a>.</p>
+<p>In this paper, Lars (LARS!) shows that he wishes I was working on the paper we are collaborating on rather than writing this entry.</p>
+<p>Sorry, rather, Gamfeldt shows that prey and consumer species richness can interact.  The key quote from the abstract is &ldquo;&hellip;prey richness did not increase resistance to consumption when consumers were present. Instead, our results indicated enhanced energy transfer with simultaneous increasing richness of consumers and prey.&rdquo;</p>
+<p>I find this heartening.  Here, p(eaten) was determined by consumers, as predicted. The second statement is curious as well and hearkens to Figure 4 of the paper where total biovolume (predators and prey) is clearly the highest when all 3 predators and prey are present.  This is clear evidence that energy transfer into this food web is at its highest here.  It drops, though, as consumer richness, but not prey richness, changes.  Which, actually, we&rsquo;d predict based on our in initial examination of energy transfer in the presence of <a href="http://www.imachordata.com/?p=965">predator loss alone</a>.  So&hellip;Gamfeldt&rsquo;s results do appear to echo what I&rsquo;ve shown here.  And for anything with less than 3 consumers shows a consistent relationship for producer loss.</p>
+<p>Ah ha.  So&hellip;I admit, intuitively, I still think that under loss at both levels, p(energy) and p(eaten) should be products of the results from both the prey and predator equations together. But they don&rsquo;t appear to be (otherwise for the 2-2 web with 1 loss at each level, we&rsquo;d have p(eaten) and p(energy) = 0.5625).  Hrm.  This bears more thinking - at least for p(energy) why one does not have to incorporate diversity at both trophic levels.  Clearly there&rsquo;s something a little more complex that needs to be represented in a general equation for p(energy | Er, Ep) though.  And likely p(eaten) as well.  Hope to come back to that later.</p>
+<p>That, and I&rsquo;m starting to (unsurprisingly) see that some meta-analysis to compare predictions to observed results is going to be necessary, and that figuring out the right metric is going to be non-trivial.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jan 9, 2012 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2012/01/03/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2012/01/18/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

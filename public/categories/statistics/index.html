@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   <meta property="og:title" content=" statistics &middot;  I&#39;m a Chordata! Urochordata!" />
   
+    <meta name="theme-color" content="#FFFFFF" />
+  
   <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
   <meta property="og:url" content="/categories/statistics/" />
   
@@ -25,6 +27,8 @@
   <link rel="shortcut icon" href="../../images/favicon.ico" />
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png" />
 
+  
+    <link rel="stylesheet" href="../../css/hamburg.css">
   
 
   
@@ -105,7 +109,7 @@
 
   
     <div>
-        NOT FOUND
+       
       Note: for the most up to date version of this, see this post on rpubs
 Background So, it looks like brms version 2.0 implements multivariate responses - and hence piecewise Structural Equation Modeling in a Bayesian framework. After https://github.com/paul-buerkner/brms/issues/303, it became clear that while one cannot do tests of D-separation, WAIC, LOO, etc., are all available. Let&rsquo;s take a peak with a familiar example.
 As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible with model forms, that I think it&rsquo;s an excellent way to approach the problem that gives a lot more breathing room.
@@ -130,7 +134,7 @@ As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible 
 
   
     <div>
-        NOT FOUND
+       
       I&rsquo;ve been teaching likelihood to grad students for the past few years using the wonderful bbmle package from Ben Bolker. I really love it&rsquo;s flexibility and the way you can get students into fitting anything their imagination can countenance. But there&rsquo;s a small cost to that. First, their imagination, when they first meet likelihood, is&hellip;.not ready. I teach linear models using least squares, then likelihood, then Bayes, in order to show the full range of inferential possibilities.
     </div>
   
@@ -153,7 +157,7 @@ As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible 
 
   
     <div>
-        NOT FOUND
+       
       I really liked the power analysis example I gave in class today. I feel like I&rsquo;m finally firing on all cylinders with the tidyverse. So I thought I would post it here, in case it was of use to anyone!
 Power OK, we can fit and evluate linear regression models, but what about their power? Let&rsquo;s look at our seal fit again - maybe we want to know what would have happened with a lower sample size?
     </div>
@@ -177,7 +181,7 @@ Power OK, we can fit and evluate linear regression models, but what about their 
 
   
     <div>
-        NOT FOUND
+       
       WARNING: AS OF 10/1/2016 LAVAAN DOES NOT PRODUCE CORRECT CASEWISE RESIDUALS. PLEASE CALCULATE YOUR RESIDUALS BY HAND. HOPEFULLY THIS WILL BE FIXED SHORTLY, AND I WILL REMOVE THIS WARNING WHEN IT IS.
 One question that comes up time and time again when I teach my SEM class is, &ldquo;What do I do if I have spatially structured data?&rdquo; Maybe you have data that was sampled on a grid, and you know there are spatial gradients.
     </div>
@@ -201,7 +205,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       I&rsquo;ve ended up digging into quantile regression a bit lately (see this excellent gentle introduction to quantile regression for ecologists [pdf] for what it is and some great reasons why to use it -see also here and here). In R this is done via the quantreg package, which is pretty nice, and has some great plotting diagnostics, etc. But what it doesn&rsquo;t have out of the box is a way to simply plot your data, and then overlay quantile regression lines at different levels of tau.
     </div>
   
@@ -224,7 +228,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       Sometimes in an SEM for which you&rsquo;re calculating a test of D-Separation, you want all exogenous variables to covary. If you have a large model with a number of exogenous variables, coding that into your basis set can be a pain, and hence, you can spend a lot of time filtering out elements that aren&rsquo;t part of your basis set, particularly with the ggm library. Here&rsquo;s a solution - a function I&rsquo;m calling filterExoFromBasiSet
     </div>
   
@@ -247,7 +251,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       _This is a x-post from the blog I&rsquo;ve setup for my course blog. As my first class at UMB, I&rsquo;m teaching An Introduction to Computational Data Analysis for Biology - basically mixing teaching statistics and basic programming. It&rsquo;s something I&rsquo;ve thought a long time about teaching - although the rubber meeting the road has been fascinating.
 As part of the course, I&rsquo;m adapting an exercise that I learned while taking English courses - in particular from a course on Dante&rsquo;s Divine Comedy.
     </div>
@@ -271,7 +275,7 @@ As part of the course, I&rsquo;m adapting an exercise that I learned while takin
 
   
     <div>
-        NOT FOUND
+       
       After writing up my tutorial regarding getting WinBUGS running on a Mac in R, a friend sent me this fantastic simple tutorial on the same thing for OpenBUGS on a mac in R. So, for those that want it, install away! Looks a good bit simpler, actually!
     </div>
   
@@ -294,7 +298,7 @@ As part of the course, I&rsquo;m adapting an exercise that I learned while takin
 
   
     <div>
-        NOT FOUND
+       
       I know, I know, I have been kinda lame about posting here lately. But that&rsquo;s because my posting muscle has been focused on the new analyses for what makes a succesful #SciFund proposal. I&rsquo;ve been posting them at the #SciFund blog under the Analysis tag - so check it out. There&rsquo;s some fun stats, and you get to watch me be a social scientist for a minute. Viva la interdisciplinarity! 
     </div>
   
@@ -317,7 +321,7 @@ As part of the course, I&rsquo;m adapting an exercise that I learned while takin
 
   
     <div>
-        NOT FOUND
+       
       I am part of an incredibly exciting project - the #SciFund Challenge. #SciFund is an attempt to have scientists link their work to the general public through crowdfunding. As I&rsquo;m one of the organizers, I thought I should have some skin in the game. But what skin?
 Well, people are pitching some incredibly sexy projects - tracking puffin migrations, coral reefs conservation,snake-squirrel interactions (WITH ROBOSQUIRRELS!), mathematical modeling of movements like Occupy Wall Street, and many many more.
     </div>
@@ -341,7 +345,7 @@ Well, people are pitching some incredibly sexy projects - tracking puffin migrat
 
   
     <div>
-        NOT FOUND
+       
       Whew, it&rsquo;s been a bit since I posted here. Rest assured, little sea squirts, there are some interesting new things in the works. Some things that are science-y (in which I try and use this blog as a sounding board/ lab notebook) and some things not so much.
 In the not so much category, a ton of my time has lately been going to the organizing of the #SciFund challenge - a large initiative to try and crowdfunding for science!
     </div>
@@ -365,7 +369,7 @@ In the not so much category, a ton of my time has lately been going to the organ
 
   
     <div>
-        NOT FOUND
+       
       I&rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.
   It&rsquo;s a method of teasing apart direct and indirect interactions in your data.
   It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.
@@ -391,7 +395,7 @@ In the not so much category, a ton of my time has lately been going to the organ
 
   
     <div>
-        NOT FOUND
+       
       I&rsquo;ll admit it. There&rsquo;s one thing that always makes me sad working on a mac. R. How does R make me sad on a mac? I look over at my compatriots in Windows using fun Integrated Development Environments (IDEs) like Tinn-R, and I sigh. On the other hand, I just had the sad little text editor and shell. Sure, it was enough, and I had wrung some sweet sweet code from that simple setup, but windows would get lost, I&rsquo;d lose track of what file was where, what plot window was open, and would sometimes even forget which instance of R I was working in when I was working on two projects at the same time (one for simulation, one for analysis).
     </div>
   
@@ -414,7 +418,7 @@ In the not so much category, a ton of my time has lately been going to the organ
 
   
     <div>
-        NOT FOUND
+       
       OK, so, the title of this article is actually Do not log-transform count data, but, as @ascidacea mentioned, you just can&rsquo;t resist adding the &ldquo;bitches&rdquo; to the end.
 Onwards.
 If you&rsquo;re like me, when you learned experimental stats, you were taught to worship at the throne of the Normal Distribution. Always check your data and make sure it is normally distributed! Or, make sure that whatever lines you fit to it have normally distributed error around them!
@@ -439,7 +443,7 @@ If you&rsquo;re like me, when you learned experimental stats, you were taught to
 
   
     <div>
-        NOT FOUND
+       
       p≤0.05
  Significant p-values. For so many scientists using statistics, this is your lord. Your master. Heck, it has its own facebook group filed under religious affiliations (ok, so, maybe I created that.) And it is a concept to whose slavish devotion we may have sacrificed a good bit of forward progress in science over the past half century. Time to blow up the cathedral! Or so says Stuart Hurlbert and Celia Lombardi in a recent fascinating review.
     </div>
@@ -463,7 +467,7 @@ If you&rsquo;re like me, when you learned experimental stats, you were taught to
 
   
     <div>
-        NOT FOUND
+       
       This is tremendously cool. A nice intuitive web-based interface for the lme4 package in R (and you neither need to know R or understand the intricacies of the lme4 package) that gives you pdf output and plots. If you just want to play around and not worry about coding things up, it&rsquo;s a great little option. Be sure to check out the demo video.
     </div>
   
@@ -486,7 +490,7 @@ If you&rsquo;re like me, when you learned experimental stats, you were taught to
 
   
     <div>
-        NOT FOUND
+       
       Well, it&rsquo;s been a few weeks since I put the revised version of my diversity-disturbance experiment out in the field. I completed sampling on Monday, and, whew, my power analysis paid off! Although not entirely how I expected&hellip;
 First off, kicking the maximum urchin density up to 50 per cage (as opposed to 16) was indeed helpful. Even after 1 week, there was a strong urchin effect. And after three weeks, well&hellip;
     </div>
@@ -510,7 +514,7 @@ First off, kicking the maximum urchin density up to 50 per cage (as opposed to 1
 
   
     <div>
-        NOT FOUND
+       
       There is nothing like that pain of taking a first look at fresh precious new data from a carefully designed experiment which took months of planning and construction, 8 divers working full days, and a lot of back-and-forth with colleagues, and then you find absolutely no patterns of interest.
 Yup, it&rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment. Fortunately, I was on my way to a 4th of July dinner with my family up in the mountains of Colorado, so, I wasn&rsquo;t quite going to commit hari-kari on the spot.
     </div>
@@ -534,7 +538,7 @@ Yup, it&rsquo;s a real takes-your-breath-away-hand-me-a-beer kind of moment. For
 
   
     <div>
-        NOT FOUND
+       
       And now its time for a multivariate stats geek out.
 The statistics that we use determine the inferences we draw from our data. The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values. It&rsquo;s happened to all of us, and it is rarely due to willful misconduct.
     </div>
@@ -558,7 +562,7 @@ The statistics that we use determine the inferences we draw from our data. The m
 
   
     <div>
-        NOT FOUND
+       
       I was completely tickled last year with the oh so amusing Statz Rappers. It kept me and my nerdy stats friends laughing for days. Rapping. Stats. The Internet.
 Good times.
 But little did I know that rapping about statistics was really just hitting its stride on youtube. This is Why We Plot began my trip down the rabbit hole. Quite a nice effort. I followed this with that Stats Rap - not bad, and oh so mellow.

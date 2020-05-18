@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   <meta property="og:title" content=" sem &middot;  I&#39;m a Chordata! Urochordata!" />
   
+    <meta name="theme-color" content="#FFFFFF" />
+  
   <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
   <meta property="og:url" content="/categories/sem/" />
   
@@ -25,6 +27,8 @@
   <link rel="shortcut icon" href="../../images/favicon.ico" />
   <link rel="apple-touch-icon" href="../../images/apple-touch-icon.png" />
 
+  
+    <link rel="stylesheet" href="../../css/hamburg.css">
   
 
   
@@ -105,7 +109,7 @@
 
   
     <div>
-        NOT FOUND
+       
       Note: for the most up to date version of this, see this post on rpubs
 Background So, it looks like brms version 2.0 implements multivariate responses - and hence piecewise Structural Equation Modeling in a Bayesian framework. After https://github.com/paul-buerkner/brms/issues/303, it became clear that while one cannot do tests of D-separation, WAIC, LOO, etc., are all available. Let&rsquo;s take a peak with a familiar example.
 As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible with model forms, that I think it&rsquo;s an excellent way to approach the problem that gives a lot more breathing room.
@@ -130,7 +134,7 @@ As a note, blavaan also implements Bayesian SEM, but brms is so gorram flexible 
 
   
     <div>
-        NOT FOUND
+       
       WARNING: AS OF 10/1/2016 LAVAAN DOES NOT PRODUCE CORRECT CASEWISE RESIDUALS. PLEASE CALCULATE YOUR RESIDUALS BY HAND. HOPEFULLY THIS WILL BE FIXED SHORTLY, AND I WILL REMOVE THIS WARNING WHEN IT IS.
 One question that comes up time and time again when I teach my SEM class is, &ldquo;What do I do if I have spatially structured data?&rdquo; Maybe you have data that was sampled on a grid, and you know there are spatial gradients.
     </div>
@@ -154,7 +158,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       Let&rsquo;s say you want to extract a p-value and save it as a variable for future use from a linear or generalized linear model - mixed or non! This is something you might want to do if, say, you were calculating Fisher&rsquo;s C from an equation-level Structural Equation Model. Here&rsquo;s how to extract the effect of a variable from multiple different fit models. We&rsquo;ll start with a data set with x, y, z, and a block effect (we&rsquo;ll see who in a moment).
     </div>
   
@@ -177,7 +181,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       Sometimes in an SEM for which you&rsquo;re calculating a test of D-Separation, you want all exogenous variables to covary. If you have a large model with a number of exogenous variables, coding that into your basis set can be a pain, and hence, you can spend a lot of time filtering out elements that aren&rsquo;t part of your basis set, particularly with the ggm library. Here&rsquo;s a solution - a function I&rsquo;m calling filterExoFromBasiSet
     </div>
   
@@ -200,7 +204,7 @@ One question that comes up time and time again when I teach my SEM class is, &ld
 
   
     <div>
-        NOT FOUND
+       
       I&rsquo;m a HUGE fan of Structural Equation Modeling. For those of you unfamiliar with the technique, it&rsquo;s awesome for three main reasons.
   It&rsquo;s a method of teasing apart direct and indirect interactions in your data.
   It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.

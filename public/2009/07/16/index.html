@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Simple Data Visualization &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/07/16/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-07-16T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="ggplot2" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+  
+
+  <title>
+     Simple Data Visualization &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Simple Data Visualization</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><img src="http://had.co.nz/images/spot.gif" alt="">OK, so, I know I already raved about one <a href="http://had.co.nz/plyr">Hadley Wickham project</a> and how it has changed my life last week.  But what can I say, the man is a genius.  And if you are using <a href="http://www.r-project.org">R</a> (and let&rsquo;s face it, you should be) and you want simple sexy graphs made quick, the man has you covered once again.</p>
+<p>I first learned about <a href="http://had.co.nz/ggplot2">ggplot2</a> while scanning through some <a href="http://www.slideshare.net/guest43ed8709/la-r-users-group-survey-of-r-graphics">slides</a> of the <a href="http://www.meetup.com/LAarea-R-usergroup/">LA Area RUG</a> meetings (that I missed - I still haven&rsquo;t been to any!) by the folks from <a href="http://dataspora.com/blog/">Michael Driscoll</a>.</p>
+<p>And I liked what I saw - ggplot2 and lattice (which I admit, I had kind of avoided) seemed more intuitive than I thought.  Then I ran into a series of articles on ggplot2 from the <a href="http://en.wordpress.com/tag/ggplot2/">Learning R blog</a> and I was hooked.  Still am.  And why I ask?</p>
+<p>Let&rsquo;s consider a task - you have some data split into four groups.  For each group, you want to plot a fitted regression between two covariates.  You want this split into panels, with common scales, and nicely placed axis labels.  Also, you want it to be purty.  While you can do this with the standard graphics package (and, I admit, I sometimes like the austerity of the standard graphics), it would take a for loop, tons of formatting instructions, and a number of steps where you could easily mess the whole thing up.  Not to mention that you might have to change a good bit if you want to add another group.</p>
+<p>Here is how easy it is with ggplot2.  Note, there are only two lines of actual graphing code.  The rest is just making up the data.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+
+<span style="color:#75715e">#create data - x is a predictor, g is a group, y is the response</span>
+x<span style="color:#f92672">&lt;-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100</span>
+g<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;A&#34;</span>, <span style="color:#e6db74">&#34;B&#34;</span>, <span style="color:#e6db74">&#34;C&#34;</span>, <span style="color:#e6db74">&#34;D&#34;</span>))
+
+<span style="color:#75715e">#i love expand grid, as it easily creates full</span>
+<span style="color:#75715e">#matrices of all combinations of multiple variables</span>
+z<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">data.frame</span>(<span style="color:#a6e22e">expand.grid</span>(x<span style="color:#f92672">=</span>x,g<span style="color:#f92672">=</span>g))
+
+<span style="color:#75715e">#add a little error in to our results</span>
+z<span style="color:#f92672">$</span>y<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#a6e22e">length</span>(z<span style="color:#f92672">$</span>x),z<span style="color:#f92672">$</span>x<span style="color:#f92672">*</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">29</span>, <span style="color:#ae81ff">50</span>)<span style="color:#a6e22e">[unclass</span>(z<span style="color:#f92672">$</span>g)]<span style="color:#ae81ff">+5</span>, sd<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>)
+
+<span style="color:#75715e">#this first bit just sets up the basic plotting, with colors and panels</span>
+a<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">qplot</span>(x,y,group<span style="color:#f92672">=</span>g, colour<span style="color:#f92672">=</span>g, data<span style="color:#f92672">=</span>z, facets<span style="color:#f92672">=~</span>g)
+
+<span style="color:#75715e">#now, add a fitted line with the error around it shown.</span>
+<span style="color:#75715e"># Also, change the theme.  And plot the whole thing!</span>
+a<span style="color:#f92672">+</span><span style="color:#a6e22e">stat_smooth</span>(method<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lm&#34;</span>, se<span style="color:#f92672">=</span>T, group<span style="color:#f92672">=</span>g, fill<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;black&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p>All of which yields the following pretty figure:</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/07/picture-4.png" alt="Nice, eh?"></p>
+<p>And that stat_smooth statement can take lots of other arguments - e.g., glms (I&rsquo;ve tried, and it looks great!)</p>
+<p>So check it out - even for just casual data exploration, there&rsquo;s some real clarity to be found.  And I look forward to trying out other products by Prof. Wickham!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jul 16, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/ggplot2/">
+            #ggplot2
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/07/12/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/07/20/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

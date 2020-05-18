@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" More on Bacteria and Groups &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2013/04/12/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2013-04-12T00:00:00Z" />
+    
+  
+
+  <title>
+     More on Bacteria and Groups &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">More on Bacteria and Groups</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><em>Continuing with <a href="http://www.imachordata.com/groupapalooza-adapting-food-web-trophic-group-methods-for-defining-bacterial-species/">bacterial group-a-palooza</a>&hellip;</em></p>
+<p>I followed Ed&rsquo;s suggestions and tried both a binomial distribution and a Poisson distribution for abundance such that the probability of a density of one species s in one group g in one plot r where there are S_g species in group gis</p>
+<p>[latex]A_rgs ~ Poisson(\frac{A_rg}{S_g})[/latex]</p>
+<p>In the analysis I&rsquo;m doing, interesting, the results do change a bit such that the original network only results are confirmed.</p>
+<p>I am having one funny thing, though, which I can&rsquo;t lock down.  Namely, the no-group option always has the lowest AIC once I include abundances - and this is true both for binomial and Poisson distributions.  Not sure what that is about.  I&rsquo;ve put the code for all of this <a href="https://github.com/jebyrnes/otu-frontiers">here</a> and made a sample script below.  This doesn&rsquo;t reproduce the behavior, but, still.  Not quite sure what this blip is about.</p>
+<p>For the sample script, we have five species and three possible grouping structures.  It looks like this, where red nodes are species or groups and blue nodes are sites:</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2013/04/Screen-Shot-2013-04-12-at-4.32.50-PM.jpg" alt="Screen Shot 2013-04-12 at 4.32.50 PM"></p>
+<p>And the data looks like this</p>
+<pre><code>  low med high  1   2   3
+1   1   1    1 50   0   0
+2   2   1    1 45   0   0
+3   3   2    2  0 100   1
+4   4   2    2  0 112   7
+5   5   3    2  0  12 110
+</code></pre>
+<p>So, here&rsquo;s the code:</p>
+<p>And the results:</p>
+<pre><code>&gt; aicdf
+     k LLNet LLBinomNet  LLPoisNet   AICpois  AICbinom AICnet
+low  5     0    0.00000  -20.54409  71.08818  60.00000     30
+med  3     0  -18.68966  -23.54655  65.09310  73.37931     18
+high 2     0 -253.52264 -170.73361 353.46723 531.04527     12
+</code></pre>
+<p>We see that the two different estimations disagree, with the binomial favorint disaggregation and poisson favoring moderate aggregation.  Interesting.  Also, the naive network only approach favors complete aggregation.  Interesting.  Thoughts?</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Apr 12, 2013 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2013/04/08/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2013/04/16/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

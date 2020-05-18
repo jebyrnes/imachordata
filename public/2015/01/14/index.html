@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Space and SEMs &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2015/01/14/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2015-01-14T00:00:00Z" />
+    
+  
+
+  <title>
+     Space and SEMs &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Space and SEMs</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><strong>WARNING: AS OF 10/1/2016 LAVAAN DOES NOT PRODUCE CORRECT CASEWISE RESIDUALS. PLEASE CALCULATE YOUR RESIDUALS BY HAND. HOPEFULLY THIS WILL BE FIXED SHORTLY, AND I WILL REMOVE THIS WARNING WHEN IT IS.</strong></p>
+<p>One question that comes up time and time again when I teach my SEM class is, &ldquo;What do I do if I have spatially structured data?&rdquo; Maybe you have data that was sampled on a grid, and you know there are spatial gradients. Maybe your samples are clustered across a landscape. Or at separate sites. A lot of it boils down to worrying about the hidden spatial wee beasties lurk in the background.</p>
+<p>I&rsquo;m going to stop for a moment and suggest that before we go any further you read Brad Hawkins&rsquo;s excellent <a href="10.1111/j.1365-2699.2011.02637.x">Eight (and a half) deadly sins of spatial analysis</a> where he warns of the danger of throwing out the baby with the bathwater. Remember, in any modeling technique, you want to ensure that you&rsquo;re capturing as much biological signal as is there, and then adjust for remaining spatial correlation. Maybe your drivers vary in a spatial pattern. That&rsquo;s OK! They&rsquo;re still your drivers.</p>
+<p>That said, ignoring residual spatial autocorrelation essentially causes you to think you have a larger sample size than you think you do (remember the assumption of independent data points) and as such your standard errors are too tight, and you may well produce overconfident results.</p>
+<p>To deal with this in a multivariate Structural Equation Modeling context, we have a few options. First, use something like Jon Lefcheck&rsquo;s excellent <a href="https://github.com/jslefche/piecewiseSEM">piecewiseSEM</a> package and fit your models with mixed model or generalized least squares tools that can accomodate spatial correlation matrices as part of the model. If you have non-spatial information about structure, I&rsquo;ve started digging into the <a href="http://cran.r-project.org/web/packages/lavaan.survey/index.html">lavaan.survey</a> package, which has been fun (and is teaching me a lot about survey statistics).</p>
+<p>But, what if you just want to go with a model you&rsquo;ve fit using covariance matrices and maximum likelihood, like you do, using <a href="http://lavaan.org">lavaan</a> in R? It should be simple, right?</p>
+<p>Well, I&rsquo;ve kind of tossed this out as a suggestion in the &lsquo;advanced topics&rsquo; portion of my class for years, but never implemented it. This year, I got off of my duff, and have been working this up, and have both a solid example, and a function that should make your lives easier - all wrapped up over at <a href="https://github.com/jebyrnes/spatial_correction_lavaan">github</a>. And I&rsquo;d love any comments or thoughts on this, as, to be honest, spatial statistics is not where I spend a lot of time. Although I seem to be spending more and more time there these days&hellip; silly spatially structured observational datasets&hellip;that I seem to keep creating.</p>
+<p>Anyway, let&rsquo;s use as an example the Boreal Vegetation dataset from Zuur et al.&lsquo;s <a href="http://www.highstat.com/book2.htm">Mixed Effects Models and Extensions in Ecology with R</a>. The data shows vegetation NDVI from satellite data, as well as a number of other covariates - information on climate (days where the temperature passed some threshold, I believe), wetness, and species richness. And space. Here&rsquo;s what the data look like, for example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Boreality data from http://www.highstat.com/book2.htm</span>
+<span style="color:#75715e"># Mixed Effects Models and Extensions in Ecology with R (2009).</span>
+<span style="color:#75715e"># Zuur, Ieno, Walker, Saveliev and Smith. Springer</span>
+boreal <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read.table</span>(<span style="color:#e6db74">&#34;./Boreality.txt&#34;</span>, header<span style="color:#f92672">=</span>T)
+
+<span style="color:#75715e">#For later</span>
+<span style="color:#a6e22e">source</span>(<span style="color:#e6db74">&#34;./lavSpatialCorrect.R&#34;</span>)
+
+<span style="color:#75715e">#Let&#39;s look at the spatial structure</span>
+<span style="color:#a6e22e">library</span>(ggplot2)
+
+<span style="color:#a6e22e">qplot</span>(x, y, data<span style="color:#f92672">=</span>boreal, size<span style="color:#f92672">=</span>Wet, color<span style="color:#f92672">=</span>NDVI) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">18</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_size_continuous</span>(<span style="color:#e6db74">&#34;Index of Wetness&#34;</span>, range<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">10</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_gradient</span>(<span style="color:#e6db74">&#34;NDVI&#34;</span>, low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;lightgreen&#34;</span>, high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;darkgreen&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/01/visualize-data-1.png" alt="visualize-data-1"></p>
+<p>So, there are both clear associations of variables, but also a good bit of spatial structure. Ruh roh! Well, maybe it&rsquo;s all in the drivers. Let&rsquo;s build a model where NDVI is affected by species richness (nTot), wetness (Wet), and climate (T61) and richness is itself also affected by climate.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(lavaan)
+
+<span style="color:#75715e">## This is lavaan 0.5-17</span>
+<span style="color:#75715e">## lavaan is BETA software! Please report any bugs.</span>
+
+<span style="color:#75715e"># A simple model where NDVI is determined</span>
+<span style="color:#75715e"># by nTot, temperature, and Wetness</span>
+<span style="color:#75715e"># and nTot is related to temperature</span>
+borModel <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">  NDVI ~ nTot + T61 + Wet
+</span><span style="color:#e6db74">  nTot ~ T61
+</span><span style="color:#e6db74">&#39;</span>
+
+<span style="color:#75715e">#note meanstructure=T to obtain intercepts</span>
+borFit <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sem</span>(borModel, data<span style="color:#f92672">=</span>boreal, meanstructure<span style="color:#f92672">=</span>T)
+</code></pre></div><p>OK, great, we have a fit model - but we fear that the SEs may be too small! Is there any spatial structure in the residuals? Let&rsquo;s look.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># residuals are key for the analysis</span>
+borRes <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.data.frame</span>(<span style="color:#a6e22e">residuals</span>(borFit, <span style="color:#e6db74">&#34;casewise&#34;</span>))
+
+<span style="color:#75715e">#raw visualization of NDVI residuals</span>
+<span style="color:#a6e22e">qplot</span>(x, y, data<span style="color:#f92672">=</span>boreal, color<span style="color:#f92672">=</span>borRes<span style="color:#f92672">$</span>NDVI, size<span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(<span style="color:#ae81ff">5</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_gradient</span>(<span style="color:#e6db74">&#34;NDVI Residual&#34;</span>, low<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;blue&#34;</span>, high<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yellow&#34;</span>)
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/01/residuals-1.png" alt="residuals-1"></p>
+<p>Well&hellip;sort of. A clearer way to see this that I like is just to see signs of residuals.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#raw visualization of sign of residuals</span>
+<span style="color:#a6e22e">qplot</span>(x, y, data<span style="color:#f92672">=</span>boreal, color<span style="color:#f92672">=</span>borRes<span style="color:#f92672">$</span>NDVI<span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>, size<span style="color:#f92672">=</span><span style="color:#a6e22e">I</span>(<span style="color:#ae81ff">5</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">17</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_manual</span>(<span style="color:#e6db74">&#34;NDVI Residual &gt;0&#34;</span>, values<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;blue&#34;</span>, <span style="color:#e6db74">&#34;red&#34;</span>))
+</code></pre></div><p><img src="http://www.imachordata.com/wp-content/uploads/2015/01/residual-analysis-sign-1.png" alt="residual-analysis-sign-1"></p>
+<p>OK, we can clearly see the positive residuals clustering on the corners, and negatives ones more prevalent in the middle. Sort of. Are they really? Well, we can correct for them one we know the degree of spatial autocorrelation, Moran&rsquo;s I. To do this, there are a few steps. First, calculate the spatial weight matrix - essentially, the inverse of the distance between any pair of points. Close points should have a lower weight on the resulting analyses than nearer points.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Evaluate Spatial Residuals</span>
+<span style="color:#75715e">#First create a distance matrix</span>
+<span style="color:#a6e22e">library</span>(ape)
+distMat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.matrix</span>(<span style="color:#a6e22e">dist</span>(<span style="color:#a6e22e">cbind</span>(boreal<span style="color:#f92672">$</span>x, boreal<span style="color:#f92672">$</span>y)))
+
+<span style="color:#75715e">#invert this matrix for weights</span>
+distsInv <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>distMat
+<span style="color:#a6e22e">diag</span>(distsInv) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><p>OK, that done, we can determine whether there was any spatial autocorrelation in the residuals. Let&rsquo;s just focus on NDVI.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#calculate Moran&#39;s I just for NDVI</span>
+mi.ndvi <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Moran.I</span>(borRes<span style="color:#f92672">$</span>NDVI, distsInv)
+mi.ndvi
+
+<span style="color:#75715e">## $observed</span>
+<span style="color:#75715e">## [1] 0.08265236</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $expected</span>
+<span style="color:#75715e">## [1] -0.001879699</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $sd</span>
+<span style="color:#75715e">## [1] 0.003985846</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $p.value</span>
+<span style="color:#75715e">## [1] 0</span>
+</code></pre></div><p>Yup, it&rsquo;s there. We can then use this correlation to calculate a spatially corrected sample size, which will be smaller than our initial sample size.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#What is our corrected sample size?</span>
+n.ndvi <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nrow</span>(boreal)<span style="color:#f92672">*</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">-</span>mi.ndvi<span style="color:#f92672">$</span>observed)<span style="color:#f92672">/</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">+</span>mi.ndvi<span style="color:#f92672">$</span>observed)
+</code></pre></div><p>And given that we can get parameter variances and covariances from the vcov matrix, it&rsquo;s a snap to calculate new SEs, remembering that the variance of a parameter has the sample size in the denominator.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#Where did we get the SE from?</span>
+<span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">vcov</span>(borFit)))
+
+<span style="color:#75715e">##    NDVI~nTot     NDVI~T61     NDVI~Wet     nTot~T61   NDVI~~NDVI</span>
+<span style="color:#75715e">## 1.701878e-04 2.254616e-03 1.322207e-01 5.459496e-01 1.059631e-04</span>
+<span style="color:#75715e">##   nTot~~nTot       NDVI~1       nTot~1</span>
+<span style="color:#75715e">## 6.863893e+00 6.690902e-01 1.617903e+02</span>
+
+<span style="color:#75715e">#New SE</span>
+ndvi.var <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">vcov</span>(borFit))[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+
+ndvi.se <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sqrt</span>(ndvi.var<span style="color:#f92672">*</span><span style="color:#a6e22e">nrow</span>(boreal)<span style="color:#f92672">/</span>n.ndvi)
+
+ndvi.se
+
+<span style="color:#75715e">##    NDVI~nTot     NDVI~T61     NDVI~Wet</span>
+<span style="color:#75715e">## 0.0001848868 0.0024493462 0.1436405689</span>
+
+<span style="color:#75715e">#compare to old SE</span>
+<span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">vcov</span>(borFit)))[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]
+
+<span style="color:#75715e">##    NDVI~nTot     NDVI~T61     NDVI~Wet</span>
+<span style="color:#75715e">## 0.0001701878 0.0022546163 0.1322207383</span>
+</code></pre></div><p>Excellent. From there, it&rsquo;s a hop, skip, and a jump to calculating a z-score and ensuring that this parameter is still different from zero (or not!)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#new z values</span>
+z <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">coef</span>(borFit)[1<span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>]<span style="color:#f92672">/</span>ndvi.se
+
+<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#a6e22e">pnorm</span>(<span style="color:#a6e22e">abs</span>(z), lower.tail<span style="color:#f92672">=</span>F)
+
+<span style="color:#75715e">##     NDVI~nTot      NDVI~T61      NDVI~Wet</span>
+<span style="color:#75715e">##  5.366259e-02  1.517587e-47 3.404230e-194</span>
+
+<span style="color:#a6e22e">summary</span>(borFit, standardized<span style="color:#f92672">=</span>T)
+
+<span style="color:#75715e">## lavaan (0.5-17) converged normally after  62 iterations</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">##   Number of observations                           533</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">##   Estimator                                         ML</span>
+<span style="color:#75715e">##   Minimum Function Test Statistic                1.091</span>
+<span style="color:#75715e">##   Degrees of freedom                                 1</span>
+<span style="color:#75715e">##   P-value (Chi-square)                           0.296</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## Parameter estimates:</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">##   Information                                 Expected</span>
+<span style="color:#75715e">##   Standard Errors                             Standard</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">##                    Estimate  Std.err  Z-value  P(&gt;|z|)   Std.lv  Std.all</span>
+<span style="color:#75715e">## Regressions:</span>
+<span style="color:#75715e">##   NDVI ~</span>
+<span style="color:#75715e">##     nTot             -0.000    0.000   -2.096    0.036   -0.000   -0.044</span>
+<span style="color:#75715e">##     T61              -0.035    0.002  -15.736    0.000   -0.035   -0.345</span>
+<span style="color:#75715e">##     Wet              -4.270    0.132  -32.295    0.000   -4.270   -0.706</span>
+<span style="color:#75715e">##   nTot ~</span>
+<span style="color:#75715e">##     T61               1.171    0.546    2.144    0.032    1.171    0.092</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## Intercepts:</span>
+<span style="color:#75715e">##     NDVI             10.870    0.669   16.245    0.000   10.870  125.928</span>
+<span style="color:#75715e">##     nTot           -322.937  161.790   -1.996    0.046 -322.937  -30.377</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## Variances:</span>
+<span style="color:#75715e">##     NDVI              0.002    0.000                      0.002    0.232</span>
+<span style="color:#75715e">##     nTot            112.052    6.864                    112.052    0.991</span>
+</code></pre></div><p>See! Just a few simple steps! Easy-peasy! And a few changes - the effect of species richness is no longer so clear, for example</p>
+<p>OK, I lied. That&rsquo;s a lot of steps. But, they&rsquo;re repetative. So, I whipped up a function that should automate this, and produce useful output for each endogenous variable. I need to work on it a bit, and I&rsquo;m sure issues will come up with latents, composites, etc. But, just keep your eyes peeled on the <a href="https://github.com/jebyrnes/spatial_correction_lavaan">github</a> for the latest update.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">lavSpatialCorrect</span>(borFit, boreal<span style="color:#f92672">$</span>x, boreal<span style="color:#f92672">$</span>y)
+
+<span style="color:#75715e">## $Morans_I</span>
+<span style="color:#75715e">## $Morans_I$NDVI</span>
+<span style="color:#75715e">##     observed     expected          sd p.value    n.eff</span>
+<span style="color:#75715e">## 1 0.08265236 -0.001879699 0.003985846       0 451.6189</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $Morans_I$nTot</span>
+<span style="color:#75715e">##     observed     expected          sd p.value    n.eff</span>
+<span style="color:#75715e">## 1 0.03853411 -0.001879699 0.003998414       0 493.4468</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $parameters</span>
+<span style="color:#75715e">## $parameters$NDVI</span>
+<span style="color:#75715e">##             Parameter      Estimate    n.eff      Std.err   Z-value</span>
+<span style="color:#75715e">## NDVI~nTot   NDVI~nTot -0.0003567484 451.6189 0.0001848868  -1.92955</span>
+<span style="color:#75715e">## NDVI~T61     NDVI~T61 -0.0354776273 451.6189 0.0024493462 -14.48453</span>
+<span style="color:#75715e">## NDVI~Wet     NDVI~Wet -4.2700526589 451.6189 0.1436405689 -29.72734</span>
+<span style="color:#75715e">## NDVI~~NDVI NDVI~~NDVI  0.0017298286 451.6189 0.0001151150  15.02696</span>
+<span style="color:#75715e">## NDVI~1         NDVI~1 10.8696158663 451.6189 0.7268790958  14.95382</span>
+<span style="color:#75715e">##                  P(&gt;|z|)</span>
+<span style="color:#75715e">## NDVI~nTot   5.366259e-02</span>
+<span style="color:#75715e">## NDVI~T61    1.517587e-47</span>
+<span style="color:#75715e">## NDVI~Wet   3.404230e-194</span>
+<span style="color:#75715e">## NDVI~~NDVI  4.889505e-51</span>
+<span style="color:#75715e">## NDVI~1      1.470754e-50</span>
+<span style="color:#75715e">##</span>
+<span style="color:#75715e">## $parameters$nTot</span>
+<span style="color:#75715e">##             Parameter    Estimate    n.eff     Std.err   Z-value</span>
+<span style="color:#75715e">## nTot~T61     nTot~T61    1.170661 493.4468   0.5674087  2.063171</span>
+<span style="color:#75715e">## nTot~~nTot nTot~~nTot  112.051871 493.4468   7.1336853 15.707431</span>
+<span style="color:#75715e">## nTot~1         nTot~1 -322.936937 493.4468 168.1495917 -1.920534</span>
+<span style="color:#75715e">##                 P(&gt;|z|)</span>
+<span style="color:#75715e">## nTot~T61   3.909634e-02</span>
+<span style="color:#75715e">## nTot~~nTot 1.345204e-55</span>
+<span style="color:#75715e">## nTot~1     5.479054e-02</span>
+</code></pre></div><p>Happy coding, and I hope this helps some of you out. If you&rsquo;re more of a spatial guru than I, and have any suggestions, feel free to float them in the comments below!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jan 14, 2015 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2014/11/14/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2015/03/28/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

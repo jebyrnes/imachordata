@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Getting it Right - after Publication: A Multifunctional Journey? &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2014/09/02/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2014-09-02T00:00:00Z" />
+    
+  
+
+  <title>
+     Getting it Right - after Publication: A Multifunctional Journey? &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Getting it Right - after Publication: A Multifunctional Journey?</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>Sometimes, you have to publish a paper to have the hit-yourself-in-the-head revelation of the real right answer.</p>
+<p>Earlier this year, along with a <a href="https://www.nceas.ucsb.edu/projects/12560">great cohort of colleagues</a>, I birthed <a href="http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12143/abstract">a really neat piece summarizing how you can look at simultaneous change in multiple ecosystem functions</a>.  We were interested in how changes in diversity can affect the simultaneous performance of multiple functions, but, really, anything can be put on the X axis - warming, fertilization, lemony-fresh-scentedness - it doesn&rsquo;t matter.</p>
+<p>This was a problem that had been vexing the field of biodiversity-ecosystem-function, or, really, anyone who wanted to look at multiple functions. Our group spent multiple sessions bashing our heads against a wall trying to derive a solid analytic strategy to look at changes in so-called <em>multifunctionality</em> and in the end came up with something that I&rsquo;m pretty proud of.  The basic idea of our approach was to look at the slope of the relationship between a predictor and the number of functions ≥ some threshold of their maximum - but then do it for lots of thresholds.  Why is it important to looks at lots of thresholds?  Well, if you look at the lines for each choice of threshold, you get something like this:</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/lineplot.jpeg" alt="lineplot"></p>
+<p>Note, that&rsquo;s from the <a href="https://github.com/jebyrnes/multifunc">multifunc R package</a> vignette, and its the analysis from our paper.</p>
+<p>Anyway, you can see how the slope and intercept change with different threshold choices. We eventually looked at how slope changes with threshold, and used that to divine a fingerprint of multifunctionality. But, a plot of threshold v. slope - it&rsquo;s kind of abstract, and can be hard to parse.  It was the best we could do, though, as we thought and thought about it.</p>
+<p>While working on a recent analysis, I began to wonder - one of the key numbers we want is something like, how does multifunctionality change with the addition or removal of one species?  We can look at how one function changes with diversity - but we still don&rsquo;t have a good something with our predictor on the X-axis.  And yet, the question I want to answer is key if we want to think about the consequences of, say, losing species for a multifunctional world.</p>
+<p>Discussing this with Jon Lefcheck, I was suddenly struck by something he had done in a figure on a manuscript. He drew a plot like the one I showed above, only, he also put a line across the top at the maximum number of functions observed in an experiment. I noticed that as my eye moved across the plot - from low to high diversity - I could see the color change along the line, indicating that the maximum number of functions were able to hit progressively higher levels of function. At low levels, nothing was able to hit any threshold. At high levels, a few were.  So&hellip;one could in theory plot diversity against the highest threshold that all of the observed functions could hit all at once.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/lines2.jpeg" alt="Lines drawn on top of the same figure for 5 functions and for 2 functions. Let your eye wander along them and note the change in color. Also, note the weird optical illusion at F=2. Yes, that line is actually straight."></p>
+<!-- raw HTML omitted -->
+<p>Moreover, if I were to, say, draw a line at a lower number of functions, I would see the same pattern - but the relationship would change. Now, higher thresholds could be reached by a lower number of functions - but, eyeballing it, it looked like the linearity changed. In some ways, it made me think of, in the BEF literature, if we have only one function, we get a saturating curved relationship between diversity and function. But for multifunction, a few of us have long wondered if we might get a more linear relationship.</p>
+<p>So, for the German example, I decided to whip up some <a href="https://gist.github.com/jebyrnes/24621cd599e64594b0f6">simple code</a> to explore the relationship between diversity, number of functions, and maximum threshold those functions can achieve. I used the fitted model, and then just calculated which thresholds could achieve some number of functions at a given level of diversity, and grabbed the maximum. The results are interesting.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2014/09/newmf.jpeg" alt="newmf"></p>
+<p>You can see that fewer functions can simultaneously achieve a higher threshold - this is predictable. But there&rsquo;s a suggestion that the curvilinearity of the relationship switches from linear to concave-up as more functions are considered.  That&rsquo;s it&rsquo;s linear to begin with is notable, as with few functions I would expect more concave-down-ness. And you kinda get that if you run it down to one function, but, this site in general in earlier papers didn&rsquo;t have an incredibly strong saturating relationship compared to some other classic examples.</p>
+<p>Overall, while it takes a bit of a moment to realize what&rsquo;s going on, I think this is a far more interpretable graph than what we presented in the paper.  I haven&rsquo;t subjected it to the same in-depth can-this-be-fooled simulations that we did for the MEE paper, but, I have to admit&hellip;I kind of like this, and think it might be the answer we tried to get at oh so long ago.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Sep 2, 2014 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2014/08/12/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2014/09/25/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

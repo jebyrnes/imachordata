@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Let&#39;s All Go Down to the Barplot! &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/09/03/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-09-03T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="ggplot2" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+  
+
+  <title>
+     Let&#39;s All Go Down to the Barplot! &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Let&#39;s All Go Down to the Barplot!</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>I&rsquo;m back for another pean to <a href="http://en.wikipedia.org/wiki/Analysis_of_variance">ANOVA</a>-loving experimental ecology.  Barplots (or point-range plots - but which is better is a discussion for a different time) are the thing!  And a <a href="http://www.marecol.gu.se/Hemsidor/Lars_Gamfeldt/">friend of mine</a> was recently asking me how to do a decent barplot with ggplot2 for data of moderate complexity (e.g., a 2-way ANOVA).</p>
+<p>So I tried it.</p>
+<p>And then I hit my head against a wall for a little while.</p>
+<p>And then I think I figured it out, so, I figured I&rsquo;d post it so that there is less head-smashing in the world.</p>
+<p>To do a boxplot is simple.  And may statisticians would argue that they are more informative, so, really, we should abandon barplots.  Take the following example which looks at the highway milage of cars of various classes in two years.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">data</span>(mpg)
+
+<span style="color:#75715e">#a simple qplot with a boxplot geometry - n.b., I like the bw theme</span>
+<span style="color:#a6e22e">qplot</span>(class, hwy, fill<span style="color:#f92672">=</span><span style="color:#a6e22e">factor</span>(year), data<span style="color:#f92672">=</span>mpg, geom<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;boxplot&#34;</span>, position<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dodge&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p>A few notes.  The x-axis her is class.  The fill attribute splits things by year (which is continuous, so we need to make it look like a factor).  And the final position=&quot;dodge&rdquo; really is the key.  It splits the bars for different years apart, and it shall come into play again in a moment.</p>
+<p>This code produces a perfectly nice boxplot:</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/09/boxplot.png" alt=""></p>
+<p>Lovely!  Unless you want a barplot.  For this, two things must happen.  First, you need to get the average and standard error values that you desire.  I do this using ddply (natch).  Second, you&rsquo;ll need to add in some error bars using geom_errorbar.  In your geom_errorbar, you&rsquo;ll need to invoke the position statement again.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#create a data frame with averages and standard deviations</span>
+hwy.avg<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ddply</span>(mpg, <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;class&#34;</span>, <span style="color:#e6db74">&#34;year&#34;</span>), <span style="color:#a6e22e">function</span>(df)
+<span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">c</span>(hwy.avg<span style="color:#f92672">=</span><span style="color:#a6e22e">mean</span>(df<span style="color:#f92672">$</span>hwy), hwy.sd<span style="color:#f92672">=</span><span style="color:#a6e22e">sd</span>(df<span style="color:#f92672">$</span>hwy))))
+
+<span style="color:#75715e">#create the barplot component</span>
+avg.plot<span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">qplot</span>(class, hwy.avg, fill<span style="color:#f92672">=</span><span style="color:#a6e22e">factor</span>(year), data<span style="color:#f92672">=</span>hwy.avg, geom<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>, position<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dodge&#34;</span>)
+
+<span style="color:#75715e">#add error bars</span>
+avg.plot<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_errorbar</span>(<span style="color:#a6e22e">aes</span>(ymax<span style="color:#f92672">=</span>hwy.avg<span style="color:#f92672">+</span>hwy.sd, ymin<span style="color:#f92672">=</span>hwy.avg<span style="color:#f92672">-</span>hwy.sd), position<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dodge&#34;</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p>This produces a perfectly serviceable and easily intelligible boxplot.  Only.  Only&hellip;  well, it&rsquo;s time for a confession.</p>
+<p>I hate the whiskers on error bars.  Those weird horizontal things, they make my stomach uneasy.  And the default for geom_errorbar makes them huge and looming.  What purpose do they really serve?  OK, don&rsquo;t answer that.  Still, they offend the little <a href="http://www.edwardtufte.com/tufte/">Edward Tufte</a> in me (that must be very little, as I&rsquo;m using barplots).</p>
+<p>So, I set about playing with width and other things to make whisker-less error bars.  Fortunately for me, there is geom_linerange, that does the same thing, but with a hitch.  It&rsquo;s &ldquo;dodge&rdquo; needs to be told just how far to dodge.  I admit, here, I played about with values until I found ones that worked, so your milage may vary depending on how many treatment levels you have.  Either way, the resulting graph was rather nice.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">#first, define the width of the dodge</span>
+dodge <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">position_dodge</span>(width<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>)
+
+<span style="color:#75715e">#now add the error bars to the plot</span>
+avg.plot<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_linerange</span>(<span style="color:#a6e22e">aes</span>(ymax<span style="color:#f92672">=</span>hwy.avg<span style="color:#f92672">+</span>hwy.sd, ymin<span style="color:#f92672">=</span>hwy.avg<span style="color:#f92672">-</span>hwy.sd), position<span style="color:#f92672">=</span>dodge)<span style="color:#f92672">+</span><span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p>And voila!  So, enjoy yet another nifty capability of ggplot2!
+<img src="http://www.imachordata.com/wp-content/uploads/2009/09/barplot.png" alt=""></p>
+<p>Great!  I will say this, though.  I have also played around with data with unequal representation of treatments (e.g., replace year with class or something in the previous example) - and, aside from making empty rows for missing treatment combinations, the plots are a little funny.  Bars expand to fill up space left by vacant treatments.  Try <code>qplot(class, hwy, data=mpg, fill= manufacturer, geom=&quot;boxplot&quot;)</code> to see what I mean.  If anyone knows how to change this, so all bar widths are the same, I&rsquo;d love to hear it.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Sep 3, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/ggplot2/">
+            #ggplot2
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/08/31/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/09/09/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

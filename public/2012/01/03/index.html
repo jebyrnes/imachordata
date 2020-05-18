@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2012/01/03/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2012-01-03T00:00:00Z" />
+    
+  
+
+  <title>
+     Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Prey Loss in Different Food Web Structures: We&#39;ve Been Here Before</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><em>This is part of a larger series of open notebook posts about how food web structure modifies the effects of predator extinctions.  For an introduction and list of other posts, <a href="http://www.imachordata.com/?p=951">see here</a>.</em></p>
+<p>OK, only two more entries (I think) on simple two-level food webs before we jump into the great unkown (and you&rsquo;ll see how unknown it is). So far I&rsquo;ve been talking about the consequences of losing predator species for predation and energy transfer. But, what about losing prey? And what about losing both? In this entry, I&rsquo;m going to show that we already know how to think about prey loss and food web structure. We just have to stand on our head. So, keeping our &ldquo;Master Food Web&rdquo; in mind, and that we&rsquo;re zooming on on a particular component, let&rsquo;s think about loss of prey.</p>
+<p>[caption id=&quot;attachment_969&rdquo; align=&quot;aligncenter&rdquo; width=&quot;457&rdquo; caption=&quot;Let&rsquo;s zoom in on one part of the general food web&rdquo;]<img src="http://www.imachordata.com/wp-content/uploads/2011/11/2-level-zoom.png" alt="">[/caption]</p>
+<p><strong>Who will be eaten?</strong></p>
+<p>First, the obvious nice result. If prey go extinct, this does not change the probability that they prey trophic level will be under control. No predation links have been deleted. Therefore, p(eaten) is still 1.</p>
+<p>Huh? Yeah, really. Think about it. This is an obvious answer, but, well. It&rsquo;s a rather nice one!</p>
+<p><strong>What&rsquo;s the probability that energy will get to predators?</strong></p>
+<p>So, energy transfer is the thing to focus in on. Sure, energy will still enter the prey trophic level, but the probability of energy getting to some of the predators after some prey go extinct may now be 0. Oops!</p>
+<p>The wonderful thing is, p(energy) can be defined using exactly the same framework as p(eaten). We just have to stand on our heads. Let&rsquo;s first look at a familiar 2-predator 2-prey web with 1 extinction.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/12/Screen-shot-2011-12-10-at-1.56.23-PM.png" alt=""></p>
+<p>It&rsquo;s quite similar to what we&rsquo;ve seen before with predator loss with a mean p(energy) of 0.75 across all prey extinction scenarios. However, what&rsquo;s different is that we&rsquo;re now interested in what PREDATORS have no prey, not what prey have no predators. This implies that we can merely flip the equations from before, replacing predators and prey as follows.</p>
+<p>Let&rsquo;s assume Er extinctions of our resource species (i.e., prey), Sr is our maximum resource species richness, and Di from before now becomes the out degree of predator i – their number of prey. We can simply revisit our earlier framework for the following two equations.</p>
+<p>p(energy | Er) = 1-dh(0; Di, Sr-Di, Sr-r)   <em>(4)</em></p>
+<p>$latex p(energy | E_{r}) = 1-\sum_{D=1}^{S_{r}}{p(eaten|E_{r}, D)F(D)} $     _(5)_</p>
+<p>Simple, no? And no extra explanation needed!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jan 3, 2012 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2011/12/27/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2012/01/09/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

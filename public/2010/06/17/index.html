@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Do Not Log-Transform Count Data, Bitches! &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2010/06/17/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2010-06-17T00:00:00Z" />
+    
+  
+
+  <title>
+     Do Not Log-Transform Count Data, Bitches! &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Do Not Log-Transform Count Data, Bitches!</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><a href="http://www.researchblogging.org"><img src="http://www.researchblogging.org/public/citation_icons/rb2_large_gray.png" alt="ResearchBlogging.org"></a> OK, so, the title of this article is actually <em><a href="10.1111/j.2041-210X.2010.00021.x">Do not log-transform count data</a></em>, but, as <a href="http://twitter.com/ascidiacea/status/16330589793">@ascidacea</a> mentioned, you just can&rsquo;t resist adding the &ldquo;bitches&rdquo; to the end.</p>
+<p>Onwards.</p>
+<p>If you&rsquo;re like me, when you learned experimental stats, you were taught to worship at the throne of the Normal Distribution.  Always check your data and make sure it is normally distributed!  Or, make sure that whatever lines you fit to it have normally distributed error around them!  Normal!  Normal normal normal!</p>
+<p>And if you violate normality - say, you have count data with no negative values, and a normal linear regression would create situations where negative values are possible (e.g., what does it mean if you predict negative kelp!  ah, the old dreaded nega-kelp), then no worries.  Just log transform your data.  Or square root.  Or log(x+1). Or SOMETHING to linearize it before fitting a line and ensure the sacrament of normality is preserved.</p>
+<p>This has led to decades of thoughtless transformation of count data without any real thought as to the consequences by in-the-field ecologists.</p>
+<p>But statistics has had a better answer for decades - <a href="http://en.wikipedia.org/wiki/Generalized_linear_model">generalized linear models</a> (<a href="http://sekhon.berkeley.edu/stats/html/glm.html">glm</a> for R nerds, gzlm for SAS goombas who use <a href="https://docs.google.com/viewer?url=http://www.okstate.edu/sas/v8/saspdf/stat/chap29.pdf&amp;pli=1">proc genmod</a>.  What? I&rsquo;m biased!) whereby one specifies a nonlinear function with a corresponding non-normal error distribution.  The <a href="http://amzn.to/czFuPq">canonical book</a> on this was first published &lsquo;round 1983.  Sure, one has to think more about the particular model and error distribution they specify, but, if you&rsquo;re not thinking about these things in the first place, why are you doing science?</p>
+<p>&ldquo;But, hey!&rdquo; you might say,  &ldquo;Glms and transformed count data should produce the same results, no?&rdquo;</p>
+<p>From first principles, Jensen&rsquo;s inequality says no - consider the consequences for error of the transformation  approach of log(y) = ax+b+error versus the glm approach y=e^(ax+b)+error.   More importantly, the error distributions from generalized linear models may often be far far faaar more appropriate to the data you have at hand.  For example, count data is discrete, and hence, a normal distribution will never be quite right.  Better to use a poisson or a negative binomial.</p>
+<p>But, &ldquo;Sheesh!&quot;, one might say, &ldquo;Come on!  How different can these models be?  I mean, I&rsquo;m going to get roughly the same answer, right?&rdquo;</p>
+<p>O&rsquo;Hara and Kotze&rsquo;s paper takes this question and runs with it.  They simulate count data from negative binomial distributions and look at the results from generalized linear models with <a href="http://en.wikipedia.org/wiki/Negative_binomial">negative binomial</a> or <a href="http://en.wikipedia.org/wiki/Quasi-likelihood">quasi-poisson</a> error terms (see <a href="http://dx.doi.org/10.1890/07-0043.1">here</a> for the difference) versus a slew of transformations.</p>
+<p>Intriguingly, they find that glms (with either distribution) always perform well, while each transformation performs poorly at some or all values.</p>
+<p>[caption id=&quot;attachment_329&rdquo; align=&quot;aligncenter&rdquo; width=&quot;482&rdquo; caption=&quot;Estimated root mean-squared error from six different models.  Curves from the quasi-poisson model are the same as the negative binomial.  Note that the glm lines (black solid) all hang out around 0 as opposed to the transformed fits.&quot;]<img src="http://www.imachordata.com/wp-content/uploads/2010/06/nf3.gif" alt="">[/caption]</p>
+<p>More intriguingly to me are the results regarding bias.  Bias is the deviation between a fit parameter and its true value.  Bascially, it&rsquo;s a measure of how wrong your answer is.  Again, here they find almost no bias in the glms, but bias all over the charts for transformed fits.</p>
+<p>[caption id=&quot;attachment_331&rdquo; align=&quot;aligncenter&rdquo; width=&quot;492&rdquo; caption=&quot;Estimated mean biases from six different models, applied to data simulated from a negative binomial distribution. A low bias means that the method will, on average, return the &lsquo;true&rsquo; value.  Note that the bias for transformed fits is all over the place.  But with a glm, bias is always minimal.&quot;]<img src="http://www.imachordata.com/wp-content/uploads/2010/06/nf2.gif" alt="">[/caption]</p>
+<p>They sum it up nicely</p>
+<!-- raw HTML omitted -->
+<p>Or, more succinctly, &ldquo;Do not log-transform count data, bitches!&rdquo;</p>
+<p>&ldquo;But how?!&rdquo; I&rsquo;m sure some of you are saying.  Well, after checking into <a href="http://dx.doi.org/10.1016/S0167-6296(01)00086-8">some</a> <a href="http://www.fs.fed.us/psw/publications/documents/psw_gtr191/psw_gtr191_0744-0753_seavy.pdf">of</a> the <a href="http://dx.doi.org/10.1890/07-0043.1">relevant</a> <a href="http://dx.doi.org/doi:10.1016/j.tree.2008.10.008">literature</a>, it&rsquo;s quite straightforward.</p>
+<p>Given the ease of implementing glms in languages like R (one uses the glm function, checks diagnostics of residuals to ensure compliance with model assumptions, then can use Likliehood ratio testing akin to anova with, well, the Anova function) this is something easily within the grasp of the everyday ecologist.  Heck, you can even do posthocs with multcomp, although if you want to correct your p-values (and there are reasons to believe you shouldn&rsquo;t), you need to carefully consider the correction type.</p>
+<p>For example, consider this data from survivorship on the Titanic (what, it&rsquo;s in the multcomp documentation!) - although, granted, it&rsquo;s looking at proportion survivorship, but, still, you&rsquo;ll see how the code works:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(multcomp)
+<span style="color:#75715e">### set up all pair-wise comparisons for count data</span>
+<span style="color:#a6e22e">data</span>(Titanic)
+mod <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(Survived <span style="color:#f92672">~</span> Class, data <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.data.frame</span>(Titanic), weights <span style="color:#f92672">=</span> Freq, family <span style="color:#f92672">=</span> binomial)
+
+<span style="color:#75715e">### specify all pair-wise comparisons among levels of variable &#34;Class&#34;</span>
+<span style="color:#75715e">### Note, Tukey means the type of contrast matrix.  See ?contrMat</span>
+glht.mod <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glht</span>(mod, <span style="color:#a6e22e">mcp</span>(Class <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Tukey&#34;</span>))
+
+<span style="color:#75715e">###summaryize information</span>
+<span style="color:#75715e">###applying the false discovery rate adjustment</span>
+<span style="color:#75715e">###you know, if that&#39;s how you roll</span>
+<span style="color:#a6e22e">summary</span>(glht.mod, test<span style="color:#f92672">=</span><span style="color:#a6e22e">adjusted</span>(<span style="color:#e6db74">&#34;fdr&#34;</span>))
+</code></pre></div><p>There are then a variety of ways to plot or otherwise view glht output.</p>
+<p>So, that&rsquo;s the nerdy details.  In sum, though, the next time you see someone doing analyses with count data using simple linear regression or ANOVA with a log, sqrt, arcsine sqrt, or any other transformation, jump on them like a live grenade.  Then, once the confusion has worn off, give them a copy of this paper.  They&rsquo;ll thank you, once they&rsquo;re finished swearing.</p>
+<p>O&rsquo;Hara, R., &amp; Kotze, D. (2010). Do not log-transform count data Methods in Ecology and Evolution, 1 (2), 118-122 DOI: <a href="http://dx.doi.org/10.1111/j.2041-210X.2010.00021.x">10.1111/j.2041-210X.2010.00021.x</a></p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jun 17, 2010 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2010/04/01/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2010/06/25/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

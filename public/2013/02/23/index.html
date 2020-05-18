@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Extracting p-values from different fit R objects &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2013/02/23/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2013-02-23T00:00:00Z" />
+    
+  
+
+  <title>
+     Extracting p-values from different fit R objects &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Extracting p-values from different fit R objects</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>Let&rsquo;s say you want to extract a p-value and save it as a variable for future use from a linear or generalized linear model - mixed or non!  This is something you might want to do if, say, you were calculating Fisher&rsquo;s C from an equation-level Structural Equation Model.  Here&rsquo;s how to extract the effect of a variable from multiple different fit models.  We&rsquo;ll start with a data set with x, y, z, and a block effect (we&rsquo;ll see who in a moment).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">2</span>)
+y <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">20</span>, x, <span style="color:#ae81ff">3</span>)
+block <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#34;b&#34;</span>, <span style="color:#ae81ff">10</span>))
+
+mydata <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">data.frame</span>(x <span style="color:#f92672">=</span> x, y <span style="color:#f92672">=</span> y, block <span style="color:#f92672">=</span> block, z <span style="color:#f92672">=</span> <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">20</span>))
+</code></pre></div><p>Now, how would you extract the p-value for the parameter fit for z from a linear model object?  Simply put, use the t-table from the lm object&rsquo;s summary</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">alm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lm</span>(y <span style="color:#f92672">~</span> x <span style="color:#f92672">+</span> z, data <span style="color:#f92672">=</span> mydata)
+
+<span style="color:#a6e22e">summary</span>(alm)<span style="color:#f92672">$</span>coefficients
+
+<span style="color:#75715e">##             Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span style="color:#75715e">## (Intercept)   1.1833     1.3496  0.8768 0.392840</span>
+<span style="color:#75715e">## x             0.7416     0.2190  3.3869 0.003506</span>
+<span style="color:#75715e">## z            -0.4021     0.8376 -0.4801 0.637251</span>
+
+<span style="color:#75715e"># Note that this is a matrix.</span>
+<span style="color:#75715e"># The third row, fourth column is the p value</span>
+<span style="color:#75715e"># you want, so...</span>
+
+p.lm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(alm)<span style="color:#f92672">$</span>coefficients[3, <span style="color:#ae81ff">4</span>]
+
+p.lm
+
+<span style="color:#75715e">## [1] 0.6373</span>
+</code></pre></div><p>That&rsquo;s a linear model, what about a generalized linear model?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">aglm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">glm</span>(y <span style="color:#f92672">~</span> x <span style="color:#f92672">+</span> z, data <span style="color:#f92672">=</span> mydata)
+
+<span style="color:#a6e22e">summary</span>(aglm)<span style="color:#f92672">$</span>coefficients
+
+<span style="color:#75715e">##             Estimate Std. Error t value Pr(&gt;|t|)</span>
+<span style="color:#75715e">## (Intercept)   1.1833     1.3496  0.8768 0.392840</span>
+<span style="color:#75715e">## x             0.7416     0.2190  3.3869 0.003506</span>
+<span style="color:#75715e">## z            -0.4021     0.8376 -0.4801 0.637251</span>
+
+<span style="color:#75715e"># Again, is a matrix.</span>
+<span style="color:#75715e"># The third row, fourth column is the p value you</span>
+<span style="color:#75715e"># want, so...</span>
+
+p.glm <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(aglm)<span style="color:#f92672">$</span>coefficients[3, <span style="color:#ae81ff">4</span>]
+
+p.glm
+
+<span style="color:#75715e">## [1] 0.6373</span>
+</code></pre></div><p>That&rsquo;s a linear model, what about a generalized linear model?</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">anls <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">nls</span>(y <span style="color:#f92672">~</span> a <span style="color:#f92672">*</span> x <span style="color:#f92672">+</span> b <span style="color:#f92672">*</span> z, data <span style="color:#f92672">=</span> mydata,
+     start <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>))
+
+<span style="color:#a6e22e">summary</span>(anls)<span style="color:#f92672">$</span>coefficients
+
+<span style="color:#75715e">##   Estimate Std. Error t value  Pr(&gt;|t|)</span>
+<span style="color:#75715e">## a   0.9118     0.1007   9.050 4.055e-08</span>
+<span style="color:#75715e">## b  -0.4651     0.8291  -0.561 5.817e-01</span>
+
+<span style="color:#75715e"># Again, is a matrix.</span>
+<span style="color:#75715e"># The second row, fourth column is the p value you</span>
+<span style="color:#75715e"># want, so...</span>
+
+p.nls <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(anls)<span style="color:#f92672">$</span>coefficients[2, <span style="color:#ae81ff">4</span>]
+
+p.nls
+
+<span style="color:#75715e">## [1] 0.5817</span>
+</code></pre></div><p>Great.  Now, what if we were running a mixed model?  First, let&rsquo;s look at the nlme package. Here, the relevant part of the summary object is the tTable</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(nlme)
+alme <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lme</span>(y <span style="color:#f92672">~</span> x <span style="color:#f92672">+</span> z, random <span style="color:#f92672">=</span> <span style="color:#f92672">~</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> block, data <span style="color:#f92672">=</span> mydata)
+
+<span style="color:#a6e22e">summary</span>(alme)<span style="color:#f92672">$</span>tTable
+
+<span style="color:#75715e">##               Value Std.Error DF t-value  p-value</span>
+<span style="color:#75715e">## (Intercept)  1.1833    1.3496 16  0.8768 0.393592</span>
+<span style="color:#75715e">## x            0.7416    0.2190 16  3.3869 0.003763</span>
+<span style="color:#75715e">## z           -0.4021    0.8376 16 -0.4801 0.637630</span>
+
+<span style="color:#75715e"># Again, is a matrix.</span>
+<span style="color:#75715e"># But now the third row, fifth column is the p value</span>
+<span style="color:#75715e"># you want, so...</span>
+
+p.lme <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(alme)<span style="color:#f92672">$</span>tTable[3, <span style="color:#ae81ff">5</span>]
+
+p.lme
+
+<span style="color:#75715e">## [1] 0.6376</span>
+</code></pre></div><p>Last, what about lme4?  Now, for a linear lmer object, you cannot get a p value.  But, if this is a generalizes linear mixed model, you are good to go (as in Shipley 2009).  Let&rsquo;s try that here.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(lme4)
+
+almer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">~</span> x <span style="color:#f92672">+</span> z <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> block, data <span style="color:#f92672">=</span> mydata)
+
+<span style="color:#75715e"># no p-value!</span>
+<span style="color:#a6e22e">summary</span>(almer)<span style="color:#f92672">@</span>coefs
+
+<span style="color:#75715e">##             Estimate Std. Error t value</span>
+<span style="color:#75715e">## (Intercept)    4.792     0.5823   8.231</span>
+
+<span style="color:#75715e"># but, for a genearlined linear mixed model</span>
+<span style="color:#75715e"># and yes, I know this is a</span>
+<span style="color:#75715e"># bad model but, you know, demonstration!</span>
+
+aglmer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lmer</span>(y <span style="color:#f92672">+</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">~</span> x <span style="color:#f92672">+</span> z <span style="color:#f92672">+</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> block),
+        data <span style="color:#f92672">=</span> mydata, family <span style="color:#f92672">=</span> <span style="color:#a6e22e">poisson</span>(link <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;log&#34;</span>))
+
+<span style="color:#a6e22e">summary</span>(aglmer)<span style="color:#f92672">@</span>coefs
+
+<span style="color:#75715e">##             Estimate Std. Error z value  Pr(&gt;|z|)</span>
+<span style="color:#75715e">## (Intercept)  1.90813    0.16542  11.535 8.812e-31</span>
+<span style="color:#75715e">## x            0.07247    0.02471   2.933 3.362e-03</span>
+<span style="color:#75715e">## z           -0.03193    0.09046  -0.353 7.241e-01</span>
+
+<span style="color:#75715e"># matrix again!  Third row, fourth column</span>
+p.glmer <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">summary</span>(aglmer)<span style="color:#f92672">@</span>coefs[3, <span style="color:#ae81ff">4</span>]
+
+p.glmer
+
+<span style="color:#75715e">## [1] 0.7241</span>
+</code></pre></div>
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Feb 23, 2013 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2013/02/23/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2013/02/25/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

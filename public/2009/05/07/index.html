@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Can you see the matrix? &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/05/07/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-05-07T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="complexity" />
+    
+      <meta property="og:article:tag" content="food web" />
+    
+      <meta property="og:article:tag" content="network" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+  
+
+  <title>
+     Can you see the matrix? &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Can you see the matrix?</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>Lately, I&rsquo;ve been dreaming of webs.</p>
+<p>I&rsquo;ve been asking myself, how do we visualize the hidden complexity of the natural world?  This is not an idle question, but draws on some of my current research.  It is vital to how we think about ecosystems when we attempt to preserve and restore them.  It is inherently beautiful, in and of itself.</p>
+<!-- raw HTML omitted -->
+<p>Most of us are familiar with the concept of a <a href="http://en.wikipedia.org/wiki/Food_chain">food chain</a>.  In a food chain, a predator eats its prey, an herbivore, who in turn eats a plant (or alga!).  The concept of the food chain lays the foundations for a <a href="http://en.wikipedia.org/wiki/Trophic_cascade">trophic cascade</a>.  In a cascade, predators actually <em>control</em> herbivore densities, keeping them low, and thus leading to lush plant or algal growth.  Most of y&rsquo;all might be familiar with the <a href="http://www.sciencemag.org/cgi/content/abstract/185/4156/1058">otter-urchin-kelp cascade</a> in Alaska.  There, otters keep urchins under control, and allow kelp to flourish.  As otters were hunted out, urchins exploded, and grazed out the kelp.</p>
+<p>Nature is rarely that simple, however.</p>
+<p>Let&rsquo;s take our otter-urchin-kelp cascade.  Perhaps alongside that, there&rsquo;s a parallel chain.  A <a href="http://en.wikipedia.org/wiki/Sebastidae">rockfish</a> that eats a crab that eats mussels.  Now what if that crab eats urchins, too?  And maybe, so does the rockfish.  Now you have what is known as a <strong>food web</strong>.  And as you add more species and more links, it can get a little crazy.</p>
+<p>And of course, I, too, am a little crazy.</p>
+<p>A small piece of one of my current research projects revolves around constructing a who-eats-who food web for Southern California Kelp forests (or rather, the species sampled by the <a href="http://sbc.lternet.edu/">SBC LTER</a>).  I&rsquo;ve spent the past few months on a literature safari, mining the peer reviews literature, digging into government reports, old student papers, unpublished doctoral dissertations and master&rsquo;s theses, and traveling to various marine lab libraries.  It&rsquo;s been pretty satisfying from a scientific navel-gazing perspective.  I heartily advise everyone to take on at least one such project in their lives.</p>
+<p>And so I have this beast.  272 species.  Tens of thousands of feeding links all in a giant interaction matrix (yes, The Matrix).  How do we visualize this?</p>
+<p>I, of course, started with <a href="http://www.r-project.org">R</a> using some of the lovely packages for <a href="http://erzuli.ss.uci.edu/R.stuff/">Social Network Analysis</a> (sna over at CRAN).  This allowed me to generate this plot.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/05/sna_web.png" alt="">
+And it&rsquo;s gorgeous.  Thick, heavy, complex.  Species are the red nodes, with arrows pointing predator -&gt; prey.  The giant cluster to the right is largely algae.  The outer points to the top are largely fish.  At the bottom, there are many sessile invertebrates.  But, still, overall, a little too confusing.</p>
+<p>So I turned to <a href="http://www.graphviz.org">graphviz</a>, first on its own, and then later using <a href="http://www.bioconductor.org/packages/release/bioc/html/Rgraphviz.html">Rgraphviz</a>.  Using a hierarchical arrangement of links, things become clearer.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/05/webdot.png" alt="">
+There are enough species, that nodes are not really seen.  They are the intersections of lines.  Lines again indicate feeding relationships, generally progressing with higher level predators at the top descending down to their prey.  You can begin to see clear hierarchies.  Algae at the bottom, a funny cluster off to the right, which is the sessile inverts.  Staring at this dense tangled web, you can also see clusters, places where the interactions are thick, or places where key species, either predator or prey, slot into the web.  But it&rsquo;s still a little wild.</p>
+<p>Perhaps most beautiful, however, is this visualization produced by <a href="http://foodwebs.org/index_page/wow2.html">FoodWebs3D</a>.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/05/adj2.png" alt="">
+It&rsquo;s harder to see distinct clusters here, but wow, you really do begin to get a sense of how connected everything is.  Also, using this hierarchical, but circular arrangement, the amount of intraguild predation (predators eating other predators) becomes a bit clearer.  There&rsquo;s quite a bit!</p>
+<p>So, gee whiz, this looks neat, but is it useful?  The next steps of this are what I find most exciting.  Taking real survey data, once can ask &ldquo;What does a food web at a particular site at a particular point in time look like?&rdquo; leading to plots like this.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2009/05/picture-1.png" alt="">
+Visually, the difference is striking.  This is the same site in two different years.  One year a lot of sand had blown through and scoured the site fairly clear.  In another year, there was a lush kelp forest.  My current quest is to try and ask what are the factors that shape these webs?  How can we understand human activities to alter their structure (their <a href="http://en.wikipedia.org/wiki/Network_topology">network topology</a>, and what does that mean for their function?</p>
+<p>Exciting.  And now it&rsquo;s images like these that swirl around my brain late at night.  Strange comfort.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          May 7, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/complexity/">
+            #complexity
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="">
+            #food web
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/network/">
+            #network
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/05/05/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/05/10/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

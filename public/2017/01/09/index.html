@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Which library to use to teach linear models &amp; likelihood &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2017/01/09/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2017-01-09T00:00:00Z" />
+    
+  
+
+  <title>
+     Which library to use to teach linear models &amp; likelihood &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Which library to use to teach linear models &amp; likelihood</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>I&rsquo;ve been teaching likelihood to grad students for the past few years using the wonderful <a href="https://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a> package from Ben Bolker. I really love it&rsquo;s flexibility and the way you can get students into fitting anything their imagination can countenance. But there&rsquo;s a small cost to that. First, their imagination, when they first meet likelihood, is&hellip;.not ready. I teach linear models using least squares, then likelihood, then Bayes, in order to show the full range of inferential possibilities. In the past, when I got to likelihood not only did I showcase the possibilities for fitting a straight line with a normal error distribution, but I also inserted the possibility of other error distributions and at least hinted at the possibility of other shapes of lines.</p>
+<p>I also taught them the canned &ldquo;formula&rdquo; interface to the <em>mle2</em> function as well as how to write a function for a model - thus introducing them to the wild world of optimizers.</p>
+<p>In this year&rsquo;s iteration, I&rsquo;ve been trying to pair a lot back, and move from teaching loops and the like to teaching <em>dplyr</em> and a more functional programming style. We hadn&rsquo;t even hit functions by the time we hit likelihood (and didn&rsquo;t ever - but that&rsquo;s partially due to this being v 2.0 of my intro class, and functions will be hit in v 2.1). So I only taught straight lines with a normal error distribution using the formula interface.</p>
+<p>It&hellip;went OK. Given that we move next into <a href="http://mc-stan.org/interfaces/rstanarm">rstanarm</a> for Bayes, the lack of a common syntax with both least squares and our Bayesian efforts was a bit more jarring this year. Particularly given the need to supply start values, coefficient names, and the issues one quickly runs into when you need to put limits on parameters, like standard deviations.</p>
+<p>So in thinking about what to do, I went back to <em>glm</em> as an easier way to introduce fitting linear models with likelihood - particularly as then it&rsquo;s an easy slide to <em>stan_glm</em>. But <a href="https://cran.r-project.org/web/packages/bbmle/index.html">bbmle</a> provides some nice tools - it&rsquo;s implementation of <em>profile</em> is so straightforward - although I make students do that by hand anyway. In <em>glm</em>, the resulting profile plots are kinda wonky and take too much explanation.</p>
+<p>But&hellip;. then someone pointed out the <em>offset</em> argument that lets you fix. So, let&rsquo;s say you have the following data frame.</p>
+<pre><code>library(dplyr)
+adf %
+  mutate(y=rnorm(100, 5*x, 90))
+</code></pre>
+<p>You can fit this with glm and check out the coefficients</p>
+<pre><code>summary(glm(y ~ x, data=adf, family=gaussian())
+</code></pre>
+<p>But, what if you want to get the profile likelihood for the intercept? Using offset, you can fix a coefficient value. Say, to 1 or 2, for the slope.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">glm</span>(y <span style="color:#f92672">~</span> <span style="color:#ae81ff">1</span>, offset<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>x, data<span style="color:#f92672">=</span>adf)
+<span style="color:#a6e22e">glm</span>(y <span style="color:#f92672">~</span> <span style="color:#ae81ff">1</span>, offset<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span><span style="color:#f92672">*</span>x, data<span style="color:#f92672">=</span>adf)
+</code></pre></div><p>Vundebar!</p>
+<p>Now, we can wrap this in with dplyr. I&rsquo;m going to do this inefficiently (fit the model twice) as I&rsquo;m trying to figure out how to do this without map. Which also was not a huge success - I need to give it more time. Functions and map. These are what needs to be hit next year a bit more solidly.</p>
+<pre><code>### Fit a bunch of slope coefficients to make a profile
+### for the intercept
+coefFrame %
+  rowwise() %&gt;%
+  mutate(int = coef(glm(y ~ 1, offset=b1*x, data=adf)),
+         LL = logLik(glm(y ~ 1, offset=b1*x, data=adf))[1])
+
+plot(LL ~ b1, data=coefFrame)
+</code></pre>
+<p><a href="http://www.imachordata.com/?attachment_id=1814"><img src="http://www.imachordata.com/wp-content/uploads/2017/01/Rplot03-300x185.jpeg" alt="rplot03"></a></p>
+<p>Works great!</p>
+<p>Now we can get the upper and lower 95% CI.</p>
+<pre><code>critVal %
+  filter(LL&gt;critVal) %&gt;%
+  slice(c(1,n()))
+</code></pre>
+<p>Again, straightforward.</p>
+<p>Hrm.</p>
+<p>Given that I&rsquo;m not using the full power of bbmle, and getting into the nitty gritty of algorithms, etc., slows things down - and that by jettisoning that weight I think I can fill it with a jump right into AIC rather than wait until we hit with MLR, this simple example makes me thing that next year&hellip; yeah, it&rsquo;s time to introduce the GLM function sooner and leave bbmle for semester 2.</p>
+<p>Note, you can do this with <em>lm</em> and an offset argument as well. But, by introducing, as I ponder this, I think that perhaps we can begin to think about non-normality earlier? Maybe? I need to ponder this.</p>
+<p>Code in <a href="https://gist.github.com/jebyrnes/37f01b1c231c17e7dfff888ca5392825">https://gist.github.com/jebyrnes/37f01b1c231c17e7dfff888ca5392825</a></p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jan 9, 2017 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2016/10/18/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2017/03/31/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Running R2WinBUGS on a Mac Running OSX &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2012/01/18/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2012-01-18T00:00:00Z" />
+    
+  
+
+  <title>
+     Running R2WinBUGS on a Mac Running OSX &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Running R2WinBUGS on a Mac Running OSX</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p>I have long used <a href="http://mcmc-jags.sourceforge.net/">JAGS</a> to do all of my Bayesian work on my mac.  Early on, I tried to figure out how to install <a href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">WinBUGS</a> and <a href="http://www.openbugs.info/w/">OpenBUGS</a> and their accompanying R libraries on my mac, but, to no avail.  I just had too hard of a time getting them running and gave up.</p>
+<p>But, it would seem that some things have changed with <a href="http://www.winehq.org/">Wine</a> lately, and it is now possible to not only get WinBUGS itself running nicely on a mac, but to also get R2WinBUGS to run as well.  Or at least, so I have discovered after an absolutely heroic (if I do say so myself) effort to get it all running (this was to help out some students I&rsquo;m teaching who wanted to be able to do the same exercises as their windows colleagues).  So, I present the steps that I&rsquo;ve worked out.  I do not promise this will work for everyone - and in fact, if it fails at some point, I want to know about it so that perhaps we can fix it so that more people can get WinBUGS up and running.</p>
+<p>Or just run JAGS (step 1} install <a href="http://sourceforge.net/projects/mcmc-jags/files/">the latest version</a>, step 2} install rjags in R.  Modify your code slightly.  Run it.  Be happy.)</p>
+<p>So, this tutorial works to get the whole WinBUGS shebang running.  Note that it hinges on installing the latest development version of Wine, not the stable version (at least as of 1/17/12).  If you have previously installed wine using macports, good on you.  Now uninstall it with &ldquo;sudo port uninstall wine&rdquo;.  Otherwise, you will not be able to do this.</p>
+<p>Away we go!</p>
+<ol>
+<li>
+<p>Have the free version of XCode Installed from <a href="http://developer.apple.com/xcode/">http://developer.apple.com/xcode/</a>.  You may have to sign up for an apple developer account.  Whee!  You&rsquo;re a developer now!</p>
+</li>
+<li>
+<p>Have X11 Installed from your system install disc.</p>
+</li>
+<li>
+<p>Install [http://www.macports.org/install.php](<a href="http://www.macports.org/%3Emacports">http://www.macports.org/&gt;macports</a><!-- raw HTML omitted --> following the guide at &lt;a href=) and install from the package installer.  See also <a href="http://guide.macports.org/#installing">here</a> for more information. Afterwards, open the terminal and type</p>
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>You will be asked for your password.  Don&rsquo;t worry that it doesn&rsquo;t display anything as you type. Press enter when you&rsquo;ve finished typing your password.</p>
+<ol start="4">
+<li>Open your terminal and type</li>
+</ol>
+<!-- raw HTML omitted -->
+<ol start="5">
+<li>
+<p>Go have a cup of coffe, check facebook, or whatever you do while the install chugs away.</p>
+</li>
+<li>
+<p>Download WinBUGS 1.4.x from <a href="http://www.mrc-bsu.cam.ac.uk/bugs/winbugs/contents.shtml">here</a>.  Also download the immortality key and the patch.</p>
+</li>
+<li>
+<p>Open your terminal, and type</p>
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>Note, if you have changed your download directory, you will need to type in the path to the directory where you download files now (e.g., Desktop).</p>
+<p>8 ) Follow the instructions to install WinBUGS into c:Program Files.</p>
+<ol start="9">
+<li>Run WinBUGS via the terminal as follows:</li>
+</ol>
+<!-- raw HTML omitted -->
+<ol start="10">
+<li>
+<p>After first running WinBUGS, install the immortality key.  Close WinBUGS.  Open it again as above and install the patch.  Close it.  Open it again and WinBUGS away!</p>
+</li>
+<li>
+<p>To now use R2WinBugs fire up R and install the R2WinBUGS library.</p>
+</li>
+<li>
+<p>R2WinBugs should now work normally with one exception.  When you use the bugs function, you will need to supply the following additional argument:</p>
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>filling in your username where indicated.  If you don&rsquo;t know it, in the terminal type</p>
+<!-- raw HTML omitted -->
+<p>No, ~ will not work for those of you used to it.  Don&rsquo;t ask me why.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jan 18, 2012 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2012/01/09/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2012/01/31/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" when NOT to MANOVA &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2009/03/09/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2009-03-09T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="manova" />
+    
+      <meta property="og:article:tag" content="mistakes I have made" />
+    
+      <meta property="og:article:tag" content="statistics" />
+    
+  
+
+  <title>
+     when NOT to MANOVA &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../css/main.css" />
+  <link rel="stylesheet" href="../../../css/github.css" />
+  <link rel="stylesheet" href="../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">when NOT to MANOVA</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><a href="http://www.researchblogging.org"><img src="http://www.researchblogging.org/public/citation_icons/rb2_large_gray.png" alt="ResearchBlogging.org"></a>
+And now its time for a multivariate stats geek out.</p>
+<p>The statistics that we use determine the inferences we draw from our data.  The more statistical tools you learn to use, the more likely you are likely to slip on a loose bit of data, and stab yourself in the eyeball with your swiss-army-knife of p values.  It&rsquo;s happened to all of us, and it is rarely due to willful misconduct.  Rather, it&rsquo;s a misunderstanding, or even being taught something improperly.</p>
+<p>I was given a sharp reminder of this recently while doing some work on how to breakdown some repeated measures MANOVAs- useful for dealing with violations of sphericity, etc.  However, I fell across this wonderful little ditty by Keselman et al - <em>Statistical Practices of Educational Researchers: An Analysis of their ANOVA, MANOVA, and ANCOVA Analyses</em> (yes, as an Ecologist, I love reading stats papers from other disciplines - I actually find it often more helpful than reading ones in my own discipline).</p>
+<p>Now, everything in my own work was A-OK, but I found this note on the usage of MANOVA fascinating. (bolded phrases are mine)</p>
+<!-- raw HTML omitted -->
+<p><strong>Although it was not indicated in any article, it was surmised that researchers followed the MANOVA-univariate data analysis strategy for protection from excessive Type I errors in univariate statistical testing.</strong> This data analysis strategy may not be overly surprising, because it has been suggested by some book authors (e.g., Stevens, 1996, p. 152; Tabachnick &amp; Fidell, 1996, p. 376). There is very limited empirical support for this strategy. A counter position may be stated simply as follows: <strong>Do not conduct a MANOVA unless it is the multivariate effects that are of substantive interest.</strong> If the univariate effects are those of interest, then it is suggested that the researcher go directly to the univariate analyses and bypass MANOVA. When doing the multiple univariate analyses, if control over the overall Type I error is of concern (as it often should be), then a Bonferroni (Huberty, 1994, p. 17) adjustment or a modified Bonferroni adjustment may be made (for a more extensive discussion on the MANOVA versus multiple ANOVAs issue, see Huberty &amp; Morris, 1989). <strong>Focusing on results of multiple univariate analyses preceded by a MANOVA is no more logical than conducting an omnibus ANOVA but focusing on results of group contrast analyses (Olejnik &amp; Huberty, 1993).</strong></p>
+<!-- raw HTML omitted -->
+<p>I, for one, was dumbstruck.  This is EXACTLY why more than one of my stats teachers have told me MANOVA was most useful.  I even have advised others to do this myself - like the child of some statistically abusive parent.  But really, if the point is controlling for type I error, why not do a Bonferroni or (my personal favorite) a <a href="http://en.wikipedia.org/wiki/False_discovery_rate">False Discovery Rate</a> correction? To invoke the MANOVA like some arcane form of magic is disingenuous to your data.  Now, if you&rsquo;re interested in the canonical variables, and what they say, then by all means!  Do it!  But if not, you really have to ask whether you&rsquo;re following a blind recipe, or if you understand what you are up to.</p>
+<p>This paper is actually pretty brilliant in documenting a number of things like this that we scientists do with our ANOVA, ANCOVA, and MANOVA.  It&rsquo;s worth reading just for that, and to take a good sharp look in the statistical mirror.</p>
+<p>H. J. Keselman, C. J. Huberty, L. M. Lix, S. Olejnik, R. A. Cribbie, B. Donahue, R. K. Kowalchuk, L. L. Lowman, M. D. Petoskey, J. C. Keselman, J. R. Levin (1998). Statistical Practices of Educational Researchers: An Analysis of their ANOVA, MANOVA, and ANCOVA Analyses Review of Educational Research, 68 (3), 350-386 DOI: <a href="http://dx.doi.org/10.3102/00346543068003350">10.3102/00346543068003350</a></p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Mar 9, 2009 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../tags/manova/">
+            #manova
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="">
+            #mistakes I have made
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../tags/statistics/">
+            #statistics
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../2009/02/14/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts" href="../../../2009/04/01/">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+
