@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 title = "I'm a Chordata! Urochordata!"
 theme = "hamburg"
-googleAnalytics = ""
+googleAnalytics = "UA-9734501-1"
 disqusShortname = "im-a-chordata-urochordata"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 relativeURLs = true
@@ -42,6 +42,7 @@ home = ["HTML", "RSS"]
     MathJaxVersion = "2.7.5"
     
     disqus = "im-a-chordata-urochordata"
+    ga_api_key = "UA-9734501-1"
 
 
 #theme specific
