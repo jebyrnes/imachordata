@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Roaring Back into Mobility in the US Post-Covid &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2020/05/25/roaring-back-into-mobility-in-the-us-post-covid/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2020-05-25T00:00:00Z" />
+    
+  
+
+  <title>
+     Roaring Back into Mobility in the US Post-Covid &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Roaring Back into Mobility in the US Post-Covid</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    
+
+
+<p>As part of the <a href="../../../../2020/05/07/the-covid19r-project/">Covid19R Project</a>, I’ve been working on a new package, <a href="https://github.com/Covid19R/covid19mobility">covid19mobility</a>. It started as an effort to pull in the <a href="https://www.apple.com/covid19/mobility">Apple Mobility Trends</a>, and has since morphed as more mobility data comes out. Right now, I’m working through the <a href="https://www.google.com/covid19/mobility/">Google Mobility Data</a>, &amp; I’m interested in the <a href="https://github.com/descarteslabs/DL-COVID-19">Descartes mobility data</a> and any others you can suggest down below (link to source)! But the data itself - it’s FASCINATING!</p>
+<p>As I finished getting the Apple data in (there are massive issues for all of the aforementioned data sets in terms of getting standardized location codes - I’m trying to use either the <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166 2</a> standard for countries and states or the <a href="https://www.unece.org/cefact/locode/service/location">UN LOCODE</a> for cities, and many of the states and cities have different names than those in the data standards. Watch me <code>dplyr::mutate()</code> and <code>ifelse</code> my way into oblivion)..</p>
+<p>OK, that was a long rant, let me start over -</p>
+<p>As I finished getting the Apple data in, I decided to check it out with a quick vignette. It’s Memorial Day, US states are starting to open up - I wonder what our traffic looks like? Now, note, Apple’s data is the relative volume of directions requests for each data type. So, let’s look at the US…</p>
+<pre class="r"><code># remotes::install_github(&quot;covid19r/covid19mobility&quot;)
+library(covid19mobility)
+library(dplyr)
+library(ggplot2)
+
+#the data, filtered to the US
+us_mobile &lt;- refresh_covid19mobility_apple_country() %&gt;%
+  filter(location_code == &quot;US&quot;)
+
+max_date &lt;- max(us_mobile$date)
+
+#now, a plot!
+baseplot &lt;- ggplot(us_mobile,
+       aes(x = date, y = value, color = data_type)) +
+  scale_color_brewer(palette = &quot;Dark2&quot;) +
+  theme_bw(base_size=14) +
+  labs(color = &quot;Mobility Type&quot;,
+       y = &quot;Relative Value&quot;,
+       x = &quot;&quot;) 
+
+baseplot +
+  geom_line(size = 1) +
+  ggtitle(paste0(&quot;Apple Mobility Trends for the US on &quot;, max_date)) </code></pre>
+<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Wow. So, driving is basically back to where it was pre-lockdown. Walkign is coming back, but isn’t there yet. And transit is… nada. Looking at this using a GAM to smooth it all out shows the same thing (I know, I know, there’s much more complex and fun timeseries stuff to do here, but…)</p>
+<pre class="r"><code>baseplot +
+  stat_smooth(method = &quot;gam&quot;, fill = NA) +
+  ggtitle(&quot;Apple Mobility Trends for the US from fitted GAMs&quot;) </code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/smooth-1.png" width="672" /></p>
+<p>The driving trend is really interesting. Is this really due to everywhere going up uniformly? To investigate, I pulled in the subregional data - for the US this just has driving stats. And then used the awesome <a href="https://hafen.github.io/geofacet/">geofacet</a> package from Ryan Hafen to visualize. I’ll just use GAMs in order to facilitate visualization without the wigglies due to within-week variation.</p>
+<pre class="r"><code>library(geofacet)
+
+state_mobile &lt;- refresh_covid19mobility_apple_subregion() %&gt;%
+  filter(country==&quot;United States&quot;) %&gt;%
+  filter(!(location %in% c(&quot;Guam&quot;, &quot;Puerto Rico&quot;, 
+                         &quot;Virgin Islands&quot;)))
+
+state_baseplot &lt;- ggplot(state_mobile,
+       aes(x = date, y = value)) +
+  theme_bw(base_size=11) +
+  labs(y = &quot;Relative Value&quot;,
+       x = &quot;&quot;) +
+  ggtitle(paste0(&quot;Apple Mobility Driving Trends for the US on &quot;, max_date)) 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))</code></pre>
+<pre><code>## List of 1
+##  $ axis.text.x:List of 11
+##   ..$ family       : NULL
+##   ..$ face         : NULL
+##   ..$ colour       : NULL
+##   ..$ size         : NULL
+##   ..$ hjust        : num 1
+##   ..$ vjust        : num 0.5
+##   ..$ angle        : num 90
+##   ..$ lineheight   : NULL
+##   ..$ margin       : NULL
+##   ..$ debug        : NULL
+##   ..$ inherit.blank: logi FALSE
+##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
+##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
+##  - attr(*, &quot;complete&quot;)= logi FALSE
+##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
+<pre class="r"><code>state_baseplot +
+  facet_geo(~location) +
+  stat_smooth(method = &quot;gam&quot;, fill = NA, color = &quot;#1B9E77&quot;) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
+<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/state-1.png" width="672" /></p>
+<p>So, a few places have stayed - Hawaii, Mass, and a few others - and others have gone WAAAY up - ND, Wyoming, Montata. Looking at it another way - we can really see how the top 5 states drive the trend up - BUT - with some exceptions, driving is still back to normal most places</p>
+<pre class="r"><code>library(ggrepel) #for labels
+
+
+#fit a bunch of GAMs so that labels connect to the right places
+state_fits &lt;- state_mobile %&gt;%
+  group_by(location) %&gt;%
+  tidyr::nest() %&gt;%
+  mutate(mods = purrr::map(data, ~mgcv::gam(value ~ s(as.numeric(date), bs = &quot;cs&quot;), data = .)),
+         data = purrr::map2(data, mods, ~modelr::add_predictions(.x, .y))) %&gt;%
+  tidyr::unnest(data) %&gt;%
+  ungroup()
+
+# make labels for the top 5 states
+tops &lt;- state_fits %&gt;%
+  filter(date == max(date)) %&gt;%
+  arrange(desc(pred)) %&gt;%
+  slice(1:5)
+
+# make labels for the bottom five states
+bottoms &lt;- state_fits %&gt;%
+  filter(date == max(date)) %&gt;%
+  arrange(pred) %&gt;%
+  slice(1:5)
+
+#merge in info about those states so we can highlight with colors
+state_mobile &lt;- state_mobile %&gt;%
+  mutate(top_state = ifelse(location %in% tops$location, &quot;top&quot;, &quot;middle&quot;),
+         top_state = ifelse(location %in% bottoms$location, &quot;bottom&quot;, top_state),
+         )
+
+# the plot  - with labels! And colors!
+# and a so-so job of using ggrepel!
+state_baseplot +
+  geom_line(data = state_mobile, stat=&quot;smooth&quot;,
+              method = &quot;gam&quot;, 
+              mapping = aes(group = location, 
+                            color = top_state, alpha = top_state),
+              size = 0.5) +
+  scale_color_manual(values = c(&quot;darkred&quot;, &quot;#1B9E77&quot;, &quot;darkorange&quot;)) +
+  scale_alpha_manual(values = c(0.6, 0.2, 0.6)) +
+  guides(color = &quot;none&quot;, alpha = &quot;none&quot;) + 
+  #labels those states - must be a better neater way.... hrm....
+  geom_text_repel(data = tops,
+                  mapping = aes(x = date, y = pred, label = location),
+                  force = 25) +
+  geom_text_repel(data = bottoms,
+                  mapping = aes(x = date, y = pred, label = location),
+                  force = 25,
+                 # min.segment.length = 25,
+                  hjust = 0.5) +
+  theme_bw(base_size=14) +
+  scale_y_continuous(limits = c(0,300))</code></pre>
+<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/overplot-1.png" width="672" /></p>
+<p>Surprised Florida is at the bottom, currently, but, really interesting to see how most states are mostly recovered in terms of driving. Now I want to run this after memorial day and see how it looks!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          May 25, 2020 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2020/05/10/best-gf-pancakes-yet/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts disabled" href="#">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-9734501-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+
