@@ -187,6 +187,7 @@ state_fits &lt;- state_mobile %&gt;%
 # make labels for the top 5 states
 tops &lt;- state_fits %&gt;%
   filter(date == max(date)) %&gt;%
+  group_by(location) %&gt;% slice(1L) %&gt;% ungroup() %&gt;%
   arrange(desc(pred)) %&gt;%
   slice(1:5)
 
@@ -200,10 +201,11 @@ bottoms &lt;- state_fits %&gt;%
 state_mobile &lt;- state_mobile %&gt;%
   mutate(top_state = ifelse(location %in% tops$location, &quot;top&quot;, &quot;middle&quot;),
          top_state = ifelse(location %in% bottoms$location, &quot;bottom&quot;, top_state),
-         )
+         ) 
 
 # the plot  - with labels! And colors!
 # and a so-so job of using ggrepel!
+set.seed(2020)
 state_baseplot +
   geom_line(data = state_mobile, stat=&quot;smooth&quot;,
               method = &quot;gam&quot;, 
@@ -216,11 +218,10 @@ state_baseplot +
   #labels those states - must be a better neater way.... hrm....
   geom_text_repel(data = tops,
                   mapping = aes(x = date, y = pred, label = location),
-                  force = 25) +
+                  force = 5) +
   geom_text_repel(data = bottoms,
                   mapping = aes(x = date, y = pred, label = location),
-                  force = 25,
-                 # min.segment.length = 25,
+                  force = 5,
                   hjust = 0.5) +
   theme_bw(base_size=14) +
   scale_y_continuous(limits = c(0,300))</code></pre>
