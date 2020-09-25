@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Simulating &#34;Posterior&#34; Predictions from Non-Bayesian Fits &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2020/09/24/simulating-posterior-predictions-from-non-bayesian-fits/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2020-09-24T00:00:00Z" />
+    
+  
+
+  <title>
+     Simulating &#34;Posterior&#34; Predictions from Non-Bayesian Fits &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Simulating &#34;Posterior&#34; Predictions from Non-Bayesian Fits</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    
+
+
+<p>As I sat down to review my course materials for my grad Biostats and Computation class this summer - <a href="http://biol607.github.io">Biology 607</a> - I was settled in with a sense of calm. I had taught this for years. I knew what I was doing. I had reshaped the class twice, and the student outcomes were on track to be great. Just going to coast through this in Covid times so I could write some papers.</p>
+<p>Then the mailman came. And delivered a brand spanking new copy of Gelman et al.’s new <a href="https://statmodeling.stat.columbia.edu/2020/07/08/regression-and-other-stories-is-available/">Regression and Other Stories</a>.</p>
+<p>After getting halfway through, and realizing that day had turned to night, it opened up…. a lot of things. I’ll probably cogitate on them in the future, and suffice to say I have re-written more than I want (and re-arranged - and realized my re-arrangement needs to be re-arranged next time).</p>
+<p>But today, let’s talk simulating the outcomes of our model.</p>
+<p>One thing I’ve always enjoyed about Bayesian models is the natural connection to simulation. And one way of model checking is to look at how your posterior predictions line up with the actual distribution of your data. For example, let’s look at a trivial example with the super-duper fun <a href="https://allisonhorst.github.io/palmerpenguins/index.html">Palmer Penguins</a>.</p>
+<div id="comparing-posteriors-from-bayesian-fits-to-observed-distributions-of-data" class="section level3">
+<h3>Comparing Posteriors from Bayesian Fits to Observed Distributions of Data</h3>
+<p>Let’s fit a simple model looking at flipper length as a function of body mass. It’s not going to be perfect, and that’s OK - I want to see some mismatch. We’ll do it with <strong>rstanarm</strong> (but use the approxmiation for speed).</p>
+<pre class="r"><code>library(rstanarm)
+library(palmerpenguins)
+
+#for some manipulations
+library(dplyr)
+library(tidyr)
+
+#remove the NAs to make the rest smoother
+penguins &lt;- penguins %&gt;% 
+  filter(!is.na(flipper_length_mm))
+
+mod_stan &lt;- stan_glm(flipper_length_mm ~ body_mass_g, 
+                     data = penguins,
+                     algorithm = &quot;optimizing&quot;
+                     )</code></pre>
+<p>So, one of the most usefu diagnostics here is to see how well the distribution of the predictions matches, or does not match, the data.</p>
+<pre class="r"><code>library(bayesplot)
+
+yhat_stan &lt;- posterior_linpred(mod_stan, draws = 100)
+ppc_dens_overlay(penguins$flipper_length_mm,
+                 yhat_stan)</code></pre>
+<p><img src="../../../../post/2020-09-24-simulating-posterior-predictions-from-non-bayesian-fits.en_files/figure-html/bayesplot-1.png" width="672" /></p>
+<p>Now, note, I used <code>posterior_linpred()</code> - so, this is for fitted values. But things look much the same with prediction intervals - if not a little worse</p>
+<pre class="r"><code>ypred_stan &lt;- posterior_predict(mod_stan, draws = 100)
+ppc_dens_overlay(penguins$flipper_length_mm,
+                 ypred_stan)</code></pre>
+<p><img src="../../../../post/2020-09-24-simulating-posterior-predictions-from-non-bayesian-fits.en_files/figure-html/predfit-1.png" width="672" /></p>
+<p>What’s great, in both is that you can see the lack of bimodality, and that valley being missing. This is due to not including species. But, it’s <strong>SUPER SUPER SUPER</strong> useful in trying to diagnose where your model fails.</p>
+<p>OK. This is great. I’m going to teach some Bayes. But. What about for those students who don’t want to go Bayes, for whatever reason, but still want access to this awesome machinery?</p>
+<p>I was at a bit of a loss. In working with mixed models in the past, to get similar simulations, I’d turn to the <a href="https://github.com/jknowles/merTools">merTools</a> package and it’s <code>predictInterval()</code> function that can turn out raw simulations. But - it doesn’t work on <code>lm()</code> or <code>glm()</code> fit models.</p>
+<p>Hrm. What to do.</p>
+</div>
+<div id="arm-yourself" class="section level3">
+<h3>ARM Yourself!</h3>
+<p>My first inclination was to go old school with the <a href="https://cran.r-project.org/web/packages/arm/index.html">arm</a> package from the original <a href="https://stat.columbia.edu/~gelman/arm/">Gelman and Hill</a> which is now being superseeded by this new book and whatever is to come next (which I am already excited for).</p>
+<p>arm had a <code>sim()</code> function that could extract simulated coefficients, and then you could be on your merry way yourself. So, let’s fit a model, and then get those fitted simulated values</p>
+<pre class="r"><code>library(arm)
+
+#let&#39;s fit a model from the palmer penguins ####
+mod &lt;- lm(flipper_length_mm ~ body_mass_g, 
+          data = penguins)
+
+
+#get some simulated coefficients using arm::sim() ####
+sims &lt;- sim(mod)
+
+#now the model frame
+X &lt;- model.frame(mod)
+
+#now get those simulated fitted values
+yhat_arm &lt;- coef(sims) %*% t(model.matrix(mod))
+
+#and make it into a nice tidy data frame
+yhat_arm &lt;- as_tibble(t(yhat_arm)) %&gt;%
+  gather(sim, flipper_length_mm)</code></pre>
+<p>This is great! We can look at how this fits with the distribution of flipper lengths. Moreover, we can compare it to the Bayesian posteriors - we’ll see a difference due to priors, but, it’s informative!</p>
+<pre class="r"><code>library(ggplot2)
+library(patchwork)
+theme_set(theme_classic(base_size = 15))
+
+arm_plot &lt;- ggplot() +
+  geom_density(data = yhat_arm, 
+               aes(x = flipper_length_mm, group = sim),
+               lwd = 0.1, color = &quot;blue&quot;) +
+    geom_density(data = penguins, 
+                 aes(x = flipper_length_mm),
+               lwd = 2) +
+  labs(&quot;Distribution of Flipper length (black) and arm Simulations&quot;)
+
+#reshape posterior predictions and make a running DF
+fit_sims &lt;- 
+  as_tibble(t(yhat_stan)) %&gt;%
+  gather(sim, flipper_length_mm) %&gt;%
+  mutate(type = &quot;stan_fit&quot;) %&gt;%
+  rbind(yhat_arm %&gt;% mutate(type = &quot;arm_fit&quot;))
+
+compare_plot &lt;- ggplot(data = fit_sims, 
+               aes(x = flipper_length_mm, 
+                   group = paste(sim, type), 
+               color = type)) +
+  geom_density(lwd = 0.1) +
+  scale_color_brewer(type = &quot;qual&quot;)
+
+
+arm_plot + compare_plot</code></pre>
+<p><img src="../../../../post/2020-09-24-simulating-posterior-predictions-from-non-bayesian-fits.en_files/figure-html/arm_dens-1.png" width="672" /></p>
+<p>This is super cool as, 1) we can see that the same problem with the simulated versus observed distributions and 2) the simulations from our <code>lm()</code> and <code>stan_glm()</code> match really nicely.</p>
+</div>
+<div id="but-can-you-make-it-simple" class="section level3">
+<h3>But Can You Make it Simple?</h3>
+<p>OK. This is cool. But…. I had to extract coefficients, do the matrix multiplication myself. “Trivial!” you say. But - well, as I get more interesting models that aren’t just <code>lm()</code> fits, it gets harder. And, more importantly, for teaching, this is a path to code confusion for my students. So…. what else is there? I mean, sure, I can write a little function for them:</p>
+<pre class="r"><code>#can we make a nice little function? ####
+predictInterval_lm &lt;- function(mod, n = 100){
+  sims &lt;- arm::sim(mod, n = 100)
+  model_mat &lt;- t(model.matrix(mod))
+  mod_coefs &lt;- coef(sims)
+  
+  y_sim &lt;- coef(sims) %*% t(model.matrix(mod))
+}</code></pre>
+<p>But - well, that’s a one-shot. They need something more general. We <em>all</em> need something more general.</p>
+<p>And so, I tested my google fu. And found…. <code>stats::simulate()</code> At which point I hit myself in the head. Simulated one or more responses from the distribution corresponding to a fitted model object indeed!</p>
+<p>Let’s take a look.</p>
+<pre class="r"><code># Wait, does stats::simulate work? ####
+yhat_simulate &lt;- simulate(mod, nsim = 100)
+
+yhat_simulate &lt;- yhat_simulate %&gt;%
+  gather(sim, flipper_length_mm) 
+
+ggplot() +
+  geom_density(data = yhat_simulate, 
+               aes(x = flipper_length_mm, group = sim),
+               lwd = 0.1, color = &quot;red&quot;) +
+    geom_density(data = penguins, 
+                 aes(x = flipper_length_mm),
+               lwd = 2) +
+  labs(&quot;Distribution of Flipper length (black) and simulate Simulations&quot;)</code></pre>
+<p><img src="../../../../post/2020-09-24-simulating-posterior-predictions-from-non-bayesian-fits.en_files/figure-html/simulate-1.png" width="672" /></p>
+<p>Huh. That does not look the same at all. Digging into it with <code>getAnywhere(simulate.lm)</code>, it becomes clear that what <code>simulate()</code> is doing is taking fitted values and adding random draws from the error distribution - NOT taking draws from the coefficients to get simulated fitted values. <em>sad trombone</em>. OK, so this isn’t going to work.</p>
+</div>
+<div id="getting-to-the-core-of-our-simulation-problem" class="section level3">
+<h3>Getting to the Core of Our Simulation Problem</h3>
+<p>So, I went back to the Goog. Poking around and around, I eventually found the excellent <a href="https://github.com/christophergandrud/coreSim">coreSim</a> package, that let’s you generate simulated confidence intervals from fit models of many types. Huzzah!</p>
+<p>The package has a function to build quantiles of interest based on models using simulation - <code>qi_builder()</code>. While it autimatically generates intervals from simulations and slims them down to a particular interval of interest, by giving a CI of one and specifying that we want the raw simulations with the argument <code>slim = FALSE</code>, we can generate the same simulations as above. We need to reshape and rename the output a bit, but it’ll do!</p>
+<pre class="r"><code>#what about coreSim? ####
+library(coreSim)
+
+#get those simulations, add simulation numbers, and rename
+yhat_coresim &lt;- qi_builder(mod, newdata = penguins, ci = 1,
+                slim = FALSE, nsim = 100) %&gt;%
+  mutate(sim = rep(1:100, 342)) %&gt;%
+  rename(flipper_length_mm = qi_) %&gt;%
+  mutate(type = &quot;coresim_fit&quot;,
+         sim = as.character(sim)) %&gt;%
+  dplyr::select(-body_mass_g)</code></pre>
+<p>OK, so, first, how does this compare to the data? And then, how does it compare to other sim methods?</p>
+<pre class="r"><code>core_plot &lt;- ggplot() +
+  geom_density(data = yhat_coresim, 
+               aes(x = flipper_length_mm, group = sim),
+               lwd = 0.1, color = &quot;orange&quot;) +
+    geom_density(data = penguins, 
+                 aes(x = flipper_length_mm),
+               lwd = 2) +
+  labs(title = &quot;Distribution of Flipper length (black) and coreSim Simulations&quot;)
+
+fit_sims &lt;- fit_sims %&gt;%
+  bind_rows(yhat_coresim)
+
+compare_plot_core &lt;- ggplot(data = fit_sims, 
+               aes(x = flipper_length_mm, 
+                   group = paste(sim, type), 
+               color = type)) +
+  geom_density(lwd = 0.1) +
+  scale_color_brewer(type = &quot;qual&quot;)</code></pre>
+<p>OK! Nice! Everything lines up, and, while we had to do some manipulation of the <code>qi_builder</code> output (and, really, it needs some work on column names), this was <em>way</em> simpler than the arm solution. And we still see the problems with the mismatch between the model and the data.</p>
+<p>But - still, I mean, I <em>could</em> go and re-write some of the coreSim functionality to have simulation numbers. But…. There had to be.</p>
+</div>
+<div id="finding-my-dharma" class="section level3">
+<h3>Finding my DHARMa</h3>
+<p>I’m a HUGE fan of Florian Hartig’s <a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html">DHARMa</a> package for assessing fit via simulated quantile residuals. Heck, eyeballing the data versus simulated distributions here is exactly what DHARMa is doing! I was working with a colleague on assessing fit in some glmmTMB models when it hit me.</p>
+<p>DHARMa calculates simulated values. From which it derives residuals. Which means it’s got a pretty robust flexible simulation algorithm in there, which means…..it has a simulations method. I went spelunking around the help files, and found <code>getSimulations()</code> which works for a wide variety of objects. Would this be the key? It turns out a matrix, so I needed to do a bit of reshaping, but…</p>
+<pre class="r"><code>library(DHARMa)
+
+# last, what about DHARMa?
+yhat_dharma &lt;- getSimulations(mod, nsim = 100 ) %&gt;%
+  as_tibble() %&gt;%
+  tidyr::gather(key = &quot;sim&quot;, value = &quot;flipper_length_mm&quot;) %&gt;%
+  mutate(type = &quot;pred_sharma&quot;)
+
+ggplot() +
+  geom_density(data = yhat_dharma, 
+               aes(x = flipper_length_mm, group = sim),
+               lwd = 0.1, color = &quot;purple&quot;) +
+    geom_density(data = penguins, 
+                 aes(x = flipper_length_mm),
+               lwd = 2) +
+  labs(title = &quot;Distribution of Flipper length (black) and DHARMa Simulations&quot;)</code></pre>
+<p><img src="../../../../post/2020-09-24-simulating-posterior-predictions-from-non-bayesian-fits.en_files/figure-html/dharma-1.png" width="672" /></p>
+<p>Alas - DHARMa isn’t pulling simulated values of the coefficients. This looks the same as the simulate functions above. And with good reason! As I dug into the code for <code>getSimulations()</code> for <code>lm()</code> fit objects, it uses simulate!</p>
+<p>Indeed, I would have noticed this from reading the helpfile (HA!) which says "
+The purpose of this wrapper for for the simulate function is to return the simulations from a model in a standardized way".</p>
+</div>
+<div id="other-packages-considered" class="section level3">
+<h3>Other packages considered</h3>
+<p>In the course of putting this together, I looked a bit at <a href="https://cran.r-project.org/web/packages/simglm/">simglm</a> as well, but it’s for knowing parameters a prior, not calculating simulations from fit models.</p>
+</div>
+<div id="conclusion---coresim-for-now" class="section level3">
+<h3>Conclusion - coreSim for now?</h3>
+<p>So, for now, coreSim for non-mixed models seems to be the way to go, predictInterval for merMods, and…. I’m not sure for others. glmmTMB has the ability to pull simulated draws of random effects using <code>simulate()</code> as seen <a href="https://cran.r-project.org/web/packages/glmmTMB/vignettes/sim.html">here</a>. But, I find myself unsatisfied with the lack of a general case solution. A predict_interval, if you will, for any model types. And one that perhaps integrates variation not just in parameters (e.g. fitted simulations), but also error terms (e.g., prediction simulations). If anyone has a solution, I’d love to know it! Perhaps I am missing a package? Short of using rstanarm, I’m stumped for the moment!</p>
+</div>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Sep 24, 2020 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2020/05/25/roaring-back-into-mobility-in-the-us-post-covid-lockdown/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts disabled" href="#">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-9734501-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+
