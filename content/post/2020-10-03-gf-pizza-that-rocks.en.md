@@ -30,7 +30,7 @@ So, here's my friend Jarrod's recipe (his writing!), modified for GF use, with l
 
 For the dough, if you're feeling courageous:
 
-*Ingredients*
+*Ingredients*  
 About 1 cup of water, shower temperature  
 About 2 3/4 cups [Cup4Cup GF flour](https://www.target.com/p/cup-4-cup-gluten-free-flour-blend-32oz/-/A-50358792?ref=tgt_adv_XS000000&AFID=google_pla_df&fndsrc=tgtao&CPNG=PLA_Grocery%2BShopping&adgroup=SC_Grocery&LID=700000001170770pgs&network=g&device=c&location=9002004&ds_rl=1246978&ds_rl=1248099&gclsrc=ds) (I suppose other pastry-oriented GF flours will work, too)  
 1/4 Cup of [Expandex modified tapioca starch](https://www.walmart.com/ip/Judee-s-Gluten-Free-Expandex-Modified-Tapioca-Starch-13-5-oz/269079493?wmlspartner=wlpa&selectedSellerId=0)  
@@ -38,7 +38,7 @@ About 2 3/4 cups [Cup4Cup GF flour](https://www.target.com/p/cup-4-cup-gluten-fr
 1 packet (2 1/4 tsp) of yeast  
 generous pinch of sugar or squirt of honey  
 
-*Utensils*
+*Utensils*  
 Big spoon 
 Flat surface  
 Big bowl  
