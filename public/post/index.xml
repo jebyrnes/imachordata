@@ -6,10 +6,19 @@
     <description>Recent content in Posts on I&#39;m a Chordata! Urochordata!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Sep 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GF Pizza that Rocks</title>
+      <link>/2020/10/03/gf-pizza-that-rocks/</link>
+      <pubDate>Sat, 03 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/10/03/gf-pizza-that-rocks/</guid>
+      <description>Have you only had mediocre or downright bad gluten free pizza? Try this - it comes out perfect with a nice, thin, crispy crust every time.</description>
+    </item>
     
     <item>
       <title>Simulating &#34;Posterior&#34; Predictions from Non-Bayesian Fits</title>
