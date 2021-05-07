@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" R Tensorflow on an M1 Mac Without Crashing &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2021/05/07/r-tensorflow-on-an-m1-mac-without-crashing/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2021-05-07T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+  
+
+  <title>
+     R Tensorflow on an M1 Mac Without Crashing &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">R Tensorflow on an M1 Mac Without Crashing</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    <p><img src="https://i.redd.it/6b7und8rs1v21.png" alt="">{style=&quot;text-align: center;&quot;}</p>
+<p>As my third semester of online teaching continued apace, something sad started to happen. My laptop started rebooting at irregular intervals. Then, the keyboard starting coming apart. This was a trusty laptop of 8 years - a delightful Macbook Air that has been my companion through several life transitions. And it would seem, parts for it were no longer made, unless I wanted to buy them aftermarket and fix it myself (still on my list - if I can find the parts!) I was truly sad.</p>
+<p>But&hellip;. also secretly delighted? I was doing more and more deep learning and Bayesian work, and the computer was showing its age. In particular, the CNN work I was doing with the <a href="https://tensorflow.rstudio.com/">R Tensorflow</a> wrapper was starting to heat up. What if, I reasoned to myself after seeing the speed benchmarks, I was able to harness the 6 CPUs and GPU of a Macbook pro for this work? I could do major testing at home before I sent big jobs off to a server. I was excited.</p>
+<p>I also should have done a wee bit more research.</p>
+<p>As I loaded up R and the requisite libraries the day I got my new hog, and ran the <a href="https://tensorflow.rstudio.com/guide/keras/">MNIST demo</a>&hellip;. I got an immediate crash. Every time I tried any tensorflow code, CRASH!</p>
+<p>I dug about, and found that it was due to architecture differences. R installs the x86 tensorflow, and&hellip;.. well while there is a version for M1 computers, it&rsquo;s <a href="https://github.com/apple/tensorflow_macos">on github and not part of the main release</a>.</p>
+<p>Heck, R itself is being run via Rosetta, as it&rsquo;s not native to arm64 yet.</p>
+<p>Thus began my quixotic quest to make all of this work. I&rsquo;ve been posting and cobbling together different resources. I&rsquo;ve learned a bit of python (and now know I need to learn more), and finally understand what all of this conda kerfuffle is all about. So. Here is what I have learned. Follow these steps, and it will run. And pretty well.</p>
+<p>I am not 100% sure if it&rsquo;s using my GPU&hellip;. if anyone has any comments on that, let me know. The guide below is likely not perfect, might not work for everyone, but, it worked for me? This is distilled from <a href="https://github.com/rstudio/keras/issues/1165">this thread</a>. So, here you go.</p>
+<ol>
+<li>
+<p>Go through the instruction to <a href="https://medium.com/codex/installing-tensorflow-on-m1-macs-958767a7a4b3">install Tensorflow on an M1 Mac from here</a>. Note, I called the environment I created <code>tf_env</code>.</p>
+</li>
+<li>
+<p>Install one of the arm64 nightly builds at <a href="https://mac.r-project.org/">https://mac.r-project.org/</a> - I&rsquo;m using 4.1. Oh hey, hi new pipe operator! Or, er, <code>new_pipe_operator |&gt; hello()</code>.</p>
+</li>
+<li>
+<p>Install a daily build of Rstudio for OSX from <a href="https://dailies.rstudio.com/">https://dailies.rstudio.com/</a> so it can handle the new version of R.</p>
+</li>
+<li>
+<p>To test, run Rstudio, and type <code>version</code> to make sure your arch is aarch64.</p>
+</li>
+<li>
+<p>OK, in your terminal, run <code>conda activate tf_env</code> - or whatever you named your environment for tensorflow in for #1.</p>
+</li>
+<li>
+<p>To open Rstudio from the environment, run <code>open -na rstudio</code></p>
+</li>
+<li>
+<p>Install the keras and tensorflow libraries. BUT - do not run <code>install_keras()</code> or <code>install_tensorflow()</code> - because you&rsquo;ve got it!</p>
+</li>
+<li>
+<p>At the head of your Rscript, include the following:</p>
+</li>
+</ol>
+<pre><code>library(tensorflow)
+library(keras)
+
+use_python(&quot;~/miniforge3/bin/python&quot;)
+use_condaenv(&quot;tf_env&quot;)
+</code></pre><p>with the later two getting you all good and set.</p>
+<p>And then - boom - it will run! I was never so happy as to see a successful run.</p>
+<p><img src="images/tensorflow_lives.png" alt="Look at tensorflow go!"></p>
+<p>Now, are there likely some problems here? Maybe! I&rsquo;d love to know, and I will edit the post as any that are relevant updates come in!</p>
+<p>I&rsquo;m also still not certain it&rsquo;s using the GPU. I tried running a CNN on it, watching GPU performance from Activity Monitor, and didn&rsquo;t really see anything. Would be delighted at any thoughts/suggestions about this issue.</p>
+<p>But, hey, it runs!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          May 7, 2021 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2020/10/03/gf-pizza-that-rocks/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts disabled" href="#">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-9734501-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on I&#39;m a Chordata! Urochordata!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Tensorflow on an M1 Mac Without Crashing</title>
+      <link>/2021/05/07/r-tensorflow-on-an-m1-mac-without-crashing/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/2021/05/07/r-tensorflow-on-an-m1-mac-without-crashing/</guid>
+      <description>How can I run Tensorflow in R on my new M1 Mac without it being a crash-fest? I ran into this problem, and, after a few months of people mucking about, I think there is an answer!</description>
+    </item>
     
     <item>
       <title>GF Pizza that Rocks</title>

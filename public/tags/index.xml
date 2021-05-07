@@ -6,10 +6,19 @@
     <description>Recent content in Tags on I&#39;m a Chordata! Urochordata!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Oct 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>gluten free</title>
@@ -98,15 +107,6 @@
       <pubDate>Mon, 11 Jul 2011 00:00:00 +0000</pubDate>
       
       <guid>/tags/kelp-forest/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Tue, 20 Jul 2010 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r/</guid>
       <description></description>
     </item>
     
