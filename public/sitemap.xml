@@ -4,7 +4,37 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -13,27 +43,7 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2021/05/07/r-tensorflow-on-an-m1-mac-without-crashing/</loc>
-    <lastmod>2021-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-05-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -139,11 +149,6 @@
   
   <url>
     <loc>/tags/power-analysis/</loc>
-    <lastmod>2016-10-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
     <lastmod>2016-10-18T00:00:00+00:00</lastmod>
   </url>
   

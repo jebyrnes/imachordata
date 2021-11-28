@@ -1,0 +1,86 @@
+---
+title: "Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse"
+author: "Jarrett Byrnes"
+date: '2021-11-28'
+slug: tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse
+categories: R
+tags:
+- R
+- tidyverse
+summary: I always forget how to write function that dynamically evaluate variables
+  in a tidyverse context. This post is a reminder mostly for myself. But maybe you
+  will find it useful, too?
+---
+
+<script src="{{< blogdown/postref >}}index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<p>Once we have become deeply immersed in the tidyverse, sometimes we want to write tidy functions. Functions where we can use <code>ggplot()</code> or <code>mutate()</code> but supply arguments to specific columns from a data set. This does not always work. For example, let’s have some fun with mtcars -</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+my_fun &lt;- function(x, y, col){
+  ggplot(mtcars, 
+         aes(x = x, y =y , color = col)) + 
+    geom_point()
+}
+
+my_fun(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Well that doesn’t look right. Not right at all. And if you do the following:</p>
+<pre class="r"><code>my_fun(mpg, cyl, disp)</code></pre>
+<p>That just throws an error.</p>
+<p>Now, ggplot in particular has a nice little workaround - <code>aes_string()</code></p>
+<pre class="r"><code>my_fun_string &lt;- function(x, y, col){
+  ggplot(mtcars, 
+         aes_string(x = x, y =y , color = col)) + 
+    geom_point()
+}
+
+
+my_fun_string(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>But - that still doesn’t work with unquoted variable names. Nor is that a general solution to the problem, as <code>dplyr</code> and friends don’t have <code>*_string</code> functions.</p>
+<p>There are a few solultions to this problem. The first is recognizing that tidyverse functions implicitly use <code>.</code> or <code>.data</code>, so we can use this to make a function that works for quoted column names.</p>
+<pre class="r"><code>my_fun_tidy &lt;- function(x, y, col){
+  
+  ggplot(mtcars, 
+         aes(x = .data[[x]],
+             y = .data[[y]],
+             color = .data[[col]])) + geom_point()
+}
+
+
+my_fun_tidy(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Convenient. And usable in other contexts. However, you still have to quote your column names. Also, more annoyingly, you have to remember when and where to use <code>.</code> or <code>.data</code> which, I’ll be honest, I forget 90% of the time.</p>
+<p>A second solution is to use <code>glue</code> syntax which is now baked into tidy evaluation.</p>
+<pre class="r"><code>my_fun_quotes &lt;- function(x, y, col){
+
+  ggplot(mtcars, 
+         aes_string(x = {{ x }}, 
+                    y = {{ y }} , 
+                    color = {{ col }})) + 
+    geom_point()
+  
+}
+
+my_fun_quotes(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Nice! It works! And all we have to remember is to wrap our variables in <code>{{ }}</code> for it to work. This still doesn’t solve the unquoted column name problem, though. For that, we need a function from <code>rlang</code> where we tell R that a variable is quoted with <code>enquo</code>. We can then use it as before.</p>
+<pre class="r"><code>my_fun_enquo &lt;- function(x, y, col){
+  
+  x &lt;- enquo(x)
+  y &lt;- enquo(y)
+  col &lt;- enquo(col)
+  
+  ggplot(mtcars, 
+         aes_string(x = {{ x }}, 
+                    y = {{ y }} , 
+                    color = {{ col }})) + geom_point()
+  
+}
+
+my_fun_enquo(mpg, cyl, disp)</code></pre>
+<p><img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>And there you go! This later will work really well for putting things into tidy workflows. And you don’t have to get deep into thinking about quosures and such, which, TBH, I could never follow/remember the exact sequence and logic of when I wasn’t working with them every single day.</p>

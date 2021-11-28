@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2021-11-28T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+      <meta property="og:article:tag" content="tidyverse" />
+    
+  
+
+  <title>
+     Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    
+<script src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/header-attrs/header-attrs.js"></script>
+
+
+<p>Once we have become deeply immersed in the tidyverse, sometimes we want to write tidy functions. Functions where we can use <code>ggplot()</code> or <code>mutate()</code> but supply arguments to specific columns from a data set. This does not always work. For example, let’s have some fun with mtcars -</p>
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+
+my_fun &lt;- function(x, y, col){
+  ggplot(mtcars, 
+         aes(x = x, y =y , color = col)) + 
+    geom_point()
+}
+
+my_fun(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Well that doesn’t look right. Not right at all. And if you do the following:</p>
+<pre class="r"><code>my_fun(mpg, cyl, disp)</code></pre>
+<p>That just throws an error.</p>
+<p>Now, ggplot in particular has a nice little workaround - <code>aes_string()</code></p>
+<pre class="r"><code>my_fun_string &lt;- function(x, y, col){
+  ggplot(mtcars, 
+         aes_string(x = x, y =y , color = col)) + 
+    geom_point()
+}
+
+
+my_fun_string(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>But - that still doesn’t work with unquoted variable names. Nor is that a general solution to the problem, as <code>dplyr</code> and friends don’t have <code>*_string</code> functions.</p>
+<p>There are a few solultions to this problem. The first is recognizing that tidyverse functions implicitly use <code>.</code> or <code>.data</code>, so we can use this to make a function that works for quoted column names.</p>
+<pre class="r"><code>my_fun_tidy &lt;- function(x, y, col){
+  
+  ggplot(mtcars, 
+         aes(x = .data[[x]],
+             y = .data[[y]],
+             color = .data[[col]])) + geom_point()
+}
+
+
+my_fun_tidy(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Convenient. And usable in other contexts. However, you still have to quote your column names. Also, more annoyingly, you have to remember when and where to use <code>.</code> or <code>.data</code> which, I’ll be honest, I forget 90% of the time.</p>
+<p>A second solution is to use <code>glue</code> syntax which is now baked into tidy evaluation.</p>
+<pre class="r"><code>my_fun_quotes &lt;- function(x, y, col){
+
+  ggplot(mtcars, 
+         aes_string(x = {{ x }}, 
+                    y = {{ y }} , 
+                    color = {{ col }})) + 
+    geom_point()
+  
+}
+
+my_fun_quotes(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Nice! It works! And all we have to remember is to wrap our variables in <code>{{ }}</code> for it to work. This still doesn’t solve the unquoted column name problem, though. For that, we need a function from <code>rlang</code> where we tell R that a variable is quoted with <code>enquo</code>. We can then use it as before.</p>
+<pre class="r"><code>my_fun_enquo &lt;- function(x, y, col){
+  
+  x &lt;- enquo(x)
+  y &lt;- enquo(y)
+  col &lt;- enquo(col)
+  
+  ggplot(mtcars, 
+         aes_string(x = {{ x }}, 
+                    y = {{ y }} , 
+                    color = {{ col }})) + geom_point()
+  
+}
+
+my_fun_enquo(mpg, cyl, disp)</code></pre>
+<p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>And there you go! This later will work really well for putting things into tidy workflows. And you don’t have to get deep into thinking about quosures and such, which, TBH, I could never follow/remember the exact sequence and logic of when I wasn’t working with them every single day.</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Nov 28, 2021 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/tidyverse/">
+            #tidyverse
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2021/05/07/r-tensorflow-on-an-m1-mac-without-crashing/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts disabled" href="#">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-9734501-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+
