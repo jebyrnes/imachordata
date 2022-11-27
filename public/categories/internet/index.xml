@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>internet on I&#39;m a Chordata! Urochordata!</title>
+    <link>/categories/internet/</link>
+    <description>Recent content in internet on I&#39;m a Chordata! Urochordata!</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 19 Nov 2022 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/internet/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Reflections on Two Weeks Using Mastodon</title>
+      <link>/2022/11/19/two-weeks-of-mastodon/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/11/19/two-weeks-of-mastodon/</guid>
+      <description>Welp. I have been on Mastodon for two week now, and am rather liking it. But here are some things I have learned&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

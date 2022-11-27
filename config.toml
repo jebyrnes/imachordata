@@ -79,3 +79,8 @@ home = ["HTML", "RSS"]
     #email          = "jarrett.byrnes@gmail.com"
     twitter       = "http://twitter.com/jebyrnes"
     github         = "https://github.com/jebyrnes"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

@@ -88,6 +88,31 @@
     
     <article>
   <header>
+    <h1 class="li-h1"><a href="../../2013/02/23/filtering-out-exogenous-pairs-of-variables-from-a-basis-set/">Filtering Out Exogenous Pairs of Variables from a Basis Set</a></h1>
+    <div class="clearfix">
+      <div class="post-date pull-left">
+        <span class="li-small">
+          Posted on
+          Feb 23, 2013 at 00:00
+        </span>
+      </div>
+    </div>
+  </header>
+
+  
+    <div>
+       
+      Sometimes in an SEM for which you&rsquo;re calculating a test of D-Separation, you want all exogenous variables to covary. If you have a large model with a number of exogenous variables, coding that into your basis set can be a pain, and hence, you can spend a lot of time filtering out elements that aren&rsquo;t part of your basis set, particularly with the ggm library. Here&rsquo;s a solution - a function I&rsquo;m calling filterExoFromBasiSet
+    </div>
+  
+</article>
+
+  
+    
+      <div class="delimiter"></div>
+    
+    <article>
+  <header>
     <h1 class="li-h1"><a href="../../2013/02/06/aaas-webinar-on-science-crowdfunding/">AAAS Webinar on Science Crowdfunding</a></h1>
     <div class="clearfix">
       <div class="post-date pull-left">
@@ -182,32 +207,6 @@ The final version of Wheat et al.&lsquo;s paper Raising money for scientific res
     <div>
        
       As someone who, admittedly, benefitted a great deal from Privilege growing up (it definitely lowered the barriers to my becoming a succesful marine scientist), know that this is true of MANY Ecology and Evolutionary Biology folk, and now think a good deal about how I can lower those barriers for students and mentees that come under my aegis, you should all go over and check out Miriam Goldstein&rsquo;s A field guide to privilege in marine science: some reasons why we lack diversity.
-    </div>
-  
-</article>
-
-  
-    
-      <div class="delimiter"></div>
-    
-    <article>
-  <header>
-    <h1 class="li-h1"><a href="../../2012/12/18/a-quick-note-in-weighting-with-nlme/">A Quick Note in Weighting with nlme</a></h1>
-    <div class="clearfix">
-      <div class="post-date pull-left">
-        <span class="li-small">
-          Posted on
-          Dec 18, 2012 at 00:00
-        </span>
-      </div>
-    </div>
-  </header>
-
-  
-    <div>
-       
-      I&rsquo;ve been doing a lot of meta-analytic things lately. More on that anon. But one quick thing that came up was variance weighting with mixed models in R, and after a few web searches, I wanted to post this, more as a note-to-self and others than anything. Now, in a simple linear model, weighting by variance or sample size is straightforward.
-#variance lm(y ~ x, data = dat, weights = 1/v) #sample size lm(y ~ x, data = dat, weights = n) You can use the same sort of weights argument with lmer.
     </div>
   
 </article>
