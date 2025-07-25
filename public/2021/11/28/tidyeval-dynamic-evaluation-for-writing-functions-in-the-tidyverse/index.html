@@ -101,7 +101,6 @@
   <div class="delimiter"></div>
   <section>
     
-<script src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/header-attrs/header-attrs.js"></script>
 
 
 <p>Once we have become deeply immersed in the tidyverse, sometimes we want to write tidy functions. Functions where we can use <code>ggplot()</code> or <code>mutate()</code> but supply arguments to specific columns from a data set. This does not always work. For example, let’s have some fun with mtcars -</p>
@@ -128,6 +127,12 @@ my_fun(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
 
 
 my_fun_string(&quot;mpg&quot;, &quot;cyl&quot;, &quot;disp&quot;)</code></pre>
+<pre><code>## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+## ℹ Please use tidy evaluation idioms with `aes()`.
+## ℹ See also `vignette(&quot;ggplot2-in-packages&quot;)` for more information.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.</code></pre>
 <p><img src="../../../../2021/11/28/tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse/index.en_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>But - that still doesn’t work with unquoted variable names. Nor is that a general solution to the problem, as <code>dplyr</code> and friends don’t have <code>*_string</code> functions.</p>
 <p>There are a few solultions to this problem. The first is recognizing that tidyverse functions implicitly use <code>.</code> or <code>.data</code>, so we can use this to make a function that works for quoted column names.</p>
