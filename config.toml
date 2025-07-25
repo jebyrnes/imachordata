@@ -1,10 +1,10 @@
-baseurl = "/"
+baseurl = "http://imachordata.com/"
 languageCode = "en-us"
 title = "I'm a Chordata! Urochordata!"
 theme = "hamburg"
 googleAnalytics = "UA-9734501-1"
 disqusShortname = "im-a-chordata-urochordata"
-ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$"]
 relativeURLs = true
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = "true"

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head prefix="og: http://ogp.me/ns#">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <meta property="og:title" content=" Modelbased for Quick and Beautiful Model Visualization &middot;  I&#39;m a Chordata! Urochordata!" />
+  
+    <meta name="theme-color" content="#FFFFFF" />
+  
+  <meta property="og:site_name" content="I&#39;m a Chordata! Urochordata!" />
+  <meta property="og:url" content="/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/" />
+  
+  
+    <meta property="og:type" content="article" />
+    
+    <meta property="og:article:published_time" content="2025-07-25T00:00:00Z" />
+    
+      <meta property="og:article:tag" content="R" />
+    
+      <meta property="og:article:tag" content="ggplot2" />
+    
+      <meta property="og:article:tag" content="easystats" />
+    
+  
+
+  <title>
+     Modelbased for Quick and Beautiful Model Visualization &middot;  I&#39;m a Chordata! Urochordata!
+  </title>
+
+  <link rel="alternative stylesheet" href="../../../../css/bootstrap.min.css" />
+  <link rel="stylesheet" href="../../../../css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../../../../css/main.css" />
+  <link rel="stylesheet" href="../../../../css/github.css" />
+  <link rel="stylesheet" href="../../../../css/color-theme.css" />
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400" type="text/css">
+  <link rel="shortcut icon" href="../../../../images/favicon.ico" />
+  <link rel="apple-touch-icon" href="../../../../images/apple-touch-icon.png" />
+
+  
+    <link rel="stylesheet" href="../../../../css/hamburg.css">
+  
+
+  
+</head>
+<body>
+  
+  <header class="global-header"  style="background-image:url(/images/bg.jpg)">
+  
+    <section class="header-text">
+      <h1><a href="../../../../">I&#39;m a Chordata! Urochordata!</a></h1>
+      
+        <h3 class="tag-line">
+          Marine Data Science for All, Regardless of Backbone!
+        </h3>
+      
+      
+        <a class="btn btn-default btn-home" href="../../../../">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+          &nbsp;Home
+        </a>
+      
+      
+      <div class="navbar-container">
+        
+          <a class="btn btn-default navbar-item" href="../../../../about/">
+            About
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="../../../../categories/">
+            Categories
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://byrneslab.net">
+            Lab Site
+          </a>
+        
+          <a class="btn btn-default navbar-item" href="https://twitter.com/jebyrnes">
+            Twitter
+          </a>
+        
+      </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </section>
+  </header>
+  <main class="container">
+
+
+
+<article>
+  <header class="article-title">
+    <h1 class="text-primary">Modelbased for Quick and Beautiful Model Visualization</h1>
+  </header>
+  <div class="delimiter"></div>
+  <section>
+    
+
+
+<p>A year ago, I found the <a href="https://easystats.github.io/modelbased/">modelbased</a> package while looking for tools to visualize some mixed models. It was a minor revelation. Just like many of the packages from the [easystats]((<a href="https://easystats.github.io/" class="uri">https://easystats.github.io/</a>) family.</p>
+<p>I teach students to simulate the data they want for data viz (yay <code>broom::augment()</code> and <code>modelr::data_grid()</code>), and then plot that in combination with raw data (sometimes). This is great for really detailed nit-picky figures. But, particularly for students just learning, or for a quick-and-dirty data viz of a fit multivariate model, I always wished there was a simpler way.</p>
+<p><a href="https://easystats.github.io/modelbased/">modelbased</a> and its <code>estimate_relation()</code> function is an amazing one-stop shop for just this (and more!)</p>
+<p>To see it in action, let’s fit a model with the Palmer Penguins data set (now in base R!) and see what this function does. Here, we’ll have look at how mass influences bill length and let this relationship vary by species.</p>
+<pre class="r"><code>library(modelbased)
+library(ggplot2)
+
+mod &lt;- lm(bill_len ~ species*body_mass,
+          data = penguins)
+
+estimate_relation(mod)</code></pre>
+<pre><code>## Model-based Predictions
+## 
+## species   | body_mass | Predicted |   SE |         95% CI
+## ---------------------------------------------------------
+## Chinstrap |      2700 |     44.22 | 0.84 | [42.57, 45.88]
+## Adelie    |      3100 |     36.88 | 0.32 | [36.24, 37.51]
+## Chinstrap |      3100 |     46.01 | 0.56 | [44.90, 47.12]
+## Adelie    |      3500 |     38.15 | 0.21 | [37.73, 38.57]
+## Chinstrap |      3500 |     47.79 | 0.34 | [47.12, 48.46]
+## Gentoo    |      3500 |     41.06 | 0.71 | [39.66, 42.46]
+## Adelie    |      3900 |     39.43 | 0.21 | [39.01, 39.85]
+## Chinstrap |      3900 |     49.58 | 0.32 | [48.95, 50.20]
+## Gentoo    |      3900 |     42.69 | 0.55 | [41.61, 43.78]
+## Adelie    |      4300 |     40.70 | 0.32 | [40.07, 41.34]
+## Chinstrap |      4300 |     51.36 | 0.52 | [50.34, 52.39]
+## Gentoo    |      4300 |     44.33 | 0.40 | [43.55, 45.11]
+## Adelie    |      4700 |     41.98 | 0.47 | [41.05, 42.90]
+## Chinstrap |      4700 |     53.15 | 0.79 | [51.59, 54.71]
+## Gentoo    |      4700 |     45.97 | 0.27 | [45.44, 46.50]
+## Gentoo    |      5100 |     47.60 | 0.22 | [47.18, 48.03]
+## Gentoo    |      5500 |     49.24 | 0.28 | [48.68, 49.80]
+## Gentoo    |      5900 |     50.88 | 0.42 | [50.06, 51.69]
+## Gentoo    |      6300 |     52.51 | 0.57 | [51.39, 53.63]
+## 
+## Variable predicted: bill_len
+## Predictors modulated: species, body_mass</code></pre>
+<p>This is a really nice visualization of a data table of predicted values. Even better, though, is we can pipe this object to plot, and…</p>
+<pre class="r"><code># basic plotting behavior
+estimate_relation(mod) |&gt; plot()</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/basic_plot-1.png" width="672" /></p>
+<p>Interesting. We’re looking at both predictors and summary output by category for a range of different values of body mass. Neat, but not quite what I want. Fortunately there is the <code>by</code> argument for <code>estimate_relation()</code> which tells what predictors to use (if you have, say, 10), holding others at their mean value in order to marginalize. For example:</p>
+<pre class="r"><code># show what&#39;s happening
+estimate_relation(mod,
+                  by = &quot;species&quot;) </code></pre>
+<pre><code>## Model-based Predictions
+## 
+## species   | Predicted |   SE |         95% CI
+## ---------------------------------------------
+## Adelie    |     40.39 | 0.29 | [39.82, 40.96]
+## Chinstrap |     50.93 | 0.46 | [50.02, 51.83]
+## Gentoo    |     43.93 | 0.43 | [43.07, 44.78]
+## 
+## Variable predicted: bill_len
+## Predictors modulated: species
+## Predictors controlled: body_mass (4.2e+03)</code></pre>
+<pre class="r"><code># plot it
+estimate_relation(mod,
+                  by = &quot;species&quot;) |&gt; 
+  plot()</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Nice, no? And the plot above is a ggplot, so you can scale and theme to your heart’s delight. More on that below.</p>
+<p>But what if I want to show the relationship between mass and bill length - my goal after all - with different lines for different species? It all depends on the order you supply variables to the <code>by</code> argument.</p>
+<p>I’ll also make an object so I can stop typing <code>estimate_relation()</code> in the future.</p>
+<pre class="r"><code># so we can type less
+mod_results &lt;- estimate_relation(mod,
+                                 by = c(&quot;body_mass&quot;, 
+                                        &quot;species&quot;))
+
+
+plot(mod_results)</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/lines-1.png" width="672" /></p>
+<p>This is great! Just what we want!</p>
+<p>Well. Almost.</p>
+<p>What if we want to customize? We can of course set scales and themes and just add them on - this is a <code>ggplot2</code> object after all. But what about the data?</p>
+<p>We can add an argument to <code>plot()</code> to show it - <code>show_data = TRUE</code>. Let’s do that, and add some more pizzaz. I’m going to do that using some themes from <a href="https://easystats.github.io/see/">see</a>, which is the viz package for many of the outputs from [easystats]((<a href="https://easystats.github.io/" class="uri">https://easystats.github.io/</a>) packages (it powers all of those great visualizations from <code>performance::check_model()</code> for example).</p>
+<pre class="r"><code># add data
+# add a scale
+plot(mod_results, 
+     show_data = TRUE) +
+  see::scale_color_metro() +
+  see::scale_fill_metro()</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/show_data-1.png" width="672" /></p>
+<p>Beautiful!</p>
+<p>But what other arguments can I give to <code>plot()</code>?</p>
+<p>This is one place where the documentation for <code>modelbased</code> currently falls a bit short. I’d love a vignette that goes through all of the ways to customize these plots. You can get it, however, if you search around and find the documentation for creating what is called a <code>visualization_recipe()</code> - particularly for the kinds of objects here</p>
+<pre class="r"><code>class(mod_results)</code></pre>
+<pre><code>## [1] &quot;estimate_expectation&quot;   &quot;estimate_predicted&quot;     &quot;see_estimate_predicted&quot;
+## [4] &quot;data.frame&quot;</code></pre>
+<p>So we can look at <a href="https://easystats.github.io/modelbased/reference/visualisation_recipe.estimate_predicted.html"><code>visualisation_recipe.estimate_predicted()</code></a>. There, we have a number of arguments we can customize - point, line, pointrange, ribbon, facet, and grid - each using a <code>list()</code> to supply geoms and aesthetic arguments for each feature of the plot. We can also supply <code>"none"</code> for things we do not want.</p>
+<p>For example, let’s make all lines black.</p>
+<pre class="r"><code># make all lines black
+plot(mod_results,
+     line = list(color = &quot;black&quot;))</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/black_line-1.png" width="672" /></p>
+<p>We see to line we supply a list where we give the aesthetic color as black. We can’t remap things here (at least, I haven’t been able to figure out how if we can), but we can give fixed aesthetics.</p>
+<p>For example, let’s do three things
+1. remove the CI ribbon
+2. make the lines have a size of 1<br />
+3. add the data</p>
+<pre class="r"><code># remove ribbon but add data
+plot(mod_results,
+     ribbon = &quot;none&quot;,
+     line = list(size = 1),
+     show_data = TRUE)</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/more_aes-1.png" width="672" /></p>
+<p>Lovely!</p>
+<p>Last - what underlies the predictions here? These prediction lines are great, but, how are they generated? What if I don’t want my lines limited to</p>
+<p>In short, <code>modelbased</code> uses a <a href="https://easystats.github.io/insight/reference/get_datagrid.html"><code>insight::get_datagrid()</code></a> to generate all combinations of relevant variables. We can use arguments for this function in <code>estimate_relation()</code> to futz with what data is used for predictions.</p>
+<p>Let’s see what the default looks like by changing the line geom to a points.</p>
+<pre class="r"><code># data grid
+plot(mod_results,
+       line = list(geom = &quot;point&quot;))</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/what_is_in_line-1.png" width="672" /></p>
+<p>OK - we can see those lines are made up of 6 points each. We can change this with a <code>length</code> argument.</p>
+<pre class="r"><code>estimate_relation(mod,
+                  by = c(&quot;body_mass&quot;, 
+                         &quot;species&quot;),
+                  length = 30) |&gt;
+  plot(line = list(geom = &quot;point&quot;))</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/many_points-1.png" width="672" /></p>
+<p>You can see how this would be useful for wild nonlinear models - glms, gams, and more. More points will give a smoother curve.</p>
+<p>We can do more using <code>insight::data_grid()</code> arguments. If we want to, for example, show the curves where each line is not limited to the range of the data for each species, but instead have one big common range, we can use <code>preserve_range = FALSE</code>.</p>
+<pre class="r"><code>estimate_relation(mod,
+                  by = c(&quot;body_mass&quot;, 
+                         &quot;species&quot;),
+                  preserve_range = FALSE) |&gt;
+  plot(line = list(geom = &quot;point&quot;))</code></pre>
+<p><img src="../../../../2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/index.en_files/figure-html/whole_range-1.png" width="672" /></p>
+<p>I’m sure there are other options I’m not covering here. And there’s even more fun to be had with mixed models. Let me know what else you would like to see, and I’ll try and explore the package a bit more!</p>
+
+  </section>
+  <div class="clearfix">
+    
+      <div class="post-date pull-left">
+        <span class="small">
+          Posted on
+          Jul 25, 2025 at 00:00
+        </span>
+      </div>
+    
+    <div class="pull-right">
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/r/">
+            #R
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/ggplot2/">
+            #ggplot2
+          </a>
+        </span>
+      
+        <span class="post-tag small">
+          <a href="../../../../tags/easystats/">
+            #easystats
+          </a>
+        </span>
+      
+    </div>
+  </div>
+  <footer>
+    
+	
+      
+        <div class="delimiter"></div>
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'im-a-chordata-urochordata';
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+    
+    <div class="delimiter"></div>
+    <div class="pager-container">
+      
+        <a class="btn btn-primary btn-older-posts" href="../../../../2022/11/19/two-weeks-of-mastodon/">
+          <div>
+            <span aria-hidden="true">&larr;</span> Older Posts
+          </div>
+        </a>
+      
+      
+        <a class="btn btn-primary btn-newer-posts disabled" href="#">
+          <div>
+            Newer Posts <span aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      
+    </div>
+  </footer>
+</article>
+<div class="delimiter"></div>
+
+  </main>
+  <footer class="container global-footer">
+    <div class="copyright-note pull-left">
+      
+    </div>
+    <div class="sns-links hidden-print">
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-9734501-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  
+  
+
+  
+  
+
+  
+</body>
+</html>
+

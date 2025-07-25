@@ -24,7 +24,8 @@ library(dplyr)
 library(ggplot2)
 
 #the data, filtered to the US
-us_mobile <- refresh_covid19mobility_apple_country() %>%
+us_mobile <- #refresh_covid19mobility_apple_country() %>%
+  covid19mobility_apple_country_demo %>%
   filter(location_code == "US")
 
 max_date <- max(us_mobile$date)
@@ -54,7 +55,7 @@ baseplot +
 
 The driving trend is really interesting. Is this really due to everywhere going up uniformly? To investigate, I pulled in the subregional data - for the US this just has driving stats. And then used the awesome [geofacet](https://hafen.github.io/geofacet/) package from Ryan Hafen to visualize. I'll just use GAMs in order to facilitate visualization without the wigglies due to within-week variation.
 
-```{r state, warning=FALSE, message=FALSE}
+```{r state, warning=FALSE, message=FALSE, eval = FALSE}
 library(geofacet)
 
 state_mobile <- refresh_covid19mobility_apple_subregion() %>%
@@ -78,7 +79,7 @@ state_baseplot +
 
 So, a few places have stayed - Hawaii, Mass, and a few others - and others have gone WAAAY up - ND, Wyoming, Montata. Looking at it another way - we can really see how the top 5 states drive the trend up - BUT - with some exceptions, driving is still back to normal most places
 
-```{r overplot, warning=FALSE, message=FALSE}
+```{r overplot, warning=FALSE, message=FALSE, eval = FALSE}
 library(ggrepel) #for labels
 
 

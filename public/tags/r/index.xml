@@ -6,10 +6,20 @@
     <description>Recent content in R on I&#39;m a Chordata! Urochordata!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 25 Jul 2025 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Modelbased for Quick and Beautiful Model Visualization</title>
+      <link>/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/</link>
+      <pubDate>Fri, 25 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/</guid>
+      <description>A year ago, I found the modelbased package while looking for tools to visualize some mixed models. It was a minor revelation. Just like many of the packages from the [easystats]((https://easystats.github.io/) family.
+I teach students to simulate the data they want for data viz (yay broom::augment() and modelr::data_grid()), and then plot that in combination with raw data (sometimes). This is great for really detailed nit-picky figures. But, particularly for students just learning, or for a quick-and-dirty data viz of a fit multivariate model, I always wished there was a simpler way.</description>
+    </item>
     
     <item>
       <title>Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse</title>

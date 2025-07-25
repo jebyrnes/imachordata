@@ -4,7 +4,47 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2022-11-19T00:00:00+00:00</lastmod>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/easystats/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2025-07-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -18,11 +58,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2022-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2022/11/19/two-weeks-of-mastodon/</loc>
     <lastmod>2022-11-19T00:00:00+00:00</lastmod>
   </url>
@@ -30,21 +65,6 @@
   <url>
     <loc>/tags/social-media/</loc>
     <lastmod>2022-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2022-11-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2021-11-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -89,11 +109,6 @@
   
   <url>
     <loc>/2020/09/24/simulating-posterior-predictions-from-non-bayesian-fits/</loc>
-    <lastmod>2020-09-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/statistics/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -1235,11 +1250,6 @@
   <url>
     <loc>/2009/09/09/the-new-york-times-recognizes-that-what-i-do-is-hard/</loc>
     <lastmod>2009-09-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot2/</loc>
-    <lastmod>2009-09-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>

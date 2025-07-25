@@ -96,137 +96,116 @@
   </header>
   <div class="delimiter"></div>
   <section>
-     
-
-
-
-<p>As part of the <a href="../../../../2020/05/07/the-covid19r-project/">Covid19R Project</a>, I’ve been working on a new package, <a href="https://github.com/Covid19R/covid19mobility">covid19mobility</a>. It started as an effort to pull in the <a href="https://www.apple.com/covid19/mobility">Apple Mobility Trends</a>, and has since morphed as more mobility data comes out. Right now, I’m working through the <a href="https://www.google.com/covid19/mobility/">Google Mobility Data</a>, &amp; I’m interested in the <a href="https://github.com/descarteslabs/DL-COVID-19">Descartes mobility data</a> and any others you can suggest down below (link to source)! But the data itself - it’s FASCINATING!</p>
-<p>As I finished getting the Apple data in (there are massive issues for all of the aforementioned data sets in terms of getting standardized location codes - I’m trying to use either the <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166 2</a> standard for countries and states or the <a href="https://www.unece.org/cefact/locode/service/location">UN LOCODE</a> for cities, and many of the states and cities have different names than those in the data standards. Watch me <code>dplyr::mutate()</code> and <code>ifelse</code> my way into oblivion)..</p>
+    <p>As part of the <a href="../../../../2020/05/07/the-covid19r-project/">Covid19R Project</a>, I&rsquo;ve been working on a new package, <a href="https://github.com/Covid19R/covid19mobility">covid19mobility</a>. It started as an effort to pull in the <a href="https://www.apple.com/covid19/mobility">Apple Mobility Trends</a>, and has since morphed as more mobility data comes out. Right now, I&rsquo;m working through the <a href="https://www.google.com/covid19/mobility/">Google Mobility Data</a>, &amp; I&rsquo;m interested in the <a href="https://github.com/descarteslabs/DL-COVID-19">Descartes mobility data</a> and any others you can suggest down below (link to source)! But the data itself - it&rsquo;s FASCINATING!</p>
+<p>As I finished getting the Apple data in (there are massive issues for all of the aforementioned data sets in terms of getting standardized location codes - I&rsquo;m trying to use either the <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166 2</a> standard for countries and states or the <a href="https://www.unece.org/cefact/locode/service/location">UN LOCODE</a> for cities, and many of the states and cities have different names than those in the data standards. Watch me <code>dplyr::mutate()</code> and <code>ifelse</code> my way into oblivion)..</p>
 <p>OK, that was a long rant, let me start over -</p>
-<p>As I finished getting the Apple data in, I decided to check it out with a quick vignette. It’s Memorial Day, US states are starting to open up - I wonder what our traffic looks like? Now, note, Apple’s data is the relative volume of directions requests for each data type. So, let’s look at the US…</p>
-<pre class="r"><code># remotes::install_github(&quot;covid19r/covid19mobility&quot;)
-library(covid19mobility)
-library(dplyr)
-library(ggplot2)
+<p>As I finished getting the Apple data in, I decided to check it out with a quick vignette. It&rsquo;s Memorial Day, US states are starting to open up - I wonder what our traffic looks like? Now, note, Apple&rsquo;s data is the relative volume of directions requests for each data type. So, let&rsquo;s look at the US&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># remotes::install_github(&#34;covid19r/covid19mobility&#34;)</span>
+<span style="color:#a6e22e">library</span>(covid19mobility)
+<span style="color:#a6e22e">library</span>(dplyr)
+<span style="color:#a6e22e">library</span>(ggplot2)
 
-#the data, filtered to the US
-us_mobile &lt;- refresh_covid19mobility_apple_country() %&gt;%
-  filter(location_code == &quot;US&quot;)
+<span style="color:#75715e">#the data, filtered to the US</span>
+us_mobile <span style="color:#f92672">&lt;-</span> <span style="color:#75715e">#refresh_covid19mobility_apple_country() %&gt;%</span>
+  covid19mobility_apple_country_demo <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(location_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;US&#34;</span>)
 
-max_date &lt;- max(us_mobile$date)
+max_date <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">max</span>(us_mobile<span style="color:#f92672">$</span>date)
 
-#now, a plot!
-baseplot &lt;- ggplot(us_mobile,
-       aes(x = date, y = value, color = data_type)) +
-  scale_color_brewer(palette = &quot;Dark2&quot;) +
-  theme_bw(base_size=14) +
-  labs(color = &quot;Mobility Type&quot;,
-       y = &quot;Relative Value&quot;,
-       x = &quot;&quot;) 
+<span style="color:#75715e">#now, a plot!</span>
+baseplot <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(us_mobile,
+       <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> date, y <span style="color:#f92672">=</span> value, color <span style="color:#f92672">=</span> data_type)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_brewer</span>(palette <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Dark2&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Mobility Type&#34;</span>,
+       y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Relative Value&#34;</span>,
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>) 
 
-baseplot +
-  geom_line(size = 1) +
-  ggtitle(paste0(&quot;Apple Mobility Trends for the US on &quot;, max_date)) </code></pre>
-<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>Wow. So, driving is basically back to where it was pre-lockdown. Walkign is coming back, but isn’t there yet. And transit is… nada. Looking at this using a GAM to smooth it all out shows the same thing (I know, I know, there’s much more complex and fun timeseries stuff to do here, but…)</p>
-<pre class="r"><code>baseplot +
-  stat_smooth(method = &quot;gam&quot;, fill = NA) +
-  ggtitle(&quot;Apple Mobility Trends for the US from fitted GAMs&quot;) </code></pre>
-<pre><code>## `geom_smooth()` using formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/smooth-1.png" width="672" /></p>
-<p>The driving trend is really interesting. Is this really due to everywhere going up uniformly? To investigate, I pulled in the subregional data - for the US this just has driving stats. And then used the awesome <a href="https://hafen.github.io/geofacet/">geofacet</a> package from Ryan Hafen to visualize. I’ll just use GAMs in order to facilitate visualization without the wigglies due to within-week variation.</p>
-<pre class="r"><code>library(geofacet)
+baseplot <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_line</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;Apple Mobility Trends for the US on &#34;</span>, max_date)) 
+</code></pre></div><p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Wow. So, driving is basically back to where it was pre-lockdown. Walkign is coming back, but isn&rsquo;t there yet. And transit is&hellip; nada. Looking at this using a GAM to smooth it all out shows the same thing (I know, I know, there&rsquo;s much more complex and fun timeseries stuff to do here, but&hellip;)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">baseplot <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">stat_smooth</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gam&#34;</span>, fill <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;Apple Mobility Trends for the US from fitted GAMs&#34;</span>) 
+</code></pre></div><pre><code>## `geom_smooth()` using formula = 'y ~ s(x, bs = &quot;cs&quot;)'
+</code></pre><p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/smooth-1.png" width="672" /></p>
+<p>The driving trend is really interesting. Is this really due to everywhere going up uniformly? To investigate, I pulled in the subregional data - for the US this just has driving stats. And then used the awesome <a href="https://hafen.github.io/geofacet/">geofacet</a> package from Ryan Hafen to visualize. I&rsquo;ll just use GAMs in order to facilitate visualization without the wigglies due to within-week variation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(geofacet)
 
-state_mobile &lt;- refresh_covid19mobility_apple_subregion() %&gt;%
-  filter(country==&quot;United States&quot;) %&gt;%
-  filter(!(location %in% c(&quot;Guam&quot;, &quot;Puerto Rico&quot;, 
-                         &quot;Virgin Islands&quot;)))
+state_mobile <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">refresh_covid19mobility_apple_subregion</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(country<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;United States&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span>(location <span style="color:#f92672">%in%</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Guam&#34;</span>, <span style="color:#e6db74">&#34;Puerto Rico&#34;</span>, 
+                         <span style="color:#e6db74">&#34;Virgin Islands&#34;</span>)))
 
-state_baseplot &lt;- ggplot(state_mobile,
-       aes(x = date, y = value)) +
-  theme_bw(base_size=11) +
-  labs(y = &quot;Relative Value&quot;,
-       x = &quot;&quot;) +
-  ggtitle(paste0(&quot;Apple Mobility Driving Trends for the US on &quot;, max_date)) 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5))</code></pre>
-<pre><code>## List of 1
-##  $ axis.text.x:List of 11
-##   ..$ family       : NULL
-##   ..$ face         : NULL
-##   ..$ colour       : NULL
-##   ..$ size         : NULL
-##   ..$ hjust        : num 1
-##   ..$ vjust        : num 0.5
-##   ..$ angle        : num 90
-##   ..$ lineheight   : NULL
-##   ..$ margin       : NULL
-##   ..$ debug        : NULL
-##   ..$ inherit.blank: logi FALSE
-##   ..- attr(*, &quot;class&quot;)= chr [1:2] &quot;element_text&quot; &quot;element&quot;
-##  - attr(*, &quot;class&quot;)= chr [1:2] &quot;theme&quot; &quot;gg&quot;
-##  - attr(*, &quot;complete&quot;)= logi FALSE
-##  - attr(*, &quot;validate&quot;)= logi TRUE</code></pre>
-<pre class="r"><code>state_baseplot +
-  facet_geo(~location) +
-  stat_smooth(method = &quot;gam&quot;, fill = NA, color = &quot;#1B9E77&quot;) + 
-  theme(axis.text.x = element_text(angle = 90, hjust = 1))</code></pre>
-<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/state-1.png" width="672" /></p>
-<p>So, a few places have stayed - Hawaii, Mass, and a few others - and others have gone WAAAY up - ND, Wyoming, Montata. Looking at it another way - we can really see how the top 5 states drive the trend up - BUT - with some exceptions, driving is still back to normal most places</p>
-<pre class="r"><code>library(ggrepel) #for labels
+state_baseplot <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(state_mobile,
+       <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> date, y <span style="color:#f92672">=</span> value)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">11</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Relative Value&#34;</span>,
+       x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#a6e22e">paste0</span>(<span style="color:#e6db74">&#34;Apple Mobility Driving Trends for the US on &#34;</span>, max_date)) 
+  <span style="color:#a6e22e">theme</span>(axis.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle <span style="color:#f92672">=</span> <span style="color:#ae81ff">90</span>, hjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, vjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>))
+
+state_baseplot <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">facet_geo</span>(<span style="color:#f92672">~</span>location) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">stat_smooth</span>(method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gam&#34;</span>, fill <span style="color:#f92672">=</span> <span style="color:#66d9ef">NA</span>, color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#1B9E77&#34;</span>) <span style="color:#f92672">+</span> 
+  <span style="color:#a6e22e">theme</span>(axis.text.x <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_text</span>(angle <span style="color:#f92672">=</span> <span style="color:#ae81ff">90</span>, hjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>))
+</code></pre></div><p>So, a few places have stayed - Hawaii, Mass, and a few others - and others have gone WAAAY up - ND, Wyoming, Montata. Looking at it another way - we can really see how the top 5 states drive the trend up - BUT - with some exceptions, driving is still back to normal most places</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggrepel) <span style="color:#75715e">#for labels</span>
 
 
-#fit a bunch of GAMs so that labels connect to the right places
-state_fits &lt;- state_mobile %&gt;%
-  group_by(location) %&gt;%
-  tidyr::nest() %&gt;%
-  mutate(mods = purrr::map(data, ~mgcv::gam(value ~ s(as.numeric(date), bs = &quot;cs&quot;), data = .)),
-         data = purrr::map2(data, mods, ~modelr::add_predictions(.x, .y))) %&gt;%
-  tidyr::unnest(data) %&gt;%
-  ungroup()
+<span style="color:#75715e">#fit a bunch of GAMs so that labels connect to the right places</span>
+state_fits <span style="color:#f92672">&lt;-</span> state_mobile <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(location) <span style="color:#f92672">%&gt;%</span>
+  tidyr<span style="color:#f92672">::</span><span style="color:#a6e22e">nest</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(mods <span style="color:#f92672">=</span> purrr<span style="color:#f92672">::</span><span style="color:#a6e22e">map</span>(data, <span style="color:#f92672">~</span>mgcv<span style="color:#f92672">::</span><span style="color:#a6e22e">gam</span>(value <span style="color:#f92672">~</span> <span style="color:#a6e22e">s</span>(<span style="color:#a6e22e">as.numeric</span>(date), bs <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cs&#34;</span>), data <span style="color:#f92672">=</span> .)),
+         data <span style="color:#f92672">=</span> purrr<span style="color:#f92672">::</span><span style="color:#a6e22e">map2</span>(data, mods, <span style="color:#f92672">~</span>modelr<span style="color:#f92672">::</span><span style="color:#a6e22e">add_predictions</span>(.x, .y))) <span style="color:#f92672">%&gt;%</span>
+  tidyr<span style="color:#f92672">::</span><span style="color:#a6e22e">unnest</span>(data) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">ungroup</span>()
 
-# make labels for the top 5 states
-tops &lt;- state_fits %&gt;%
-  filter(date == max(date)) %&gt;%
-  group_by(location) %&gt;% slice(1L) %&gt;% ungroup() %&gt;%
-  arrange(desc(pred)) %&gt;%
-  slice(1:5)
+<span style="color:#75715e"># make labels for the top 5 states</span>
+tops <span style="color:#f92672">&lt;-</span> state_fits <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(date <span style="color:#f92672">==</span> <span style="color:#a6e22e">max</span>(date)) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(location) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1L</span>) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">ungroup</span>() <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">arrange</span>(<span style="color:#a6e22e">desc</span>(pred)) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>)
 
-# make labels for the bottom five states
-bottoms &lt;- state_fits %&gt;%
-  filter(date == max(date)) %&gt;%
-  arrange(pred) %&gt;%
-  slice(1:5)
+<span style="color:#75715e"># make labels for the bottom five states</span>
+bottoms <span style="color:#f92672">&lt;-</span> state_fits <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(date <span style="color:#f92672">==</span> <span style="color:#a6e22e">max</span>(date)) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">arrange</span>(pred) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>)
 
-#merge in info about those states so we can highlight with colors
-state_mobile &lt;- state_mobile %&gt;%
-  mutate(top_state = ifelse(location %in% tops$location, &quot;top&quot;, &quot;middle&quot;),
-         top_state = ifelse(location %in% bottoms$location, &quot;bottom&quot;, top_state),
+<span style="color:#75715e">#merge in info about those states so we can highlight with colors</span>
+state_mobile <span style="color:#f92672">&lt;-</span> state_mobile <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(top_state <span style="color:#f92672">=</span> <span style="color:#a6e22e">ifelse</span>(location <span style="color:#f92672">%in%</span> tops<span style="color:#f92672">$</span>location, <span style="color:#e6db74">&#34;top&#34;</span>, <span style="color:#e6db74">&#34;middle&#34;</span>),
+         top_state <span style="color:#f92672">=</span> <span style="color:#a6e22e">ifelse</span>(location <span style="color:#f92672">%in%</span> bottoms<span style="color:#f92672">$</span>location, <span style="color:#e6db74">&#34;bottom&#34;</span>, top_state),
          ) 
 
-# the plot  - with labels! And colors!
-# and a so-so job of using ggrepel!
-set.seed(2020)
-state_baseplot +
-  geom_line(data = state_mobile, stat=&quot;smooth&quot;,
-              method = &quot;gam&quot;, 
-              mapping = aes(group = location, 
-                            color = top_state, alpha = top_state),
-              size = 0.5) +
-  scale_color_manual(values = c(&quot;darkred&quot;, &quot;#1B9E77&quot;, &quot;darkorange&quot;)) +
-  scale_alpha_manual(values = c(0.6, 0.2, 0.6)) +
-  guides(color = &quot;none&quot;, alpha = &quot;none&quot;) + 
-  #labels those states - must be a better neater way.... hrm....
-  geom_text_repel(data = tops,
-                  mapping = aes(x = date, y = pred, label = location),
-                  force = 5) +
-  geom_text_repel(data = bottoms,
-                  mapping = aes(x = date, y = pred, label = location),
-                  force = 5,
-                  hjust = 0.5) +
-  theme_bw(base_size=14) +
-  scale_y_continuous(limits = c(0,300))</code></pre>
-<p><img src="../../../../post/2020-05-25-roaring-back-into-mobility-in-the-us-post-covid_files/figure-html/overplot-1.png" width="672" /></p>
-<p>Surprised Florida is at the bottom, currently, but, really interesting to see how most states are mostly recovered in terms of driving. Now I want to run this after memorial day and see how it looks!</p>
+<span style="color:#75715e"># the plot  - with labels! And colors!</span>
+<span style="color:#75715e"># and a so-so job of using ggrepel!</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">2020</span>)
+state_baseplot <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_line</span>(data <span style="color:#f92672">=</span> state_mobile, stat<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;smooth&#34;</span>,
+              method <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;gam&#34;</span>, 
+              mapping <span style="color:#f92672">=</span> <span style="color:#a6e22e">aes</span>(group <span style="color:#f92672">=</span> location, 
+                            color <span style="color:#f92672">=</span> top_state, alpha <span style="color:#f92672">=</span> top_state),
+              size <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_color_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;darkred&#34;</span>, <span style="color:#e6db74">&#34;#1B9E77&#34;</span>, <span style="color:#e6db74">&#34;darkorange&#34;</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_alpha_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0.6</span>, <span style="color:#ae81ff">0.2</span>, <span style="color:#ae81ff">0.6</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">guides</span>(color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>, alpha <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;none&#34;</span>) <span style="color:#f92672">+</span> 
+  <span style="color:#75715e">#labels those states - must be a better neater way.... hrm....</span>
+  <span style="color:#a6e22e">geom_text_repel</span>(data <span style="color:#f92672">=</span> tops,
+                  mapping <span style="color:#f92672">=</span> <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> date, y <span style="color:#f92672">=</span> pred, label <span style="color:#f92672">=</span> location),
+                  force <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_text_repel</span>(data <span style="color:#f92672">=</span> bottoms,
+                  mapping <span style="color:#f92672">=</span> <span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> date, y <span style="color:#f92672">=</span> pred, label <span style="color:#f92672">=</span> location),
+                  force <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>,
+                  hjust <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>(base_size<span style="color:#f92672">=</span><span style="color:#ae81ff">14</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_y_continuous</span>(limits <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">300</span>))
+</code></pre></div><p>Surprised Florida is at the bottom, currently, but, really interesting to see how most states are mostly recovered in terms of driving. Now I want to run this after memorial day and see how it looks!</p>
 
   </section>
   <div class="clearfix">

@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Modelbased for Quick and Beautiful Model Visualization</title>
+      <link>/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/</link>
+      <pubDate>Fri, 25 Jul 2025 00:00:00 +0000</pubDate>
+      
+      <guid>/2025/07/25/modelbased-for-quick-and-beautiful-model-visualization/</guid>
+      <description>A year ago, I found the modelbased package while looking for tools to visualize some mixed models. It was a minor revelation. Just like many of the packages from the [easystats]((https://easystats.github.io/) family.
+I teach students to simulate the data they want for data viz (yay broom::augment() and modelr::data_grid()), and then plot that in combination with raw data (sometimes). This is great for really detailed nit-picky figures. But, particularly for students just learning, or for a quick-and-dirty data viz of a fit multivariate model, I always wished there was a simpler way.</description>
+    </item>
+    
+    <item>
       <title>Reflections on Two Weeks Using Mastodon</title>
       <link>/2022/11/19/two-weeks-of-mastodon/</link>
       <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
@@ -62,7 +72,7 @@
       <pubDate>Mon, 25 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/2020/05/25/roaring-back-into-mobility-in-the-us-post-covid-lockdown/</guid>
-      <description>As part of the Covid19R Project, I’ve been working on a new package, covid19mobility. It started as an effort to pull in the Apple Mobility Trends, and has since morphed as more mobility data comes out. Right now, I’m working through the Google Mobility Data, &amp;amp; I’m interested in the Descartes mobility data and any others you can suggest down below (link to source)! But the data itself - it’s FASCINATING!</description>
+      <description>As part of the Covid19R Project, I&amp;rsquo;ve been working on a new package, covid19mobility. It started as an effort to pull in the Apple Mobility Trends, and has since morphed as more mobility data comes out. Right now, I&amp;rsquo;m working through the Google Mobility Data, &amp;amp; I&amp;rsquo;m interested in the Descartes mobility data and any others you can suggest down below (link to source)! But the data itself - it&amp;rsquo;s FASCINATING!</description>
     </item>
     
     <item>
@@ -82,7 +92,7 @@ So, I&amp;rsquo;ve been working through a lot of GF pancake recipies, or using G
       
       <guid>/2020/05/07/the-covid19r-project/</guid>
       <description>We want our coronavirus data! We want it now! We want it TIDY!
-tl;dr Go check out the Covid19R project and it’s documentation - a way for many people to bring their unique data harvesting efforts of Covid-19 data into a single tidy data format, and then be redistributed through a single low-dependency package, covid19R. It’s all one big work-in-progress, but check it out!
+tl;dr Go check out the Covid19R project and it&amp;rsquo;s documentation - a way for many people to bring their unique data harvesting efforts of Covid-19 data into a single tidy data format, and then be redistributed through a single low-dependency package, covid19R. It&amp;rsquo;s all one big work-in-progress, but check it out!
 OK, the story! Back in February (remember February), while teaching data science, I was trying to think of ways to spice up the class with more relevant data.</description>
     </item>
     
