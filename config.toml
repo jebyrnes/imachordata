@@ -77,8 +77,9 @@ home = ["HTML", "RSS"]
 [params.social]
     rss            = true
     #email          = "jarrett.byrnes@gmail.com"
-    twitter       = "http://twitter.com/jebyrnes"
+    #twitter       = "http://twitter.com/jebyrnes"
     github         = "https://github.com/jebyrnes"
+    bluesky        = "https://bsky.app/profile/jebyrnes.bsky.social"
 
 [markup]
   [markup.goldmark]
