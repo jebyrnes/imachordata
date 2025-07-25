@@ -109,15 +109,15 @@
 <p>Have X11 Installed from your system install disc.</p>
 </li>
 <li>
-<p>Install [http://www.macports.org/install.php](<a href="http://www.macports.org/%3Emacports">http://www.macports.org/&gt;macports</a><!-- raw HTML omitted --> following the guide at &lt;a href=) and install from the package installer.  See also <a href="http://guide.macports.org/#installing">here</a> for more information. Afterwards, open the terminal and type</p>
+<p>Install [http://www.macports.org/install.php](<a href="http://www.macports.org/%3Emacports">http://www.macports.org/&gt;macports</a></a> following the guide at &lt;a href=) and install from the package installer.  See also <a href="http://guide.macports.org/#installing">here</a> for more information. Afterwards, open the terminal and type</p>
 </li>
 </ol>
-<!-- raw HTML omitted -->
+<blockquote>`	echo export PATH=/opt/local/bin:/opt/local/sbin:$PATH$'n'export MANPATH=/opt/local/man:$MANPATH | sudo tee -a /etc/profile `</blockquote>
 <p>You will be asked for your password.  Don&rsquo;t worry that it doesn&rsquo;t display anything as you type. Press enter when you&rsquo;ve finished typing your password.</p>
 <ol start="4">
 <li>Open your terminal and type</li>
 </ol>
-<!-- raw HTML omitted -->
+<blockquote>`	sudo port install wine-devel `</blockquote>
 <ol start="5">
 <li>
 <p>Go have a cup of coffe, check facebook, or whatever you do while the install chugs away.</p>
@@ -129,13 +129,14 @@
 <p>Open your terminal, and type</p>
 </li>
 </ol>
-<!-- raw HTML omitted -->
+<blockquote>`	cd Downloads
+	wine WinBUGS14.exe `</blockquote>
 <p>Note, if you have changed your download directory, you will need to type in the path to the directory where you download files now (e.g., Desktop).</p>
 <p>8 ) Follow the instructions to install WinBUGS into c:Program Files.</p>
 <ol start="9">
 <li>Run WinBUGS via the terminal as follows:</li>
 </ol>
-<!-- raw HTML omitted -->
+<blockquote>`	wine ~/.wine/drive_c/Program Files/WinBUGS14/WinBUGS14 `</blockquote>
 <ol start="10">
 <li>
 <p>After first running WinBUGS, install the immortality key.  Close WinBUGS.  Open it again as above and install the patch.  Close it.  Open it again and WinBUGS away!</p>
@@ -147,9 +148,9 @@
 <p>R2WinBugs should now work normally with one exception.  When you use the bugs function, you will need to supply the following additional argument:</p>
 </li>
 </ol>
-<!-- raw HTML omitted -->
+<blockquote>` bugs.directory='/Users/YOURUSERNAME/.wine/drive_c/Program Files/WinBUGS14' `</blockquote>
 <p>filling in your username where indicated.  If you don&rsquo;t know it, in the terminal type</p>
-<!-- raw HTML omitted -->
+<blockquote>`	ls /Users `</blockquote>
 <p>No, ~ will not work for those of you used to it.  Don&rsquo;t ask me why.</p>
 
   </section>

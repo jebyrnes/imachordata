@@ -106,22 +106,116 @@
 <p>R has the capability to apply a single function to a vector or list using apply or mapply, or their various derivatives.  This returns another vector or list.</p>
 <p>This is great in principal, but in practice, with indexing, odd return objects, and difficulties in using multiple arguments, it can get out of hand for complex functions.  Hence, one often resorts to a for loop.</p>
 <p>Let me give you an example.  Let&rsquo;s say I have some data from a simple experiment where I wanted to look at the effect of adding urchins, lobsters, or both on a diverse community of sessile invertebrates - mussels, squirts, etc.  Heck, let&rsquo;s say, I had <strong>one gazillion species</strong> whose responses I was interested in.  Now let&rsquo;s say I want a simple summary table of the change in the density each species - and my data has before and after values.  So, my data would look like this.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<table ><tr >
+<td >Urchins
+</td>
+<td >Lobsters
+</td>
+<td >Before.After
+</td>
+<td >Replicate
+</td>
+<td >Species
+</td>
+<td >Density
+</td>
+</tr>
+<tr >
+<td >Yes
+</td>
+<td >No
+</td>
+<td >Before
+</td>
+<td >1
+</td>
+<td >1
+</td>
+<td >30
+</td>
+ </tr>
+<tr >
+<tr >
+<td >Yes
+</td>
+<td >No
+</td>
+<td >After
+</td>
+<td >1
+</td>
+<td >1
+</td>
+<td >10
+</td>
+ </tr>
+<tr >
+<tr >
+<td >Yes
+</td>
+<td >No
+</td>
+<td >Before
+</td>
+<td >1
+</td>
+<td >2
+</td>
+<td >45
+</td>
+ </tr>
+<tr >
+<tr >
+<td >Yes
+</td>
+<td >No
+</td>
+<td >After
+</td>
+<td >1
+</td>
+<td >2
+</td>
+<td >23
+</td>
+ </tr>
+<tr >
+<td colspan="7" >.
+.
+.
+.
+.
+</td></tr>
+<tr >
+<td >Yes
+</td>
+<td >Yes
+</td>
+<td >Before
+</td>
+<td >15
+</td>
+<td >Gazillion
+</td>
+<td >10
+</td>
+ </tr>
+<tr >
+<tr >
+<td >Yes
+</td>
+<td >Yes
+</td>
+<td >After
+</td>
+<td >15
+</td>
+<td >Gazillion
+</td>
+<td >9
+</td>
+ </tr>
+</table>
 <p>So, each row represents the measurement for one species in one replicate either before or after the experiment.  Now, previously, to get an output table with the mean change for each species for each treatment, I would have had to do something like this:</p>
 <pre><code>#first, create blank list of vectors waiting to be filled
 #as well as blank vectors to remember what treatment

@@ -6,10 +6,19 @@
     <description>Recent content in Posts on I&#39;m a Chordata! Urochordata!</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Nov 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Nov 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reflections on Two Weeks Using Mastodon</title>
+      <link>/2022/11/19/two-weeks-of-mastodon/</link>
+      <pubDate>Sat, 19 Nov 2022 00:00:00 +0000</pubDate>
+      
+      <guid>/2022/11/19/two-weeks-of-mastodon/</guid>
+      <description>Welp. I have been on Mastodon for two week now, and am rather liking it. But here are some things I have learned&amp;hellip;</description>
+    </item>
     
     <item>
       <title>Tidyeval/Dynamic Evaluation for Writing Functions in the Tidyverse</title>
@@ -353,6 +362,7 @@ Now I just can&amp;rsquo;t wait until they get to p-values and Bayes&amp;rsquo; 
       
       <guid>/2013/09/26/wanna-join-my-department-tenure-track-job-posting-in-disease-ecologyevolution/</guid>
       <description>So, rolling into year two here in the Biology Department at UMass Boston, I have to say I&amp;rsquo;m having a delightful time. Fabulous colleagues (who I&amp;rsquo;m already co-authoring papers with - that&amp;rsquo;s just how we roll), a easy access to multiple field sites and stations, a deliciously nerdy intellectual scene throughout Boston, a brand-spankin&amp;rsquo;-new School for the Environment, and a nice waterfront setting.
+Yep, this is us!
 So, I&amp;rsquo;m pleased to announce that we&amp;rsquo;re hiring a disease ecologist/evolutionary biologist type in our department.</description>
     </item>
     
@@ -434,7 +444,7 @@ Then, the ever helpful Sean Anderson tweeted a link to a little code he&amp;rsqu
       <pubDate>Fri, 12 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>/2013/07/12/which-social-media-platform-should-i-use-for-science/</guid>
-      <description>OK, so, you&amp;rsquo;re a scientist interested in jumping into the world of online social networking for interacting with colleagues, fun and profitbringing science to the world at large. Fantastic!
+      <description>OK, so, you&amp;rsquo;re a scientist interested in jumping into the world of online social networking for interacting with colleagues, fun and profit bringing science to the world at large. Fantastic!
 So, you log on, and are suddenly confronted by a dizzying array of sites you could use to communicate. Facebook, Instagram, Twitter, Google+, Myspace (yes, it&amp;rsquo;s back), Blogspot, Wordpress, FriendFeed, Tumblr, &amp;hellip;. I could go on for a while. And then you may also have concerns about mixing personal and private.</description>
     </item>
     
@@ -1666,7 +1676,7 @@ Businesses has recognized the need to spot emerging trends with scant informatio
       
       <guid>/2010/01/06/ecology-in-2020/</guid>
       <description>Today&amp;rsquo;s issue of Nature rings in the New Decade with an interesting article on where Science needs to be in 2020. With respect to Ecology, Robert Holt makes the following observation:
-Um. I think that describes my research program. Except the whole isotope/bar-coding thing. Damn. Add that to the list of things I need to learn, as right now, figuring out who-eats-who can be a real show-stopper! But overall, I guess I&amp;rsquo;m on the right track.</description>
+ A key task will be to predict and mitigate this loss of biodiversity and the degradation of ecosystem function. One step is to gauge the resilience of ecological networks such as food webs — in particular, their capacity to withstand disturbance and species loss.</description>
     </item>
     
     <item>
@@ -1859,8 +1869,7 @@ Yes, it sounds silly, but in the current issue of the Journal of Biogegraphy, Lo
       
       <guid>/2009/06/15/ascidians-in-vanity-fair/</guid>
       <description>Yes, it&amp;rsquo;s time for squirts to take the limelight in America&amp;rsquo;s most fashionable magazine! I know this is a little old, but in the 2007 article, If You Knew Sushi by Nick Tosches, the author encounters a delicacy, Halocynthia roretzi aka the Sea Pineapple. (That&amp;rsquo;s right, they&amp;rsquo;re even on wikipedia now!)
-&amp;ldquo;Sea pineapple,&amp;rdquo; he says. &amp;ldquo;Attaches to rocks in the ocean. Tastes something like iodine. Sendai people like it.&amp;rdquo;
-It looks nothing like a pineapple.</description>
+Among a biochromatic wealth of mysterious mollusks and other sea invertebrates of unknown nature, I see the weirdest creature I&#39;ve ever seen.</description>
     </item>
     
     <item>
@@ -2112,7 +2121,7 @@ It provides a frightening insight into my current state of mind&amp;hellip;
       <guid>/2008/12/06/5-things-meme/</guid>
       <description>Auch! I have been tagged! Memes away!
 5 Things I Was Doing 10 Years Ago:****
-  Hanging and focusing lights     Pondering leaving the theater&amp;hellip;for computer science?     Learning that, hey, I&amp;rsquo;m a pretty good cook for 20 people     Being ignorant of the meeting that was to take place in a few months that would turn me into a marine biologist, and the sea chanties that were to come after     Laying the groundwork so that I could meet miriam in a darkened theater and convince her to be the tech director for Rosencrantz and Guildenstern Are Dead   5 Things On My To-Do List Today:</description>
+   Hanging and focusing lights     Pondering leaving the theater&amp;hellip;for computer science?     Learning that, hey, I&amp;rsquo;m a pretty good cook for 20 people     Being ignorant of the meeting that was to take place in a few months that would turn me into a marine biologist, and the sea chanties that were to come after     Laying the groundwork so that I could meet miriam in a darkened theater and convince her to be the tech director for Rosencrantz and Guildenstern Are Dead    5 Things On My To-Do List Today:</description>
     </item>
     
     <item>

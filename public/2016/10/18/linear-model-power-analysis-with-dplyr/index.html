@@ -107,27 +107,60 @@
 <p>OK, we can fit and evluate linear regression models, but what about their power? Let&rsquo;s look at our <a href="https://biol607.github.io/lab/06_lm.html">seal fit</a> again - maybe we want to know what would have happened with a lower sample size?</p>
 <p>Note, I&rsquo;m going to use a knitr function, <code>kable</code> to neaten up the table for markdown. Try it in your own homeworks!</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">knitr<span style="color:#f92672">::</span><span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">tidy</span>(seal_lm))
-</code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+</code></pre></div><table >
+<tr class="header" >
+term
+estimate
+std.error
+statistic
+p.value
+</tr>
+<tbody >
+<tr class="odd" >
+<td align="left" >(Intercept)
+</td>
+<td align="right" >115.7667505
+</td>
+<td align="right" >0.1763751
+</td>
+<td align="right" >656.3668
+</td>
+<td align="right" >0
+</td>
+</tr>
+<tr class="even" >
+<td align="left" >age.days
+</td>
+<td align="right" >0.0023706
+</td>
+<td align="right" >0.0000447
+</td>
+<td align="right" >53.0645
+</td>
+<td align="right" >0
+</td>
+</tr>
+</tbody>
+</table>
 <p>What about the residual SD?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">knitr<span style="color:#f92672">::</span><span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">glance</span>(seal_lm)[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>])
-</code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+</code></pre></div><table >
+<tr class="header" >
+r.squared
+adj.r.squared
+sigma
+</tr>
+<tbody >
+<tr class="odd" >
+<td align="right" >0.2256493
+</td>
+<td align="right" >0.2255691
+</td>
+<td align="right" >5.6805
+</td>
+</tr>
+</tbody>
+</table>
 <p>All right - there are our target values. Now, we can change a lof ot things. The effect size (slope), range of values, sigma, and more. But let&rsquo;s try sample size.</p>
 <h6 id="1-make-a-table-of-parameters-some-of-which-vary">1 Make a Table of Parameters, some of which vary</h6>
 <p>The first step of a power analysis is to setup a data frame with all of the different possibilities that you might want to assess for power. For linear regression, we have the following parameters, all of which might vary:</p>
