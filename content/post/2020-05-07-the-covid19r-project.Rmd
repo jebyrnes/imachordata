@@ -17,7 +17,7 @@ tl;dr Go check out the [Covid19R project](https://covid19r.github.io/covid19R/) 
   
 Back in February (remember February), while teaching [data science](http://biol355.github.io), I was trying to think of ways to spice up the class with more relevant data. We were in the midst of data tidying, when I saw a tweet from [Rami Krispin](https://twitter.com/Rami_Krispin/) about starting a Covid R data package (whose account as of 2022-11-27 is suspended?)
 
-<!-- #`r htmltools::HTML("{{< tweet 1227613923462877188 >}}")` -->
+<!-- #`htmltools::HTML("{{< tweet 1227613923462877188 >}}")` -->
 
 Cool! A coronavirus data package. I went on to make a neat [data tidying lab](https://biol355.github.io/Labs/coronavirus.html) - well, I think it's neat - as well as weaving the data into other parts of the course. I also made a few pull requests on the repo to add features....as did [Amanda Dobbyn](https://twitter.com/dobbleobble). Rami contacted both of us, and thus a collaboration was born!
 
