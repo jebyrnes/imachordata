@@ -1,0 +1,6 @@
+---
+title: "Page not found"
+---
+
+Sorry, that page has gone the way of the larval tunicate's notochord.
+Try the [home page](/) or browse the [categories](/categories/).

@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jarrett Byrnes">
+<meta name="dcterms.date" content="2011-05-02">
+
+<title>Ecological SEMs and Composite Variables: What, Why, and How – I’m a Chordata! Urochordata!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7e9bc76334ffa4b1f5c3bb5ac29e32b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Ecological SEMs and Composite Variables: What, Why, and How – I’m a Chordata! Urochordata!">
+<meta property="og:description" content="Marine Data Science for All, Regardless of Backbone!">
+<meta property="og:site_name" content="I'm a Chordata! Urochordata!">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
+      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ecological SEMs and Composite Variables: What, Why, and How</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">sem</div>
+    <div class="quarto-category">statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jarrett Byrnes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 2, 2011</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>I’m a HUGE fan of <a href="http://www.statsoft.com/textbook/structural-equation-modeling/">Structural Equation Modeling</a>. For those of you unfamiliar with the technique, it’s awesome for three main reasons.</p>
+<ol type="1">
+<li><p>It’s a method of teasing apart direct and indirect interactions in your data.</p></li>
+<li><p>It allows you to assess the importance of underlying latent variables that you cannot measure, but for which have measured indicators.</p></li>
+<li><p>As it’s formally presented, with path diagrams showing connections between variables, it’s SUPER easy to link conceptual models with your data. See <a href="http://dx.doi.org/10.1890/09-0464.1">Grace et al.&nbsp;2010</a> for a handy guide to this.</p></li>
+</ol>
+<p>Also, there is a quite simple and intuitive R package for fitting SEMs, <a href="http://lavaan.org">lavaan</a> (LAtent VAriable Analysis). Disclaimer, I just hopped on board as a lavaan developer (yay!). I’ve also recently started a small project to find cool examples of SEM in the Ecological literature, and then using the provided information, <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan">post the models coded up in lavaan</a> so that others can see how to put some of these models together.</p>
+<p>As Ecologists, we often use latent variables to incorporate known measurement error of a quantity - i.e., a latent variable with a single indicator and fixed variance. We’re often not interested in the full power of latent variables - latents with multiple indicators. Typically, this is because we’ve actually measured everything we want to measure. We’re not like political scientists who have to quantify fuzzy things like Democracy, or Authoritarianism, or Gastronomicism. (note, I want to live in a political system driven by gastronomy - a gastronomocracy!)</p>
+<p>However, we’re still fascinated by the idea of bundling different variables together into a single causal effect, and maybe evaluating the relative contribution of each of those variables within a model. In SEM, this is known as the creation of a Composite Variable. This composite is still an unmeasured quantity - like a latent variable - but with no error variance, and with “indicators” actually driving the variable, rather than having the unmeasured variable causing the expression of its indicators.</p>
+<p>Let me give you an example. Let’s say we want to measure the effect of nutrients on diatom species richness in a stream. You’re particularly concerned about nitrogen. However, you can’t bring water samples back to the lab, so, you’re relying on some moderately accurate nitrogen color strips, the biomass of algae (more algae = more nitrogen!), and your lab tech, Stu, who claims he can taste nitrogen in water (and has been proved to be stunningly accurate in the past). In this case, you have a <strong>latent variable</strong>. The true nitrogen content of the water is causing the readings by these three different indicators.</p>
+<p>A <strong>composite variable</strong> is a different beast. Let’s say we have the same scenario. But, now you have really good measurements of nitrogen. In fact, you have good measurements of both ammonium (NH4) and nitrate (NO3). You want to estimate a “nitrogen effect”, but, you know that both of these different forms of N will contribute to the effect in a slightly different way. You could just construct a model with effects going from both NO3 and NH4 to species richness. If you want to represent the total “Nitrogen Effect” in your model, however, and evaluate the effect of each form of nitrogen on its total effect, you would create a composite. The differences become clear when looking at the path diagram of each case.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.11-PM-1024x697.png" class="img-fluid"></p>
+<p>Here, I’m adopting the custom of observed variables in squares, latent variables in ovals, and composite variables in hexagons. Note that, as indicators of nitrogen in the latent variable model, each observed indicator has some additional variation due to factors other than nitrogen - δi. There is no such error in the composite variable model. Also, I’m showing that the error in the Nitrogen Effect in the composite variable model is indeed set to 0. There are sometimes reasons where that shouldn’t be 0, but that’s another topic for another time.</p>
+<p>This may still seem abstract to you. So, let’s look at an example in practice. One way we often use composites is to bring together a linear and nonlinear effect of a single variable. For example, we know that often nutrient supply rates have a humped shape effect on species richness - i.e., the highest richness happens at intermediate supply rates. One nice example of that is in a paper by Cardinale et al.&nbsp;in 2009 looking at relationships between <a href="http://dx.doi.org/10.1890/08-1038.1">manipulated nutrient supply, species richness, and algal productivity</a>. To capture that relationship with a composite variable, one would have a ‘nitrogen effect’ affected by N and N2. This nitrogen effect would then affect local species richness.</p>
+<p>So, how would you code this model up in lavaan, and then evaluate it.</p>
+<p>Well, hey, <a href="http://www.esapubs.org/archive/ecol/E090/079/suppl-1.htm">the data from this paper are freely available</a>, so, let’s use this as an example. For a full replication of the model presented in the paper <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/cardinale_et_al_2008.r">see here</a>. However, Cardinale et al.&nbsp;didn’t use any composite variables, so, let’s create a model of our own capturing the Nitrogen-Richness relationship while also accounting for local species richness being influenced by regional species richness.</p>
+<p><img src="http://www.imachordata.com/wp-content/uploads/2011/05/Screen-shot-2011-05-02-at-1.55.19-PM-1024x506.png" class="img-fluid"></p>
+<p>In the figure above, we have the relationship between resource supply rate and local species richness on an agar plate to the left. Separate lines are for separate streams. The black line is the average fit with the supplied equation. On the right, we have a path diagram representing this relationship, as well as the influence of regional species richness.</p>
+<p>So, we have a path diagram. Now comes the tricky part. Coding. One thing about the current version of lavaan (0.4-8) is that it does not have a way to represent composite variables. This will change in the future (believe me), but, it may take a while, so, let me walk you through the tricks of incorporating latent variables now. Basically, there are four steps.</p>
+<ol type="1">
+<li><p>Define the variable as a regression, where the composite is determined by it’s causal variables. Also, fix one of the effects to 1. This gives your composite variable a scale.</p></li>
+<li><p>Specify that the composite has an error variance of 0.</p></li>
+<li><p>Now treat the composite as a latent variable. It’s indicators are it’s response variables. This may seem odd. However, it’s all just ways of specifying causal pathways - an indicator pathway and a regression pathway have the same meaning in terms of causality. The software just needs something specified so that it doesn’t go looking for our composite variable in our data. Hence, defining it as a latent variable whose indicators are endogenous responses. I actually find this helpful, as it also makes me think more carefully about what a composite variable is, and how too many responses may make my model not identified.</p></li>
+<li><p>Lastly, because we don’t want to fix the effect of our composite on its response to 1, we’ll have to include an argument in the fitting function that makes it not force the first latent variable loading to be set to 1. We’ll also have to specify that we then want the variance of the response to latent variables freely estimated. Yeah, I know. Note: this all can play havoc when you have both latent and composite variables, so be careful. See <a href="https://github.com/jebyrnes/Ecological-SEMs-in-lavaan/blob/master/grace_bollen_2006.r">here</a> for an example.</p></li>
+<li><p>Everything else - other regression relationships, showing that nonlinearities are derived quantities, etc.</p></li>
+</ol>
+<p>OK, that’s a lot. How’s it work in practice? Below is the code to fit the model in the path diagram. I’ve labeled the steps in comments, and, included the regional ~ local richness relationship as well as the relationship showing that logN2 was derived from logN. Note, this is a centered squared variable. And, yes, all nitrogen values have been log transformed here.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#simple SA model with N and regional SR using a composite</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Variables: logN = log nutrient supply rate, logNcen2 = log supply rate squared</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># SA = Species richness on a patch of Agar, SR = stream-wide richness</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>compositeModel<span class="ot">&lt;-</span><span class="st">'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">    #1) define the composite, scale to logN</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">    Nitrogen ~ 1*logN + logNcen2 #loading on the significant path!</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">    #2) Specify 0 error variance</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    Nitrogen ~~ 0*Nitrogen</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">    #3) now, because we need to represent this as a latent variable</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="st">    #show how species richness is an _indicator_ of nitrogen</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="st">    Nitrogen =~ SA</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="st">    #4) BUT, make sure the variance of SA is estimated</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="st">    SA ~~ SA</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="st">    #Regional Richness also has an effect</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="st">    SA ~ SR</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="st">    #And account for the derivation of the square term from the linear term</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="st">    logNcen2 ~ logN</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="st">    '</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="co"># we specify std.lv=T so that the Nitrogen-SA relationship isn't fixed to 1</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> compositeFit <span class="ot">&lt;-</span> <span class="fu">sem</span>(compositeModel, <span class="at">data=</span>cards, <span class="at">std.lv=</span>T)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Great! It should fit just fine. I’m not going to focus on the regional relationship, as it is predictable and positive. Moreover, when we look at the results, two things immediately pop out at us about the effect of nutrient supply rate.</p>
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA                0.362    0.438    0.827    0.408
+
+Regressions:
+  Nitrogen ~
+    logN              1.000
+    logNcen2         -1.311    1.373   -0.955    0.340</code></pre>
+<p>Wait, what? The Nitrogen effect was not detectably different from 0? Nor was there a nonlinear effect? What’s going on here?</p>
+<p>What’s going on is that the scale of the composite is affecting our results. We’ve set it to 1. Whenever you are fixing scales, you should always check and see, what would happen if you changed which path was set to 1. So, we can simply set the scale to the nonlinear variable, refit the model, and see if this makes a difference. If it doesn’t, then that means there is no nitrogen effect at all!</p>
+<p>So, change</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Nitrogen <span class="sc">~</span> <span class="dv">1</span><span class="sc">*</span>logN <span class="sc">+</span> logNcen2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>to</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Nitrogen <span class="sc">~</span> logN <span class="sc">+</span> <span class="dv">1</span><span class="sc">*</span>logNcen2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And, now let’s see the results…..</p>
+<pre><code>                   Estimate  Std.err  Z-value  P(&gt;|z|)
+Latent variables:
+  Nitrogen =~
+    SA               -0.474    0.239   -1.989    0.047
+
+Regressions:
+  Nitrogen ~
+    logN             -0.763    0.799   -0.955    0.340
+    logNcen2          1.000</code></pre>
+<p>Ah HA! Not only is the linear effect not different from 0, but now we see that fixing the nonlinear effect allows the nutrient signal to come through.</p>
+<p>But wait, you may say, that effect is negative? Well, remember that the scale of the nitrogen effect is the same as the nonlinear scale. And, a positive hump-shaped relationship will have a negative squared term. So, given how we’ve setup the model, yes, that should be negative.</p>
+<p><em>whew!</em> That was a lot. And this for a very simile model involving composites and nonlinearities. I thought I’d throw that out as it’s a common use of composites, and interpreting nonlinearities in SEMs is always a little tricky and worth bending your brain around. Other uses of composites include summing up a lot of <em>linear</em> quantities, a composite for the application of treatments, and more. But, this should give you a good sense of what they are, how to code them in lavaan, and how to use them in the future.</p>
+<p>For a more in depth treatment of this topic, and latent variables versus composites, I urge you to check out <a href="http://pubs.usgs.gov/of/2006/1363/">this excellent piece by Jim Grace and Ken Bollen</a>. Happy model fitting!</p>
+
+
+
+</main> <!-- /main -->
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/imachordata\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jebyrnes">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/jebyrnes.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

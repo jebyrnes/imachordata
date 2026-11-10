@@ -1,0 +1,46 @@
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

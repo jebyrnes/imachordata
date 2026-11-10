@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jarrett Byrnes">
+
+<title>Groupapalooza: Adapting Food Web Trophic Group Methods for Defining Bacterial “Species” – I'm a Chordata! Urochordata!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7e9bc76334ffa4b1f5c3bb5ac29e32b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Groupapalooza: Adapting Food Web Trophic Group Methods for Defining Bacterial “Species” – I’m a Chordata! Urochordata!">
+<meta property="og:description" content="Marine Data Science for All, Regardless of Backbone!">
+<meta property="og:site_name" content="I'm a Chordata! Urochordata!">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
+      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Groupapalooza: Adapting Food Web Trophic Group Methods for Defining Bacterial “Species”</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">networks</div>
+    <div class="quarto-category">research</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jarrett Byrnes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Apr 8, 2013</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>_The following is some notes on a technique I’m developing for a cool collaboration between me, <a href="http://faculty.www.umb.edu/jennifer.bowen/home.php">Jen Bowen</a>, and <a href="http://www.umb.edu/academics/csm/faculty_staff/faculty_and_staff">David Weisman</a>. I think it has some generality to it, and I’d love any feedback from the more mathematical crowd…I also wrote it to make sure I knew what I was doing - translating scribbled equations to code to results - so it does freeflow a bit. It may change based on feedback - consider this a working document.</p>
+<p>So. Away we go._</p>
+<p>What do food webs and determining the identity of bacterial species based on sequences and co-occurrence data have in common? How can bacterial ‘species’ advance basic food web research?</p>
+<p>Networks. And AIC scores.</p>
+<p>Let me explain.</p>
+<p>I’ve long been a huge fan of <a href="http://dx.doi.org/10.1111/j.1461-0248.2009.01321.x">Allesina and Pascual’s 2009 paper</a> on deriving trophic groups de novo from food web networks. In short, they say that if you have a simple binary network (a eats b, or a doesn’t eat b), you can use information theory to determine trophic groups within a network. I’ve applied their methods in the past to kelp forests, and seen some interesting things, and<a href="http://dx.doi.org/10.1371/journal.pcbi.1002321">Ed Baskerville</a> has a great paper on using the technique for Seringetti food webs.</p>
+<p>So how does this connect to bacteria?</p>
+<p>I’m working on an analysis where my collaborators have surveyed bacterial communities at a number of different sites. We want to know the abundance of different species at different sites. However, how to define a bacterial ‘species’ is a tricky question. OK - let me poorly explain my understanding of bacterial taxonomic definitions (don’t kill me, <a href="http://faculty.www.umb.edu/jennifer.bowen/home.php">Jen</a>!) Let’s say you amplify and sequence a sample. You may get a number of different representative sequences from that sample. And you can get a measure of the abundance of each sequence type.</p>
+<p>Now, on to species - looking at any pair of sequences (looong sequences of many base pairs), you may find two that are, say, one base pair different from each other. Are these two ‘sequences’ independent species or not? What if they differed by 2 base pairs? What about 3? 4? Now, a researcher can define an ‘operational taxonomic unit’ or OTU by all sequences that are X% different from each other - and X is up to them. Thus, once you define your percent similarity, you can sum up all of the species in each OTU, and get the abundance of each “species” in each plot.</p>
+<p>This is somewhat unsatisfying. I mean, what if you had two sequences that were 98% similar, but all of sequence A was in one plot, and all of sequence B was in another plot. Now you tell me - is this one species or two?</p>
+<p>Let’s take that one step further. Let’s suppose A and B are both in a plot. But sequence A has 10x the abundance of sequence B. Furthermore, in a second plot, both are present, but sequence B is 10x more abundant. Again, one species or two?</p>
+<p>The approach I want to lay out here answers this using a slight modification of Allesina and Pasqual’s framework. Namely, we’re going to look at patterns of association, sequence similarity, and abundances to define OTUs.</p>
+<p><strong>The Association Part</strong> At the core of Allesina and Pasqual’s framework is the following observation. Let’s say you are dealing with a food web. You’ve got all sorts of directed connections of species A eating species B. Now, let’s say you want to define two trophic groups. Definitions of predator, prey, etc., are not important here. Just that in each group, you’ll have one set of species that eats species in the other group, and vice-versa. Like in this diagram:</p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-539a35d47e664c97a50115a146a7f1bd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="http://www.imachordata.com/wp-content/uploads/2013/04/Screen-shot-2013-04-08-at-3.07.42-PM-300x132.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-539a35d47e664c97a50115a146a7f1bd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Screen shot 2013-04-08 at 3.07.42 PM
+</figcaption>
+</figure>
+</div>
+<p>So far, so good, yes? Now, the question is, which of these is a better is a better descriptor of the structure of the network, after penalizing for complexity. I.e., we want a general schema. Is the amount of information lost by grouping things a-ok, given that we’ve reduced the complexity of out model of how the world works?</p>
+<p>A&amp;P derive a wonderful formula for this. It involved two pieces. First, for each A -&gt; B connection between groups we’ve made, we can derive a probability of producing that particular graph with those species assigned into exactly those groups. L(ab) is the number of links going from species in A to species in B, and S(i) is, say, the number of species in group i. If we define p(ab) as L(ab) / [S(a)S(b)]. The probability of a given link in the network - say, A -&gt; B - given p(ab) can be defined as</p>
+<p>p(network | p(ab) = p(ab)L(1-p(ab))^S(a)S(b) - L</p>
+<p>Which implies that the likelihood of p(ab) given the network is the same.</p>
+<p>Likelihood (p(ab) | network)) = p(ab)L(1-p(ab))^S(a)S(b) - L</p>
+<p>or</p>
+<p>Log-Likelihood = L<em>log(p(ab)) + (S(a)S(b) - L)</em>log(1-p(ab))</p>
+<p>Cool, right?</p>
+<p>Let’s call one of those LLs, L(a-&gt;b). Now, the Log-Likelihood of a given network configuration with groups is just</p>
+<p>LL(all p(ij) | whole network) = LL(a-&gt;b) + LL(b -&gt; a) + LL(a -&gt; a) + LL(b -&gt; b)</p>
+<p>where LL(a-&gt;b) is one of those log-likelihood calculations above. We’ll call this LL(network) for future use.</p>
+<p>Now, what about this comparison and penalty for complexity? Here’s where things get even better. We know that there are S total species, and k^2 probabilities, where k is the number of groups. So, voila, we have an AIC for a group structure’d network</p>
+<p>AIC = -2 * LL(network) + 2S + 2k^2</p>
+<p>and as each AIC for each configuration captures information about information lost by a particular network, we can directly compare different grouping schemas. Note that the AIC for the baseline network is just 2S + 2K^2.</p>
+<p><em>So what does this have to do with bacteria?!?!</em></p>
+<p>OK, ok, hold your horses. Let’s think about sequences and their associations with a site as a link. Let’s consider both sequences and sites as nodes in a network. So, if one sequence associates with one site, that’s a directed link from sequence to site. It’s a bipartite graph. Now, instead of searching through all possible group structures, our groups are defined by OTUs that are created from different levels of sequence similarity. We can calculate the LL for each group -&gt; site association the same as we calculated the LL for A -&gt; B before. The difference is, however, that there are fewer probabilities over the whole network. Instead of there being k^2 probabilities, there are k*r where r is the number of replicate plots we’ve sampled. So</p>
+<p>AIC = -2 * LL(OTU network) + 2S + 2k*r</p>
+<p>The beauty of this approach is that instead of having to search through group structures, we have 1 grouping per degree of sequence similarity. Granted, we can have tens of thousands of groups, so, it’s still a moderately heinous calculation (go-go mclapply!), but it’s not so bad.</p>
+<p><strong>But, what about that abundance problem?</strong></p>
+<p>So, until now, I’ve been talking about binary networks, where links are either 1 or 0. As far as I know, no one has derived a weighted-network analog of the A&amp;P approach. On the other hand, here, our network weights are real abundances. Because of this, we can calculate a Likelhood of species with some set of abundances in a plot being part of the same group. Then,</p>
+<p>LL(OTU group A -&gt; 1 Plot) = LL(network) + LL(sequences having the observed pattern of abundances in that plot if they are in the same group)</p>
+<p>I’m making this jump from the probability of species in one group being in that group and connecting to one plot = probability of species connecting to plot * probability of species having that pattern of densities.</p>
+<p>p(network &amp; abundance) = p(network) * p(abundances)</p>
+<p>OK, so, how to we get that p(abundances) aka L(parameters | observed abundances)?</p>
+<p>I’m going to throw out a proposal. I’m totally game to hear others, but I think this is reasonable.</p>
+<p>If two sequences are indeed the same OTU, they should respond in similar ways to environmental variation. Thus, you should have an equal probability, if you were to sample random individuals from a group in one plot, of drawing either species. So, in the figure below, on the left, the two sequences (in red), even though they both associate with this one site, are different OTUs. Or, rather, it is highly unlikely they are from the same OTU. On the right, they are likely from the same OTU.</p>
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-539a35d47e664c97a50115a146a7f1bd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="http://www.imachordata.com/wp-content/uploads/2013/04/Screen-shot-2013-04-08-at-3.07.47-PM.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-2" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-539a35d47e664c97a50115a146a7f1bd-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Screen shot 2013-04-08 at 3.07.47 PM
+</figcaption>
+</figure>
+</div>
+<p>This is great, as we now have a parameter for each group-plot combination: the probability of drawing and individual with one of the sequences within a group. And we’re defining that probability as 1/number of sequences in a group. It’s rolling a dice. And we’re rolling it the number of times as we have total ‘individuals’ observed. So, for each sequences, we have a probability of drawing it, and a number of dice rolls…and we should be able to calculate a p(sequence | p(i in j in plot q)) which is the same as Likelihood(p(i in j in plot q) | sequence). I’ll call like Likelihood(abundance ijq). Using a(iq) as the abundance of species i in plot q and A(jq) is the abundance of all species in group j in plot q and S(jq) is the number of sequence types in group j in plot q</p>
+<p>Likelihood(abundance ijq) = dbinom(a(iq) | size=A(jq), p=1/S(jq))</p>
+<p>Log that, sum over all species in all plots, and we get LL(abundance).</p>
+<p>We’ve added 2<em>k</em>r more parameters, so, now,</p>
+<p>AIC = -2 * LL(OTU network) -2 * LL(OTU abundances) + 2S + 4k*r</p>
+<p>Aaand…. that’s it. I think. We should be able to use this to scan across all OTU structures based on sequence similarity, calculate an AIC for each, and then use the OTU structure with the smallest AIC as our ‘species’.</p>
+<p>Now, we could of course add additional information. For example, what if we knew some environmental information about plots, etc. We could probably use that to create groups of plots, rather than just use individual plots.</p>
+<p>I also wonder if this can be related to a more general solution for weighted networks, and get back to A&amp;P’s original formulation for food webs. Perhaps assuming that all interaction strengths are drawn from the same distribution with the same mean and variance. That should do it, and be relatively simple to implement. Heck, one could even try different distributional assumptions.</p>
+<p><strong>References</strong> Allesina, S. &amp; Pascual, M. (2009). Food web models: a plea for groups. Ecol. Lett., 12, 652–662. <a href="http://dx.doi.org/10.1111/j.1461-0248.2009.01321.x">10.1111/j.1461-0248.2009.01321.x</a></p>
+<p>Baskerville, E.B., Dobson, A.P., Bedford, T., Allesina, S., Anderson, T.M. &amp; Pascual, M. (2011). Spatial Guilds in the Serengeti Food Web Revealed by a Bayesian Group Model. PLoS Comp Biol, 7, e1002321. <a href="http://dx.doi.org/10.1371/journal.pcbi.1002321">10.1371/journal.pcbi.1002321</a></p>
+
+
+
+</main> <!-- /main -->
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/imachordata\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jebyrnes">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/jebyrnes.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

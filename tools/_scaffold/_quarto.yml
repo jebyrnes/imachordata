@@ -1,0 +1,50 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - images/**
+    - wp-content/**
+    - rmarkdown-libs/**
+    - posts/files/**
+
+website:
+  title: "I'm a Chordata! Urochordata!"
+  description: "Marine Data Science for All, Regardless of Backbone!"
+  site-url: https://imachordata.com
+  favicon: images/favicon.ico
+  open-graph: true
+  # The old Hugo config pointed at a Universal Analytics property (UA-9734501-1). Google shut
+  # Universal Analytics down in 2023, so it is not carried over. To use GA4 add:
+  #   google-analytics: "G-XXXXXXXXXX"
+  page-footer:
+    right:
+      - icon: github
+        href: https://github.com/jebyrnes
+        aria-label: GitHub
+      - icon: bluesky
+        href: https://bsky.app/profile/jebyrnes.bsky.social
+        aria-label: Bluesky
+      - icon: rss
+        href: index.xml
+        aria-label: RSS
+
+format:
+  html:
+    theme: [cosmo, styles/chordata.scss]
+    # Hugo's Markdown renderer (goldmark) differs from Pandoc in a few ways:
+    #  - no $...$ math (the posts contain R code like df$x that must not become math)
+    #  - an image on its own line is NOT turned into a captioned figure
+    #  - bare URLs become links
+    from: markdown-tex_math_dollars-implicit_figures+autolink_bare_uris
+    toc: false
+    highlight-style: github
+    code-overflow: scroll
+    date-format: "MMM D, YYYY"
+    link-external-icon: false
+    include-before-body: _header.html
+    include-after-body: _post-footer.html
+    grid:
+      sidebar-width: 0px
+      body-width: 750px
+      margin-width: 0px
+      gutter-width: 1.5rem

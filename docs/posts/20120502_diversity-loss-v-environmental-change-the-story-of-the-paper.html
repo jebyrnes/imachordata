@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jarrett Byrnes">
+<meta name="dcterms.date" content="2012-05-02">
+
+<title>Diversity Loss v. Environmental Change: The Story of the Paper – I’m a Chordata! Urochordata!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7e9bc76334ffa4b1f5c3bb5ac29e32b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Diversity Loss v. Environmental Change: The Story of the Paper – I’m a Chordata! Urochordata!">
+<meta property="og:description" content="Marine Data Science for All, Regardless of Backbone!">
+<meta property="og:site_name" content="I'm a Chordata! Urochordata!">
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
+      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Diversity Loss v. Environmental Change: The Story of the Paper</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">paper review</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jarrett Byrnes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 2, 2012</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="http://www.researchblogging.org"><img src="http://www.researchblogging.org/public/citation_icons/rb2_large_gray.png" class="img-fluid" alt="ResearchBlogging.org"></a>Just over a year and a half ago, I was lucky enough to be in a room with <a href="http://www.nceas.ucsb.edu/projects/12560">some of the world’s top authorities</a> on the consequences of species loss at the National Center for Ecological Analysis and Synthesis. We were worried. When Brad Cardinale asked, “So, where does diversity loss rank? As important as climate change? Rampant nutrient runoff from agriculture? I mean, come on, how important is it, <em>really</em>?”, none of us knew the answer.</p>
+<p>But now we do.</p>
+<p>As our group has <a href="http://dx.doi.org/10.1038/nature11118">just published in Nature</a>, species loss matters quite a bit - as much as many of the major drivers of environmental change.</p>
+<div class="wp-caption alignright" style="width: 250px;">
+<p><a href="http://www.imachordata.com/wp-content/uploads/2012/04/diversity_algae.jpeg"><img src="http://www.imachordata.com/wp-content/uploads/2012/04/diversity_algae-225x300.jpg" class="img-fluid"></a></p>
+<p>Will losing one or more of these algae matter as much as the rapid rise in global temperature?</p>
+</div>
+<p>Let me back up. As species continue to go extinct across the globe, one has to ask - will there be any consequences? We’ve spent the last 15 years answering this question, and it is, yes. Losing species, at the bare minimum, reduces the ability of fields of plants or algae to most efficiently turn sunlight and nutrients into new production. Losing some of the myriad of species responsible for munching their way through dead detrital material will slow that whole process down. More questions remain, but diversity loss seems to be altering a wide variety of ecosystem properties.</p>
+<p>But how important is that loss, really? In the grand scheme of climate change, pollution, and other forms of environmental change, is losing species important? Or is it just the icing on the cake of environmental degradation?</p>
+<div class="wp-caption alignleft" style="width: 188px;">
+<p><img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-11.06.47-AM-188x300.jpg" class="img-fluid"></p>
+<p>What would results from experiments like this one with flumes full of many different combinations of algae tel us about how diversity and the environment both shape primary production?</p>
+</div>
+<p>Realizing that there was no good answer to this, we sat down, rolled up our digital sleeves, and got to work. Led by the ever steady Dave Hooper and always insightful Carol Adair, we began to dig into the literature - to see what information was out there about the impacts of these different forms of environmental change. We were armed with the hugely revised and updated version of Brad’s monster database (in no small part due to the Epic efforts of the unflappable Kristin Matulich at UC Irvine) documenting nearly every experiment that has measured the consequences of diversity loss ever conducted. Most of the data was from experiments describing changes to plant or algal productivity &amp; decomposition. So we had a starting point.</p>
+<p>How will diversity loss compare to the plethora of other forms of environmental change in altering these basic processes?</p>
+<p>The answer came from what we called the Meta-Meta. (Come on, say it 10 times fast). We assembled a huge database of <a href="http://en.wikipedia.org/wiki/Meta-analysis">meta-analyses</a> - statistical summaries of previous experimental results much like our own diversity set - that examined the effect of, say, nutrient addition or warming on plant productivity and decomposition. Carol then did some statistical wizardry, calculating <a href="http://en.wikipedia.org/wiki/Bootstrapping_(statistics)">bootstrapped</a> effect sizes of each from these previous meta-analyses. Hence, we had Meta-Meta-Analytic results that we could compare with our own meta-analytic results. There was a lot of meta.</p>
+<p>But we had a problem. The measurements in our diversity experiment database looked at the consequences of having 1 species versus many species in a plot for productivity. That number of ‘many’ species varied from experiment to experiment. And, besides, what’s the right diversity loss scenario to compare to climate change. 10% species loss? 50%? 95%? Only 1 last species left, clinging tenaciously to the earth?</p>
+<p>We actually argued about this for a long time as only scientists can when they want to get something dead-on right. But the solution ended up being delightfully elegant.</p>
+<p>Why not look at the whole range of species loss scenarios. Bruce Hungate, Carol, Dave and I figured out a way to look at slices of the data that simulate some relevant range of species loss and applied a nonlinear model shown to fit species loss data quite well to generate a loss-productivity curve. The curve showed that, if you lose a few species, meh! Some productivity is lost, but no big whoop. But as you start losing more and more, the problem of species loss starts to compound. Like the interest rate from hell, more species lost means exponentially more plant production lost.</p>
+<p>We still struggled with visualization (hey, infographics people, any ideas), but the figure that we ended up producing I think gets the point across nicely.</p>
+<div class="wp-caption aligncenter" style="width: 600px;">
+<div id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-539a35d47e664c97a50115a146a7f1bd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-10.46.10-AM.jpg" id="fig-539a35d47e664c97a50115a146a7f1bd-1" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-539a35d47e664c97a50115a146a7f1bd-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure 1 from the paper
+</figcaption>
+</figure>
+</div>
+<p>Changes in primary production as a function of per cent local species loss or the application of an environmental change treatment. The line with the confidence interval around it shows the effect of diversity loss. The think no-CI curve is its mirror image so that we can easily compare effect magnitude to types of environmental change that differ in the sign of their effect. Anything in red is a negative effect on productivity. E.g., drought and diversity loss both have negative effects. Anything in blue is a positive effect. E.g., if you add nitrogen and phosphorous, you boost productivity by quite a bit. Y-axis is in units of log response ratios. Any designers in the house with an even slicker way of presenting this, email me!</p>
+</div>
+<p>So, now you can compare the effect of some environmental change to some percentage of species loss. For example, ~50% species loss has an equivalent impact to dousing a plot in acid rain.</p>
+<p>Of all of the types of environmental change out there, a lot of them are roughly equivalent to between 30-70% species loss for production and decomposition. And, some additional review work we did showed that predictions of local extinctions (i.e., within a plot) range pretty widely, but, the upper end of that range is ~41-60% - so, right in our range of observations.</p>
+<p>“Oh-ho!”, I hear some of you saying (and some in the group said - I’m looking at you, Lars). “Aren’t the effects of environmental change in your Meta-Meta actually including any loss of species in experiments? I want a cleaner result!”</p>
+<p>Well, we thought of that.</p>
+<p>Kristin, Dave, and I did some data-sorting kung-fu on the diversity experiment data set, and turned up several studies that not only manipulated species number, but also crossed that with a manipulation of some form of environmental change - things like drought, nutrient enrichment, and more. This was a much smaller set of data, and a smaller set of environmental change manipulations. But, the results are compelling, and show that we’ve got the story right.</p>
+<div class="wp-caption aligncenter" style="width: 640px;">
+<p><img src="http://www.imachordata.com/wp-content/uploads/2012/04/Screen-shot-2012-04-26-at-11.15.06-AM-1024x741.jpg" class="img-fluid"></p>
+<p>Figure S4 from the supplement. All is as it was before in the above figure, but, this data is from experiments that cross changes in number of species with one or more other forms of environmental change.</p>
+</div>
+<p>Those careful factorial crossed experiments show that once the diversity signal is taken out, the size of many of those environmental effects gets smaller relative to diversity. For example, the average effect of a CO2 increase is of the same magnitude as 20% species loss (although opposite in sign). The effect of drought, one of the biggest from the Meta-Meta, drops waaaay back as well - although for both of these, the confidence intervals overlap 0 due to low sample sizes (and the 2 or the three drought datapoints come from mosses, so, more factorial experiments are needed!). Still, it’s pretty darned suggestive that there are some interesting indirect effects hidden in the meta-meta.</p>
+<p>At the very least, the experimental data pretty clearly backs up the conclusion that loss of species appears to have effects on primary productivity that is similar to other sources of environmental change. And more intriguingly, it suggests that if environmental change ALSO causes loss of species, ecosystem functions like productivity are going to get hit with a 1-2 punch.</p>
+<p>The team noted a few caveats and open questions to this. When multiple kinds of environmental change were present - say, multiple kinds of fertilizers - the effects are way stronger than diversity loss. But we don’t have a great handle on those kinds of synergistic effects overall. We also don’t know how they’ll affect diversity and then indirectly alter function. Also, because we were working with meta-analyses, we don’t have, say, the ability to compare 30% species loss to a 30% increase in temperature, or something comparable. It would be awesome to be able to compare two continuous curves, but we’re not there yet. Our results (deep inside the supplement) also show that composition - which species go extinct - can matter a great deal. But that was ancillary to our overall question of diversity loss. And there’s all sorts of ancillary questions about scaling and interaction between diversity loss and environmental change - but that’s work that Andy Gonzalez and Mary O’Connor are following up on in a massive multilevel modeling extravaganza.</p>
+<p>Overall, we felt like this told a pretty tight story. Sure, as we came up with question after question, we accumulated a lot of figures and explanatory materials that made their way into the supplementary material, but the big story was pretty clear and compelling. In working group meeting 3, we really shaped this sucker, and then bounced revisions back and forth, wrenching the text back and forth. I’ve never been part of such a large collaboration (save for our earlier <a href="http://dx.doi.org/10.3732/ajb.1000364">first paper</a>), so it was an inspiring process to see big ideas hashed out, thrown aside, revised, and made into clearer cleanly crafted pieces all on the screen of my word processor.</p>
+<p>I’m pretty psyched that <a href="http://dx.doi.org/10.1038/nature11118">the paper</a> is now out, and I hope you all enjoy it as well. There’s more to come from the working group, so stay tuned!</p>
+<div class="wp-caption aligncenter" style="width: 500px;">
+<p><img src="http://www.imachordata.com/wp-content/uploads/2012/04/wg_small.jpeg" class="img-fluid"></p>
+<p>The working group at our first meeting.</p>
+</div>
+<p>(Oh, and, final note - to anyone who wants to look at this data, or for R-nerds who want to see how we created these awesome figures, it’s all available <a href="http://knb.ecoinformatics.org/knb/metacat/nceas.984/nceas">here</a>.)</p>
+<p><em>References</em> Cardinale, Bradley J.; Matulich, Kristin L.; Hooper, David U.; Byrnes, Jarrett E.; Duffy, Emmett; Gamfeldt, Lars; Balvanera, Patricia; O’Connor, Mary I.; Gonzalez, Andrew. 2011. The functional role of producer diversity in ecosystems. American Journal of Botany. 98:572-592. <a href="http://dx.doi.org/10.3732/ajb.1000364">10.3732/ajb.1000364</a></p>
+<p>Hooper, David U., Adair, E. Carol, Cardinale, Bradley J., Byrnes, Jarrett E.K., Hungate, Bruce A., Matulich, Kristin L., Gonzalez, Andrew, Duffy, J.E., Gamfeldt, Lars, O’Connor, Mary I. 2012. Biodiversity loss ranks as a major driver of ecosystem change. Nature. <a href="http://dx.doi.org/10.1038/nature11118">10.1038/nature11118</a></p>
+<p><a href="http://www.credit-and-collections.com/">cheap cialis online</a></p>
+
+
+
+</main> <!-- /main -->
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/imachordata\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jebyrnes">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/jebyrnes.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

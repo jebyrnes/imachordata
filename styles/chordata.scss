@@ -1,0 +1,123 @@
+/*-- scss:defaults --*/
+$primary: #558b2f;
+$link-color: #558b2f;
+$link-hover-color: #558b2f;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+/*-- scss:rules --*/
+
+/* ---- Header banner (ported from the Hugo "hamburg" theme) ---- */
+.global-header {
+  background-size: cover;
+  background-position: center;
+  min-height: 350px;
+  margin-bottom: 0;
+}
+.header-text {
+  position: relative;
+  min-height: 350px;
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+.header-text .tag-line { margin-bottom: 0; }
+.header-text .site-title {
+  margin: 0 auto;
+  padding: 25px 0;
+  text-align: center;
+  font-weight: 100;
+  font-size: 52px;
+  line-height: 1.2;
+  border-bottom: 1px solid;
+  max-width: 550px;
+}
+.header-text .site-title a,
+.header-text .site-title a:hover { color: #fff; text-decoration: none; }
+.header-text .tag-line {
+  margin: 25px auto;
+  padding: 0 10px;
+  max-width: 430px;
+  text-align: center;
+  font-weight: 200;
+  font-size: 24px;
+  color: #fff;
+}
+.header-text .navbar-container {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.header-text a.header-btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #fff;
+  border: 1px solid #fff;
+  background: transparent;
+  text-decoration: none;
+}
+.header-text a.header-btn:hover { background: rgba(189, 189, 189, 0.3); color: #fff; }
+@media (max-width: 575px) {
+  .header-text .site-title { font-size: 36px; padding: 18px 10px; }
+  .header-text .tag-line { font-size: 18px; }
+}
+
+/* ---- Post pages ---- */
+.quarto-title-block .quarto-title h1.title,
+#title-block-header h1.title { text-align: center; font-weight: 400; }
+#title-block-header { text-align: center; }
+#title-block-header .quarto-title-meta { justify-content: center; }
+#title-block-header .quarto-categories { justify-content: center; }
+
+/* ---- WordPress captions (converted from [caption] shortcodes) ---- */
+.wp-caption { max-width: 100%; margin: 1rem 0; padding: 4px; text-align: center;
+  border: 1px solid #dcedc8; }
+.wp-caption img { max-width: 100%; height: auto; margin: 0 auto; }
+.wp-caption p { font-size: 0.85rem; color: #757575; margin: 0.4rem 0 0.2rem; }
+.wp-caption.aligncenter { margin-left: auto; margin-right: auto; }
+.wp-caption.alignleft { float: left; margin-right: 1rem; }
+.wp-caption.alignright { float: right; margin-left: 1rem; }
+.table-condensed td, .table-condensed th { padding: 0.25rem 0.5rem; }
+blockquote { border-left: 3px solid #bdbdbd; padding: 0.5rem 1rem; font-style: italic; }
+article img, main img { max-width: 100%; height: auto; }
+
+#title-block-header .quarto-title-meta > div:has(p.author) { display: none; }  /* old site showed the date only */
+#title-block-header .quarto-title-meta { display: block; }
+
+/* ---- Post list: title, "Posted on" date, summary, "Read more" (as on the Hugo site) ---- */
+.quarto-listing-default .quarto-post {
+  display: flex !important;
+  flex-direction: column;
+  gap: 0 !important;
+  padding: 0 0 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.quarto-listing-default .quarto-post .body { display: contents; }
+.quarto-listing-default .quarto-post .listing-title { order: 1; margin: 0 !important; padding: 0 !important; font-size: 1.75rem; font-weight: 400; line-height: 1.25; }
+.quarto-listing-default .quarto-post .metadata { order: 2; width: auto; min-width: 0; max-width: none; padding: 0 !important; margin: 0 !important; }
+.quarto-listing-default .quarto-post .listing-date { color: #757575; font-size: 0.75rem; margin: 0.15rem 0 0.5rem !important; padding: 0 !important; }
+.quarto-listing-default .quarto-post .listing-date::before { content: "Posted on "; }
+.quarto-listing-default .quarto-post .listing-description { order: 3; margin: 0 !important; padding: 0 !important; }
+.quarto-listing-default .quarto-post .listing-description a { color: inherit; }
+.quarto-listing-default .quarto-post .listing-description a::after {
+  content: "Read more \2192";
+  display: block; width: fit-content; margin-top: 0.75rem; padding: 4px 12px;
+  font-size: 13px; color: #558b2f; border: 1px solid #558b2f;
+}
+.quarto-listing-default .quarto-post .listing-description a:hover::after { background: #dcedc8; }
+.quarto-listing-default .quarto-post .listing-categories { order: 4; margin: 0.75rem 0 0 !important; }
+.quarto-listing-default .quarto-post .metadata a { color: inherit; text-decoration: none; }
+
+/* ---- Older / Newer pager on post pages ---- */
+.post-pager { display: flex; justify-content: space-between; gap: 1rem; margin: 2rem 0 1rem;
+  padding-top: 1rem; border-top: 1px solid rgba(0, 0, 0, 0.1); }
+.post-pager a { display: inline-block; padding: 6px 12px; font-size: 13px; border: 1px solid #558b2f;
+  color: #558b2f; text-decoration: none; }
+.post-pager a:hover { background: #dcedc8; }
