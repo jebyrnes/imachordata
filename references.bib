@@ -1,0 +1,15 @@
+@article{RTMB,
+author = {Kristensen, Kasper and Nielsen, Anders and Albertsen, Christoffer Moesgaard and Berg, Casper Willestofte and Trijoulet, Vanessa},
+title = {RTMB: An R Package for Fitting Latent Variable Models With Template Model Builder},
+journal = {Ecology and Evolution},
+volume = {16},
+number = {11},
+pages = {e74572},
+keywords = {automatic differentiation, ecology, epidemiology, fisheries science, hierarchical models, Laplace approximation, state-space models, TMB},
+doi = {https://doi.org/10.1002/ece3.74572},
+url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/ece3.74572},
+eprint = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/ece3.74572},
+note = {e74572 ECE-2026-08-02287.R1},
+abstract = {ABSTRACT Hierarchical and latent variable models are fundamental in ecology, fisheries science, and epidemiology, but fitting them efficiently relies on automatic differentiation (AD) combined with approximations such as the Laplace approximation. Template Model Builder (TMB) has become a standard tool for this kind of inference in R, but it requires users to write the objective function in C++, which is a potential obstacle for those unfamiliar with it, slows model iteration through compilation, and complicates debugging and simulation. We present RTMB, an R package that exposes the full power of TMB's AD machinery directly from plain R. Users write the joint negative log-likelihood as an ordinary R function; RTMB traces it onto an AD tape and hands the result to TMB's existing optimization, Laplace approximation, and reporting routines. We describe the design of the package, illustrate its use through a worked example, and provide a side-by-side comparison with the equivalent TMB implementation of a theta-logistic state-space population model. The result is a transparent, debuggable, and pedagogically accessible interface to state-of-the-art latent variable inference, with runtime performance comparable to native TMB.},
+year = {2026}
+}

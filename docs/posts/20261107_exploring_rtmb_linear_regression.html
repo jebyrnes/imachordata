@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jarrett Byrnes">
+<meta name="keywords" content="R, RTMB">
+
+<title>Exploring RTMB with Palmer Penguins: Linear Regression – I’m a Chordata! Urochordata!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-7e9bc76334ffa4b1f5c3bb5ac29e32b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Exploring RTMB with Palmer Penguins: Linear Regression – I’m a Chordata! Urochordata!">
+<meta property="og:description" content="Marine Data Science for All, Regardless of Backbone!">
+<meta property="og:image" content="https://imachordata.com/posts/20261107_exploring_rtmb_linear_regression_files/figure-html/osa-1.png">
+<meta property="og:site_name" content="I'm a Chordata! Urochordata!">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#a-simple-linear-regression-model" id="toc-a-simple-linear-regression-model" class="nav-link active" data-scroll-target="#a-simple-linear-regression-model">A Simple Linear Regression model</a></li>
+  <li><a href="#regression-output" id="toc-regression-output" class="nav-link" data-scroll-target="#regression-output">Regression Output</a></li>
+  <li><a href="#model-checking" id="toc-model-checking" class="nav-link" data-scroll-target="#model-checking">Model checking</a></li>
+  <li><a href="#plot-model-fit-and-fit-interval" id="toc-plot-model-fit-and-fit-interval" class="nav-link" data-scroll-target="#plot-model-fit-and-fit-interval">Plot Model Fit and Fit Interval</a></li>
+  <li><a href="#plot-model-fit-and-prediction-interval" id="toc-plot-model-fit-and-prediction-interval" class="nav-link" data-scroll-target="#plot-model-fit-and-prediction-interval">Plot Model Fit and Prediction Interval</a></li>
+  <li><a href="#wait-but-what-if-i-wanted-to-get-fit-intervals-via-simulation" id="toc-wait-but-what-if-i-wanted-to-get-fit-intervals-via-simulation" class="nav-link" data-scroll-target="#wait-but-what-if-i-wanted-to-get-fit-intervals-via-simulation">Wait, but what if I wanted to get fit intervals via simulation?</a></li>
+  <li><a href="#plot-new-data-counterfactuals" id="toc-plot-new-data-counterfactuals" class="nav-link" data-scroll-target="#plot-new-data-counterfactuals">Plot New Data (counterfactuals!)</a>
+  <ul class="collapse">
+  <li><a href="#a-function-for-new-values" id="toc-a-function-for-new-values" class="nav-link" data-scroll-target="#a-function-for-new-values">A Function for new values</a></li>
+  <li><a href="#fitting-the-first-time---now-with-data" id="toc-fitting-the-first-time---now-with-data" class="nav-link" data-scroll-target="#fitting-the-first-time---now-with-data">Fitting the first time - now with data!</a></li>
+  <li><a href="#predictions-using-our-hessian-without-no-aggression" id="toc-predictions-using-our-hessian-without-no-aggression" class="nav-link" data-scroll-target="#predictions-using-our-hessian-without-no-aggression">Predictions using our Hessian without no aggression</a></li>
+  </ul></li>
+  <li><a href="#well-that-was-wild.-why-did-i-do-this" id="toc-well-that-was-wild.-why-did-i-do-this" class="nav-link" data-scroll-target="#well-that-was-wild.-why-did-i-do-this">Well that was wild. Why did I do this?</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
+      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Exploring RTMB with Palmer Penguins: Linear Regression</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">statistics</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jarrett Byrnes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Nov 7, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>R, RTMB</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>I was deeply intrigued to see <a href="https://onlinelibrary.wiley.com/doi/10.1002/ece3.74572"><span class="citation" data-cites="RTMB">Kristensen et al. (<span>2026</span>)</span></a> in Ecology and Evolution the other day. With a title like <em>RTMB: An R Package for Fitting Latent Variable Models With Template Model Builder</em> how could I not be intrigued? Latent variables and possibility of SEM? Check! TMB? Well, I’m a regular user of <a href="https://cran.r-project.org/web/packages/glmmTMB/index.html">glmmTMB</a> and <a href="https://sdmtmb.github.io/sdmTMB/">sdmTMB</a> - the later of which has just moved over to using RTMB at its core. So, what indeed is RTMB and how does it work?</p>
+<p>At its core, RTMB is a way to use TMB and it’s AD “machinery” without having to code in C++ and compile your model. Seems great! You make an objective function - kinda just like you did if you are using <code>optim()</code> or <code>nlminb()</code> and then use <code>MakeADFun()</code> to wrap it all up so that it can be fed to one of those optimizers to fit.</p>
+<p>There are a few other things you want to do inside of the function. Use <code>getAll()</code> so you don’t have to do a lot of typing with a <code>$</code>. Flag the observed variable using <code>OBS()</code>. Use <code>REPORT()</code> to get an object you want to see after fitting without uncertainty. Use <code>ADREPORT()</code> to get a derived quantity for which you DO want to get some uncertainty. There are other bits and pieces, but, let’s look at this in context using <code>palmerpenguins</code>. Or, now that its in base R, <code>penguins</code> - haha!</p>
+<section id="a-simple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-linear-regression-model">A Simple Linear Regression model</h2>
+<p>Let’s start by loading in our data and, for the moment, getting rid of NAs.</p>
+<div class="cell" data-messages="false">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RTMB)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># to make our lives easier</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>penguins_clean <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(penguins) <span class="co"># get rid of NAs</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, what’s our model? Let’s look at <code>bill_len ~ body_mass</code> as a linear regression. If we were just using lm, this would be</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguin_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(bill_len <span class="sc">~</span> body_mass, <span class="at">data =</span> penguins_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>This is always lovely, as we don’t really have to think about what is going on under the hood. Not so with RTMB. We actually define our model mathematically and estimate parameters. So, to remind you, a linear regression model looks like this:</p>
+<p>$$ = _0 + _1 x_i$$ $$y_i (, )$$</p>
+<p>To start, we have to actually create a list of parameters as well as some start values. Let’s not use betas and sigmas from above, but give them more meaningful names.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>linreg_params <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">intercept =</span> <span class="dv">0</span>,     <span class="co"># starting guesses</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">body_mass_slope =</span> <span class="dv">0</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">logsigma =</span> <span class="fu">log</span>(<span class="fu">sd</span>(penguins_clean<span class="sc">$</span>bill_len))) <span class="co">#seems reasonable if all was flat!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Note we’re doing log sigma. That will make things easier to fit.</p>
+<p>Now, we define our model with an objective function. We are going to actually have the linear model, the likelihood (the normal distribution for residuals), and then turn that into a negative log-likelihood. Well, ok, we’re going to use <code>dnorm()</code> so we’ll set <code>log=TRUE</code> to start out with the log-likelihood, as that’s good practice for rounding, etc. We’ll make a function with one argument - <code>p</code>. What is that? Well, <code>p</code> is a list of parameter values - the same one we just made! And we’ll use <code>getAll()</code> so we don’t need to keep typing <code>p$</code> or <code>penguins_clean$</code> throughout.</p>
+<ol type="1">
+<li><p>Supply one argument - <code>p</code> - which is a list of our parameter values. We’ll then use <code>getAll()</code> in order to not have to use <code>p$</code> or <code>penguins_clean$</code> in the rest of the function.</p></li>
+<li><p>We will calculate <code>sigmas</code> as <code>exp(logsigma)</code> and then use <code>ADREPORT(sigma)</code> so that we can see it in our coefficient output. If we wanted to get simulations of it as well, we would include <code>REPORT(sigma)</code> for later use with the <code>simulate()</code> function</p></li>
+<li><p>One funny thing is that we will use <code>bill_len &lt;- OBS(bill_len)</code> - this allows us to define our observed variable, which will then be used in things like calculating residuals, simulations, and more.</p></li>
+<li><p>Do you want fitted values? You have to define them and get them with <code>ADREPORT()</code> as well! Which is fine - and menas you can do all sorts of tricksy things - particularly if you want link and response values, etc.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>linreg <span class="ot">&lt;-</span> <span class="cf">function</span>(p){</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">getAll</span>(penguins_clean, p) <span class="co"># so we can stop using $</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a transformed parameter</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(logsigma)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ADREPORT</span>(sigma) <span class="co">#so we can see it later</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#REPORT(sigma) #for simulation</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What are we observing for later sims</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  bill_len <span class="ot">&lt;-</span> <span class="fu">OBS</span>(bill_len)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># model for DGP and output those fitted values</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  bill_len_hat <span class="ot">&lt;-</span> intercept <span class="sc">+</span> body_mass_slope <span class="sc">*</span> body_mass</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ADREPORT</span>(bill_len_hat)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># EGP</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  pointwise_ll <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(bill_len, </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>              <span class="at">mean =</span> bill_len_hat, </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>              <span class="at">sd =</span> <span class="fu">exp</span>(logsigma), <span class="at">log =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># turn that into a negative log-likelihood</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  nll <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> <span class="fu">sum</span>(pointwise_ll)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># return</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  nll</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Cool! Now we need to turn it into an TMB object. Note, we’ll use <code>silent = TRUE</code> to supress output from our fitting function.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>linreg_obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(linreg, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                        linreg_params, </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Last, we fit it. Note, <code>linreg_obj</code> has a few parts - a list of parameters, an objective function, and a gradient function. We could call them individually in a call to <code>optim</code> or something, but, easier to use <code>do.call()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>linreg_out <span class="ot">&lt;-</span> <span class="fu">do.call</span>(<span class="st">"optim"</span>, linreg_obj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="regression-output" class="level2">
+<h2 class="anchored" data-anchor-id="regression-output">Regression Output</h2>
+<p>OK, you wanna see the output? The big thing is that, it’s actually out object - not the fit from optim - that has all of the info in it. So, let’s see what we have! Note, I’m using some row notation, as otherwise, we get ALL of the fitted values and their SE as well.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># note this is obj and not out</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>linreg_coefs <span class="ot">&lt;-</span> <span class="fu">sdreport</span>(linreg_obj) </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>linreg_coefs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sdreport(.) result
+                    Estimate   Std. Error
+intercept       27.150733601 1.2877182107
+body_mass_slope  0.004003285 0.0003006444
+logsigma         1.484095254 0.0387491858
+Maximum gradient component: 0.7064614 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If we wanted to see the fit values as well</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># uncomment and run</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(linreg_coefs)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># to see the values including what comes out with ADREPORT</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(linreg_coefs)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Estimate   Std. Error
+intercept       27.150733601 1.2877182107
+body_mass_slope  0.004003285 0.0003006444
+logsigma         1.484095254 0.0387491858
+sigma            4.410972798 0.1709216045</code></pre>
+</div>
+</div>
+<p>Nice! Look at the names of that coefs object - there’s a lot of info, like the VCOV matrix!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(linreg_coefs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "value"          "sd"             "cov"            "par.fixed"     
+[5] "cov.fixed"      "pdHess"         "gradient.fixed" "env"           </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>linreg_coefs<span class="sc">$</span>cov.fixed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    intercept body_mass_slope      logsigma
+intercept        1.658218e+00   -3.802634e-04  3.484112e-08
+body_mass_slope -3.802634e-04    9.038703e-08 -1.474645e-11
+logsigma         3.484112e-08   -1.474645e-11  1.501499e-03</code></pre>
+</div>
+</div>
+</section>
+<section id="model-checking" class="level2">
+<h2 class="anchored" data-anchor-id="model-checking">Model checking</h2>
+<p>First, did our model do a good job?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">checkConsistency</span>(linreg_obj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Parameters used for simulation:
+      intercept body_mass_slope        logsigma 
+   27.150733601     0.004003285     1.484095254 
+
+Test correct simulation (p.value):
+[1] 0.9421078
+Simulation appears to be correct
+
+Estimated parameter bias:
+      intercept body_mass_slope        logsigma 
+   7.477649e-02   -1.519087e-05    7.237122e-04 </code></pre>
+</div>
+</div>
+<p>What about model assumptions? To look at that, we want residuals, which we get via <code>oneStepPredict()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">oneStepPredict</span>(linreg_obj, <span class="at">method =</span> <span class="st">"fullGaussian"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">density</span>(res<span class="sc">$</span>residual) <span class="sc">|&gt;</span> <span class="fu">plot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/osa-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(res<span class="sc">$</span>residual)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(res<span class="sc">$</span>residual)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/osa-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Not bad, not great - but we know why! We’re not looking at species.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(res <span class="sc">~</span> species,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">data.frame</span>(<span class="at">res =</span> res<span class="sc">$</span>residual,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">species =</span> penguins_clean<span class="sc">$</span>species))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What about the fitted versus observed? For that, we need the fit values, which we have in our sdreport. If we look at the values in the object, we can see which of the derived parameters are coefficients and which are data. They go in order defined in the model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(linreg_coefs<span class="sc">$</span>value[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sigma"        "bill_len_hat" "bill_len_hat" "bill_len_hat" "bill_len_hat"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>fitted <span class="ot">&lt;-</span> linreg_coefs<span class="sc">$</span>value[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(linreg_coefs<span class="sc">$</span>value)]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>So now we can do something like a fitted versus residuals plot.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted, res<span class="sc">$</span>residual)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We could get fancy and throw this into ggplot2 and color by species, or all manner of other things. The world is our oyster.</p>
+</section>
+<section id="plot-model-fit-and-fit-interval" class="level2">
+<h2 class="anchored" data-anchor-id="plot-model-fit-and-fit-interval">Plot Model Fit and Fit Interval</h2>
+<p>What’s nice about this is that we can plot our data and our fit quite easily given what we have generated. We can do this using the outputs of fits from our <code>ADREPORT()</code> values of fitted values.</p>
+<p>We know that <code>summary(linreg_coefs)</code> will give us our coefficients and fitted values. So, we can just remove the first four rows (intercept, slope, logsima, and sigma), and then use the estimate and SE to generate CIS.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit_frame <span class="ot">&lt;-</span> <span class="fu">summary</span>(linreg_coefs)[<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),] <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># clean those names!</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># calculate CIs and make sure to add your X</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lower_ci =</span> estimate <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>std_error,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">upper_ci =</span> estimate <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>std_error,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">body_mass =</span> penguins_clean<span class="sc">$</span>body_mass) <span class="sc">|&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># do a little arrange to make the ribbon look nice</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body_mass)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(fit_frame,</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">plot</span>(penguins_clean<span class="sc">$</span>body_mass,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>             penguins_clean<span class="sc">$</span>bill_len,</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">"body mass(g)"</span>, </span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"bill length (mm)"</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>       <span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">c</span>(body_mass, <span class="fu">rev</span>(body_mass)),</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">c</span>(lower_ci, <span class="fu">rev</span>(upper_ci)),</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"lightgrey"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">lines</span>(body_mass, estimate, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>       <span class="fu">points</span>(penguins_clean<span class="sc">$</span>body_mass, </span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>              penguins_clean<span class="sc">$</span>bill_len)</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>       }</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/fit_frame-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Yes, you can do this in ggplot2, but, I’m feeling saucy and using base.</p>
+</section>
+<section id="plot-model-fit-and-prediction-interval" class="level2">
+<h2 class="anchored" data-anchor-id="plot-model-fit-and-prediction-interval">Plot Model Fit and Prediction Interval</h2>
+<p>What if we want to look at the interval for new predictions. This is harder, and can depend a lot on some details of the probability distributions we’re dealing with. So, what about <strong>simulation</strong>?</p>
+<p><code>linreg_obj$simulate()</code> will give us new simulated points for each pointwise prediction. This can be really useful if we replicate it, as it can give us means, CIs, and even let us do things like quantile residuals for DHARMA plots. Here, let’s use it as above to get means and PIs.</p>
+<p>Fist, the simulated values. I’ll use <code>replicate()</code>. Note, we also have to draw out a variable. That’s right - we could have simulated out a LOT of things based on <code>OBS()</code> and <code>REPORT()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>sim_matrix <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="fl">1e3</span>, linreg_obj<span class="sc">$</span><span class="fu">simulate</span>()<span class="sc">$</span>bill_len)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(sim_matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  333 1000</code></pre>
+</div>
+</div>
+<p>To see that these really are what we want, let’s compare the means of the sims to our fitted values.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted, <span class="fu">rowMeans</span>(sim_matrix))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Good for 1K sims, no? Now, let’s use this matrix to generate something like our prediction data frame above.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pis <span class="ot">&lt;-</span> <span class="fu">apply</span>(sim_matrix, <span class="dv">1</span>, quantile, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>sim_frame <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">body_mass =</span> penguins_clean<span class="sc">$</span>body_mass,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">bill_len_fit =</span> fitted,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">bill_len_raw =</span> penguins_clean<span class="sc">$</span>bill_len,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower_pi =</span> pis[<span class="dv">1</span>,],</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper_pi =</span> pis[<span class="dv">2</span>,]</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body_mass)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sim_frame)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  body_mass bill_len_fit bill_len_raw lower_pi upper_pi
+      &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1      2700         38.0         46.9     29.7     46.2
+2      2850         38.6         36.5     29.9     47.3
+3      2850         38.6         36.4     30.5     47.8
+4      2900         38.8         34.5     30.1     47.1
+5      2900         38.8         33.1     30.5     47.1
+6      2900         38.8         38.6     30.6     46.9</code></pre>
+</div>
+</div>
+<p>Fantastic. Now the plot</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(sim_frame,</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">plot</span>(body_mass,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>             bill_len_raw,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">"body mass(g)"</span>, </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"bill length (mm)"</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>       <span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">c</span>(body_mass, <span class="fu">rev</span>(body_mass)),</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">c</span>(lower_pi, <span class="fu">rev</span>(upper_pi)),</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"lightgrey"</span>)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">lines</span>(body_mass, bill_len_fit, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>       <span class="fu">points</span>(body_mass, </span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>              bill_len_raw)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>       }</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>BONUS</strong> Here’s how to get quantile resudials!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>qres <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="at">length =</span> <span class="fu">length</span>(fitted))</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(fitted)){</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  qres[i] <span class="ot">&lt;-</span> </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(sim_matrix[i,] <span class="sc">&lt;</span> penguins_clean<span class="sc">$</span>bill_len[i]) <span class="sc">/</span> <span class="fu">ncol</span>(sim_matrix)  </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(qres)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>gap<span class="sc">::</span><span class="fu">qqunif</span>(qres, <span class="at">logscale =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Or, simpler</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>qres <span class="ot">&lt;-</span> DHARMa<span class="sc">::</span><span class="fu">getQuantile</span>(sim_matrix, penguins_clean<span class="sc">$</span>bill_len)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(qres)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>gap<span class="sc">::</span><span class="fu">qqunif</span>(qres, <span class="at">logscale =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">"black"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note, both of these have problems. Why? SPECIES!</p>
+</section>
+<section id="wait-but-what-if-i-wanted-to-get-fit-intervals-via-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="wait-but-what-if-i-wanted-to-get-fit-intervals-via-simulation">Wait, but what if I wanted to get fit intervals via simulation?</h2>
+<p>You can! You would use exactly the code above. The difference is that, in your model, you would need to include a line that is <code>REPORT(bill_len_hat)</code> so that, when you simulate, it comes out as well. That’s it! Then just use <code>bill_len_hat</code> in the above code for prediction intervals instead of <code>bill_len</code>. Oh, and you should probably change any variable name with <code>pi*</code> in it to <code>ci*</code>!</p>
+<p>Why might you want to do this other than simulation is cool? Well, **NOTE: The PIs above did not incorporate fit error - they do not incorporate the CI of sigma as well - but, if you <code>REPORT(sigma)</code> you can get uncertainty there, and then use make draws of noise to add to simulated hat values. Gelman and Hill cover this a bit in their classic book and it’s accompanying <code>arm</code> package with its <code>sim()</code> function. Worth looking up, and long one of my biggest kvetches about <code>simulate()</code> (I even got shirty about it and started to write a package <a href="https://github.com/jebyrnes/sinterval">sinterval</a> that was meant to produce results much like <a href="https://mjskay.github.io/tidybayes/">tidybayes</a> but, well, there are only so many hours in a day!)</p>
+</section>
+<section id="plot-new-data-counterfactuals" class="level2">
+<h2 class="anchored" data-anchor-id="plot-new-data-counterfactuals">Plot New Data (counterfactuals!)</h2>
+<p>What if we want to use our fit model to do wholly different predictions on new values? We’re used to fitting a model and then using a function with a new data frame of our choice to generate new values. It’s not quite as simple here - although you can write a function to do something like that.</p>
+<p>The short version is</p>
+<ol type="1">
+<li><p>We’re gonna need to rewrite our function so that it takes in data - and some of that data will be new!</p></li>
+<li><p>New rows will merely have NA values for the response variable - which we will then exclude at key points.</p></li>
+<li><p>We can use the Hessian from the initial fit model for use with new values to avoid refitting.</p></li>
+</ol>
+<section id="a-function-for-new-values" class="level3">
+<h3 class="anchored" data-anchor-id="a-function-for-new-values">A Function for new values</h3>
+<p>Let’s start by re-writing the objective function. We will now include a data argument. We will also check the data to see what values are new, what are observed, and use that information moving forward for our likelihood and for reporting. Note, I’m also going to introduce the <code>%~%</code> syntax for probability distributions. It matches other probailistic programing languages, and allows you to stop thinking about remembering log=TRUE and -1* and all that. We will also use it for random effects, latent variables, and other things - so, best to start working with it now.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>linreg_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p, data){</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">getAll</span>(data, p) <span class="co"># so we can stop using $</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># a transformed parameter</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(logsigma)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ADREPORT</span>(sigma) <span class="co">#so we can see it later</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">REPORT</span>(sigma) <span class="co"># for simulation</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># What are we observing for later sims</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  bill_len <span class="ot">&lt;-</span> <span class="fu">OBS</span>(bill_len)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># model for DGP and output those fitted values</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  bill_len_hat <span class="ot">&lt;-</span> intercept <span class="sc">+</span> body_mass_slope <span class="sc">*</span> body_mass</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ADREPORT</span>(bill_len_hat)</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">REPORT</span>(bill_len_hat) <span class="co">#for fit interval simulations</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># new predictions</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>  new_idx <span class="ot">&lt;-</span> <span class="fu">is.na</span>(bill_len) <span class="co"># the indices of new values</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>  obs_idx <span class="ot">&lt;-</span> <span class="sc">!</span>new_idx</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Likelihood - but for obs only!</span></span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>  bill_len[obs_idx] <span class="sc">%~%</span> <span class="fu">dnorm</span>(bill_len_hat[obs_idx],</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>                             <span class="at">sd =</span> sigma)</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Not super different, no?</p>
+</section>
+<section id="fitting-the-first-time---now-with-data" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-the-first-time---now-with-data">Fitting the first time - now with data!</h3>
+<p>OK, we need to fit our model. We need to add the data to the call to <code>MakeADFun()</code> for fitting the model. Looking at the helpfile for <code>MakeADFun()</code> we see that the first argument is a function - our objective function! The second argument is the parameters, which is feeds to the function. So, we need a function to… make a function! In the docs for RTMB, they have a nice little one called <code>cmb()</code> which I implement here. But, I dunno, maybe the authors want to add a data argument to <code>MakeADFun()</code>?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cmb <span class="ot">&lt;-</span> <span class="cf">function</span>(f, d) <span class="cf">function</span>(p) <span class="fu">f</span>(p, d)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>linreg_obj_p <span class="ot">&lt;-</span> <span class="fu">cmb</span>(linreg_p, penguins_clean) <span class="sc">|&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MakeADFun</span>(linreg_params, </span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">silent =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Yeah, I piped it, but, meh. Now let’s fit the thing. We’ll use <code>nlminb()</code> to show something different than the <code>do.call("optim", mod)</code> approach above, as who knows what optimizer you want to use! TO show you, let’s see what’s inside that we’ll need to use with <code>names()</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(linreg_obj_p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "par"          "fn"           "gr"           "he"           "hessian"     
+ [6] "method"       "retape"       "env"          "report"       "simulate"    
+[11] "force.update" "vectorize"   </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>linreg_p_fit <span class="ot">&lt;-</span> <span class="fu">with</span>(linreg_obj_p,</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>     <span class="fu">nlminb</span>(par, fn, gr))</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># did it blend?</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>linreg_p_fit<span class="sc">$</span>message</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>Looks like it fit! And to convince you this has changed nothing…let’s compare it to our previous fit.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sdreport</span>(linreg_obj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sdreport(.) result
+                    Estimate   Std. Error
+intercept       27.150733601 1.2877182107
+body_mass_slope  0.004003285 0.0003006444
+logsigma         1.484095254 0.0387491858
+Maximum gradient component: 0.7064614 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sdreport</span>(linreg_obj_p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sdreport(.) result
+                    Estimate   Std. Error
+intercept       27.150726341 1.2877185869
+body_mass_slope  0.004003289 0.0003006444
+logsigma         1.484095547 0.0387491971
+Maximum gradient component: 0.07012756 </code></pre>
+</div>
+</div>
+</section>
+<section id="predictions-using-our-hessian-without-no-aggression" class="level3">
+<h3 class="anchored" data-anchor-id="predictions-using-our-hessian-without-no-aggression">Predictions using our Hessian without no aggression</h3>
+<p><img src="../images/hessian.png" class="img-fluid"></p>
+<p>Sorry, I could not resist.</p>
+<p>For those unfamiliar (and many applied scientists are), the Hessian matrix of a model fit is the square matrix of second-order partial derivatives of the log-likelihood with respect to the parameters. Inverting it gives us an estimate of the covariance matrix, and it is used for much more. Basically, we can think of it as the raw information about our fit model, and using it will allow us to generate the CIs and PIs on our new predictions.</p>
+<p>To get new predictions, we need to 1. Make our new data frame for prediction with blank values for <code>bill_len</code>.</p>
+<ol start="2" type="1">
+<li><p>Get the fit parameters and fit hessian.</p></li>
+<li><p>Use the new data, our model, our <code>cmb</code> function from above, and our fit parameters with <code>MakeADFun()</code>.</p></li>
+<li><p>Use <code>sdreport()</code> with <code>fixed.hessian = fit_hessian</code> to get the proper SE of our predictions. For ease of use, I’m going to supply some more processing workflow to make a nice new prediction data frame.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># new data to predict from</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>pred_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">body_mass =</span> <span class="fu">seq</span>(<span class="fu">min</span>(penguins_clean<span class="sc">$</span>body_mass),</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">max</span>(penguins_clean<span class="sc">$</span>body_mass),</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">length.out =</span> <span class="dv">20</span>),</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">bill_len =</span> <span class="cn">NA</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="co"># extract parameters and Hessian</span></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>fit_params <span class="ot">&lt;-</span> linreg_p_fit<span class="sc">$</span>par</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>fit_hessian <span class="ot">&lt;-</span> linreg_obj_p<span class="sc">$</span><span class="fu">he</span>()</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a><span class="co"># make a new ADFun</span></span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>pred_adfun <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(<span class="fu">cmb</span>(linreg_p, pred_data),</span>
+<span id="cb45-15"><a href="#cb45-15" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">as.list</span>(fit_params), </span>
+<span id="cb45-16"><a href="#cb45-16" aria-hidden="true" tabindex="-1"></a>                       <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb45-17"><a href="#cb45-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-18"><a href="#cb45-18" aria-hidden="true" tabindex="-1"></a><span class="co"># get the new predictions and their SEs</span></span>
+<span id="cb45-19"><a href="#cb45-19" aria-hidden="true" tabindex="-1"></a>pred_values <span class="ot">&lt;-</span> <span class="fu">sdreport</span>(pred_adfun,</span>
+<span id="cb45-20"><a href="#cb45-20" aria-hidden="true" tabindex="-1"></a>                        <span class="at">hessian.fixed =</span> fit_hessian) <span class="sc">|&gt;</span></span>
+<span id="cb45-21"><a href="#cb45-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>() <span class="sc">|&gt;</span></span>
+<span id="cb45-22"><a href="#cb45-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span></span>
+<span id="cb45-23"><a href="#cb45-23" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb45-24"><a href="#cb45-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb45-25"><a href="#cb45-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(pred_data) <span class="sc">|&gt;</span></span>
+<span id="cb45-26"><a href="#cb45-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>bill_len) <span class="sc">|&gt;</span></span>
+<span id="cb45-27"><a href="#cb45-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">bill_len =</span> estimate) <span class="sc">|&gt;</span></span>
+<span id="cb45-28"><a href="#cb45-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ci_low =</span> bill_len <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> std_error,</span>
+<span id="cb45-29"><a href="#cb45-29" aria-hidden="true" tabindex="-1"></a>         <span class="at">ci_high =</span> bill_len <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> std_error) <span class="sc">|&gt;</span></span>
+<span id="cb45-30"><a href="#cb45-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(body_mass, <span class="fu">everything</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb45-31"><a href="#cb45-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(body_mass)</span>
+<span id="cb45-32"><a href="#cb45-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-33"><a href="#cb45-33" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look!</span></span>
+<span id="cb45-34"><a href="#cb45-34" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pred_values)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  body_mass bill_len std_error ci_low ci_high
+      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1     2700      38.0     0.513   37.0    39.0
+2     2889.     38.7     0.464   37.8    39.6
+3     3079.     39.5     0.416   38.7    40.3
+4     3268.     40.2     0.371   39.5    41.0
+5     3458.     41.0     0.330   40.3    41.6
+6     3647.     41.8     0.294   41.2    42.3</code></pre>
+</div>
+</div>
+<p>Did it blend? Let’s visualize this with our fit line and CI to see where it falls in.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First, our original fit - we already did this above.</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(fit_frame,</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">plot</span>(penguins_clean<span class="sc">$</span>body_mass,</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>             penguins_clean<span class="sc">$</span>bill_len,</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">xlab =</span> <span class="st">"body mass(g)"</span>, </span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ylab =</span> <span class="st">"bill length (mm)"</span>,</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">type =</span> <span class="st">"n"</span>) <span class="co">#blank plot</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">polygon</span>(<span class="at">x =</span> <span class="fu">c</span>(body_mass, <span class="fu">rev</span>(body_mass)),</span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">y =</span> <span class="fu">c</span>(lower_ci, <span class="fu">rev</span>(upper_ci)),</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">col =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">border =</span> <span class="cn">NA</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>       <span class="fu">lines</span>(body_mass, estimate, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>       }</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="co">#Now, let's add our new points and their CIs!</span></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(pred_values,</span>
+<span id="cb47-25"><a href="#cb47-25" aria-hidden="true" tabindex="-1"></a>     {</span>
+<span id="cb47-26"><a href="#cb47-26" aria-hidden="true" tabindex="-1"></a>       <span class="fu">segments</span>(body_mass, ci_low, body_mass, ci_high)</span>
+<span id="cb47-27"><a href="#cb47-27" aria-hidden="true" tabindex="-1"></a>       <span class="fu">points</span>(body_mass, bill_len)</span>
+<span id="cb47-28"><a href="#cb47-28" aria-hidden="true" tabindex="-1"></a>       </span>
+<span id="cb47-29"><a href="#cb47-29" aria-hidden="true" tabindex="-1"></a>     })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261107_exploring_rtmb_linear_regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Yup, right on the prediction line, as they should be, with the correct CI. So, you could wrap the workflow above in a function, for example, and use it to generate a fit curve that is more complex for plotting. You could also use <code>simualte()</code> from the model if you wanted to get draws of new predicted values and knock yourself out there as well - and if you reported the hat values and sigma, you can even get the full prediction interval. The sky is the limit.</p>
+</section>
+</section>
+<section id="well-that-was-wild.-why-did-i-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="well-that-was-wild.-why-did-i-do-this">Well that was wild. Why did I do this?</h2>
+That was A LOT. If you want to fit a simple linear regression, should you use this framework? NO! Come on. We have lives to live, dinner to cook, cats to pet.
+<center>
+<img src="../images/pearl.png" class="img-fluid" alt="How you might feel at this point">
+</center>
+<p>BUT - what this does do is give you access to the ability to fit complex likelihood-based models, even with latent variables, easily. And quickly! Without leaving R! Working through more familiar models are a nice way to get into the guts of how to use this framework - which is SUPER powerful - before yo have to jump into something a bit more difficult.</p>
+<p>It’s also not escaped my attention that this is a nice halfway house to going Bayesian. You can roll this into Stan with <a href="https://github.com/kaskr/tmbstan">tmbstan</a> - <a href="https://kaskr.r-universe.dev/articles/tmbstan/tmbstan.html">see here for how to do it</a>. Or, the coding here is not too too different from <a href="https://github.com/rmcelreath/rethinking">rethinking</a> which is a gateway into full blown <a href="https://mc-stan.org/">Stan</a>.</p>
+<p>The biggest thing, you have a LOT of latitude. So don’t dream it. Be it.</p>
+</section>
+<section id="references" class="level2">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-RTMB" class="csl-entry" role="listitem">
+Kristensen, Kasper, Anders Nielsen, Christoffer Moesgaard Albertsen, Casper Willestofte Berg, and Vanessa Trijoulet. 2026. <span>“RTMB: An r Package for Fitting Latent Variable Models with Template Model Builder.”</span> <em>Ecology and Evolution</em> 16 (11): e74572. https://doi.org/<a href="https://doi.org/10.1002/ece3.74572">https://doi.org/10.1002/ece3.74572</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/imachordata\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jebyrnes">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/jebyrnes.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
