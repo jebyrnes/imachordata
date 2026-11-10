@@ -9,7 +9,7 @@
 <link>https://imachordata.com/</link>
 <atom:link href="https://imachordata.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Marine Data Science for All, Regardless of Backbone!</description>
-<generator>quarto-1.8.25</generator>
+<generator>quarto-1.10.18</generator>
 <lastBuildDate>Sat, 07 Nov 2026 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Exploring RTMB with Palmer Penguins: Linear Regression</title>
