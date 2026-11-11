@@ -1,2 +1,7 @@
 # applies to every post in this folder
 author: Jarrett Byrnes
+format:
+  html:
+    toc: true
+    grid:
+      margin-width: 260px

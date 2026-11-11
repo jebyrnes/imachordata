@@ -97,7 +97,7 @@ div.csl-indent {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-7e9bc76334ffa4b1f5c3bb5ac29e32b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-9c01d5dd1e2efcfab7dd028f3fb3a506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -166,7 +166,7 @@ div.csl-indent {
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
+<header class="global-header" style="background-image:url(images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
@@ -354,12 +354,12 @@ logsigma         3.484112e-08   -1.474645e-11  1.501499e-03</code></pre>
    27.150733601     0.004003285     1.484095254 
 
 Test correct simulation (p.value):
-[1] 0.9421078
+[1] 0.2960898
 Simulation appears to be correct
 
 Estimated parameter bias:
       intercept body_mass_slope        logsigma 
-   7.477649e-02   -1.519087e-05    7.237122e-04 </code></pre>
+  -2.063098e-01    4.507903e-05    5.132947e-03 </code></pre>
 </div>
 </div>
 <p>What about model assumptions? To look at that, we want residuals, which we get via <code>oneStepPredict()</code>.</p>
@@ -509,12 +509,12 @@ Estimated parameter bias:
 <pre><code># A tibble: 6 × 5
   body_mass bill_len_fit bill_len_raw lower_pi upper_pi
       &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1      2700         38.0         46.9     29.7     46.2
-2      2850         38.6         36.5     29.9     47.3
-3      2850         38.6         36.4     30.5     47.8
-4      2900         38.8         34.5     30.1     47.1
-5      2900         38.8         33.1     30.5     47.1
-6      2900         38.8         38.6     30.6     46.9</code></pre>
+1      2700         38.0         46.9     29.8     46.4
+2      2850         38.6         36.5     29.8     47.2
+3      2850         38.6         36.4     29.9     46.7
+4      2900         38.8         34.5     29.9     47.4
+5      2900         38.8         33.1     30.5     47.6
+6      2900         38.8         38.6     30.0     48.0</code></pre>
 </div>
 </div>
 <p>Fantastic. Now the plot</p>

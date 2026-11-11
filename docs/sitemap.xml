@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://imachordata.com/index.html</loc>
-    <lastmod>2026-11-08T22:48:39.000Z</lastmod>
+    <lastmod>2026-11-11T19:01:39.389Z</lastmod>
   </url>
   <url>
     <loc>https://imachordata.com/about/index.html</loc>
@@ -119,5 +119,9 @@
   <url>
     <loc>https://imachordata.com/posts/20210507_r-tensorflow-on-an-m1-mac-without-crashing.html</loc>
     <lastmod>2026-11-10T01:29:06.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</loc>
+    <lastmod>2026-11-11T19:05:45.608Z</lastmod>
   </url>
 </urlset>
