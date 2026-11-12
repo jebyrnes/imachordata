@@ -16,7 +16,7 @@
   <dc:creator>Jarrett Byrnes</dc:creator>
   <link>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</link>
   <description><![CDATA[ 
-<header class="global-header" style="background-image:url(images/bg.jpg)">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
@@ -1051,7 +1051,7 @@ font-style: inherit;">14</span>)</span></code></pre></div></div>
   <dc:creator>Jarrett Byrnes</dc:creator>
   <link>https://imachordata.com/posts/20261107_exploring_rtmb_linear_regression.html</link>
   <description><![CDATA[ 
-<header class="global-header" style="background-image:url(images/bg.jpg)">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
@@ -1354,12 +1354,12 @@ font-style: inherit;">checkConsistency</span>(linreg_obj)</span></code></pre></d
    27.150733601     0.004003285     1.484095254 
 
 Test correct simulation (p.value):
-[1] 0.2960898
+[1] 0.4056133
 Simulation appears to be correct
 
 Estimated parameter bias:
       intercept body_mass_slope        logsigma 
-  -2.063098e-01    4.507903e-05    5.132947e-03 </code></pre>
+  -9.598438e-02    2.425398e-05    6.041408e-03 </code></pre>
 </div>
 </div>
 <p>What about model assumptions? To look at that, we want residuals, which we get via <code>oneStepPredict()</code>.</p>
@@ -1735,12 +1735,12 @@ font-style: inherit;">head</span>(sim_frame)</span></code></pre></div></div>
 <pre><code># A tibble: 6 × 5
   body_mass bill_len_fit bill_len_raw lower_pi upper_pi
       &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1      2700         38.0         46.9     29.8     46.4
-2      2850         38.6         36.5     29.8     47.2
-3      2850         38.6         36.4     29.9     46.7
-4      2900         38.8         34.5     29.9     47.4
-5      2900         38.8         33.1     30.5     47.6
-6      2900         38.8         38.6     30.0     48.0</code></pre>
+1      2700         38.0         46.9     29.8     46.3
+2      2850         38.6         36.5     30.1     47.9
+3      2850         38.6         36.4     30.1     47.4
+4      2900         38.8         34.5     29.4     47.2
+5      2900         38.8         33.1     30.4     48.0
+6      2900         38.8         38.6     30.0     47.0</code></pre>
 </div>
 </div>
 <p>Fantastic. Now the plot</p>
@@ -2451,7 +2451,7 @@ Kristensen, Kasper, Anders Nielsen, Christoffer Moesgaard Albertsen, Casper Will
   <dc:creator>Jarrett Byrnes</dc:creator>
   <link>https://imachordata.com/posts/20250725_modelbased-for-quick-and-beautiful-model-visualization.html</link>
   <description><![CDATA[ 
-<header class="global-header" style="background-image:url(images/bg.jpg)">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
@@ -3003,7 +3003,7 @@ font-style: inherit;">"point"</span>))</span></code></pre></div></div>
   <dc:creator>Jarrett Byrnes</dc:creator>
   <link>https://imachordata.com/posts/20211128_tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse.html</link>
   <description><![CDATA[ 
-<header class="global-header" style="background-image:url(images/bg.jpg)">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
@@ -3385,8 +3385,8 @@ Look at tensorflow go!
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -3454,8 +3454,8 @@ Big bowl<br>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -4302,8 +4302,8 @@ font-style: inherit;">"Distribution of Flipper length (black) and DHARMa Simulat
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -5008,8 +5008,8 @@ font-style: inherit;">300</span>))</span></code></pre></div></div>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -5071,8 +5071,8 @@ font-style: inherit;">300</span>))</span></code></pre></div></div>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -5451,8 +5451,8 @@ font-style: inherit;">300</span>))</span></code></pre></div></div>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -5493,8 +5493,8 @@ font-style: inherit;">300</span>))</span></code></pre></div></div>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -6341,8 +6341,8 @@ font-style: italic;">## [1,] 45.2057 50.16215</span></span></code></pre></div></
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -6408,8 +6408,8 @@ oil_map_spillsize
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -6513,8 +6513,8 @@ plot(LL ~ b1, data=coefFrame)</code></pre>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -7373,8 +7373,8 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -7594,8 +7594,8 @@ font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -7637,8 +7637,8 @@ font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
@@ -7689,8 +7689,8 @@ font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre>
     <div class="navbar-container">
       <a class="header-btn" href="../about/">About</a>
       <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
     </div>
   </section>
 </header>
