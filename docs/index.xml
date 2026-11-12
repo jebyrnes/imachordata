@@ -10,7 +10,1042 @@
 <atom:link href="https://imachordata.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Marine Data Science for All, Regardless of Backbone!</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Sat, 07 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 10 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Categorical Variables in RTMB with Palmer Penguins</title>
+  <dc:creator>Jarrett Byrnes</dc:creator>
+  <link>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</link>
+  <description><![CDATA[ 
+<header class="global-header" style="background-image:url(images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+
+
+
+<p>After looking at <a href="linreg_rtmb.html">linear regressions</a> with the <a href="https://kaskr.r-universe.dev/RTMB">RTMB</a> package, we’re naturally left with the question - whither categorical variables. Whether a model with categorical predictors, a model where coefficients vary by categorical predictors, a model with random effects - variable slopes or variable intercepts - or, really, anything weirder, we need categories! RTMB has got you, though, although you’re going to have to work for it a bit.</p>
+<p>So what’s the answer? Vectors.</p>
+<p>Can we see it in context? OK.</p>
+<p>Will you be using Palmer Penguins again? Heck yeah.</p>
+<div class="cell" data-messages="false">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMB)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># to make our lives easier</span></span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># my base enthusiasm has waned</span></span>
+<span id="cb1-4"></span>
+<span id="cb1-5">penguins_clean <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">na.omit</span>(penguins) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># get rid of NAs</span></span></code></pre></div></div>
+</div>
+<section id="categorical-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-predictors">Categorical Predictors</h2>
+<p>So, let’s consider a model where <code>body_mass ~ species</code>. Simple enough! The answer to what we’re gonna do lies in one version of the model.</p>
+<p>$$ = <em>{j}$$ $$y</em>{ij} (, )$$ Where i is individual i in species j and $_{j}$ is the mean mass of species j. It’s an index! We have three species, so j is 1, 2, or 3! Which we can generate by using factors.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">penguins_clean <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb2-2">  penguins_clean <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">species_idx =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.factor</span>(species) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.numeric</span>())</span>
+<span id="cb2-4"></span>
+<span id="cb2-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># see the matchip</span></span>
+<span id="cb2-6">penguins_clean <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb2-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(species) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb2-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summarize</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">species_idx =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">unique</span>(species_idx))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  species   species_idx
+  &lt;fct&gt;           &lt;dbl&gt;
+1 Adelie              1
+2 Chinstrap           2
+3 Gentoo              3</code></pre>
+</div>
+</div>
+<p>Nice - and in alphabetical order too, so that will make our lives easier later.</p>
+<p><strong>NEVER ASSUME THEY WILL BE IN ORDER - ALWAYS CHECK THIS OR INVOKE SOME STEP TO ORDER OR YOU WILL DO BAD THINGS</strong></p>
+<p>Just sayin’.</p>
+<p>OK, with that info down, we can start by making our list of parameters. The <code>mean_mass</code> value will, instead of being a single number, be a vector of three numbers! We can put in a lot of different start values, but, let’s use the mean of all penguins in the data as a reasonable start.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">m <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_mass)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3">mass_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb4-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_mass =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(m,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),</span>
+<span id="cb4-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_mass))</span>
+<span id="cb4-6">)</span></code></pre></div></div>
+</div>
+<p>From there, we can build a simple objective function. The biggest difference between this and the linear regression is that we are now going to use an index with one of our parameters as it is a vector. Here, it’s just for means. But, you could do this with slopes just as well. I’m also going to use the <code>%~%</code> operator for the likelihood, as, again, I’m a fan.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">mass_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p){</span>
+<span id="cb5-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(penguins_clean, p)</span>
+<span id="cb5-3">  </span>
+<span id="cb5-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># get that SD</span></span>
+<span id="cb5-5">  sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma)</span>
+<span id="cb5-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(sigma)</span>
+<span id="cb5-7">  </span>
+<span id="cb5-8">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># DGP</span></span>
+<span id="cb5-9">  mass_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  mean_mass[species_idx]</span>
+<span id="cb5-10">  </span>
+<span id="cb5-11">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># likelihood</span></span>
+<span id="cb5-12">  body_mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(mass_hat, sigma)</span>
+<span id="cb5-13">}</span></code></pre></div></div>
+</div>
+<p>OK! Model made! Let’s fit it. We’ll make our ADFun and then use <code>nlminb()</code> to fit (<code>optim()</code> doesn’t really like a means model using the defail “Nelder-Mead”, but, see below for an example that does work)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">mass_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(mass_mod,</span>
+<span id="cb6-2">                      mass_params,</span>
+<span id="cb6-3">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb6-4"></span>
+<span id="cb6-5"></span>
+<span id="cb6-6">mass_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(mass_fit, </span>
+<span id="cb6-7">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr)</span>
+<span id="cb6-8">)</span>
+<span id="cb6-9"></span>
+<span id="cb6-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># works</span></span>
+<span id="cb6-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mass_opt &lt;- with(mass_fit,</span></span>
+<span id="cb6-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
+<span id="cb6-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span></code></pre></div></div>
+</div>
+<p>After this, we can use <code>sdreport()</code> to get the relevant info and plot! Although we will have to add the OG species names back</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(mass_fit) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb7-4">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() </span>
+<span id="cb7-5"></span>
+<span id="cb7-6">params</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  parameter estimate std_error
+  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;
+1 mean_mass  3706.     38.0   
+2 mean_mass  3733.     55.6   
+3 mean_mass  5092.     42.1   
+4 logsigma      6.13    0.0387
+5 sigma       459.     17.8   </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># plot!</span></span>
+<span id="cb9-2">params[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>),] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">species =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">levels</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>species)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> species, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> estimate,</span>
+<span id="cb9-5">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> species)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_jitter</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> penguins_clean, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> body_mass)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_linerange</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>std_error,</span>
+<span id="cb9-9">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>std_error),</span>
+<span id="cb9-10">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_manual</span>(</span>
+<span id="cb9-12">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"darkorange"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"purple"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cyan4"</span>),</span>
+<span id="cb9-13">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">guide =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb9-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_bw</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">14</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova_files/figure-html/get_means-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Bazinga!</p>
+</section>
+<section id="random-effects" class="level2">
+<h2 class="anchored" data-anchor-id="random-effects">Random Effects</h2>
+<p>While I don’t love 3 as a number of groups for random effects, it’s enough! We can try it! So, first, what’s the model, as, our model should translate directly into our objective function. Let’s do something simple for <code>body_mass</code></p>
+<p>$$ = <em>{j}$$ $$</em>{j} (, <em>{species})$$ $$y</em>{ij} (, )$$ Here where $$ is the some penguin-level grand mean, and each species mean is drawn from a normal distribution around it. This means that our objective function will have to have a few new parameters - the grand mean and a log sigma for species - and a part where we specify that mean mass is drawn from a normal distribution.</p>
+<p>Yes, you could code this as deviation from the grand mean to make your random effects comparable to, say, <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> output of <code>ranef()</code>, but, if all we’re interested in is looking at the species-level effects, not just the “fixed” effects (I know, that’s a loaded term with a lot of complexity, especially for Ecologists). So, you could code it as deviation, or even have <code>mass_hat</code> be a sum of the fixed effect grand mean and the random effect deviation. Lots of flexibility! Or rope to hang yourself with? You decide! And, remember, some choices can greatly improve model convergence and speed over others. But for the moment…</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">mass_re_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p){</span>
+<span id="cb10-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(penguins_clean, p)</span>
+<span id="cb10-3">  </span>
+<span id="cb10-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># get that SD</span></span>
+<span id="cb10-5">  sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma)</span>
+<span id="cb10-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(sigma)</span>
+<span id="cb10-7">  </span>
+<span id="cb10-8">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RE Sigma</span></span>
+<span id="cb10-9">  sp_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(sp_logsigma)</span>
+<span id="cb10-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(sp_sigma)</span>
+<span id="cb10-11"></span>
+<span id="cb10-12">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RE</span></span>
+<span id="cb10-13">  mean_mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(gmean_mass, sp_sigma)</span>
+<span id="cb10-14">  </span>
+<span id="cb10-15">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># DGP</span></span>
+<span id="cb10-16">  mass_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  mean_mass[species_idx]</span>
+<span id="cb10-17">  </span>
+<span id="cb10-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># likelihood</span></span>
+<span id="cb10-19">  body_mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(mass_hat, sigma)</span>
+<span id="cb10-20">}</span></code></pre></div></div>
+</div>
+<p>This is great. Now, we just need to define our initial parameter list. We can use both the mean of our data as start values for the grand mean and the mean mass of all species, and just use the log of the sd for each logsigma.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">mass_re_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb11-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">gmean_mass =</span> m,</span>
+<span id="cb11-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean_mass =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(m,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),</span>
+<span id="cb11-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_mass)),</span>
+<span id="cb11-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sp_logsigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>body_mass))</span>
+<span id="cb11-6">)</span></code></pre></div></div>
+</div>
+<p>Finally, we can make <code>MakeADFun()</code> and fit. BUT - one new wrinkle. We need to tell it which parameters are random. In this case, <code>mean_mass</code>. Then we’ll fit with <code>nlminb()</code> I’ll throw in a few other examples that work, too.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">mass_re_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(mass_re_mod,</span>
+<span id="cb12-2">                      mass_re_params,</span>
+<span id="cb12-3">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"mean_mass"</span>,</span>
+<span id="cb12-4">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb12-5"></span>
+<span id="cb12-6"></span>
+<span id="cb12-7">mass_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(mass_re_fit, </span>
+<span id="cb12-8">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr)</span>
+<span id="cb12-9">)</span>
+<span id="cb12-10"></span>
+<span id="cb12-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># works</span></span>
+<span id="cb12-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
+<span id="cb12-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
+<span id="cb12-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span>
+<span id="cb12-15"></span>
+<span id="cb12-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># works - try other methods as well</span></span>
+<span id="cb12-17"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
+<span id="cb12-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
+<span id="cb12-19"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span>
+<span id="cb12-20"></span>
+<span id="cb12-21"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># works with warning</span></span>
+<span id="cb12-22"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mass_opt &lt;- with(mass_re_fit,</span></span>
+<span id="cb12-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#      optimx::opm(par, fn, gr, method = "L-BFGS-B")</span></span>
+<span id="cb12-24"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span>
+<span id="cb12-25"></span>
+<span id="cb12-26"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># works - but gradient free</span></span>
+<span id="cb12-27"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># also work looking at the nlmixr2 package and the</span></span>
+<span id="cb12-28"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># </span></span>
+<span id="cb12-29"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
+<span id="cb12-30"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#      minqa::bobyqa(par, fn)</span></span>
+<span id="cb12-31"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># )</span></span></code></pre></div></div>
+</div>
+<p>How did it do? Compare to lme4</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">mass_re_fit <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>()</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               Estimate   Std. Error
+gmean_mass  4207.055989 374.98360021
+logsigma       6.132951   0.03892482
+sp_logsigma    6.471637   0.41098704
+mean_mass   3707.900998  38.11532151
+mean_mass   3736.602453  55.80660586
+mean_mass   5088.673802  42.30186928
+sigma        460.794033  17.93632394
+sp_sigma     646.541545 265.72019710</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lme4)</span>
+<span id="cb15-2">mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lmer</span>(body_mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> (<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|</span>species), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> penguins_clean)</span>
+<span id="cb15-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">coef</span>(mod)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>species</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          (Intercept)
+Adelie       3707.256
+Chinstrap    3735.292
+Gentoo       5089.839</code></pre>
+</div>
+</div>
+<p>Not bad! Now, we would need ot do the cleanup work to get the values assigned to a species and such, but, we’re doing good!</p>
+</section>
+<section id="separate-slopes" class="level2">
+<h2 class="anchored" data-anchor-id="separate-slopes">Separate Slopes</h2>
+<p>OK, we’ve looked at means a lot. Let’s finish up with separate lines for separate species. Last time we looked at a simple linear regression and how body mass predicts bill length. Using our indexing logic above, the only change we would need to make to that model is to add in a species specific slope and intercept - so, change our initial parameters from single variables to vectors, and do some indexing in the function.</p>
+<p>So, here is the original linear regression:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">linreg <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p){</span>
+<span id="cb17-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(penguins_clean, p) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># so we can stop using $</span></span>
+<span id="cb17-3">  </span>
+<span id="cb17-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># a transformed parameter</span></span>
+<span id="cb17-5">  sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma)</span>
+<span id="cb17-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(sigma) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#so we can see it later</span></span>
+<span id="cb17-7">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#REPORT(sigma) #for simulation</span></span>
+<span id="cb17-8">  </span>
+<span id="cb17-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># What are we observing for later sims</span></span>
+<span id="cb17-10">  bill_len <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(bill_len)</span>
+<span id="cb17-11">  </span>
+<span id="cb17-12">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># model for DGP and output those fitted values</span></span>
+<span id="cb17-13">  bill_len_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> intercept <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> body_mass_slope <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> body_mass</span>
+<span id="cb17-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(bill_len_hat)</span>
+<span id="cb17-15">  </span>
+<span id="cb17-16">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># EGP</span></span>
+<span id="cb17-17">  bill_len <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(, </span>
+<span id="cb17-18">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> bill_len_hat, </span>
+<span id="cb17-19">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma))</span>
+<span id="cb17-20"></span>
+<span id="cb17-21">}</span></code></pre></div></div>
+</div>
+<p>Let’s add that indexing to make an categorical-continuous model with variable slopes. Note - I’ll leave it to you to ponder how this would work as a mixed model given the above. It’s not that different!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">varslope_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p){</span>
+<span id="cb18-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(penguins_clean, p) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># so we can stop using $</span></span>
+<span id="cb18-3">  </span>
+<span id="cb18-4">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># a transformed parameter</span></span>
+<span id="cb18-5">  sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma)</span>
+<span id="cb18-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(sigma) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#so we can see it later</span></span>
+<span id="cb18-7">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#REPORT(sigma) #for simulation</span></span>
+<span id="cb18-8">  </span>
+<span id="cb18-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># What are we observing for later sims</span></span>
+<span id="cb18-10">  bill_len <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(bill_len)</span>
+<span id="cb18-11">  </span>
+<span id="cb18-12">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># model for DGP and output those fitted values</span></span>
+<span id="cb18-13">  bill_len_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> intercept[species_idx] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb18-14">    body_mass_slope[species_idx] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> body_mass</span>
+<span id="cb18-15">  </span>
+<span id="cb18-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(bill_len_hat)</span>
+<span id="cb18-17">  </span>
+<span id="cb18-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># EGP</span></span>
+<span id="cb18-19">  bill_len <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mean =</span> bill_len_hat, </span>
+<span id="cb18-20">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(logsigma))</span>
+<span id="cb18-21"></span>
+<span id="cb18-22">}</span></code></pre></div></div>
+</div>
+<p>That’s it! Now we just need to make start parameters - as a vector - and fit.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">varslope_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">intercept =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),    </span>
+<span id="cb19-2">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">body_mass_slope =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),</span>
+<span id="cb19-3">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bill_len))) </span>
+<span id="cb19-4"></span>
+<span id="cb19-5"></span>
+<span id="cb19-6">varslope_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(varslope_mod, </span>
+<span id="cb19-7">                        varslope_params, </span>
+<span id="cb19-8">                        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb19-9"></span>
+<span id="cb19-10">varslope_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(varslope_fit,</span>
+<span id="cb19-11">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span></code></pre></div></div>
+</div>
+<p>Now, we could look at the summary of the sdreport to get coefficients, etc. But, let’s just end in a plot. Because re reported out the fit values, and they are in the order of our data, we can do a little dplyr magic to merge it back with the original data and make a nice plot!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">predictions <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> varslope_fit <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bill_len_hat"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-6">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>parameter) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-8">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ci_low =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>std_error,</span>
+<span id="cb20-9">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ci_high =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>std_error)</span>
+<span id="cb20-10"></span>
+<span id="cb20-11">penguins_clean_pred <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bind_cols</span>(penguins_clean, </span>
+<span id="cb20-12">                                 predictions)</span>
+<span id="cb20-13"></span>
+<span id="cb20-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(penguins_clean_pred,</span>
+<span id="cb20-15">       <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> body_mass, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> species)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> bill_len)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_ribbon</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> estimate,</span>
+<span id="cb20-18">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> ci_low,</span>
+<span id="cb20-19">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> ci_high,</span>
+<span id="cb20-20">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> species),</span>
+<span id="cb20-21">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey"</span>, </span>
+<span id="cb20-22">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, </span>
+<span id="cb20-23">              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-24">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> estimate, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">group =</span> species), </span>
+<span id="cb20-25">            <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-26">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_color_manual</span>(</span>
+<span id="cb20-27">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"darkorange"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"purple"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cyan4"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb20-28">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_bw</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">14</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="well-that-was-wild.-why-did-i-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="well-that-was-wild.-why-did-i-do-this">Well that was wild. Why did I do this?</h2>
+<p>Again, for simple standard stuff, meh. For more complex models, this can get you in the guts. Heck, even for simple stuff, this can REALLY make you think about what you are doing and why. VERY useful. Particularly as a teaching tool.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>statistics</category>
+  <guid>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</guid>
+  <pubDate>Tue, 10 Nov 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Exploring RTMB with Palmer Penguins: Linear Regression</title>
   <dc:creator>Jarrett Byrnes</dc:creator>
@@ -1412,9 +2447,9 @@ Kristensen, Kasper, Anders Nielsen, Christoffer Moesgaard Albertsen, Casper Will
   <pubDate>Sat, 07 Nov 2026 05:00:00 GMT</pubDate>
 </item>
 <item>
-  <title>Categorical Variables in RTMB with Palmer Penguins</title>
+  <title>Modelbased for Quick and Beautiful Model Visualization</title>
   <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</link>
+  <link>https://imachordata.com/posts/20250725_modelbased-for-quick-and-beautiful-model-visualization.html</link>
   <description><![CDATA[ 
 <header class="global-header" style="background-image:url(images/bg.jpg)">
   <section class="header-text">
@@ -1425,1041 +2460,6 @@ Kristensen, Kasper, Anders Nielsen, Christoffer Moesgaard Albertsen, Casper Will
       <a class="header-btn" href="../categories/">Categories</a>
       <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
       <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
-    </div>
-  </section>
-</header>
-<script>
-/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
-(function () {
-  var h = document.querySelector('header.global-header');
-  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
-})();
-</script>
-
-
-
-
-<p>After looking at <a href="linreg_rtmb.html">linear regressions</a> with the <a href="https://kaskr.r-universe.dev/RTMB">RTMB</a> package, we’re naturally left with the question - whither categorical variables. Whether a model with categorical predictors, a model where coefficients vary by categorical predictors, a model with random effects - variable slopes or variable intercepts - or, really, anything weirder, we need categories! RTMB has got you, though, although you’re going to have to work for it a bit.</p>
-<p>So what’s the answer? Vectors.</p>
-<p>Can we see it in context? OK.</p>
-<p>Will you be using Palmer Penguins again? Heck yeah.</p>
-<div class="cell" data-messages="false">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(RTMB)</span>
-<span id="cb1-2"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(dplyr) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># to make our lives easier</span></span>
-<span id="cb1-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(ggplot2) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># my base enthusiasm has waned</span></span>
-<span id="cb1-4"></span>
-<span id="cb1-5">penguins_clean <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">na.omit</span>(penguins) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># get rid of NAs</span></span></code></pre></div></div>
-</div>
-<section id="categorical-predictors" class="level2">
-<h2 class="anchored" data-anchor-id="categorical-predictors">Categorical Predictors</h2>
-<p>So, let’s consider a model where <code>body_mass ~ species</code>. Simple enough! The answer to what we’re gonna do lies in one version of the model.</p>
-<p>$$ = <em>{j}$$ $$y</em>{ij} (, )$$ Where i is individual i in species j and $_{j}$ is the mean mass of species j. It’s an index! We have three species, so j is 1, 2, or 3! Which we can generate by using factors.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">penguins_clean <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> </span>
-<span id="cb2-2">  penguins_clean <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb2-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">species_idx =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.factor</span>(species) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as.numeric</span>())</span>
-<span id="cb2-4"></span>
-<span id="cb2-5"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># see the matchip</span></span>
-<span id="cb2-6">penguins_clean <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span> </span>
-<span id="cb2-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">group_by</span>(species) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb2-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summarize</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">species_idx =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">unique</span>(species_idx))</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  species   species_idx
-  &lt;fct&gt;           &lt;dbl&gt;
-1 Adelie              1
-2 Chinstrap           2
-3 Gentoo              3</code></pre>
-</div>
-</div>
-<p>Nice - and in alphabetical order too, so that will make our lives easier later.</p>
-<p><strong>NEVER ASSUME THEY WILL BE IN ORDER - ALWAYS CHECK THIS OR INVOKE SOME STEP TO ORDER OR YOU WILL DO BAD THINGS</strong></p>
-<p>Just sayin’.</p>
-<p>OK, with that info down, we can start by making our list of parameters. The <code>mean_mass</code> value will, instead of being a single number, be a vector of three numbers! We can put in a lot of different start values, but, let’s use the mean of all penguins in the data as a reasonable start.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">m <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mean</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>body_mass)</span>
-<span id="cb4-2"></span>
-<span id="cb4-3">mass_params <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(</span>
-<span id="cb4-4">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean_mass =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(m,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>),</span>
-<span id="cb4-5">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>body_mass))</span>
-<span id="cb4-6">)</span></code></pre></div></div>
-</div>
-<p>From there, we can build a simple objective function. The biggest difference between this and the linear regression is that we are now going to use an index with one of our parameters as it is a vector. Here, it’s just for means. But, you could do this with slopes just as well. I’m also going to use the <code>%~%</code> operator for the likelihood, as, again, I’m a fan.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">mass_mod <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(p){</span>
-<span id="cb5-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getAll</span>(penguins_clean, p)</span>
-<span id="cb5-3">  </span>
-<span id="cb5-4">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># get that SD</span></span>
-<span id="cb5-5">  sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma)</span>
-<span id="cb5-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(sigma)</span>
-<span id="cb5-7">  </span>
-<span id="cb5-8">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># DGP</span></span>
-<span id="cb5-9">  mass_hat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span>  mean_mass[species_idx]</span>
-<span id="cb5-10">  </span>
-<span id="cb5-11">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># likelihood</span></span>
-<span id="cb5-12">  body_mass <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dnorm</span>(mass_hat, sigma)</span>
-<span id="cb5-13">}</span></code></pre></div></div>
-</div>
-<p>OK! Model made! Let’s fit it. We’ll make our ADFun and then use <code>nlminb()</code> to fit (<code>optim()</code> doesn’t really like a means model using the defail “Nelder-Mead”, but, see below for an example that does work)</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">mass_fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">MakeADFun</span>(mass_mod,</span>
-<span id="cb6-2">                      mass_params,</span>
-<span id="cb6-3">                      <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb6-4"></span>
-<span id="cb6-5"></span>
-<span id="cb6-6">mass_opt <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(mass_fit, </span>
-<span id="cb6-7">     <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nlminb</span>(par, fn, gr)</span>
-<span id="cb6-8">)</span>
-<span id="cb6-9"></span>
-<span id="cb6-10"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># works</span></span>
-<span id="cb6-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mass_opt &lt;- with(mass_fit,</span></span>
-<span id="cb6-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
-<span id="cb6-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># )</span></span></code></pre></div></div>
-</div>
-<p>After this, we can use <code>sdreport()</code> to get the relevant info and plot! Although we will have to add the OG species names back</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1">params <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sdreport</span>(mass_fit) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb7-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb7-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb7-4">  janitor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">clean_names</span>() </span>
-<span id="cb7-5"></span>
-<span id="cb7-6">params</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 3
-  parameter estimate std_error
-  &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;
-1 mean_mass  3706.     38.0   
-2 mean_mass  3733.     55.6   
-3 mean_mass  5092.     42.1   
-4 logsigma      6.13    0.0387
-5 sigma       459.     17.8   </code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># plot!</span></span>
-<span id="cb9-2">params[<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">4</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">5</span>),] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb9-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">species =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">levels</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>species)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb9-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> species, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> estimate,</span>
-<span id="cb9-5">             <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> species)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_jitter</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> penguins_clean, <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> body_mass)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">2</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_linerange</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymin =</span> estimate <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>std_error,</span>
-<span id="cb9-9">                     <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymax =</span> estimate <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>std_error),</span>
-<span id="cb9-10">                 <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-11">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_color_manual</span>(</span>
-<span id="cb9-12">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"darkorange"</span>,<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"purple"</span>,<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cyan4"</span>),</span>
-<span id="cb9-13">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">guide =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb9-14">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_bw</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">14</span>)</span></code></pre></div></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova_files/figure-html/get_means-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Bazinga!</p>
-</section>
-<section id="random-effects" class="level2">
-<h2 class="anchored" data-anchor-id="random-effects">Random Effects</h2>
-<p>While I don’t love 3 as a number of groups for random effects, it’s enough! We can try it! So, first, what’s the model, as, our model should translate directly into our objective function. Let’s do something simple for <code>body_mass</code></p>
-<p>$$ = <em>{j}$$ $$</em>{j} (, <em>{species})$$ $$y</em>{ij} (, )$$ Here where $$ is the some penguin-level grand mean, and each species mean is drawn from a normal distribution around it. This means that our objective function will have to have a few new parameters - the grand mean and a log sigma for species - and a part where we specify that mean mass is drawn from a normal distribution.</p>
-<p>Yes, you could code this as deviation from the grand mean to make your random effects comparable to, say, <a href="https://cran.r-project.org/web/packages/lme4/index.html">lme4</a> output of <code>ranef()</code>, but, if all we’re interested in is looking at the species-level effects, not just the “fixed” effects (I know, that’s a loaded term with a lot of complexity, especially for Ecologists). So, you could code it as deviation, or even have <code>mass_hat</code> be a sum of the fixed effect grand mean and the random effect deviation. Lots of flexibility! Or rope to hang yourself with? You decide! And, remember, some choices can greatly improve model convergence and speed over others. But for the moment…</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">mass_re_mod <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(p){</span>
-<span id="cb10-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getAll</span>(penguins_clean, p)</span>
-<span id="cb10-3">  </span>
-<span id="cb10-4">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># get that SD</span></span>
-<span id="cb10-5">  sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma)</span>
-<span id="cb10-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(sigma)</span>
-<span id="cb10-7">  </span>
-<span id="cb10-8">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># RE Sigma</span></span>
-<span id="cb10-9">  sp_sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(sp_logsigma)</span>
-<span id="cb10-10">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(sp_sigma)</span>
-<span id="cb10-11"></span>
-<span id="cb10-12">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># RE</span></span>
-<span id="cb10-13">  mean_mass <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dnorm</span>(gmean_mass, sp_sigma)</span>
-<span id="cb10-14">  </span>
-<span id="cb10-15">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># DGP</span></span>
-<span id="cb10-16">  mass_hat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span>  mean_mass[species_idx]</span>
-<span id="cb10-17">  </span>
-<span id="cb10-18">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># likelihood</span></span>
-<span id="cb10-19">  body_mass <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dnorm</span>(mass_hat, sigma)</span>
-<span id="cb10-20">}</span></code></pre></div></div>
-</div>
-<p>This is great. Now, we just need to define our initial parameter list. We can use both the mean of our data as start values for the grand mean and the mean mass of all species, and just use the log of the sd for each logsigma.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">mass_re_params <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(</span>
-<span id="cb11-2">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">gmean_mass =</span> m,</span>
-<span id="cb11-3">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean_mass =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(m,<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>),</span>
-<span id="cb11-4">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>body_mass)),</span>
-<span id="cb11-5">  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sp_logsigma =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>body_mass))</span>
-<span id="cb11-6">)</span></code></pre></div></div>
-</div>
-<p>Finally, we can make <code>MakeADFun()</code> and fit. BUT - one new wrinkle. We need to tell it which parameters are random. In this case, <code>mean_mass</code>. Then we’ll fit with <code>nlminb()</code> I’ll throw in a few other examples that work, too.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1">mass_re_fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">MakeADFun</span>(mass_re_mod,</span>
-<span id="cb12-2">                      mass_re_params,</span>
-<span id="cb12-3">                      <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"mean_mass"</span>,</span>
-<span id="cb12-4">                      <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb12-5"></span>
-<span id="cb12-6"></span>
-<span id="cb12-7">mass_opt <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(mass_re_fit, </span>
-<span id="cb12-8">     <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nlminb</span>(par, fn, gr)</span>
-<span id="cb12-9">)</span>
-<span id="cb12-10"></span>
-<span id="cb12-11"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># works</span></span>
-<span id="cb12-12"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
-<span id="cb12-13"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
-<span id="cb12-14"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># )</span></span>
-<span id="cb12-15"></span>
-<span id="cb12-16"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># works - try other methods as well</span></span>
-<span id="cb12-17"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
-<span id="cb12-18"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#      optim(par, fn, gr, method = "L-BFGS-B")</span></span>
-<span id="cb12-19"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># )</span></span>
-<span id="cb12-20"></span>
-<span id="cb12-21"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># works with warning</span></span>
-<span id="cb12-22"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mass_opt &lt;- with(mass_re_fit,</span></span>
-<span id="cb12-23"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#      optimx::opm(par, fn, gr, method = "L-BFGS-B")</span></span>
-<span id="cb12-24"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># )</span></span>
-<span id="cb12-25"></span>
-<span id="cb12-26"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># works - but gradient free</span></span>
-<span id="cb12-27"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># also work looking at the nlmixr2 package and the</span></span>
-<span id="cb12-28"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># </span></span>
-<span id="cb12-29"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># mass_opt &lt;- with(mass_re_fit, </span></span>
-<span id="cb12-30"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#      minqa::bobyqa(par, fn)</span></span>
-<span id="cb12-31"><span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># )</span></span></code></pre></div></div>
-</div>
-<p>How did it do? Compare to lme4</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">mass_re_fit <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb13-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sdreport</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb13-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>()</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>               Estimate   Std. Error
-gmean_mass  4207.055989 374.98360021
-logsigma       6.132951   0.03892482
-sp_logsigma    6.471637   0.41098704
-mean_mass   3707.900998  38.11532151
-mean_mass   3736.602453  55.80660586
-mean_mass   5088.673802  42.30186928
-sigma        460.794033  17.93632394
-sp_sigma     646.541545 265.72019710</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(lme4)</span>
-<span id="cb15-2">mod <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">lmer</span>(body_mass <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">~</span> (<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|</span>species), <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">data =</span> penguins_clean)</span>
-<span id="cb15-3"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">coef</span>(mod)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>species</span></code></pre></div></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          (Intercept)
-Adelie       3707.256
-Chinstrap    3735.292
-Gentoo       5089.839</code></pre>
-</div>
-</div>
-<p>Not bad! Now, we would need ot do the cleanup work to get the values assigned to a species and such, but, we’re doing good!</p>
-</section>
-<section id="separate-slopes" class="level2">
-<h2 class="anchored" data-anchor-id="separate-slopes">Separate Slopes</h2>
-<p>OK, we’ve looked at means a lot. Let’s finish up with separate lines for separate species. Last time we looked at a simple linear regression and how body mass predicts bill length. Using our indexing logic above, the only change we would need to make to that model is to add in a species specific slope and intercept - so, change our initial parameters from single variables to vectors, and do some indexing in the function.</p>
-<p>So, here is the original linear regression:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1">linreg <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(p){</span>
-<span id="cb17-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getAll</span>(penguins_clean, p) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># so we can stop using $</span></span>
-<span id="cb17-3">  </span>
-<span id="cb17-4">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># a transformed parameter</span></span>
-<span id="cb17-5">  sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma)</span>
-<span id="cb17-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(sigma) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#so we can see it later</span></span>
-<span id="cb17-7">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#REPORT(sigma) #for simulation</span></span>
-<span id="cb17-8">  </span>
-<span id="cb17-9">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># What are we observing for later sims</span></span>
-<span id="cb17-10">  bill_len <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">OBS</span>(bill_len)</span>
-<span id="cb17-11">  </span>
-<span id="cb17-12">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># model for DGP and output those fitted values</span></span>
-<span id="cb17-13">  bill_len_hat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> intercept <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> body_mass_slope <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> body_mass</span>
-<span id="cb17-14">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(bill_len_hat)</span>
-<span id="cb17-15">  </span>
-<span id="cb17-16">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># EGP</span></span>
-<span id="cb17-17">  bill_len <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dnorm</span>(, </span>
-<span id="cb17-18">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> bill_len_hat, </span>
-<span id="cb17-19">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma))</span>
-<span id="cb17-20"></span>
-<span id="cb17-21">}</span></code></pre></div></div>
-</div>
-<p>Let’s add that indexing to make an categorical-continuous model with variable slopes. Note - I’ll leave it to you to ponder how this would work as a mixed model given the above. It’s not that different!</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">varslope_mod <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">function</span>(p){</span>
-<span id="cb18-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">getAll</span>(penguins_clean, p) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># so we can stop using $</span></span>
-<span id="cb18-3">  </span>
-<span id="cb18-4">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># a transformed parameter</span></span>
-<span id="cb18-5">  sigma <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma)</span>
-<span id="cb18-6">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(sigma) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#so we can see it later</span></span>
-<span id="cb18-7">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">#REPORT(sigma) #for simulation</span></span>
-<span id="cb18-8">  </span>
-<span id="cb18-9">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># What are we observing for later sims</span></span>
-<span id="cb18-10">  bill_len <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">OBS</span>(bill_len)</span>
-<span id="cb18-11">  </span>
-<span id="cb18-12">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># model for DGP and output those fitted values</span></span>
-<span id="cb18-13">  bill_len_hat <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> intercept[species_idx] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> </span>
-<span id="cb18-14">    body_mass_slope[species_idx] <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span> body_mass</span>
-<span id="cb18-15">  </span>
-<span id="cb18-16">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ADREPORT</span>(bill_len_hat)</span>
-<span id="cb18-17">  </span>
-<span id="cb18-18">  <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;"># EGP</span></span>
-<span id="cb18-19">  bill_len <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">dnorm</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">mean =</span> bill_len_hat, </span>
-<span id="cb18-20">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">sd =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">exp</span>(logsigma))</span>
-<span id="cb18-21"></span>
-<span id="cb18-22">}</span></code></pre></div></div>
-</div>
-<p>That’s it! Now we just need to make start parameters - as a vector - and fit.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">varslope_params <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">intercept =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>),    </span>
-<span id="cb19-2">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">body_mass_slope =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">3</span>),</span>
-<span id="cb19-3">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">logsigma =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sd</span>(penguins_clean<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">$</span>bill_len))) </span>
-<span id="cb19-4"></span>
-<span id="cb19-5"></span>
-<span id="cb19-6">varslope_fit <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">MakeADFun</span>(varslope_mod, </span>
-<span id="cb19-7">                        varslope_params, </span>
-<span id="cb19-8">                        <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">TRUE</span>)</span>
-<span id="cb19-9"></span>
-<span id="cb19-10">varslope_opt <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">with</span>(varslope_fit,</span>
-<span id="cb19-11">     <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">nlminb</span>(par, fn, gr))</span></code></pre></div></div>
-</div>
-<p>Now, we could look at the summary of the sdreport to get coefficients, etc. But, let’s just end in a plot. Because re reported out the fit values, and they are in the order of our data, we can do a little dplyr magic to merge it back with the original data and make a nice plot!</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">predictions <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> varslope_fit <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-2">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">sdreport</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-3">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-4">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">==</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"bill_len_hat"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-6">  janitor<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-7">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span>parameter) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb20-8">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ci_low =</span> estimate <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">-</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>std_error,</span>
-<span id="cb20-9">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ci_high =</span> estimate <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1.96</span><span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">*</span>std_error)</span>
-<span id="cb20-10"></span>
-<span id="cb20-11">penguins_clean_pred <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">bind_cols</span>(penguins_clean, </span>
-<span id="cb20-12">                                 predictions)</span>
-<span id="cb20-13"></span>
-<span id="cb20-14"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">ggplot</span>(penguins_clean_pred,</span>
-<span id="cb20-15">       <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">x =</span> body_mass, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> species)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb20-16">    <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_point</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> bill_len)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb20-17">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_ribbon</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> estimate,</span>
-<span id="cb20-18">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymin =</span> ci_low,</span>
-<span id="cb20-19">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">ymax =</span> ci_high,</span>
-<span id="cb20-20">                  <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> species),</span>
-<span id="cb20-21">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"grey"</span>, </span>
-<span id="cb20-22">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="cn" style="color: #8f5902;
-background-color: null;
-font-style: inherit;">NA</span>, </span>
-<span id="cb20-23">              <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">alpha =</span> <span class="fl" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0.7</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb20-24">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">geom_line</span>(<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">y =</span> estimate, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">group =</span> species), </span>
-<span id="cb20-25">            <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">color =</span> <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"black"</span>)<span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb20-26">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale_color_manual</span>(</span>
-<span id="cb20-27">    <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"darkorange"</span>,<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"purple"</span>,<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"cyan4"</span>)) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">+</span></span>
-<span id="cb20-28">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">theme_bw</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">14</span>)</span></code></pre></div></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="well-that-was-wild.-why-did-i-do-this" class="level2">
-<h2 class="anchored" data-anchor-id="well-that-was-wild.-why-did-i-do-this">Well that was wild. Why did I do this?</h2>
-<p>Again, for simple standard stuff, meh. For more complex models, this can get you in the guts. Heck, even for simple stuff, this can REALLY make you think about what you are doing and why. VERY useful. Particularly as a teaching tool.</p>
-
-
-</section>
-
- ]]></description>
-  <category>R</category>
-  <category>statistics</category>
-  <guid>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</guid>
-  <pubDate>Wed, 30 Sep 2026 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Modelbased for Quick and Beautiful Model Visualization</title>
-  <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20250725_modelbased-for-quick-and-beautiful-model-visualization.html</link>
-  <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
-  <section class="header-text">
-    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
-    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
-    <div class="navbar-container">
-      <a class="header-btn" href="../about/">About</a>
-      <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://twitter.com/jebyrnes">Twitter</a>
-      <a class="header-btn" href="https://byrneslab.net">Lab Site</a>
     </div>
   </section>
 </header>

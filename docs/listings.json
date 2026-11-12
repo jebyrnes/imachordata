@@ -2,8 +2,8 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/20261107_exploring_rtmb_linear_regression.html",
       "/posts/20261110_exploring_rtmb_categorical_anova.html",
+      "/posts/20261107_exploring_rtmb_linear_regression.html",
       "/posts/20250725_modelbased-for-quick-and-beautiful-model-visualization.html",
       "/posts/20221119_two-weeks-of-mastodon.html",
       "/posts/20211128_tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse.html",

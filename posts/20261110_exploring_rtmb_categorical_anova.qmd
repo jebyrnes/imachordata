@@ -1,9 +1,7 @@
 ---
 title: "Categorical Variables in RTMB with Palmer Penguins"
-
-    
 author: "Jarrett Byrnes"
-date: '2026-11-00'
+date: '2026-11-10'
 bibliography: "../references.bib"
 warning: false
 
