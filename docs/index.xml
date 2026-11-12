@@ -1354,12 +1354,12 @@ font-style: inherit;">checkConsistency</span>(linreg_obj)</span></code></pre></d
    27.150733601     0.004003285     1.484095254 
 
 Test correct simulation (p.value):
-[1] 0.4056133
+[1] 0.9463342
 Simulation appears to be correct
 
 Estimated parameter bias:
       intercept body_mass_slope        logsigma 
-  -9.598438e-02    2.425398e-05    6.041408e-03 </code></pre>
+   0.0724317864   -0.0000175987    0.0003841974 </code></pre>
 </div>
 </div>
 <p>What about model assumptions? To look at that, we want residuals, which we get via <code>oneStepPredict()</code>.</p>
@@ -1735,12 +1735,12 @@ font-style: inherit;">head</span>(sim_frame)</span></code></pre></div></div>
 <pre><code># A tibble: 6 × 5
   body_mass bill_len_fit bill_len_raw lower_pi upper_pi
       &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1      2700         38.0         46.9     29.8     46.3
-2      2850         38.6         36.5     30.1     47.9
-3      2850         38.6         36.4     30.1     47.4
-4      2900         38.8         34.5     29.4     47.2
-5      2900         38.8         33.1     30.4     48.0
-6      2900         38.8         38.6     30.0     47.0</code></pre>
+1      2700         38.0         46.9     30.1     46.5
+2      2850         38.6         36.5     29.8     47.1
+3      2850         38.6         36.4     30.2     47.2
+4      2900         38.8         34.5     30.2     47.2
+5      2900         38.8         33.1     29.7     47.6
+6      2900         38.8         38.6     29.7     47.1</code></pre>
 </div>
 </div>
 <p>Fantastic. Now the plot</p>
