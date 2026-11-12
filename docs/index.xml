@@ -3003,7 +3003,7 @@ font-style: inherit;">"point"</span>))</span></code></pre></div></div>
   <dc:creator>Jarrett Byrnes</dc:creator>
   <link>https://imachordata.com/posts/20211128_tidyeval-dynamic-evaluation-for-writing-functions-in-the-tidyverse.html</link>
   <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
+<header class="global-header" style="background-image:url(images/bg.jpg)">
   <section class="header-text">
     <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
     <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>

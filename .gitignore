@@ -4,3 +4,4 @@ ancillary
 .Rhistory
 /.quarto/
 **/*.quarto_ipynb
+_conversion.md
