@@ -9,6 +9,8 @@ warning: false
 categories:
 - R
 - statistics
+- RTMB
+
 keywords:
 - R
 - RTMB

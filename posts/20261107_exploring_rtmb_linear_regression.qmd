@@ -10,6 +10,8 @@ toc: true
 categories:
 - R
 - statistics
+- RTMB
+
 keywords:
 - R
 - RTMB

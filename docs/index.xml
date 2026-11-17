@@ -10,7 +10,1343 @@
 <atom:link href="https://imachordata.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Marine Data Science for All, Regardless of Backbone!</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Tue, 10 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 17 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Latent Variables and Confirmatory Factor Analysis in RTMB</title>
+  <dc:creator>Jarrett Byrnes</dc:creator>
+  <link>https://imachordata.com/posts/20261110_rtmb_latent_cfa.html</link>
+  <description><![CDATA[ 
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+
+
+
+<p>In previous posts, I mentioned that one reason to use the <a href="https://kaskr.r-universe.dev/RTMB">RTMB</a> package is for more complex models. Latent variables are an excellent case! I use them all the time doing Structural Equation Modeling with <a href="https://www.lavaan.ugent.be/">lavaan</a>, but often want to be free of the covariance-based approach for reasons of non-linearities and non-normality. Jon Lefcheck’s <a href="https://jslefche.github.io/piecewiseSEM/">piecewiseSEM</a> is a great solution, integrating together many modeling frameworks and packages in one place, but, it doesn’t implement latent variables for a variety of reasons. It’s a hard problem! You can deal with it Bayes - even with <a href="https://jebyrnes.github.io/bayesian_sem/bayesian_sem.html">brms</a>. But, some folk might not want to go all the way to <em>Full Luxury Bayesian Structural Equation Modeling</em>.</p>
+<p>RTMB, however, presents a great way forward. And not only does it allow one to do a basic SEM, but with latent variables, you can do things like Integrated Modeling, where you have different data sources with different types of information all of which reflect one underlying phenomenon as used in fisheries modeling.</p>
+<p>Let’s build up to an SEM with a nice data set looking at how distance from source site affects cordgrass (<em>Spartina</em>) transplant success that I’ve used for other teaching projects based on data from <a href="https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/08-1443.1">Travis and Grace 2010</a>.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 471.79 152.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-148 467.79,-148 467.79,4 -4,4"></polygon>
+<!-- performance -->
+<g id="node1" class="node">
+<title>performance</title>
+<ellipse fill="none" stroke="black" cx="184.18" cy="-72" rx="65.5" ry="18"></ellipse>
+<text text-anchor="middle" x="184.18" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">performance</text>
+</g>
+<!-- clonediam -->
+<g id="node4" class="node">
+<title>clonediam</title>
+<polygon fill="none" stroke="black" points="369.42,-144 289.79,-144 289.79,-108 369.42,-108 369.42,-144"></polygon>
+<text text-anchor="middle" x="329.61" y="-121.8" font-family="Helvetica,sans-Serif" font-size="14.00">clonediam</text>
+</g>
+<!-- performance&#45;&gt;clonediam -->
+<g id="edge2" class="edge">
+<title>performance-&gt;clonediam</title>
+<path fill="none" stroke="black" d="M223.61,-86.47C241,-93.02 261.73,-100.82 280.17,-107.76"></path>
+<polygon fill="black" stroke="black" points="278.97,-111.05 289.57,-111.3 281.44,-104.5 278.97,-111.05"></polygon>
+</g>
+<!-- numbstems -->
+<g id="node5" class="node">
+<title>numbstems</title>
+<polygon fill="none" stroke="black" points="373.97,-90 285.25,-90 285.25,-54 373.97,-54 373.97,-90"></polygon>
+<text text-anchor="middle" x="329.61" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">numbstems</text>
+</g>
+<!-- performance&#45;&gt;numbstems -->
+<g id="edge3" class="edge">
+<title>performance-&gt;numbstems</title>
+<path fill="none" stroke="black" d="M249.76,-72C258.23,-72 266.83,-72 275.09,-72"></path>
+<polygon fill="black" stroke="black" points="275.33,-75.5 285.33,-72 275.33,-68.5 275.33,-75.5"></polygon>
+</g>
+<!-- numbinfl -->
+<g id="node6" class="node">
+<title>numbinfl</title>
+<polygon fill="none" stroke="black" points="364.02,-36 295.19,-36 295.19,0 364.02,0 364.02,-36"></polygon>
+<text text-anchor="middle" x="329.61" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">numbinfl</text>
+</g>
+<!-- performance&#45;&gt;numbinfl -->
+<g id="edge4" class="edge">
+<title>performance-&gt;numbinfl</title>
+<path fill="none" stroke="black" d="M223.61,-57.53C242.73,-50.33 265.89,-41.61 285.59,-34.2"></path>
+<polygon fill="black" stroke="black" points="286.83,-37.47 294.95,-30.67 284.36,-30.92 286.83,-37.47"></polygon>
+</g>
+<!-- s -->
+<g id="node2" class="node">
+<title>s</title>
+<text text-anchor="start" x="37.58" y="-121.8" font-family="Helvetica,sans-Serif" font-size="14.00">σ</text>
+</g>
+<!-- s&#45;&gt;performance -->
+<g id="edge11" class="edge">
+<title>s-&gt;performance</title>
+<path fill="none" stroke="black" d="M68.6,-115.97C87.45,-108.74 113.41,-98.77 135.86,-90.16"></path>
+<polygon fill="black" stroke="black" points="137.15,-93.41 145.24,-86.56 134.65,-86.88 137.15,-93.41"></polygon>
+</g>
+<!-- geneticdist -->
+<g id="node3" class="node">
+<title>geneticdist</title>
+<polygon fill="none" stroke="black" points="82.9,-90 0.03,-90 0.03,-54 82.9,-54 82.9,-90"></polygon>
+<text text-anchor="middle" x="41.47" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">geneticdist</text>
+</g>
+<!-- geneticdist&#45;&gt;performance -->
+<g id="edge1" class="edge">
+<title>geneticdist-&gt;performance</title>
+<path fill="none" stroke="black" d="M83.17,-72C91.16,-72 99.78,-72 108.48,-72"></path>
+<polygon fill="black" stroke="black" points="108.71,-75.5 118.71,-72 108.71,-68.5 108.71,-75.5"></polygon>
+</g>
+<!-- e1 -->
+<g id="node7" class="node">
+<title>e1</title>
+<polygon fill="none" stroke="black" points="463.79,-144 409.79,-144 409.79,-108 463.79,-108 463.79,-144"></polygon>
+<text text-anchor="middle" x="436.79" y="-121.8" font-family="Helvetica,sans-Serif" font-size="14.00">e1</text>
+</g>
+<!-- clonediam&#45;&gt;e1 -->
+<!-- e2 -->
+<g id="node8" class="node">
+<title>e2</title>
+<polygon fill="none" stroke="black" points="463.79,-90 409.79,-90 409.79,-54 463.79,-54 463.79,-90"></polygon>
+<text text-anchor="middle" x="436.79" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">e2</text>
+</g>
+<!-- numbstems&#45;&gt;e2 -->
+<!-- e3 -->
+<g id="node9" class="node">
+<title>e3</title>
+<polygon fill="none" stroke="black" points="463.79,-36 409.79,-36 409.79,0 463.79,0 463.79,-36"></polygon>
+<text text-anchor="middle" x="436.79" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">e3</text>
+</g>
+<!-- numbinfl&#45;&gt;e3 -->
+<!-- e1&#45;&gt;clonediam -->
+<g id="edge5" class="edge">
+<title>e1-&gt;clonediam</title>
+<path fill="none" stroke="black" d="M409.53,-131.93C400.45,-132.55 389.96,-132.82 379.66,-132.74"></path>
+<polygon fill="black" stroke="black" points="379.54,-129.23 369.47,-132.54 379.4,-136.23 379.54,-129.23"></polygon>
+</g>
+<!-- e2&#45;&gt;numbstems -->
+<g id="edge6" class="edge">
+<title>e2-&gt;numbstems</title>
+<path fill="none" stroke="black" d="M409.66,-77.92C401.83,-78.46 392.94,-78.73 384.02,-78.75"></path>
+<polygon fill="black" stroke="black" points="384.03,-75.25 373.99,-78.66 383.96,-82.25 384.03,-75.25"></polygon>
+</g>
+<!-- e3&#45;&gt;numbinfl -->
+<g id="edge7" class="edge">
+<title>e3-&gt;numbinfl</title>
+<path fill="none" stroke="black" d="M409.52,-23.93C398.91,-24.65 386.36,-24.9 374.43,-24.67"></path>
+<polygon fill="black" stroke="black" points="374.28,-21.16 364.18,-24.34 374.06,-28.16 374.28,-21.16"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>This is where I want to go, but for the moment, let’s just look at the latent variable side - the CFA - for performance.</p>
+<p>So let’s start by loading it up and some libraries -</p>
+<div class="cell" data-messages="false">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMB)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># to make our lives easier</span></span>
+<span id="cb1-3"></span>
+<span id="cb1-4">spartina <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> readr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://raw.githubusercontent.com/jebyrnes/semclass/refs/heads/master/files/data/TravisDataForLVExample.csv"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb1-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbstems_s =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(numbstems),</span>
+<span id="cb1-6">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clonediam_s =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(clonediam),</span>
+<span id="cb1-7">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbinfl_s =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(numbinfl),</span>
+<span id="cb1-8">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">meanht_s =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(meanht),</span>
+<span id="cb1-9">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">meanwidth_s =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale</span>(meanwidth),</span>
+<span id="cb1-10">  )</span></code></pre></div></div>
+</div>
+<section id="a-simple-latent-variable-model" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-latent-variable-model">A Simple Latent Variable Model</h2>
+<p>Let’s start by building the CFA portion. We’re going to need to write an objective function that</p>
+<ol type="1">
+<li><p>Has a sigma for each observed variable.</p></li>
+<li><p>We’ll define a distribution for each observed indicator variable that is a unique slope * our latent variable, <code>performance</code> plus a unique intercept. We’ll set that to be normally distribted.</p></li>
+<li><p>As we need to define our latent variable, and make sure this model is identified, we’ll define it as a normally distributed variable with mean of 0 and SD of 1.</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">lv_fun <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p){</span>
+<span id="cb2-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(spartina, p)</span>
+<span id="cb2-3">  </span>
+<span id="cb2-4">  sigma_clonediam <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_clonediam)</span>
+<span id="cb2-5">  sigma_numbstems <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_numbstems)</span>
+<span id="cb2-6">  sigma_numbinfl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_numbinfl)</span>
+<span id="cb2-7">  </span>
+<span id="cb2-8">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># latent variable indicators</span></span>
+<span id="cb2-9">  clonediam <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb2-10">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(pc <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> clonediam_int, sigma_clonediam)</span>
+<span id="cb2-11">  </span>
+<span id="cb2-12">  numbstems  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb2-13">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(ps <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> numbstems_int, sigma_numbstems)</span>
+<span id="cb2-14">  </span>
+<span id="cb2-15">  numbinfl  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb2-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(pi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> numbinfl_int, sigma_numbinfl)</span>
+<span id="cb2-17">  </span>
+<span id="cb2-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fixed coefs to make this identified</span></span>
+<span id="cb2-19">  performance_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb2-20">  performance_mean <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb2-21">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(performance_sigma); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(performance_mean)</span>
+<span id="cb2-22">  </span>
+<span id="cb2-23">  performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(performance_mean, performance_sigma)</span>
+<span id="cb2-24">}</span></code></pre></div></div>
+</div>
+<p>OK, that makes sense from a modeling perspective. It does what we want. Now, how do we setup start values? Well, let’s start with all loadings at 1 and intercepts at the mean of the observed indicator (note, I ran this once setting loadings at 0, but, that’s a special point in the likelihood, and you should never do that - learn from my mistakes). Next, we’ll set the log sigmas as the log of SDs. Again, reasonable start values.</p>
+<p>Last - the latent variable parameter. What do we do? Here, we just need to make an empty vector that is the right length. And by empty, I don’t mean nulls or NAs, but rather, we’ll use start values that accord to our mean - in this case 0 - of our LV.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">lv_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb3-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pc =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ps =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">pi =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-5">  </span>
+<span id="cb3-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clonediam_int =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>clonediam),</span>
+<span id="cb3-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbstems_int =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>numbstems),</span>
+<span id="cb3-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbinfl_int =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>numbinfl),</span>
+<span id="cb3-9">  </span>
+<span id="cb3-10">  </span>
+<span id="cb3-11">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_sigma_clonediam =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>clonediam) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(),</span>
+<span id="cb3-12">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_sigma_numbstems =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>numbstems)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(),</span>
+<span id="cb3-13">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_sigma_numbinfl =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(spartina<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>numbinfl)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(),</span>
+<span id="cb3-14">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">performance =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(spartina))</span>
+<span id="cb3-15"></span>
+<span id="cb3-16">)</span></code></pre></div></div>
+</div>
+<p>The final step is pretty simple - we’ll use <code>MakeADFun()</code> as usual. Only now, we need to define <code>performance</code> as a random variable. This lets RTMB know that this is an unobserved latent variable we will be estimating - just like when we did random effects before.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">lv_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(lv_fun, lv_params, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>,</span>
+<span id="cb4-2">                    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>)</span>
+<span id="cb4-3"></span>
+<span id="cb4-4">lv_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(lv_fit,</span>
+<span id="cb4-5">               <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span>
+<span id="cb4-6"></span>
+<span id="cb4-7">lv_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>message</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(lv_fit)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sdreport(.) result
+                      Estimate Std. Error
+pc                  16.9316555  2.7667769
+ps                  15.8302699  2.4673571
+pi                   1.8210469  0.3585978
+clonediam_int       27.6005960  3.7019904
+numbstems_int       25.0760853  3.3728447
+numbinfl_int         2.2119566  0.4456149
+log_sigma_clonediam  1.6754413  0.2932943
+log_sigma_numbstems  1.2013250  0.5907472
+log_sigma_numbinfl   0.1119555  0.1619030
+Maximum gradient component: 5.274218e-05 </code></pre>
+</div>
+</div>
+<p>Lovely! It worked, and we have coefficients that, well, nothing seems insane at least.</p>
+</section>
+<section id="did-it-blend" class="level2">
+<h2 class="anchored" data-anchor-id="did-it-blend">Did it blend?</h2>
+<p>To check to ensure this worked as we think it should, we can compare it to the same model fit using covariance-based estimation of SEMs in <code>lavaan</code>. To make sure our model matches, we need to include that we want the meanstructure and also that, rather than the loading of the first indicator set to 1 as is the default, that the variance of the LV is set to 1. For that, we set <code>std_lv = TRUE</code> - we have a standardized latent variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(lavaan)</span>
+<span id="cb8-2"></span>
+<span id="cb8-3">mod_lavaan <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span>
+<span id="cb8-4"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">    performance =~ clonediam + numbstems + numbinfl</span></span>
+<span id="cb8-5"><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"</span></span>
+<span id="cb8-6"></span>
+<span id="cb8-7">fit_lavaan <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sem</span>(mod_lavaan,</span>
+<span id="cb8-8">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> spartina,</span>
+<span id="cb8-9">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">meanstructure =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>,</span>
+<span id="cb8-10">                  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">std.lv =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb8-11">)</span></code></pre></div></div>
+</div>
+<p>OK, nicely done. BUT - do the coefficients match? For that, we can use <code>broom::tidy</code> to get the coefficients from lavaan and then I’ll do some awful substitutions to join those coefficients with the RTMB coefficients from <code>sdreport()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">lavcoefs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> broom<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy</span>(fit_lavaan) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>op, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>statistic, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>p.value, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>std.lv, <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>std.all)</span>
+<span id="cb9-3"></span>
+<span id="cb9-4">rtmb_coefs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(lv_fit) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb9-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-7">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-8">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-9"> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(</span>
+<span id="cb9-10">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">term =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">case_when</span>(</span>
+<span id="cb9-11">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pc"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance =~ clonediam"</span>,</span>
+<span id="cb9-12">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ps"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance =~ numbstems"</span>,</span>
+<span id="cb9-13">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"pi"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance =~ numbinfl"</span>,</span>
+<span id="cb9-14">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_sigma_clonediam"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clonediam ~~ clonediam"</span>,</span>
+<span id="cb9-15">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_sigma_numbstems"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbstems ~~ numbstems"</span>,</span>
+<span id="cb9-16">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"log_sigma_numbinfl"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbinfl ~~ numbinfl"</span>,</span>
+<span id="cb9-17">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance_sigma"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance ~~ performance"</span>,</span>
+<span id="cb9-18">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clonediam_int"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clonediam ~1 "</span>,</span>
+<span id="cb9-19">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbstems_int"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbstems ~1 "</span>,</span>
+<span id="cb9-20">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbinfl_int"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbinfl ~1 "</span>,</span>
+<span id="cb9-21">    parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance_mean"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance ~1 "</span></span>
+<span id="cb9-22">  )</span>
+<span id="cb9-23">) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-24">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rtmb_estimate =</span> estimate,</span>
+<span id="cb9-25">         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rtmb_std_error =</span> std_error)</span>
+<span id="cb9-26"></span>
+<span id="cb9-27"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">left_join</span>(lavcoefs, rtmb_coefs) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb9-28">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(term, estimate, rtmb_estimate, </span>
+<span id="cb9-29">         std.error, rtmb_std_error)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 5
+   term                         estimate rtmb_estimate std.error rtmb_std_error
+   &lt;chr&gt;                           &lt;dbl&gt;         &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt;
+ 1 "performance =~ clonediam"      16.9         16.9       2.77           2.77 
+ 2 "performance =~ numbstems"      15.8         15.8       2.47           2.47 
+ 3 "performance =~ numbinfl"        1.82         1.82      0.359          0.359
+ 4 "clonediam ~~ clonediam"        28.5          1.68     16.7            0.293
+ 5 "numbstems ~~ numbstems"        11.1          1.20     13.1            0.591
+ 6 "numbinfl ~~ numbinfl"           1.25         0.112     0.405          0.162
+ 7 "performance ~~ performance"     1            1         0              0    
+ 8 "clonediam ~1 "                 27.6         27.6       3.70           3.70 
+ 9 "numbstems ~1 "                 25.1         25.1       3.37           3.37 
+10 "numbinfl ~1 "                   2.21         2.21      0.446          0.446
+11 "performance ~1 "                0            0         0              0    </code></pre>
+</div>
+</div>
+<p>Well, gross code, but, it worked! And - well looky-there. A fabulous match!</p>
+<p><strong>warning: this is a teaching demo</strong> - I’m not showing everything! You should also do this and try and set loadings to 1 - although, in terms of scaling latent variables… <a href="https://quantitude.org/s8e07-latent-scaling/">listen here to see if it don’t make no nevermind</a>.</p>
+<p>As a final check, we can compare the predicted values of latent variables from both <code>lavaan</code> and <code>RTMB</code> to see if they match.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># from RTMB</span></span>
+<span id="cb11-2">fac_scores <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(lv_fit) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb11-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb11-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb11-6">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>()</span>
+<span id="cb11-7"></span>
+<span id="cb11-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Make a tibble with the values from lavaan</span></span>
+<span id="cb11-9">lv_values <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(</span>
+<span id="cb11-10">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lavaan_factor =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lavPredict</span>(fit_lavaan),</span>
+<span id="cb11-11">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rtmb_factor =</span> fac_scores<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>estimate</span>
+<span id="cb11-12">)</span>
+<span id="cb11-13"></span>
+<span id="cb11-14"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># plot with a 1:1 line</span></span>
+<span id="cb11-15"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(lavaan_factor <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> rtmb_factor, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> lv_values)</span>
+<span id="cb11-16"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">a =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">b =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261110_rtmb_latent_cfa_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now that is NICE.</p>
+</section>
+<section id="what-about-new-observations" class="level2">
+<h2 class="anchored" data-anchor-id="what-about-new-observations">What about new observations?</h2>
+<p>What if we want to get the factor scores for new observations? As we have already looked at factors as a missing variable problem, we should be able to do the same - only now with new observations - as long as we use the loadings from our fit model. We just need to re-write our model, as we did with <a href="../posts/20261107_exploring_rtmb_linear_regression.html">linear regression</a>, to take in new data. I’m also going to report out the hat values of our indicators for use in prediction.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># label: fun_with_data</span></span>
+<span id="cb12-2">lv_fun_forpred <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p, data){</span>
+<span id="cb12-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(data, p)</span>
+<span id="cb12-4"></span>
+<span id="cb12-5">  sigma_clonediam <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_clonediam)</span>
+<span id="cb12-6">  sigma_numbstems <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_numbstems)</span>
+<span id="cb12-7">  sigma_numbinfl <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_sigma_numbinfl)</span>
+<span id="cb12-8">  </span>
+<span id="cb12-9">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># latent variable indicators - now with hats</span></span>
+<span id="cb12-10">  clonediam_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pc <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> clonediam_int</span>
+<span id="cb12-11">  clonediam <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb12-12">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(clonediam_hat, sigma_clonediam)</span>
+<span id="cb12-13">  </span>
+<span id="cb12-14">  numbstems_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> ps <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> numbstems_int</span>
+<span id="cb12-15">  numbstems  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb12-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(numbstems_hat, sigma_numbstems)</span>
+<span id="cb12-17">  </span>
+<span id="cb12-18">  numbinfl_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pi <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span>performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> numbinfl_int</span>
+<span id="cb12-19">  numbinfl  <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> </span>
+<span id="cb12-20">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(numbinfl_hat, sigma_numbinfl)</span>
+<span id="cb12-21">  </span>
+<span id="cb12-22">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(clonediam_hat); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(numbstems_hat); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(numbinfl_hat)</span>
+<span id="cb12-23">  </span>
+<span id="cb12-24">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fixed coefs to make this identified</span></span>
+<span id="cb12-25">  performance_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb12-26">  performance_mean <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb12-27">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(performance_sigma); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(performance_mean); </span>
+<span id="cb12-28"></span>
+<span id="cb12-29">  performance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(performance_mean, performance_sigma)</span>
+<span id="cb12-30">}</span></code></pre></div></div>
+</div>
+<p>Then, make an initial fit to with this new model, extracting the parameters and the Hessian. Note, RTMB doesn’t do well with the Hessian with random effects, so we’ll use <code>optimHess()</code> instead (thanks, Claude!)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">cmb <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(f, d) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">f</span>(p, d)</span>
+<span id="cb13-2"></span>
+<span id="cb13-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RTMB object</span></span>
+<span id="cb13-4">lv_fit_forpred <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(lv_fun_forpred, spartina) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb13-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(lv_params, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>,</span>
+<span id="cb13-6">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb13-7"></span>
+<span id="cb13-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#optimize</span></span>
+<span id="cb13-9">lv_opt_forpred <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(lv_fit_forpred,</span>
+<span id="cb13-10">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span>
+<span id="cb13-11"></span>
+<span id="cb13-12"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># parameters and hessian</span></span>
+<span id="cb13-13">fit_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> lv_opt_forpred<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par</span>
+<span id="cb13-14"></span>
+<span id="cb13-15"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Have to use a different method to get the Hessian as RTMB won't run he()</span></span>
+<span id="cb13-16"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#fit_hessian &lt;- lv_fit_forpred$he() # doesn't work</span></span>
+<span id="cb13-17">fit_hessian <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">optimHess</span>(fit_params, lv_fit_forpred<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fn, lv_fit_forpred<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>gr)</span></code></pre></div></div>
+</div>
+<p>Now, what if we start with a set of values for our latent variable. Can we recover indicators? Yes!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">pred_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">performance =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),</span>
+<span id="cb14-2">                        <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">clonediam =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbstems =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">numbinfl =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>)</span>
+<span id="cb14-3"></span>
+<span id="cb14-4">pred_adfun <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(lv_fun_forpred, pred_data),</span>
+<span id="cb14-5">                         <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(fit_params), </span>
+<span id="cb14-6">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb14-7"></span>
+<span id="cb14-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's see it!</span></span>
+<span id="cb14-9">pred_inds <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(pred_adfun, </span>
+<span id="cb14-10">                              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">par.fixed =</span> fit_params,</span>
+<span id="cb14-11">                              <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hessian.fixed =</span> fit_hessian)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%in%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"clonediam_hat"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbstems_hat"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"numbinfl_hat"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-14">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-15">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#select(-std_error) |&gt;</span></span>
+<span id="cb14-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">parameter =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gsub</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_hat"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>, parameter)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-17">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">performance =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(pred_data<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>performance, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-18">  tidyr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pivot_wider</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">names_from =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>, </span>
+<span id="cb14-19">                     <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values_from =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"estimate"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"std_error"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb14-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename_with</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gsub</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"estimate_"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>, .), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">everything</span>())</span>
+<span id="cb14-21">pred_inds</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 7
+  performance clonediam numbstems numbinfl std_error_clonediam
+        &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;               &lt;dbl&gt;
+1          -1      10.7      9.25    0.391                4.62
+2           0      27.6     25.1     2.21                 3.70
+3           1      44.5     40.9     4.03                 4.62
+4           2      61.5     56.7     5.85                 6.66
+# ℹ 2 more variables: std_error_numbstems &lt;dbl&gt;, std_error_numbinfl &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p>OK - so values we can work with. Can we go the other way? We can! But, here’s the funky part. <code>performance</code> is not a value in the data that we feed in. Rather, it’s a parameter that we are estimaing. Let’s see this in action by looking at our parameters.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">lv_fit_forpred<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>env<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">parList</span>(fit_params)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pc
+[1] 16.93166
+
+$ps
+[1] 15.83027
+
+$pi
+[1] 1.821047
+
+$clonediam_int
+[1] 27.6006
+
+$numbstems_int
+[1] 25.07609
+
+$numbinfl_int
+[1] 2.211957
+
+$log_sigma_clonediam
+[1] 1.675441
+
+$log_sigma_numbstems
+[1] 1.201325
+
+$log_sigma_numbinfl
+[1] 0.1119555
+
+$performance
+ [1] -0.67696296  0.67816261  1.30447923 -0.47250827 -0.13397593 -1.33131153
+ [7]  0.04805202  0.61415494 -1.19767322 -0.31161947  1.46422489  0.01011777
+[13] -0.73435498  0.46809476 -1.52626706  1.22366568 -1.52120288 -1.00467587
+[19]  0.86494119  2.16074542 -0.44747061  0.16716053  0.35422578
+
+attr(,"check.passed")
+[1] TRUE</code></pre>
+</div>
+</div>
+<p>Note that this is different than where we extracted just the parameters for <code>fit_params</code> before - let’s you see the random effects! And all that goes into your summary of your sdreport.</p>
+<p>You can see this more dramatically by running the following, which will fail.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">ind_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pred_inds <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb18-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>performance)</span>
+<span id="cb18-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mutate(performance = 0) # can also try this which does not work</span></span>
+<span id="cb18-4"></span>
+<span id="cb18-5">pred_adfun <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(lv_fun_forpred, ind_data),</span>
+<span id="cb18-6">                         fit_params, </span>
+<span id="cb18-7">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>,</span>
+<span id="cb18-8">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
+</div>
+<p>I know, I wish it were the other way around, but, so it goes for random - latent - variables. So, we combine it with our fit parameters with a list of performance values for the model to work with. To do that, we take our parameter list from above, and add a list of performance values of 0.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># data</span></span>
+<span id="cb19-2">ind_data <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> pred_inds <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb19-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>performance)</span>
+<span id="cb19-4"></span>
+<span id="cb19-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fit parameters</span></span>
+<span id="cb19-6">new_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(fit_params, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">performance =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(ind_data))))</span>
+<span id="cb19-7"></span>
+<span id="cb19-8">score_adfun <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span>  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(lv_fun_forpred, ind_data),</span>
+<span id="cb19-9">                          new_params, </span>
+<span id="cb19-10">                          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">random =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"performance"</span>,</span>
+<span id="cb19-11">                          <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span></code></pre></div></div>
+</div>
+<p>Nice. Now we can proceed as before and see how this compares to <code>c(-1, 0, 1, 2)</code>. Note, we’ll give summary the <code>"random"</code> argument to just pull out the random component.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">scores <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(score_adfun,</span>
+<span id="cb20-2">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">par.fixed =</span> fit_params, </span>
+<span id="cb20-3">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">hessian.fixed =</span> fit_hessian) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"random"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb20-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) </span>
+<span id="cb20-6"></span>
+<span id="cb20-7">scores</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  parameter   Estimate `Std. Error`
+  &lt;chr&gt;          &lt;dbl&gt;        &lt;dbl&gt;
+1 performance   -0.973        0.299
+2 performance    0            0.264
+3 performance    0.973        0.299
+4 performance    1.95         0.384</code></pre>
+</div>
+</div>
+<p>Not bad!!! I’m hoping you are seeing the connection here - that once we have this setup, we can, perhaps, go to full blown SEM and use fit models to make new predictions, counterfactuals, and more. Next time!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>statistics</category>
+  <category>RTMB</category>
+  <guid>https://imachordata.com/posts/20261110_rtmb_latent_cfa.html</guid>
+  <pubDate>Tue, 17 Nov 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Categorical Variables in RTMB with Palmer Penguins</title>
   <dc:creator>Jarrett Byrnes</dc:creator>
@@ -1043,6 +2379,7 @@ font-style: inherit;">14</span>)</span></code></pre></div></div>
  ]]></description>
   <category>R</category>
   <category>statistics</category>
+  <category>RTMB</category>
   <guid>https://imachordata.com/posts/20261110_exploring_rtmb_categorical_anova.html</guid>
   <pubDate>Tue, 10 Nov 2026 05:00:00 GMT</pubDate>
 </item>
@@ -1354,12 +2691,12 @@ font-style: inherit;">checkConsistency</span>(linreg_obj)</span></code></pre></d
    27.150733601     0.004003285     1.484095254 
 
 Test correct simulation (p.value):
-[1] 0.9463342
+[1] 0.7277494
 Simulation appears to be correct
 
 Estimated parameter bias:
       intercept body_mass_slope        logsigma 
-   0.0724317864   -0.0000175987    0.0003841974 </code></pre>
+  -2.791799e-02    1.158975e-05    1.584572e-03 </code></pre>
 </div>
 </div>
 <p>What about model assumptions? To look at that, we want residuals, which we get via <code>oneStepPredict()</code>.</p>
@@ -1735,12 +3072,12 @@ font-style: inherit;">head</span>(sim_frame)</span></code></pre></div></div>
 <pre><code># A tibble: 6 × 5
   body_mass bill_len_fit bill_len_raw lower_pi upper_pi
       &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1      2700         38.0         46.9     30.1     46.5
-2      2850         38.6         36.5     29.8     47.1
-3      2850         38.6         36.4     30.2     47.2
-4      2900         38.8         34.5     30.2     47.2
-5      2900         38.8         33.1     29.7     47.6
-6      2900         38.8         38.6     29.7     47.1</code></pre>
+1      2700         38.0         46.9     29.0     46.7
+2      2850         38.6         36.5     30.2     46.6
+3      2850         38.6         36.4     30.1     47.4
+4      2900         38.8         34.5     30.7     47.2
+5      2900         38.8         33.1     30.5     47.6
+6      2900         38.8         38.6     30.3     47.7</code></pre>
 </div>
 </div>
 <p>Fantastic. Now the plot</p>
@@ -2443,6 +3780,7 @@ Kristensen, Kasper, Anders Nielsen, Christoffer Moesgaard Albertsen, Casper Will
 </div></section></div> ]]></description>
   <category>R</category>
   <category>statistics</category>
+  <category>RTMB</category>
   <guid>https://imachordata.com/posts/20261107_exploring_rtmb_linear_regression.html</guid>
   <pubDate>Sat, 07 Nov 2026 05:00:00 GMT</pubDate>
 </item>
@@ -7676,48 +9014,6 @@ font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre>
   <category>science parent</category>
   <guid>https://imachordata.com/posts/20160121_parenting-as-a-scientist-in-the-age-of-climate-change.html</guid>
   <pubDate>Thu, 21 Jan 2016 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Rafe Sagarin and Passion in The Life Scientific</title>
-  <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20150601_rafe-sagarin-and-passion-in-the-life-scientific.html</link>
-  <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
-  <section class="header-text">
-    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
-    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
-    <div class="navbar-container">
-      <a class="header-btn" href="../about/">About</a>
-      <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
-      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
-    </div>
-  </section>
-</header>
-<script>
-/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
-(function () {
-  var h = document.querySelector('header.global-header');
-  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
-})();
-</script>
-
-
-
-
-<p><img src="http://www.imachordata.com/wp-content/uploads/2015/06/rafeapylsiacrop-jczarka-229x300.jpeg" class="img-fluid" alt="rafeapylsiacrop-jczarka">How to process something like <a href="&quot;http://tucson.com/news/blogs/police-beat/ua-professor-raphael-sagarin-killed-in-crash/article_0cb9f384-e050-5046-93f8-89a637339759.html&quot;">Rafe Sagarin’s senseless passing</a>? For those who never encountered him, <a href="http://rafesagarin.com/">Rafe</a> was a wonderful marine ecologist whose <a href="https://scholar.google.com/citations?user=DZBc8WEAAAAJ&amp;hl=en">body of work</a> was as varied and eclectic as can be, from <a href="https://rafesagarin.files.wordpress.com/2009/11/ecomono.pdf">classic papers on long-term effects of climate change</a> in Science and Ecological Monograph to <a href="http://www.amazon.com/Learning-Octopus-Secrets-Terrorist-Disasters/dp/0465021832/">books</a> on how the natural world can help us deal with risk, like terrorist attacks, to working at Biosphere2. He’s even got a wonderful <a href="https://www.youtube.com/playlist?list=PLLqo3zIxhSEIdE-93urRbfsC6ewcsMA8R">youtube channel</a> that works, as he always did, outside of the box.</p>
-<p>Rafe was one of those vivacious dynamic iconoclastic people that you are always delighted to encounter in life. I was fortunate to know him through the <a href="http://www.westsocnat.com/">Western Society of Naturalists</a> where his charm and vim earned him the annual slot of auctioneer to raise funds for students. I really only knew him as colleague at meetings, and yet he is someone who has served as an example for myself and so many other early career scientists.</p>
-<p>It was his passion. Every talk I heard him give, every conversation we ever had - scientific, personal, or with others about the difficulties of being early career - every interaction I saw him have with anyone around him, all of it was infused with an infection passion. His passion for the natural world was infectious. It infused everything. It was in his voice. It was in his worldview. It was in how he shaped his talks and storytelling. It was in his damned silly shirt he wore at every WSN.</p>
-<p>Rafe’s uncompromising passion for science and nature was an inspiration. I looked forward to seeing what he thought of next because there is no joy in the world like watching someone follow their passion. And now I will not be able to again.</p>
-<p>But that passion. That is what I will always hold onto. Because the life scientific can get you down as it grinds forward. But holding onto our passion, our vim, our vigor, our joie de vivre, rooted in our love of the natural world - that is what can provide an endless wellspring of joy in every moment. It’s something that has helped me forge onwards in my own career and in my life in general.</p>
-<p>Rafe will always serve as an example of that passion and the myriad of directions it can lead. I will hold onto that. I hope that his passion will long serve as an example for our whole community. It will for me.</p>
-
-
-
- ]]></description>
-  <category>professional musings</category>
-  <guid>https://imachordata.com/posts/20150601_rafe-sagarin-and-passion-in-the-life-scientific.html</guid>
-  <pubDate>Mon, 01 Jun 2015 04:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
