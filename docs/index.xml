@@ -41,7 +41,8 @@
 
 <p>In previous posts, I mentioned that one reason to use the <a href="https://kaskr.r-universe.dev/RTMB">RTMB</a> package is for more complex models. Latent variables are an excellent case! I use them all the time doing Structural Equation Modeling with <a href="https://www.lavaan.ugent.be/">lavaan</a>, but often want to be free of the covariance-based approach for reasons of non-linearities and non-normality. Jon Lefcheck’s <a href="https://jslefche.github.io/piecewiseSEM/">piecewiseSEM</a> is a great solution, integrating together many modeling frameworks and packages in one place, but, it doesn’t implement latent variables for a variety of reasons. It’s a hard problem! You can deal with it Bayes - even with <a href="https://jebyrnes.github.io/bayesian_sem/bayesian_sem.html">brms</a>. But, some folk might not want to go all the way to <em>Full Luxury Bayesian Structural Equation Modeling</em>.</p>
 <p>RTMB, however, presents a great way forward. And not only does it allow one to do a basic SEM, but with latent variables, you can do things like Integrated Modeling, where you have different data sources with different types of information all of which reflect one underlying phenomenon as used in fisheries modeling.</p>
-<p>Let’s build up to an SEM with a nice data set looking at how distance from source site affects cordgrass (<em>Spartina</em>) transplant success that I’ve used for other teaching projects based on data from <a href="https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/08-1443.1">Travis and Grace 2010</a>.</p>
+<p>Let’s build up to an SEM over the next post or two with a nice data set looking at how distance from source site affects cordgrass (<em>Spartina</em>) transplant success that I’ve used for other teaching projects based on data from <a href="https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/08-1443.1">Travis and Grace 2010</a>.</p>
+<p>Here’s where I ultimately want to go:</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -162,8 +163,8 @@
 </div>
 </div>
 </div>
-<p>This is where I want to go, but for the moment, let’s just look at the latent variable side - the CFA - for performance.</p>
-<p>So let’s start by loading it up and some libraries -</p>
+<p>But for the moment, let’s just look at the latent variable side - the CFA - for performance.</p>
+<p>So let’s start by loading it up and some libraries and the data and away we go -</p>
 <div class="cell" data-messages="false">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
@@ -182,41 +183,120 @@ font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">read_csv</span>(<span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"https://raw.githubusercontent.com/jebyrnes/semclass/refs/heads/master/files/data/TravisDataForLVExample.csv"</span>) <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">|&gt;</span></span>
-<span id="cb1-5">  <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">numbstems_s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale</span>(numbstems),</span>
-<span id="cb1-6">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">clonediam_s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale</span>(clonediam),</span>
-<span id="cb1-7">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">numbinfl_s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale</span>(numbinfl),</span>
-<span id="cb1-8">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">meanht_s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale</span>(meanht),</span>
-<span id="cb1-9">         <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">meanwidth_s =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">scale</span>(meanwidth),</span>
-<span id="cb1-10">  )</span></code></pre></div></div>
+font-style: inherit;">"https://raw.githubusercontent.com/jebyrnes/semclass/refs/heads/master/files/data/TravisDataForLVExample.csv"</span>) </span></code></pre></div></div>
 </div>
 <section id="a-simple-latent-variable-model" class="level2">
 <h2 class="anchored" data-anchor-id="a-simple-latent-variable-model">A Simple Latent Variable Model</h2>
-<p>Let’s start by building the CFA portion. We’re going to need to write an objective function that</p>
+<p>We will start with just that Latent variable model for performance.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 352.86 152.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 148)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-148 348.86,-148 348.86,4 -4,4"></polygon>
+<!-- performance -->
+<g id="node1" class="node">
+<title>performance</title>
+<ellipse fill="none" stroke="black" cx="65.25" cy="-72" rx="65.5" ry="18"></ellipse>
+<text text-anchor="middle" x="65.25" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">performance</text>
+</g>
+<!-- clonediam -->
+<g id="node3" class="node">
+<title>clonediam</title>
+<polygon fill="none" stroke="black" points="250.49,-144 170.86,-144 170.86,-108 250.49,-108 250.49,-144"></polygon>
+<text text-anchor="middle" x="210.68" y="-121.8" font-family="Helvetica,sans-Serif" font-size="14.00">clonediam</text>
+</g>
+<!-- performance&#45;&gt;clonediam -->
+<g id="edge1" class="edge">
+<title>performance-&gt;clonediam</title>
+<path fill="none" stroke="black" d="M104.68,-86.47C122.07,-93.02 142.8,-100.82 161.23,-107.76"></path>
+<polygon fill="black" stroke="black" points="160.04,-111.05 170.63,-111.3 162.51,-104.5 160.04,-111.05"></polygon>
+</g>
+<!-- numbstems -->
+<g id="node4" class="node">
+<title>numbstems</title>
+<polygon fill="none" stroke="black" points="255.04,-90 166.32,-90 166.32,-54 255.04,-54 255.04,-90"></polygon>
+<text text-anchor="middle" x="210.68" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">numbstems</text>
+</g>
+<!-- performance&#45;&gt;numbstems -->
+<g id="edge2" class="edge">
+<title>performance-&gt;numbstems</title>
+<path fill="none" stroke="black" d="M130.83,-72C139.3,-72 147.9,-72 156.16,-72"></path>
+<polygon fill="black" stroke="black" points="156.4,-75.5 166.4,-72 156.4,-68.5 156.4,-75.5"></polygon>
+</g>
+<!-- numbinfl -->
+<g id="node5" class="node">
+<title>numbinfl</title>
+<polygon fill="none" stroke="black" points="245.09,-36 176.26,-36 176.26,0 245.09,0 245.09,-36"></polygon>
+<text text-anchor="middle" x="210.68" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">numbinfl</text>
+</g>
+<!-- performance&#45;&gt;numbinfl -->
+<g id="edge3" class="edge">
+<title>performance-&gt;numbinfl</title>
+<path fill="none" stroke="black" d="M104.68,-57.53C123.8,-50.33 146.96,-41.61 166.66,-34.2"></path>
+<polygon fill="black" stroke="black" points="167.89,-37.47 176.02,-30.67 165.43,-30.92 167.89,-37.47"></polygon>
+</g>
+<!-- s -->
+<g id="node2" class="node">
+<title>s</title>
+<text text-anchor="start" x="61.36" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">σ</text>
+</g>
+<!-- s&#45;&gt;performance -->
+<g id="edge10" class="edge">
+<title>s-&gt;performance</title>
+<path fill="none" stroke="black" d="M65.25,-36.14C65.25,-38.62 65.25,-41.1 65.25,-43.59"></path>
+<polygon fill="black" stroke="black" points="61.75,-43.79 65.25,-53.79 68.75,-43.79 61.75,-43.79"></polygon>
+</g>
+<!-- e1 -->
+<g id="node6" class="node">
+<title>e1</title>
+<polygon fill="none" stroke="black" points="344.86,-144 290.86,-144 290.86,-108 344.86,-108 344.86,-144"></polygon>
+<text text-anchor="middle" x="317.86" y="-121.8" font-family="Helvetica,sans-Serif" font-size="14.00">e1</text>
+</g>
+<!-- clonediam&#45;&gt;e1 -->
+<!-- e2 -->
+<g id="node7" class="node">
+<title>e2</title>
+<polygon fill="none" stroke="black" points="344.86,-90 290.86,-90 290.86,-54 344.86,-54 344.86,-90"></polygon>
+<text text-anchor="middle" x="317.86" y="-67.8" font-family="Helvetica,sans-Serif" font-size="14.00">e2</text>
+</g>
+<!-- numbstems&#45;&gt;e2 -->
+<!-- e3 -->
+<g id="node8" class="node">
+<title>e3</title>
+<polygon fill="none" stroke="black" points="344.86,-36 290.86,-36 290.86,0 344.86,0 344.86,-36"></polygon>
+<text text-anchor="middle" x="317.86" y="-13.8" font-family="Helvetica,sans-Serif" font-size="14.00">e3</text>
+</g>
+<!-- numbinfl&#45;&gt;e3 -->
+<!-- e1&#45;&gt;clonediam -->
+<g id="edge4" class="edge">
+<title>e1-&gt;clonediam</title>
+<path fill="none" stroke="black" d="M290.6,-131.93C281.52,-132.55 271.03,-132.82 260.73,-132.74"></path>
+<polygon fill="black" stroke="black" points="260.61,-129.23 250.54,-132.54 260.47,-136.23 260.61,-129.23"></polygon>
+</g>
+<!-- e2&#45;&gt;numbstems -->
+<g id="edge5" class="edge">
+<title>e2-&gt;numbstems</title>
+<path fill="none" stroke="black" d="M290.73,-77.92C282.9,-78.46 274.01,-78.73 265.09,-78.75"></path>
+<polygon fill="black" stroke="black" points="265.1,-75.25 255.06,-78.66 265.03,-82.25 265.1,-75.25"></polygon>
+</g>
+<!-- e3&#45;&gt;numbinfl -->
+<g id="edge6" class="edge">
+<title>e3-&gt;numbinfl</title>
+<path fill="none" stroke="black" d="M290.59,-23.93C279.97,-24.65 267.43,-24.9 255.5,-24.67"></path>
+<polygon fill="black" stroke="black" points="255.35,-21.16 245.24,-24.34 255.13,-28.16 255.35,-21.16"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>To fit a CFA for a single latent variable, we’re going to need to write an objective function that</p>
 <ol type="1">
 <li><p>Has a sigma for each observed variable.</p></li>
 <li><p>We’ll define a distribution for each observed indicator variable that is a unique slope * our latent variable, <code>performance</code> plus a unique intercept. We’ll set that to be normally distribted.</p></li>
@@ -790,7 +870,7 @@ font-style: inherit;">1</span>)</span></code></pre></div></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="https://imachordata.com/posts/20261110_rtmb_latent_cfa_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="https://imachordata.com/posts/20261110_rtmb_latent_cfa_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

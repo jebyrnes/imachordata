@@ -21,7 +21,9 @@ keywords:
 
 RTMB, however, presents a great way forward. And not only does it allow one to do a basic SEM, but with latent variables, you can do things like Integrated Modeling, where you have different data sources with different types of information all of which reflect one underlying phenomenon as used in fisheries modeling.
 
-Let's build up to an SEM with a nice data set looking at how distance from source site affects cordgrass (*Spartina*) transplant success that I've used for other teaching projects based on data from [Travis and Grace 2010](https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/08-1443.1).
+Let's build up to an SEM over the next post or two with a nice data set looking at how distance from source site affects cordgrass (*Spartina*) transplant success that I've used for other teaching projects based on data from [Travis and Grace 2010](https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/08-1443.1).
+
+Here's where I ultimately want to go:
 
 ```{dot}
 digraph G {
@@ -53,9 +55,9 @@ digraph G {
 }
 ```
 
-This is where I want to go, but for the moment, let's just look at the latent variable side - the CFA - for performance.
+But for the moment, let's just look at the latent variable side - the CFA - for performance.
 
-So let's start by loading it up and some libraries -  
+So let's start by loading it up and some libraries and the data and away we go -  
 
 ```{r}
 #| label: start
@@ -65,18 +67,42 @@ So let's start by loading it up and some libraries -
 library(RTMB)
 library(dplyr) # to make our lives easier
 
-spartina <- readr::read_csv("https://raw.githubusercontent.com/jebyrnes/semclass/refs/heads/master/files/data/TravisDataForLVExample.csv") |>
-  mutate(numbstems_s = scale(numbstems),
-         clonediam_s = scale(clonediam),
-         numbinfl_s = scale(numbinfl),
-         meanht_s = scale(meanht),
-         meanwidth_s = scale(meanwidth),
-  )
+spartina <- readr::read_csv("https://raw.githubusercontent.com/jebyrnes/semclass/refs/heads/master/files/data/TravisDataForLVExample.csv") 
 ```
 
 ## A Simple Latent Variable Model
 
-Let's start by building the CFA portion. We're going to need to write an objective function that  
+We will start with just that Latent variable model for performance.
+
+
+```{dot}
+digraph G {
+
+  rankdir=LR
+  node [shape = box, fontname="Helvetica"]
+  performance[shape = ellipse]
+  s[shape = none, label = <&sigma;>]
+
+  performance -> clonediam
+  performance -> numbstems
+  performance -> numbinfl
+  
+
+  e1 -> clonediam
+  e2 -> numbstems
+  e3 -> numbinfl
+  
+  clonediam -> e1 [style=invis]
+  numbstems -> e2 [style=invis]
+  numbinfl -> e3 [style=invis]
+
+ s -> performance  [constraint=false]
+ 
+
+}
+```
+
+To fit a CFA for a single latent variable, we're going to need to write an objective function that  
 
 1. Has a sigma for each observed variable.  
   
