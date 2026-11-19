@@ -224,6 +224,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/20261119_splice_to_a_function.html",
       "/posts/20261110_rtmb_latent_cfa.html",
       "/posts/20261110_exploring_rtmb_categorical_anova.html",
       "/posts/20261107_exploring_rtmb_linear_regression.html",

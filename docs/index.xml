@@ -10,7 +10,277 @@
 <atom:link href="https://imachordata.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Marine Data Science for All, Regardless of Backbone!</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Tue, 17 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 19 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Splice on to a Function!</title>
+  <dc:creator>Jarrett Byrnes</dc:creator>
+  <link>https://imachordata.com/posts/20261119_splice_to_a_function.html</link>
+  <description><![CDATA[ 
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+
+
+
+<p>Sometimes, you write a function somewhere in your code and, well, you want to add a little something to it. But rather than copy and paste to your function, what if you could just slip some new lines into the end to do something? For example, let’s say we had a function that takes in <code>x</code> and adds 1. We love it. But now we want that same function to also square things. Or, rather, make a new function that adds and squares, but, we don’t want to re-write something that’s already working. Sure, we can call one function from inside another, but, what if you want to just splice on to the end. Consider:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">add_one <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x){</span>
+<span id="cb1-2">  z <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb1-3">  z</span>
+<span id="cb1-4">}</span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p>Now, we want <code>add_one_square()</code>. We could do these:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">add_one_square <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x){</span>
+<span id="cb3-2">  (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one</span>(x))<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb3-3">}</span>
+<span id="cb3-4"></span>
+<span id="cb3-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one_square</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">add_one_square <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x){</span>
+<span id="cb5-2">  z <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> x <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb5-3">  z<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb5-4">}</span>
+<span id="cb5-5"></span>
+<span id="cb5-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one_square</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+<p>But, what if for some reason we wanted to splice it together? Well, we can use <code>body()</code> to get elements of a function, turn them into a list, and reboot them as a new function. Consider:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#newlines</span></span>
+<span id="cb7-2">new_lines <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">quote</span>({</span>
+<span id="cb7-3">  z<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">^</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span></span>
+<span id="cb7-4">})</span>
+<span id="cb7-5"></span>
+<span id="cb7-6">b <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(add_one))</span>
+<span id="cb7-7"></span>
+<span id="cb7-8">n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(new_lines)[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb7-9"></span>
+<span id="cb7-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># copy over the old function</span></span>
+<span id="cb7-11">add_one_square <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> add_one</span>
+<span id="cb7-12"></span>
+<span id="cb7-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># fill in the new</span></span>
+<span id="cb7-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(add_one_square) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.call</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(b[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>], n))</span>
+<span id="cb7-15"></span>
+<span id="cb7-16">add_one_square</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x) 
+{
+    z &lt;- x + 1
+    z^2
+}</code></pre>
+</div>
+</div>
+<p>Nice! And it works!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one_square</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+<p>Now, you can write a generic splice function. Let’s say by default it chops off the last line, but you can always just set lines_back to 0 if you just want to tack on new things</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1">add_to_end <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(f, new_stuff, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lines_back =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>){</span>
+<span id="cb11-2">  s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(f))</span>
+<span id="cb11-3">  n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(new_stuff)[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb11-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(f) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.call</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(s)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>lines_back)], n))</span>
+<span id="cb11-5">  f</span>
+<span id="cb11-6">}</span>
+<span id="cb11-7"></span>
+<span id="cb11-8"></span>
+<span id="cb11-9">add_one_square <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_to_end</span>(add_one, new_lines)</span>
+<span id="cb11-10"></span>
+<span id="cb11-11">add_one_square</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>function (x) 
+{
+    z &lt;- x + 1
+    z^2
+}</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_one_square</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+
+
+
+ ]]></description>
+  <category>R</category>
+  <guid>https://imachordata.com/posts/20261119_splice_to_a_function.html</guid>
+  <pubDate>Thu, 19 Nov 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Latent Variables and Confirmatory Factor Analysis in RTMB</title>
   <dc:creator>Jarrett Byrnes</dc:creator>
@@ -9041,58 +9311,6 @@ font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre>
   <category>climate change</category>
   <category>science parent</category>
   <guid>https://imachordata.com/posts/20160121_other-writings-about-parenting-climate-change-by-scientists.html</guid>
-  <pubDate>Thu, 21 Jan 2016 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Parenting as a Scientist in the Age of Climate Change</title>
-  <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20160121_parenting-as-a-scientist-in-the-age-of-climate-change.html</link>
-  <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
-  <section class="header-text">
-    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
-    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
-    <div class="navbar-container">
-      <a class="header-btn" href="../about/">About</a>
-      <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
-      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
-    </div>
-  </section>
-</header>
-<script>
-/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
-(function () {
-  var h = document.querySelector('header.global-header');
-  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
-})();
-</script>
-
-
-
-
-<p>An old friend with a new child asked me if I know any climate change scientists or global change biologists who are parents and have written cogently about being parents in the era of climate change. Off of the top of my head, I couldn’t think of any (prove me wrong, internet), but, heck, I’m one myself. Here I am, staring down the barrel of hitting one year since HD’s arrival.</p>
-<p>I’ve actually had a lot of conversations about climate change and our daughter with my wife - ethically, what does it mean to have children knowing what we know about the future of their earth? How many children is it fair (to them!) to have? And within myself, I ask, what should I be doing? Both what should I do to try to make the future not suck as much as it might for her and how do I help her prepare for the world that will look so very different than the one my own parents handed me.</p>
-<p>I’ll admit, I don’t have many good answers. Particularly not as the parent of a kiddo just shy of the end of her first year. Why is that?</p>
-<p>One reason that climate science communication is oft said to fail is the huge scale of imagination needed to grapple with the implications of climate change in the future. Climate scientists often possess some key personality traits that help them with this understanding - moreso than the general public[1]. Add the daily insanity and of managing a tiny human and what it does to your brain, and my brain-box is just not always up to wrestling with these issues until the moment that they will become pressing. Granted, this may be due to being the parent of a babe (with the power) and scientist parents of older children might have some better answers. I hope so, as this is definitely a looming challenge that I have not yet been able to navigate with forethought.</p>
-<p>But that kind of punting things down the road is not fair - not fair to her.</p>
-<p>So, what are the issues to consider? Here are the ones that always rise to the top of my mind.</p>
-<p>First - is it ethical to be having children at all? For me, that one was straightforward. Yes. I do want to pass on the legacy of the family that gave rise to me. I think that there is some great culture and history that has brought me to where I am today. And I think some of that moxie, honestly, will be useful to the world in helping navigate the way forward. I mean, damn, that’s an egotistical thing to say, but, I want my genes to sally forth and help create someone who will help heal the world in some way. The alternative is to fold, and go home. As a species. Not an option. Or see this as someone else’s kid’s problem, not mine. That’s the kind of ethical stance that got us into this problem in the first place. So, also, nope.</p>
-<p>Second - what can I do to make a better future? Welp, as someone who studies global change biology, I hope I’m doing it. I hope that I’m building the ship of knowledge that we need to sail forward as a species. I hope that the choices I make - personally and politically - all help improve the world and our path into the future. I don’t see myself doing anything differently or with more or less urgency than I did before. But that’s because of the values I hold about the importance of my actions for how the impact the whole world and future generations.</p>
-<p>And finally - how do I prepare my daughter for the the world she is inheriting? Well here’s where my I feel completely inadequate to the task. I want to imbue her with the same love of the sea (and nature in general) that I have so that she appreciates the possible. I want to help her embrace the philosophy of helping to heal the world that was such a strong part of my philosophical upbringing. But, again, I would have done these things climate change or no. When do we need to talk about why this problem exists in the first place? How do I teach her about making proactive choices that lessen her own risk to the dangers of climate change? How is this different than how I would have raised her before? What are the lurking issues that I am missing, that I know my mind slips around, avoiding them because they are so large that I cannot see them when it comes to my own child? To her future, once I am gone? Should I be helping her learn more skills for self-reliance that I might not have otherwise? Should I be giving her more cynicism and skepticism of the systems around her that have failed us all, or the pragmatism to know that they can be the solution? Are there actual tangible skills or ideas I should make sure to teach her?</p>
-<p>Or should I just muddle along as a normal parent, confronting these issues as they arise with the best judgement and sense of ethical responsibility that I can teach as I would have anyway?</p>
-<p>As you can see, I have nothing but questions.</p>
-<p>But in writing this, I do feel comforted that a lot of my own answers come down to just raising a pragmatic ethical kid who loves the natural world and embraces the responsibility of being part of a species that constantly seeks to better itself.</p>
-<p>Is that enough?</p>
-<p><strong>Some Interesting Literature Cited</strong> [1] Weiler, C.S., Keller, J.K., Olex, C., 2012. Personality type differences between Ph. D. climate researchers and the general public: implications for effective communication. Clim. Change. <a href="doi:10.1007/s10584-011-0205-7" class="uri">doi:10.1007/s10584-011-0205-7</a></p>
-
-
-
- ]]></description>
-  <category>climate change</category>
-  <category>rantish</category>
-  <category>science parent</category>
-  <guid>https://imachordata.com/posts/20160121_parenting-as-a-scientist-in-the-age-of-climate-change.html</guid>
   <pubDate>Thu, 21 Jan 2016 05:00:00 GMT</pubDate>
 </item>
 </channel>

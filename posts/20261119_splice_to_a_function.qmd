@@ -1,0 +1,89 @@
+---
+title: "Splice on to a Function!"
+author: "Jarrett Byrnes"
+date: '2026-11-19'
+warning: false
+toc: true
+
+
+categories:
+- R
+
+keywords:
+- R
+---
+
+
+Sometimes, you write a function somewhere in your code and, well, you want to add a little something to it. But rather than copy and paste to your function, what if you could just slip some new lines into the end to do something? For example, let's say we had a function that takes in `x` and adds 1. We love it. But now we want that same function to also square things. Or, rather, make a new function that adds and squares, but, we don't want to re-write something that's already working. Sure, we can call one function from inside another, but, what if you want to just splice on to the end.  Consider:
+
+```{r}
+add_one <- function(x){
+  z <- x + 1
+  z
+}
+
+add_one(2)
+```
+
+Now, we want `add_one_square()`. We could do these:
+
+```{r}
+add_one_square <- function(x){
+  (add_one(x))^2
+}
+
+add_one_square(2)
+
+add_one_square <- function(x){
+  z <- x + 1
+  z^2
+}
+
+add_one_square(2)
+```
+
+But, what if for some reason we wanted to splice it together? Well, we can use `body()` to get elements of a function, turn them into a list, and reboot them as a new function. Consider:
+
+```{r}
+
+#newlines
+new_lines <- quote({
+  z^2
+})
+
+b <- as.list(body(add_one))
+
+n <- as.list(new_lines)[-1]
+
+# copy over the old function
+add_one_square <- add_one
+
+# fill in the new
+body(add_one_square) <- as.call(c(b[1:2], n))
+
+add_one_square
+```
+
+Nice! And it works!
+
+```{r}
+add_one_square(3)
+```
+
+Now, you can write a generic splice function. Let's say by default it chops off the last line, but you can always just set lines_back to 0 if you just want to tack on new things
+
+```{r}
+add_to_end <- function(f, new_stuff, lines_back = 1){
+  s <- as.list(body(f))
+  n <- as.list(new_stuff)[-1]
+  body(f) <- as.call(c(s[1:(length(s)-lines_back)], n))
+  f
+}
+
+
+add_one_square <- add_to_end(add_one, new_lines)
+
+add_one_square
+
+add_one_square(3)
+```
