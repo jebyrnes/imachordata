@@ -224,6 +224,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/20261125_sem_testing_rtmb.html",
+      "/posts/20261120_piecewise_sem_rtmb.html",
       "/posts/20261119_splice_to_a_function.html",
       "/posts/20261110_rtmb_latent_cfa.html",
       "/posts/20261110_exploring_rtmb_categorical_anova.html",

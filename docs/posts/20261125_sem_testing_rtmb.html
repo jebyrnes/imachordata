@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Jarrett Byrnes">
+<meta name="keywords" content="R, RTMB">
+
+<title>Testing Structural Equation Models Built with RTMB – I’m a Chordata! Urochordata!</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-9c01d5dd1e2efcfab7dd028f3fb3a506.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Testing Structural Equation Models Built with RTMB – I’m a Chordata! Urochordata!">
+<meta property="og:description" content="Marine Data Science for All, Regardless of Backbone!">
+<meta property="og:image" content="https://imachordata.com/posts/20261125_sem_testing_rtmb_files/figure-html/unnamed-chunk-9-1.png">
+<meta property="og:site_name" content="I'm a Chordata! Urochordata!">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-model-for-your-consideration" id="toc-the-model-for-your-consideration" class="nav-link active" data-scroll-target="#the-model-for-your-consideration">The Model For Your Consideration</a></li>
+  <li><a href="#testing-model-fit-with-chi2" id="toc-testing-model-fit-with-chi2" class="nav-link" data-scroll-target="#testing-model-fit-with-chi2">Testing Model Fit with $chi^2$</a></li>
+  <li><a href="#tests-of-directed-separation" id="toc-tests-of-directed-separation" class="nav-link" data-scroll-target="#tests-of-directed-separation">Tests of Directed Separation</a></li>
+  <li><a href="#model-comparison-in-general" id="toc-model-comparison-in-general" class="nav-link" data-scroll-target="#model-comparison-in-general">Model Comparison in General</a></li>
+  <li><a href="#where-do-we-go-from-here" id="toc-where-do-we-go-from-here" class="nav-link" data-scroll-target="#where-do-we-go-from-here">Where do we go from here?</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Testing Structural Equation Models Built with RTMB</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">R</div>
+    <div class="quarto-category">statistics</div>
+    <div class="quarto-category">RTMB</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jarrett Byrnes </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Nov 25, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>R, RTMB</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>After fitting a Structural Equation Model, we have to assess whether the fit is any good. This typically falls into two main branches of questions:</p>
+<ol type="1">
+<li><p>Does my model reproduce the structure of my data?</p></li>
+<li><p>Are there any missing links in my model? I.e., does my model satisfy all conditional independence claims that its structure implies?</p></li>
+</ol>
+<p>With an SEM fit using RTMB, we can test both with a little extra elbow grease.</p>
+<section id="the-model-for-your-consideration" class="level2">
+<h2 class="anchored" data-anchor-id="the-model-for-your-consideration">The Model For Your Consideration</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 429.96 67.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 63)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-63 425.96,-63 425.96,4 -4,4"></polygon>
+<!-- distance -->
+<g id="node1" class="node">
+<title>distance</title>
+<polygon fill="none" stroke="black" points="61.8,-36 0.07,-36 0.07,0 61.8,0 61.8,-36"></polygon>
+<text text-anchor="middle" x="30.93" y="-13.8" font-family="Times,serif" font-size="14.00">distance</text>
+</g>
+<!-- age -->
+<g id="node2" class="node">
+<title>age</title>
+<polygon fill="none" stroke="black" points="151.87,-59 97.87,-59 97.87,-23 151.87,-23 151.87,-59"></polygon>
+<text text-anchor="middle" x="124.87" y="-36.8" font-family="Times,serif" font-size="14.00">age</text>
+</g>
+<!-- distance&#45;&gt;age -->
+<g id="edge1" class="edge">
+<title>distance-&gt;age</title>
+<path fill="none" stroke="black" d="M62.04,-25.53C70.32,-27.6 79.38,-29.87 87.95,-32.01"></path>
+<polygon fill="black" stroke="black" points="87.17,-35.43 97.72,-34.46 88.87,-28.63 87.17,-35.43"></polygon>
+</g>
+<!-- rich -->
+<g id="node3" class="node">
+<title>rich</title>
+<polygon fill="none" stroke="black" points="421.96,-36 367.96,-36 367.96,0 421.96,0 421.96,-36"></polygon>
+<text text-anchor="middle" x="394.96" y="-13.8" font-family="Times,serif" font-size="14.00">rich</text>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge2" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="black" d="M61.97,-18C128.53,-18 284.81,-18 357.08,-18"></path>
+<polygon fill="black" stroke="black" points="357.52,-21.5 367.52,-18 357.52,-14.5 357.52,-21.5"></polygon>
+</g>
+<!-- firesev -->
+<g id="node4" class="node">
+<title>firesev</title>
+<polygon fill="none" stroke="black" points="242,-59 187.82,-59 187.82,-23 242,-23 242,-59"></polygon>
+<text text-anchor="middle" x="214.91" y="-36.8" font-family="Times,serif" font-size="14.00">firesev</text>
+</g>
+<!-- age&#45;&gt;firesev -->
+<g id="edge3" class="edge">
+<title>age-&gt;firesev</title>
+<path fill="none" stroke="black" d="M152.29,-41C160.28,-41 169.2,-41 177.72,-41"></path>
+<polygon fill="black" stroke="black" points="177.82,-44.5 187.82,-41 177.82,-37.5 177.82,-44.5"></polygon>
+</g>
+<!-- cover -->
+<g id="node5" class="node">
+<title>cover</title>
+<polygon fill="none" stroke="black" points="331.96,-59 277.96,-59 277.96,-23 331.96,-23 331.96,-59"></polygon>
+<text text-anchor="middle" x="304.96" y="-36.8" font-family="Times,serif" font-size="14.00">cover</text>
+</g>
+<!-- firesev&#45;&gt;cover -->
+<g id="edge4" class="edge">
+<title>firesev-&gt;cover</title>
+<path fill="none" stroke="black" d="M242.33,-41C250.32,-41 259.25,-41 267.76,-41"></path>
+<polygon fill="black" stroke="black" points="267.86,-44.5 277.86,-41 267.86,-37.5 267.86,-44.5"></polygon>
+</g>
+<!-- cover&#45;&gt;rich -->
+<g id="edge5" class="edge">
+<title>cover-&gt;rich</title>
+<path fill="none" stroke="black" d="M332.36,-34.1C340.44,-31.99 349.47,-29.63 358.06,-27.38"></path>
+<polygon fill="black" stroke="black" points="359.09,-30.73 367.88,-24.82 357.32,-23.96 359.09,-30.73"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-model-fit-with-chi2" class="level2">
+<h2 class="anchored" data-anchor-id="testing-model-fit-with-chi2">Testing Model Fit with $chi^2$</h2>
+<p>OK, first things first. Let’s load the data and get some packages setup.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RTMB)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(RTMBdist)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># for playing with coefficient tables</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># for viz</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"keeley"</span>, <span class="at">package =</span> <span class="st">"piecewiseSEM"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Great, now, using the DAG above, let’s setup a model. Remember, richness is negative binomial with a log link.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>keeley_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(data, params){</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># let's goooooooo!</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">getAll</span>(data, params)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Setup for SEM separating endogenous variables out</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  rich <span class="ot">&lt;-</span> <span class="fu">OBS</span>(rich)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  cover_obs <span class="ot">&lt;-</span> cover</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  cover <span class="ot">&lt;-</span> <span class="fu">OBS</span>(cover)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  firesev_obs <span class="ot">&lt;-</span> firesev</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  firesev <span class="ot">&lt;-</span> <span class="fu">OBS</span>(firesev)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  age_obs <span class="ot">&lt;-</span> age</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">OBS</span>(age)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># age predictors</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  age_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_age_sigma)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  age_hat <span class="ot">&lt;-</span> distance_age <span class="sc">*</span> distance <span class="sc">+</span> age_int</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">%~%</span> <span class="fu">dnorm</span>(age_hat, age_sigma)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># firesev predictors</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  firesev_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_firesev_sigma)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  firesev_hat <span class="ot">&lt;-</span> age_firesev <span class="sc">*</span> age_obs <span class="sc">+</span> firesev_int</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  firesev <span class="sc">%~%</span> <span class="fu">dnorm</span>(firesev_hat, firesev_sigma)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cover predictors</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  cover_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_cover_sigma)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  cover_hat <span class="ot">&lt;-</span> firesev_cover <span class="sc">*</span> firesev_obs <span class="sc">+</span> cover_int</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  cover <span class="sc">%~%</span> <span class="fu">dnorm</span>(cover_hat, cover_sigma)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predictors of richness</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="co"># GLM with a log link </span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  log_rich_hat <span class="ot">&lt;-</span> </span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    cover_rich <span class="sc">*</span> cover_obs <span class="sc">+</span> </span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    distance_rich <span class="sc">*</span> distance <span class="sc">+</span> </span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    rich_int</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  rich_hat <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_rich_hat) <span class="co"># inverse link function!</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  theta <span class="ot">=</span> <span class="fu">exp</span>(log_theta)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  rich <span class="sc">%~%</span> <span class="fu">dnbinom2</span>(<span class="at">mu =</span> rich_hat, <span class="at">size =</span> theta)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, let’s setup a list of parameter start values. I’m gonna be lame and set them to 1 or use the SD values from the data. This works just fine.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>keeley_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">cover_rich =</span> <span class="dv">1</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance_rich =</span> <span class="dv">1</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">rich_int =</span> <span class="dv">1</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">firesev_cover =</span> <span class="dv">1</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">cover_int =</span> <span class="dv">1</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_firesev =</span> <span class="dv">1</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">firesev_int =</span> <span class="dv">1</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance_age =</span> <span class="dv">1</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_int =</span> <span class="dv">1</span>,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_cover_sigma =</span> <span class="fu">log</span>(<span class="fu">sd</span>(keeley<span class="sc">$</span>cover)),</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_firesev_sigma =</span> <span class="fu">log</span>(<span class="fu">sd</span>(keeley<span class="sc">$</span>firesev)),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_age_sigma =</span> <span class="fu">log</span>(<span class="fu">sd</span>(keeley<span class="sc">$</span>age)),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_theta =</span> <span class="dv">1</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><em>breathes hard like I just ran a marathon</em> I’m not gonna lie. The above two steps is really making me wonder if there is some code that can work from a lavaan-like specification to a list of parameters and RTMB code so I don’t have to type so damn much.</p>
+<p>OK, let’s fit it and make sure we converge.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cmb <span class="ot">&lt;-</span> <span class="cf">function</span>(f, d) <span class="cf">function</span>(p) <span class="fu">f</span>(p, d)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># RTMB object</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>keeley_fit <span class="ot">&lt;-</span> <span class="fu">cmb</span>(keeley_mod, keeley) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MakeADFun</span>(keeley_params,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                 <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#optimize</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>keeley_opt <span class="ot">&lt;-</span> <span class="fu">with</span>(keeley_fit,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>     <span class="fu">nlminb</span>(par, fn, gr))</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>keeley_opt<span class="sc">$</span>message</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>We’re good. I leave it to you to look at the <code>sdreport</code> - but, I ran this and compared it to a piecewiseSEM fit, and we’re good. The point here, though, is to compare to a fully saturated model to test the hypothesis that our model fit is not different from said saturated model’s fit.</p>
+<p>We want a $^2$ likelihood ratio test! We want to ask if the observed Likelihood-Ratio, or a more extreme LR, is different from and LR produced if our null hypothesis - that the models are the same - is true.</p>
+<p>With covariance-based SEM, one would merely compare the model-produced covariance matrix to the observed covariance matrix noting the degrees of freedom (from the number of parameters versus number of entries on the VCOV). We can’t do that here as we’re already beyond the world of the gaussian (I mean, we could, but the results wouldn’t be right). Instead, we need to fit a <em>saturated model</em> and use that. What would that be? Looking at the model we are fitting, we can modify it slightly. Red indicates a path we need to add.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 429.96 118.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 114)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-114 425.96,-114 425.96,4 -4,4"></polygon>
+<!-- distance -->
+<g id="node1" class="node">
+<title>distance</title>
+<polygon fill="none" stroke="black" points="61.8,-36 0.07,-36 0.07,0 61.8,0 61.8,-36"></polygon>
+<text text-anchor="middle" x="30.93" y="-13.8" font-family="Times,serif" font-size="14.00">distance</text>
+</g>
+<!-- age -->
+<g id="node2" class="node">
+<title>age</title>
+<polygon fill="none" stroke="black" points="151.87,-110 97.87,-110 97.87,-74 151.87,-74 151.87,-110"></polygon>
+<text text-anchor="middle" x="124.87" y="-87.8" font-family="Times,serif" font-size="14.00">age</text>
+</g>
+<!-- distance&#45;&gt;age -->
+<g id="edge1" class="edge">
+<title>distance-&gt;age</title>
+<path fill="none" stroke="black" d="M54.66,-36.29C66.35,-45.7 80.76,-57.3 93.4,-67.48"></path>
+<polygon fill="black" stroke="black" points="91.42,-70.37 101.41,-73.92 95.81,-64.92 91.42,-70.37"></polygon>
+</g>
+<!-- rich -->
+<g id="node3" class="node">
+<title>rich</title>
+<polygon fill="none" stroke="black" points="421.96,-38 367.96,-38 367.96,-2 421.96,-2 421.96,-38"></polygon>
+<text text-anchor="middle" x="394.96" y="-15.8" font-family="Times,serif" font-size="14.00">rich</text>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge2" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="black" d="M61.87,-14.24C127.93,-10.95 286.02,-11.72 357.62,-15.54"></path>
+<polygon fill="black" stroke="black" points="357.75,-19.06 367.94,-16.15 358.17,-12.07 357.75,-19.06"></polygon>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge7" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="red" d="M61.87,-22.09C127.93,-26.11 286.02,-27.09 357.62,-24.06"></path>
+<polygon fill="red" stroke="red" points="358.12,-27.54 367.94,-23.56 357.78,-20.55 358.12,-27.54"></polygon>
+</g>
+<!-- firesev -->
+<g id="node4" class="node">
+<title>firesev</title>
+<polygon fill="none" stroke="black" points="242,-66 187.82,-66 187.82,-30 242,-30 242,-66"></polygon>
+<text text-anchor="middle" x="214.91" y="-43.8" font-family="Times,serif" font-size="14.00">firesev</text>
+</g>
+<!-- distance&#45;&gt;firesev -->
+<g id="edge6" class="edge">
+<title>distance-&gt;firesev</title>
+<path fill="none" stroke="red" d="M61.98,-22.95C93.73,-28.19 143.79,-36.44 177.7,-42.03"></path>
+<polygon fill="red" stroke="red" points="177.23,-45.5 187.66,-43.67 178.36,-38.59 177.23,-45.5"></polygon>
+</g>
+<!-- age&#45;&gt;rich -->
+<g id="edge9" class="edge">
+<title>age-&gt;rich</title>
+<path fill="none" stroke="red" d="M151.94,-95.82C192.75,-100.53 273.13,-104.65 331.96,-75 346.57,-67.63 360.44,-55.95 371.34,-45.25"></path>
+<polygon fill="red" stroke="red" points="373.89,-47.65 378.39,-38.06 368.89,-42.75 373.89,-47.65"></polygon>
+</g>
+<!-- age&#45;&gt;firesev -->
+<g id="edge3" class="edge">
+<title>age-&gt;firesev</title>
+<path fill="none" stroke="black" d="M152.29,-78.8C160.63,-74.63 169.99,-69.95 178.84,-65.53"></path>
+<polygon fill="black" stroke="black" points="180.44,-68.64 187.82,-61.04 177.31,-62.38 180.44,-68.64"></polygon>
+</g>
+<!-- cover -->
+<g id="node5" class="node">
+<title>cover</title>
+<polygon fill="none" stroke="black" points="331.96,-66 277.96,-66 277.96,-30 331.96,-30 331.96,-66"></polygon>
+<text text-anchor="middle" x="304.96" y="-43.8" font-family="Times,serif" font-size="14.00">cover</text>
+</g>
+<!-- age&#45;&gt;cover -->
+<g id="edge8" class="edge">
+<title>age-&gt;cover</title>
+<path fill="none" stroke="red" d="M152.11,-90.16C175.91,-88.01 211.79,-83.61 241.96,-75 250.74,-72.49 259.9,-69.02 268.41,-65.4"></path>
+<polygon fill="red" stroke="red" points="269.95,-68.54 277.67,-61.29 267.11,-62.14 269.95,-68.54"></polygon>
+</g>
+<!-- firesev&#45;&gt;cover -->
+<g id="edge4" class="edge">
+<title>firesev-&gt;cover</title>
+<path fill="none" stroke="black" d="M242.33,-48C250.32,-48 259.25,-48 267.76,-48"></path>
+<polygon fill="black" stroke="black" points="267.86,-51.5 277.86,-48 267.86,-44.5 267.86,-51.5"></polygon>
+</g>
+<!-- cover&#45;&gt;rich -->
+<g id="edge5" class="edge">
+<title>cover-&gt;rich</title>
+<path fill="none" stroke="black" d="M332.36,-39.6C340.53,-37 349.66,-34.09 358.34,-31.33"></path>
+<polygon fill="black" stroke="black" points="359.41,-34.67 367.88,-28.3 357.29,-28 359.41,-34.67"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>We can setup a new model and parameter set for this and fit as usual.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>keeley_mod_saturated <span class="ot">&lt;-</span> <span class="cf">function</span>(data, params){</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># let's goooooooo!</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">getAll</span>(data, params)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Setup for SEM separating endogenous variables out</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  rich <span class="ot">&lt;-</span> <span class="fu">OBS</span>(rich)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  cover_obs <span class="ot">&lt;-</span> cover</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  cover <span class="ot">&lt;-</span> <span class="fu">OBS</span>(cover)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  firesev_obs <span class="ot">&lt;-</span> firesev</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  firesev <span class="ot">&lt;-</span> <span class="fu">OBS</span>(firesev)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  age_obs <span class="ot">&lt;-</span> age</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  age <span class="ot">&lt;-</span> <span class="fu">OBS</span>(age)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># age predictors</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  age_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_age_sigma)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  age_hat <span class="ot">&lt;-</span> distance_age <span class="sc">*</span> distance <span class="sc">+</span> age_int</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">%~%</span> <span class="fu">dnorm</span>(age_hat, age_sigma)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># firesev predictors</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  firesev_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_firesev_sigma)</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  firesev_hat <span class="ot">&lt;-</span> age_firesev <span class="sc">*</span> age_obs <span class="sc">+</span> </span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    distance_firesev <span class="sc">*</span> distance <span class="sc">+</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    firesev_int</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  firesev <span class="sc">%~%</span> <span class="fu">dnorm</span>(firesev_hat, firesev_sigma)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># cover predictors</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  cover_sigma <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_cover_sigma)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  cover_hat <span class="ot">&lt;-</span> firesev_cover <span class="sc">*</span> firesev_obs <span class="sc">+</span> </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    distance_cover <span class="sc">*</span> distance <span class="sc">+</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    age_cover <span class="sc">*</span> age_obs <span class="sc">+</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    cover_int</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  cover <span class="sc">%~%</span> <span class="fu">dnorm</span>(cover_hat, cover_sigma)</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># predictors of richness</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># GLM with a log link </span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>  log_rich_hat <span class="ot">&lt;-</span> </span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    cover_rich <span class="sc">*</span> cover_obs <span class="sc">+</span> </span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    distance_rich <span class="sc">*</span> distance <span class="sc">+</span> </span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    firesev_rich <span class="sc">*</span> firesev_obs <span class="sc">+</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    age_rich <span class="sc">*</span> age_obs <span class="sc">+</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>    rich_int</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>  rich_hat <span class="ot">&lt;-</span> <span class="fu">exp</span>(log_rich_hat) <span class="co"># inverse link function!</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>  theta <span class="ot">=</span> <span class="fu">exp</span>(log_theta)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>  rich <span class="sc">%~%</span> <span class="fu">dnbinom2</span>(<span class="at">mu =</span> rich_hat, <span class="at">size =</span> theta)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="co"># params - just add to what we already have!</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>keeley_params_saturated <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>  keeley_params,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">firesev_rich =</span> <span class="dv">1</span>,</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_rich =</span> <span class="dv">1</span>,</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_cover =</span> <span class="dv">1</span>,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>    <span class="at">distance_cover =</span> <span class="dv">1</span>,</span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">distance_firesev =</span> <span class="dv">1</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="co"># RTMB object</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>keeley_fit_saturated <span class="ot">&lt;-</span> <span class="fu">cmb</span>(keeley_mod_saturated, </span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>                            keeley) <span class="sc">|&gt;</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">MakeADFun</span>(keeley_params_saturated,</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>                 <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="co">#optimize</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>keeley_opt_saturated <span class="ot">&lt;-</span> <span class="fu">with</span>(keeley_fit_saturated,</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>     <span class="fu">nlminb</span>(par, fn, gr))</span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>keeley_opt_saturated<span class="sc">$</span>message</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>Whew! Big, but, it converged. Now, we just need to compare. Fortunately, our objective has both the negative log-likelihood of each model and the number of parameters. So, we can do this by hand (or write a function to do this for any set of nested models).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># first the LRT</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lrt <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (keeley_opt<span class="sc">$</span>objective <span class="sc">-</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>              keeley_opt_saturated<span class="sc">$</span>objective)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># difference in parameters = DF</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>df  <span class="ot">&lt;-</span> keeley_opt_saturated<span class="sc">$</span>par<span class="sc">|&gt;</span> <span class="fu">length</span>() <span class="sc">-</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  keeley_opt<span class="sc">$</span>par<span class="sc">|&gt;</span> <span class="fu">length</span>()</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(lrt, df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0402467</code></pre>
+</div>
+</div>
+<p>OK! And there’s your test! Did it fit. Well. Not quite… So, at this point, what do you do? You can do a lot! You can look at the parameter values in the saturated model and see if anything is obvious (it’s not) or you can begin to diagnose is there are other problems. Maybe there’s something else wrong here - who knows! The conundrum of SEM!</p>
+</section>
+<section id="tests-of-directed-separation" class="level2">
+<h2 class="anchored" data-anchor-id="tests-of-directed-separation">Tests of Directed Separation</h2>
+<p>What’s interesting is that in order to create a saturated model…. you need to fill out the basis set! It’s a convenient bit. If you are worried, you can always fill out a model and use <a href="https://www.dagitty.net/">dagitty</a> and <a href="https://r-causal.github.io/ggdag/index.html">ggdag</a> to see the conditional independence claims. Note - this is not the basis set, it’s more expansive.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dagitty)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggdag)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>mod_dag <span class="ot">&lt;-</span> ggdag<span class="sc">::</span><span class="fu">dagify</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">~</span> distance,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  firesev <span class="sc">~</span> age,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  cover <span class="sc">~</span> firesev,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  rich <span class="sc">~</span> cover <span class="sc">+</span> distance</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">impliedConditionalIndependencies</span>(mod_dag)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>age _||_ covr | frsv
+age _||_ rich | covr, dstn
+age _||_ rich | dstn, frsv
+covr _||_ dstn | age
+covr _||_ dstn | frsv
+dstn _||_ frsv | age
+frsv _||_ rich | covr, dstn
+frsv _||_ rich | age, covr</code></pre>
+</div>
+</div>
+<p>You can also plot the basis set with ggdag</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_dag, <span class="at">type =</span> <span class="st">"basis.set"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="20261125_sem_testing_rtmb_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>to see what you’ll need to test.</p>
+<p>But, hey, NEAT - that is the <em>same</em> as the new parameters we have for the saturated model. It’s almost as if, we can use those new parameters, fix each one to 0, then one at the time let them be free, and get the p-value each time.</p>
+<p>First, let’s start with - how do we take a model and pin it’s values at a certain value? For that, <code>MakeADFun()</code> has an argument <code>map</code> where you can supply a list with names of parameters. If a parameter in the map is a factor with NA - <code>factor(NA)</code> - its value is fixed to what it is in the parameters list. Interestingly, if you have entries in map with the SAME factor level (that is not NA), they will be set to a common value. So, nice way to do some constraints even if you have different parameter names.</p>
+<p>OK, so, let’s make a new basis set parameter list and an accompanying map.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>basis_params <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">firesev_rich =</span> <span class="dv">0</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_rich =</span> <span class="dv">0</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_cover =</span> <span class="dv">0</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">distance_cover =</span> <span class="dv">0</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">distance_firesev =</span> <span class="dv">0</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>keeley_params_basis <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  keeley_params,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  basis_params</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>fix0_map <span class="ot">&lt;-</span> <span class="fu">lapply</span>(basis_params,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>                   \(x){<span class="fu">factor</span>(<span class="cn">NA</span>)})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, to show you this works, let’s fit the following. We’ll use <code>keeley_mod_saturated</code> from above, but use our new parameters for a basis set and we will fix all parameters to 0. This should mean we get a fit model back that is identical to our initial <code>keeley_fit</code> from the start of all of this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cmb</span>(keeley_mod_saturated, keeley),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">parameters =</span> keeley_params_basis,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">map =</span> fix0_map,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">silent =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># optimize</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>opt <span class="ot">&lt;-</span> <span class="fu">nlminb</span>(obj<span class="sc">$</span>par, obj<span class="sc">$</span>fn, obj<span class="sc">$</span>gr)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># compare models NLLs</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>opt<span class="sc">$</span>objective</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 878.5167</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>keeley_opt<span class="sc">$</span>objective</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 878.5167</code></pre>
+</div>
+</div>
+<p>Check their <code>sdreport()</code> as well - you’ll see they are the same.</p>
+<p>So this is cool. We can now use <code>lapply()</code> or <code>purrr::map()</code> to iterate over the parameter names in <code>basis_params</code> and get the p value for each one in order to construct a test of Fischer’s C. First, we’ll need a function to extract a p-value for a parameter.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>get_p_param <span class="ot">&lt;-</span> <span class="cf">function</span>(obj, a_param){</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sdreport</span>(obj) <span class="sc">|&gt;</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summary</span>(<span class="at">p.value =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>(<span class="at">rownames =</span> <span class="st">"parameter"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="sc">|&gt;</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(parameter <span class="sc">==</span> a_param) <span class="sc">|&gt;</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(parameter, pr_z_2) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">p =</span> pr_z_2)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">get_p_param</span>(obj, <span class="st">"age_firesev"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  parameter            p
+  &lt;chr&gt;            &lt;dbl&gt;
+1 age_firesev 0.00000135</code></pre>
+</div>
+</div>
+<p>Now we need a function that, given a parameter and a map list where that parameter is fixed will free it up.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>get_free_mod <span class="ot">&lt;-</span> <span class="cf">function</span>(mod, param, paramlist, fix0_map, data) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  new_map <span class="ot">&lt;-</span> fix0_map[<span class="fu">names</span>(fix0_map) <span class="sc">!=</span> param]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  obj <span class="ot">&lt;-</span> <span class="fu">MakeADFun</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cmb</span>(mod, data),</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">parameters =</span> paramlist,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">map =</span> new_map,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">silent =</span> <span class="cn">TRUE</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># optimize</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  opt <span class="ot">&lt;-</span> <span class="fu">nlminb</span>(obj<span class="sc">$</span>par, obj<span class="sc">$</span>fn, obj<span class="sc">$</span>gr)</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  obj</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># let's test it out!</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>test_obj <span class="ot">&lt;-</span> <span class="fu">get_free_mod</span>(</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>  keeley_mod_saturated,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">param =</span> <span class="st">"distance_firesev"</span>,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">paramlist =</span> keeley_params_basis,</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">fix0_map =</span> fix0_map,</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> keeley</span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="fu">get_p_param</span>(test_obj, <span class="st">"distance_firesev"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  parameter             p
+  &lt;chr&gt;             &lt;dbl&gt;
+1 distance_firesev 0.0876</code></pre>
+</div>
+</div>
+<p>Oh, hey! That works! And……look, there’s our p-value! So, one last step to make this all work - wrap it in an lapply!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>make_basis_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(param){</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  fit_obj <span class="ot">&lt;-</span> <span class="fu">get_free_mod</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    keeley_mod_saturated,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">param =</span> param,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">paramlist =</span> keeley_params_basis,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">fix0_map =</span> fix0_map,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> keeley</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_param</span>(fit_obj, param)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co"># make it sew</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>basis_frame <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="fu">names</span>(basis_params),</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>                      make_basis_fun) <span class="sc">|&gt;</span></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Reduce</span>(rbind, <span class="at">x =</span> _)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>basis_frame</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  parameter             p
+  &lt;chr&gt;             &lt;dbl&gt;
+1 firesev_rich     0.0429
+2 age_rich         0.250 
+3 age_cover        0.0669
+4 distance_cover   0.176 
+5 distance_firesev 0.0876</code></pre>
+</div>
+</div>
+<p>Welp - what’s nice here is that we can see that one conditional independence claim is not satisfied - and it’s an interesting one! We can also now calculate Fisher’s C and evaluate it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>c_stat <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">sum</span>(<span class="fu">log</span>(basis_frame<span class="sc">$</span>p))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">nrow</span>(basis_frame)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pchisq</span>(c_stat, df)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">C =</span> c_stat, <span class="at">df =</span> df, <span class="at">p =</span> p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         C df          p
+1 22.82381 10 0.01141593</code></pre>
+</div>
+</div>
+<p>Yup - that failure hoses the model. Interestingly, this is slightly different from a similar model in piecewiseSEM, but, it’s likely a rounding bit in the p values or an algorithmic thing.</p>
+</section>
+<section id="model-comparison-in-general" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison-in-general">Model Comparison in General</h2>
+<p>From the above, I hope you can see how you can easily generate AICs from alternate models and do comparisons there. As our objective is the negative log likelihood, our AIC is just 2 * (nll + k). So, let’s compare the first model we fit to the saturated model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>AIC_mod <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> keeley_opt<span class="sc">$</span>objective <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span><span class="sc">*</span> <span class="fu">length</span>(keeley_opt<span class="sc">$</span>par)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>AIC_saturated <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> keeley_opt_saturated<span class="sc">$</span>objective <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span><span class="fu">length</span>(keeley_opt_saturated<span class="sc">$</span>par)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="fu">c</span>(<span class="st">"Our model"</span>, <span class="st">"Saturated model"</span>),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">aic =</span> <span class="fu">c</span>(AIC_mod, AIC_saturated)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delta_aic =</span> <span class="fu">min</span>(aic) <span class="sc">-</span> aic)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  model             aic delta_aic
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 Our model       1783.     -1.63
+2 Saturated model 1781.      0   </code></pre>
+</div>
+</div>
+<p>Not that different! Which accords with most of our results above - save that we’re not testing for fit explicitly. Still, this gives another view into how these models compare, and one that is useful for optimizing for out of sample prediction.</p>
+</section>
+<section id="where-do-we-go-from-here" class="level2">
+<h2 class="anchored" data-anchor-id="where-do-we-go-from-here">Where do we go from here?</h2>
+<p>I hope you’ve enjoyed. Obviously, as we’re dealing with SEMs using equation-level estimation, the complexity is pretty daunting. However, there are some real advantages. In the next post, I’ll talk simulation from these models, which is pretty sweet. I’ve explored a bit if some of the above can be automated, and, well, while it can, it’s often with some fairly abstruse coding that is easy to use once written, but often obscures what you are trying to do with your models from you. I still think at some point an semRTMB package might be a good idea that translates lavaan-style models to RTMB and automates some of the above, but…. that might be a minute until I have time to try making that. But I’m sure it’s possible!</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script>
+/* Disqus comments + Older/Newer pager on posts (/posts/YYYYMMDD_slug.html) and the About page. */
+(function () {
+  var path = window.location.pathname;
+  var m = path.match(/^\/posts\/(\d{4})(\d{2})(\d{2})_([^\/]+?)(?:\.html)?$/);
+  if (!m && !/^\/about\//.test(path)) return;
+  var host = document.getElementById('quarto-document-content') || document.body;
+  var strip = function (p) { return p.replace(/index\.html$/, '').replace(/\.html$/, ''); };
+
+  if (m) {
+    var pager = document.createElement('nav');
+    pager.className = 'post-pager';
+    pager.setAttribute('aria-label', 'Older and newer posts');
+    host.appendChild(pager);
+    fetch('/listings.json').then(function (r) { return r.json(); }).then(function (lists) {
+      var items = null;
+      (lists || []).forEach(function (l) { if (l.listing === '/index.html') items = l.items; });
+      if (!items) return;
+      var here = strip(path);
+      var i = items.findIndex(function (p) { return strip(p) === here; });
+      if (i < 0) return;
+      // the listing is sorted newest first
+      if (i + 1 < items.length) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i + 1] + '">\u2190 Older Post</a>');
+      else pager.insertAdjacentHTML('beforeend', '<span></span>');
+      if (i > 0) pager.insertAdjacentHTML('beforeend',
+        '<a href="' + items[i - 1] + '">Newer Post \u2192</a>');
+    }).catch(function () {});
+  }
+
+  var thread = document.createElement('div');
+  thread.id = 'disqus_thread';
+  host.appendChild(thread);
+  window.disqus_shortname = 'im-a-chordata-urochordata';
+  if (m) {
+    /* Old comment threads were created under the old Hugo URL (/YYYY/MM/DD/slug/), so use that. */
+    var legacy = window.location.origin + '/' + m[1] + '/' + m[2] + '/' + m[3] + '/' + m[4] + '/';
+    window.disqus_config = function () { this.page.url = legacy; };
+  }
+  var dsq = document.createElement('script');
+  dsq.async = true;
+  dsq.src = '//' + window.disqus_shortname + '.disqus.com/embed.js';
+  document.head.appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/imachordata\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/jebyrnes">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/jebyrnes.bsky.social">
+      <i class="bi bi-bluesky" role="img" aria-label="Bluesky">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="../index.xml">
+      <i class="bi bi-rss" role="img" aria-label="RSS">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

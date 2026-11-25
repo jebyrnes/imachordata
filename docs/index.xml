@@ -10,7 +10,2576 @@
 <atom:link href="https://imachordata.com/index.xml" rel="self" type="application/rss+xml"/>
 <description>Marine Data Science for All, Regardless of Backbone!</description>
 <generator>quarto-1.8.25</generator>
-<lastBuildDate>Thu, 19 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Wed, 25 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Testing Structural Equation Models Built with RTMB</title>
+  <dc:creator>Jarrett Byrnes</dc:creator>
+  <link>https://imachordata.com/posts/20261125_sem_testing_rtmb.html</link>
+  <description><![CDATA[ 
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+
+
+
+<p>After fitting a Structural Equation Model, we have to assess whether the fit is any good. This typically falls into two main branches of questions:</p>
+<ol type="1">
+<li><p>Does my model reproduce the structure of my data?</p></li>
+<li><p>Are there any missing links in my model? I.e., does my model satisfy all conditional independence claims that its structure implies?</p></li>
+</ol>
+<p>With an SEM fit using RTMB, we can test both with a little extra elbow grease.</p>
+<section id="the-model-for-your-consideration" class="level2">
+<h2 class="anchored" data-anchor-id="the-model-for-your-consideration">The Model For Your Consideration</h2>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 429.96 67.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 63)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-63 425.96,-63 425.96,4 -4,4"></polygon>
+<!-- distance -->
+<g id="node1" class="node">
+<title>distance</title>
+<polygon fill="none" stroke="black" points="61.8,-36 0.07,-36 0.07,0 61.8,0 61.8,-36"></polygon>
+<text text-anchor="middle" x="30.93" y="-13.8" font-family="Times,serif" font-size="14.00">distance</text>
+</g>
+<!-- age -->
+<g id="node2" class="node">
+<title>age</title>
+<polygon fill="none" stroke="black" points="151.87,-59 97.87,-59 97.87,-23 151.87,-23 151.87,-59"></polygon>
+<text text-anchor="middle" x="124.87" y="-36.8" font-family="Times,serif" font-size="14.00">age</text>
+</g>
+<!-- distance&#45;&gt;age -->
+<g id="edge1" class="edge">
+<title>distance-&gt;age</title>
+<path fill="none" stroke="black" d="M62.04,-25.53C70.32,-27.6 79.38,-29.87 87.95,-32.01"></path>
+<polygon fill="black" stroke="black" points="87.17,-35.43 97.72,-34.46 88.87,-28.63 87.17,-35.43"></polygon>
+</g>
+<!-- rich -->
+<g id="node3" class="node">
+<title>rich</title>
+<polygon fill="none" stroke="black" points="421.96,-36 367.96,-36 367.96,0 421.96,0 421.96,-36"></polygon>
+<text text-anchor="middle" x="394.96" y="-13.8" font-family="Times,serif" font-size="14.00">rich</text>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge2" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="black" d="M61.97,-18C128.53,-18 284.81,-18 357.08,-18"></path>
+<polygon fill="black" stroke="black" points="357.52,-21.5 367.52,-18 357.52,-14.5 357.52,-21.5"></polygon>
+</g>
+<!-- firesev -->
+<g id="node4" class="node">
+<title>firesev</title>
+<polygon fill="none" stroke="black" points="242,-59 187.82,-59 187.82,-23 242,-23 242,-59"></polygon>
+<text text-anchor="middle" x="214.91" y="-36.8" font-family="Times,serif" font-size="14.00">firesev</text>
+</g>
+<!-- age&#45;&gt;firesev -->
+<g id="edge3" class="edge">
+<title>age-&gt;firesev</title>
+<path fill="none" stroke="black" d="M152.29,-41C160.28,-41 169.2,-41 177.72,-41"></path>
+<polygon fill="black" stroke="black" points="177.82,-44.5 187.82,-41 177.82,-37.5 177.82,-44.5"></polygon>
+</g>
+<!-- cover -->
+<g id="node5" class="node">
+<title>cover</title>
+<polygon fill="none" stroke="black" points="331.96,-59 277.96,-59 277.96,-23 331.96,-23 331.96,-59"></polygon>
+<text text-anchor="middle" x="304.96" y="-36.8" font-family="Times,serif" font-size="14.00">cover</text>
+</g>
+<!-- firesev&#45;&gt;cover -->
+<g id="edge4" class="edge">
+<title>firesev-&gt;cover</title>
+<path fill="none" stroke="black" d="M242.33,-41C250.32,-41 259.25,-41 267.76,-41"></path>
+<polygon fill="black" stroke="black" points="267.86,-44.5 277.86,-41 267.86,-37.5 267.86,-44.5"></polygon>
+</g>
+<!-- cover&#45;&gt;rich -->
+<g id="edge5" class="edge">
+<title>cover-&gt;rich</title>
+<path fill="none" stroke="black" d="M332.36,-34.1C340.44,-31.99 349.47,-29.63 358.06,-27.38"></path>
+<polygon fill="black" stroke="black" points="359.09,-30.73 367.88,-24.82 357.32,-23.96 359.09,-30.73"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="testing-model-fit-with-chi2" class="level2">
+<h2 class="anchored" data-anchor-id="testing-model-fit-with-chi2">Testing Model Fit with $chi^2$</h2>
+<p>OK, first things first. Let’s load the data and get some packages setup.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMB)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMBdist)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># for playing with coefficient tables</span></span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># for viz</span></span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"keeley"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"piecewiseSEM"</span>)</span></code></pre></div></div>
+</div>
+<p>Great, now, using the DAG above, let’s setup a model. Remember, richness is negative binomial with a log link.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">keeley_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(data, params){</span>
+<span id="cb2-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's goooooooo!</span></span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(data, params)</span>
+<span id="cb2-4">  </span>
+<span id="cb2-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Setup for SEM separating endogenous variables out</span></span>
+<span id="cb2-6">  rich <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(rich)</span>
+<span id="cb2-7">  cover_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cover</span>
+<span id="cb2-8">  cover <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(cover)</span>
+<span id="cb2-9">  firesev_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev</span>
+<span id="cb2-10">  firesev <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(firesev)</span>
+<span id="cb2-11">  age_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> age</span>
+<span id="cb2-12">  age <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(age)</span>
+<span id="cb2-13">  </span>
+<span id="cb2-14">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># age predictors</span></span>
+<span id="cb2-15">  age_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_age_sigma)</span>
+<span id="cb2-16">  age_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> distance_age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age_int</span>
+<span id="cb2-17">  age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(age_hat, age_sigma)</span>
+<span id="cb2-18">  </span>
+<span id="cb2-19">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># firesev predictors</span></span>
+<span id="cb2-20">  firesev_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_firesev_sigma)</span>
+<span id="cb2-21">  firesev_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> age_firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> age_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> firesev_int</span>
+<span id="cb2-22">  firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(firesev_hat, firesev_sigma)</span>
+<span id="cb2-23">  </span>
+<span id="cb2-24">  </span>
+<span id="cb2-25">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cover predictors</span></span>
+<span id="cb2-26">  cover_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_cover_sigma)</span>
+<span id="cb2-27">  cover_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> cover_int</span>
+<span id="cb2-28">  cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(cover_hat, cover_sigma)</span>
+<span id="cb2-29">  </span>
+<span id="cb2-30">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># predictors of richness</span></span>
+<span id="cb2-31">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># GLM with a log link </span></span>
+<span id="cb2-32">  log_rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb2-33">    cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-34">    distance_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb2-35">    rich_int</span>
+<span id="cb2-36">  rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_rich_hat) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># inverse link function!</span></span>
+<span id="cb2-37">  theta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_theta)</span>
+<span id="cb2-38">  rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnbinom2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mu =</span> rich_hat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> theta)</span>
+<span id="cb2-39"></span>
+<span id="cb2-40">}</span></code></pre></div></div>
+</div>
+<p>Now, let’s setup a list of parameter start values. I’m gonna be lame and set them to 1 or use the SD values from the data. This works just fine.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">keeley_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb3-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cover_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rich_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-5">  </span>
+<span id="cb3-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cover_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-8">  </span>
+<span id="cb3-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_firesev =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-10">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-11"></span>
+<span id="cb3-12">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_age =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-13">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-14">  </span>
+<span id="cb3-15">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_cover_sigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>cover)),</span>
+<span id="cb3-16">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_firesev_sigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>firesev)),</span>
+<span id="cb3-17">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_age_sigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>age)),</span>
+<span id="cb3-18">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_theta =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-19">)</span></code></pre></div></div>
+</div>
+<p><em>breathes hard like I just ran a marathon</em> I’m not gonna lie. The above two steps is really making me wonder if there is some code that can work from a lavaan-like specification to a list of parameters and RTMB code so I don’t have to type so damn much.</p>
+<p>OK, let’s fit it and make sure we converge.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">cmb <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(f, d) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">f</span>(p, d)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RTMB object</span></span>
+<span id="cb4-4">keeley_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(keeley_mod, keeley) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(keeley_params,</span>
+<span id="cb4-6">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#optimize</span></span>
+<span id="cb4-9">keeley_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(keeley_fit,</span>
+<span id="cb4-10">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span>
+<span id="cb4-11"></span>
+<span id="cb4-12">keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>message</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>We’re good. I leave it to you to look at the <code>sdreport</code> - but, I ran this and compared it to a piecewiseSEM fit, and we’re good. The point here, though, is to compare to a fully saturated model to test the hypothesis that our model fit is not different from said saturated model’s fit.</p>
+<p>We want a $^2$ likelihood ratio test! We want to ask if the observed Likelihood-Ratio, or a more extreme LR, is different from and LR produced if our null hypothesis - that the models are the same - is true.</p>
+<p>With covariance-based SEM, one would merely compare the model-produced covariance matrix to the observed covariance matrix noting the degrees of freedom (from the number of parameters versus number of entries on the VCOV). We can’t do that here as we’re already beyond the world of the gaussian (I mean, we could, but the results wouldn’t be right). Instead, we need to fit a <em>saturated model</em> and use that. What would that be? Looking at the model we are fitting, we can modify it slightly. Red indicates a path we need to add.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 429.96 118.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 114)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-114 425.96,-114 425.96,4 -4,4"></polygon>
+<!-- distance -->
+<g id="node1" class="node">
+<title>distance</title>
+<polygon fill="none" stroke="black" points="61.8,-36 0.07,-36 0.07,0 61.8,0 61.8,-36"></polygon>
+<text text-anchor="middle" x="30.93" y="-13.8" font-family="Times,serif" font-size="14.00">distance</text>
+</g>
+<!-- age -->
+<g id="node2" class="node">
+<title>age</title>
+<polygon fill="none" stroke="black" points="151.87,-110 97.87,-110 97.87,-74 151.87,-74 151.87,-110"></polygon>
+<text text-anchor="middle" x="124.87" y="-87.8" font-family="Times,serif" font-size="14.00">age</text>
+</g>
+<!-- distance&#45;&gt;age -->
+<g id="edge1" class="edge">
+<title>distance-&gt;age</title>
+<path fill="none" stroke="black" d="M54.66,-36.29C66.35,-45.7 80.76,-57.3 93.4,-67.48"></path>
+<polygon fill="black" stroke="black" points="91.42,-70.37 101.41,-73.92 95.81,-64.92 91.42,-70.37"></polygon>
+</g>
+<!-- rich -->
+<g id="node3" class="node">
+<title>rich</title>
+<polygon fill="none" stroke="black" points="421.96,-38 367.96,-38 367.96,-2 421.96,-2 421.96,-38"></polygon>
+<text text-anchor="middle" x="394.96" y="-15.8" font-family="Times,serif" font-size="14.00">rich</text>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge2" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="black" d="M61.87,-14.24C127.93,-10.95 286.02,-11.72 357.62,-15.54"></path>
+<polygon fill="black" stroke="black" points="357.75,-19.06 367.94,-16.15 358.17,-12.07 357.75,-19.06"></polygon>
+</g>
+<!-- distance&#45;&gt;rich -->
+<g id="edge7" class="edge">
+<title>distance-&gt;rich</title>
+<path fill="none" stroke="red" d="M61.87,-22.09C127.93,-26.11 286.02,-27.09 357.62,-24.06"></path>
+<polygon fill="red" stroke="red" points="358.12,-27.54 367.94,-23.56 357.78,-20.55 358.12,-27.54"></polygon>
+</g>
+<!-- firesev -->
+<g id="node4" class="node">
+<title>firesev</title>
+<polygon fill="none" stroke="black" points="242,-66 187.82,-66 187.82,-30 242,-30 242,-66"></polygon>
+<text text-anchor="middle" x="214.91" y="-43.8" font-family="Times,serif" font-size="14.00">firesev</text>
+</g>
+<!-- distance&#45;&gt;firesev -->
+<g id="edge6" class="edge">
+<title>distance-&gt;firesev</title>
+<path fill="none" stroke="red" d="M61.98,-22.95C93.73,-28.19 143.79,-36.44 177.7,-42.03"></path>
+<polygon fill="red" stroke="red" points="177.23,-45.5 187.66,-43.67 178.36,-38.59 177.23,-45.5"></polygon>
+</g>
+<!-- age&#45;&gt;rich -->
+<g id="edge9" class="edge">
+<title>age-&gt;rich</title>
+<path fill="none" stroke="red" d="M151.94,-95.82C192.75,-100.53 273.13,-104.65 331.96,-75 346.57,-67.63 360.44,-55.95 371.34,-45.25"></path>
+<polygon fill="red" stroke="red" points="373.89,-47.65 378.39,-38.06 368.89,-42.75 373.89,-47.65"></polygon>
+</g>
+<!-- age&#45;&gt;firesev -->
+<g id="edge3" class="edge">
+<title>age-&gt;firesev</title>
+<path fill="none" stroke="black" d="M152.29,-78.8C160.63,-74.63 169.99,-69.95 178.84,-65.53"></path>
+<polygon fill="black" stroke="black" points="180.44,-68.64 187.82,-61.04 177.31,-62.38 180.44,-68.64"></polygon>
+</g>
+<!-- cover -->
+<g id="node5" class="node">
+<title>cover</title>
+<polygon fill="none" stroke="black" points="331.96,-66 277.96,-66 277.96,-30 331.96,-30 331.96,-66"></polygon>
+<text text-anchor="middle" x="304.96" y="-43.8" font-family="Times,serif" font-size="14.00">cover</text>
+</g>
+<!-- age&#45;&gt;cover -->
+<g id="edge8" class="edge">
+<title>age-&gt;cover</title>
+<path fill="none" stroke="red" d="M152.11,-90.16C175.91,-88.01 211.79,-83.61 241.96,-75 250.74,-72.49 259.9,-69.02 268.41,-65.4"></path>
+<polygon fill="red" stroke="red" points="269.95,-68.54 277.67,-61.29 267.11,-62.14 269.95,-68.54"></polygon>
+</g>
+<!-- firesev&#45;&gt;cover -->
+<g id="edge4" class="edge">
+<title>firesev-&gt;cover</title>
+<path fill="none" stroke="black" d="M242.33,-48C250.32,-48 259.25,-48 267.76,-48"></path>
+<polygon fill="black" stroke="black" points="267.86,-51.5 277.86,-48 267.86,-44.5 267.86,-51.5"></polygon>
+</g>
+<!-- cover&#45;&gt;rich -->
+<g id="edge5" class="edge">
+<title>cover-&gt;rich</title>
+<path fill="none" stroke="black" d="M332.36,-39.6C340.53,-37 349.66,-34.09 358.34,-31.33"></path>
+<polygon fill="black" stroke="black" points="359.41,-34.67 367.88,-28.3 357.29,-28 359.41,-34.67"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>We can setup a new model and parameter set for this and fit as usual.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1">keeley_mod_saturated <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(data, params){</span>
+<span id="cb6-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's goooooooo!</span></span>
+<span id="cb6-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(data, params)</span>
+<span id="cb6-4">  </span>
+<span id="cb6-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Setup for SEM separating endogenous variables out</span></span>
+<span id="cb6-6">  rich <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(rich)</span>
+<span id="cb6-7">  cover_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cover</span>
+<span id="cb6-8">  cover <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(cover)</span>
+<span id="cb6-9">  firesev_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev</span>
+<span id="cb6-10">  firesev <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(firesev)</span>
+<span id="cb6-11">  age_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> age</span>
+<span id="cb6-12">  age <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(age)</span>
+<span id="cb6-13">  </span>
+<span id="cb6-14">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># age predictors</span></span>
+<span id="cb6-15">  age_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_age_sigma)</span>
+<span id="cb6-16">  age_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> distance_age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> age_int</span>
+<span id="cb6-17">  age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(age_hat, age_sigma)</span>
+<span id="cb6-18">  </span>
+<span id="cb6-19">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># firesev predictors</span></span>
+<span id="cb6-20">  firesev_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_firesev_sigma)</span>
+<span id="cb6-21">  firesev_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> age_firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> age_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-22">    distance_firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-23">    firesev_int</span>
+<span id="cb6-24">  firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(firesev_hat, firesev_sigma)</span>
+<span id="cb6-25">  </span>
+<span id="cb6-26">  </span>
+<span id="cb6-27">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cover predictors</span></span>
+<span id="cb6-28">  cover_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_cover_sigma)</span>
+<span id="cb6-29">  cover_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-30">    distance_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-31">    age_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> age_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-32">    cover_int</span>
+<span id="cb6-33">  cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(cover_hat, cover_sigma)</span>
+<span id="cb6-34">  </span>
+<span id="cb6-35">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># predictors of richness</span></span>
+<span id="cb6-36">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># GLM with a log link </span></span>
+<span id="cb6-37">  log_rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> </span>
+<span id="cb6-38">    cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-39">    distance_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> distance <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb6-40">    firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-41">    age_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> age_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb6-42">    rich_int</span>
+<span id="cb6-43">  rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_rich_hat) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># inverse link function!</span></span>
+<span id="cb6-44">  theta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_theta)</span>
+<span id="cb6-45">  rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnbinom2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mu =</span> rich_hat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> theta)</span>
+<span id="cb6-46"></span>
+<span id="cb6-47">}</span>
+<span id="cb6-48"></span>
+<span id="cb6-49"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># params - just add to what we already have!</span></span>
+<span id="cb6-50">keeley_params_saturated <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb6-51">  keeley_params,</span>
+<span id="cb6-52">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb6-53">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb6-54">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb6-55">    </span>
+<span id="cb6-56">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb6-57">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb6-58">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_firesev =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb6-59">    </span>
+<span id="cb6-60">  )</span>
+<span id="cb6-61">)</span>
+<span id="cb6-62"></span>
+<span id="cb6-63"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RTMB object</span></span>
+<span id="cb6-64">keeley_fit_saturated <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(keeley_mod_saturated, </span>
+<span id="cb6-65">                            keeley) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb6-66">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(keeley_params_saturated,</span>
+<span id="cb6-67">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb6-68"></span>
+<span id="cb6-69"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#optimize</span></span>
+<span id="cb6-70">keeley_opt_saturated <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(keeley_fit_saturated,</span>
+<span id="cb6-71">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span>
+<span id="cb6-72"></span>
+<span id="cb6-73">keeley_opt_saturated<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>message</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>Whew! Big, but, it converged. Now, we just need to compare. Fortunately, our objective has both the negative log-likelihood of each model and the number of parameters. So, we can do this by hand (or write a function to do this for any set of nested models).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># first the LRT</span></span>
+<span id="cb8-2">lrt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> </span>
+<span id="cb8-3">              keeley_opt_saturated<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective)</span>
+<span id="cb8-4"></span>
+<span id="cb8-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># difference in parameters = DF</span></span>
+<span id="cb8-6">df  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> keeley_opt_saturated<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span></span>
+<span id="cb8-7">  keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>()</span>
+<span id="cb8-8"></span>
+<span id="cb8-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pchisq</span>(lrt, df, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lower.tail =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0402467</code></pre>
+</div>
+</div>
+<p>OK! And there’s your test! Did it fit. Well. Not quite… So, at this point, what do you do? You can do a lot! You can look at the parameter values in the saturated model and see if anything is obvious (it’s not) or you can begin to diagnose is there are other problems. Maybe there’s something else wrong here - who knows! The conundrum of SEM!</p>
+</section>
+<section id="tests-of-directed-separation" class="level2">
+<h2 class="anchored" data-anchor-id="tests-of-directed-separation">Tests of Directed Separation</h2>
+<p>What’s interesting is that in order to create a saturated model…. you need to fill out the basis set! It’s a convenient bit. If you are worried, you can always fill out a model and use <a href="https://www.dagitty.net/">dagitty</a> and <a href="https://r-causal.github.io/ggdag/index.html">ggdag</a> to see the conditional independence claims. Note - this is not the basis set, it’s more expansive.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dagitty)</span>
+<span id="cb10-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggdag)</span>
+<span id="cb10-3"></span>
+<span id="cb10-4">mod_dag <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> ggdag<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dagify</span>(</span>
+<span id="cb10-5">  age <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> distance,</span>
+<span id="cb10-6">  firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> age,</span>
+<span id="cb10-7">  cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> firesev,</span>
+<span id="cb10-8">  rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> distance</span>
+<span id="cb10-9">) </span>
+<span id="cb10-10"></span>
+<span id="cb10-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">impliedConditionalIndependencies</span>(mod_dag)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>age _||_ covr | frsv
+age _||_ rich | covr, dstn
+age _||_ rich | dstn, frsv
+covr _||_ dstn | age
+covr _||_ dstn | frsv
+dstn _||_ frsv | age
+frsv _||_ rich | covr, dstn
+frsv _||_ rich | age, covr</code></pre>
+</div>
+</div>
+<p>You can also plot the basis set with ggdag</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>(mod_dag, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">type =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"basis.set"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261125_sem_testing_rtmb_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>to see what you’ll need to test.</p>
+<p>But, hey, NEAT - that is the <em>same</em> as the new parameters we have for the saturated model. It’s almost as if, we can use those new parameters, fix each one to 0, then one at the time let them be free, and get the p-value each time.</p>
+<p>First, let’s start with - how do we take a model and pin it’s values at a certain value? For that, <code>MakeADFun()</code> has an argument <code>map</code> where you can supply a list with names of parameters. If a parameter in the map is a factor with NA - <code>factor(NA)</code> - its value is fixed to what it is in the parameters list. Interestingly, if you have entries in map with the SAME factor level (that is not NA), they will be set to a common value. So, nice way to do some constraints even if you have different parameter names.</p>
+<p>OK, so, let’s make a new basis set parameter list and an accompanying map.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1">basis_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb13-2">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb13-3">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb13-4">    </span>
+<span id="cb13-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">age_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb13-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>,</span>
+<span id="cb13-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">distance_firesev =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb13-8">    </span>
+<span id="cb13-9">  )</span>
+<span id="cb13-10"></span>
+<span id="cb13-11">keeley_params_basis <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(</span>
+<span id="cb13-12">  keeley_params,</span>
+<span id="cb13-13">  basis_params</span>
+<span id="cb13-14">)</span>
+<span id="cb13-15"></span>
+<span id="cb13-16">fix0_map <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lapply</span>(basis_params,</span>
+<span id="cb13-17">                   \(x){<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">factor</span>(<span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NA</span>)})</span></code></pre></div></div>
+</div>
+<p>Now, to show you this works, let’s fit the following. We’ll use <code>keeley_mod_saturated</code> from above, but use our new parameters for a basis set and we will fix all parameters to 0. This should mean we get a fit model back that is identical to our initial <code>keeley_fit</code> from the start of all of this.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">obj <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(</span>
+<span id="cb14-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(keeley_mod_saturated, keeley),</span>
+<span id="cb14-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">parameters =</span> keeley_params_basis,</span>
+<span id="cb14-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">map =</span> fix0_map,</span>
+<span id="cb14-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb14-6"></span>
+<span id="cb14-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># optimize</span></span>
+<span id="cb14-8">opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par, obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fn, obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>gr)</span>
+<span id="cb14-9"></span>
+<span id="cb14-10"></span>
+<span id="cb14-11"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># compare models NLLs</span></span>
+<span id="cb14-12">opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 878.5167</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 878.5167</code></pre>
+</div>
+</div>
+<p>Check their <code>sdreport()</code> as well - you’ll see they are the same.</p>
+<p>So this is cool. We can now use <code>lapply()</code> or <code>purrr::map()</code> to iterate over the parameter names in <code>basis_params</code> and get the p value for each one in order to construct a test of Fischer’s C. First, we’ll need a function to extract a p-value for a parameter.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">get_p_param <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(obj, a_param){</span>
+<span id="cb18-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(obj) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb18-3">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">p.value =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> </span>
+<span id="cb18-4">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"parameter"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb18-5">    janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb18-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(parameter <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> a_param) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb18-7">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(parameter, pr_z_2) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb18-8">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rename</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">p =</span> pr_z_2)</span>
+<span id="cb18-9">}</span>
+<span id="cb18-10"></span>
+<span id="cb18-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_p_param</span>(obj, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"age_firesev"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  parameter            p
+  &lt;chr&gt;            &lt;dbl&gt;
+1 age_firesev 0.00000135</code></pre>
+</div>
+</div>
+<p>Now we need a function that, given a parameter and a map list where that parameter is fixed will free it up.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1">get_free_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(mod, param, paramlist, fix0_map, data) {</span>
+<span id="cb20-2">  new_map <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> fix0_map[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(fix0_map) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!=</span> param]</span>
+<span id="cb20-3">  </span>
+<span id="cb20-4">  obj <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(</span>
+<span id="cb20-5">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(mod, data),</span>
+<span id="cb20-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">parameters =</span> paramlist,</span>
+<span id="cb20-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">map =</span> new_map,</span>
+<span id="cb20-8">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span></span>
+<span id="cb20-9">  )</span>
+<span id="cb20-10">  </span>
+<span id="cb20-11">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># optimize</span></span>
+<span id="cb20-12">  opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par, obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fn, obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>gr)</span>
+<span id="cb20-13">  </span>
+<span id="cb20-14">  obj</span>
+<span id="cb20-15">  </span>
+<span id="cb20-16">}</span>
+<span id="cb20-17"></span>
+<span id="cb20-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's test it out!</span></span>
+<span id="cb20-19">test_obj <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_free_mod</span>(</span>
+<span id="cb20-20">  keeley_mod_saturated,</span>
+<span id="cb20-21">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">param =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"distance_firesev"</span>,</span>
+<span id="cb20-22">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paramlist =</span> keeley_params_basis,</span>
+<span id="cb20-23">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fix0_map =</span> fix0_map,</span>
+<span id="cb20-24">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> keeley</span>
+<span id="cb20-25">)</span>
+<span id="cb20-26"></span>
+<span id="cb20-27"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_p_param</span>(test_obj, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"distance_firesev"</span>)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  parameter             p
+  &lt;chr&gt;             &lt;dbl&gt;
+1 distance_firesev 0.0876</code></pre>
+</div>
+</div>
+<p>Oh, hey! That works! And……look, there’s our p-value! So, one last step to make this all work - wrap it in an lapply!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">make_basis_fun <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(param){</span>
+<span id="cb22-2">  fit_obj <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_free_mod</span>(</span>
+<span id="cb22-3">    keeley_mod_saturated,</span>
+<span id="cb22-4">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">param =</span> param,</span>
+<span id="cb22-5">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">paramlist =</span> keeley_params_basis,</span>
+<span id="cb22-6">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fix0_map =</span> fix0_map,</span>
+<span id="cb22-7">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> keeley</span>
+<span id="cb22-8">  )</span>
+<span id="cb22-9">  </span>
+<span id="cb22-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">get_p_param</span>(fit_obj, param)</span>
+<span id="cb22-11">}</span>
+<span id="cb22-12"></span>
+<span id="cb22-13"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make it sew</span></span>
+<span id="cb22-14">basis_frame <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">names</span>(basis_params),</span>
+<span id="cb22-15">                      make_basis_fun) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">Reduce</span>(rbind, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> _)</span>
+<span id="cb22-17"></span>
+<span id="cb22-18">basis_frame</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  parameter             p
+  &lt;chr&gt;             &lt;dbl&gt;
+1 firesev_rich     0.0429
+2 age_rich         0.250 
+3 age_cover        0.0669
+4 distance_cover   0.176 
+5 distance_firesev 0.0876</code></pre>
+</div>
+</div>
+<p>Welp - what’s nice here is that we can see that one conditional independence claim is not satisfied - and it’s an interesting one! We can also now calculate Fisher’s C and evaluate it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">c_stat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(basis_frame<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>p))</span>
+<span id="cb24-2">df <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nrow</span>(basis_frame)</span>
+<span id="cb24-3">p <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pchisq</span>(c_stat, df)</span>
+<span id="cb24-4"></span>
+<span id="cb24-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">C =</span> c_stat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">df =</span> df, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">p =</span> p)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         C df          p
+1 22.82381 10 0.01141593</code></pre>
+</div>
+</div>
+<p>Yup - that failure hoses the model. Interestingly, this is slightly different from a similar model in piecewiseSEM, but, it’s likely a rounding bit in the p values or an algorithmic thing.</p>
+</section>
+<section id="model-comparison-in-general" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison-in-general">Model Comparison in General</h2>
+<p>From the above, I hope you can see how you can easily generate AICs from alternate models and do comparisons there. As our objective is the negative log likelihood, our AIC is just 2 * (nll + k). So, let’s compare the first model we fit to the saturated model.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1">AIC_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb26-2"> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(keeley_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par)</span>
+<span id="cb26-3"></span>
+<span id="cb26-4">AIC_saturated <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> keeley_opt_saturated<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>objective <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb26-5">  <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(keeley_opt_saturated<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>par)</span>
+<span id="cb26-6"></span>
+<span id="cb26-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tibble</span>(</span>
+<span id="cb26-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">model =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Our model"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Saturated model"</span>),</span>
+<span id="cb26-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">aic =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(AIC_mod, AIC_saturated)</span>
+<span id="cb26-10">) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb26-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">delta_aic =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">min</span>(aic) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> aic)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 3
+  model             aic delta_aic
+  &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;
+1 Our model       1783.     -1.63
+2 Saturated model 1781.      0   </code></pre>
+</div>
+</div>
+<p>Not that different! Which accords with most of our results above - save that we’re not testing for fit explicitly. Still, this gives another view into how these models compare, and one that is useful for optimizing for out of sample prediction.</p>
+</section>
+<section id="where-do-we-go-from-here" class="level2">
+<h2 class="anchored" data-anchor-id="where-do-we-go-from-here">Where do we go from here?</h2>
+<p>I hope you’ve enjoyed. Obviously, as we’re dealing with SEMs using equation-level estimation, the complexity is pretty daunting. However, there are some real advantages. In the next post, I’ll talk simulation from these models, which is pretty sweet. I’ve explored a bit if some of the above can be automated, and, well, while it can, it’s often with some fairly abstruse coding that is easy to use once written, but often obscures what you are trying to do with your models from you. I still think at some point an semRTMB package might be a good idea that translates lavaan-style models to RTMB and automates some of the above, but…. that might be a minute until I have time to try making that. But I’m sure it’s possible!</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>statistics</category>
+  <category>RTMB</category>
+  <guid>https://imachordata.com/posts/20261125_sem_testing_rtmb.html</guid>
+  <pubDate>Wed, 25 Nov 2026 05:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Piecewise Structural Equation Modeling in RTMB</title>
+  <dc:creator>Jarrett Byrnes</dc:creator>
+  <link>https://imachordata.com/posts/20261120_piecewise_sem_rtmb.html</link>
+  <description><![CDATA[ 
+<header class="global-header" style="background-image:url(/images/bg.jpg)">
+  <section class="header-text">
+    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
+    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
+    <div class="navbar-container">
+      <a class="header-btn" href="../about/">About</a>
+      <a class="header-btn" href="../categories/">Categories</a>
+      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
+      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
+    </div>
+  </section>
+</header>
+<script>
+/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
+(function () {
+  var h = document.querySelector('header.global-header');
+  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
+})();
+</script>
+
+
+
+
+<p>OK. After thinking about Latent Variables the other day and hinting that I was going to get into SEM, lets, well, get into SEM! But with observed variables only at first so that we can demonstrate some simple concepts of how to work with SEM.</p>
+<section id="data-and-model" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-model">Data and Model</h2>
+<p>We’re going to use the classic <a href="https://esajournals.onlinelibrary.wiley.com/doi/full/10.1890/07-0836.1">Keeley dataset</a> that Jim Grace uses in <a href="https://www.amazon.com/Structural-Equation-Modeling-Natural-Systems/dp/0521546532">his book</a> and I use a lot for teaching. It’s in the <a href="https://besjournals.onlinelibrary.wiley.com/doi/10.1111/2041-210X.12512">piecewiseSEM</a> package by <a href="https://jonlefcheck.net/">Jon Lefcheck</a> which we’re kinda re-implementing in RTMB here.</p>
+<p>Just as an aside, if you have things that are alreacy covered by <code>piecewiseSEM</code>, you might want to just use that, as it’s robust and stress-tested. And, as you’ll see, it automates many things that will be, shall we say, a pain in the butt for working with RTMB. So, buyer beware.</p>
+<p>The Keeley data is great as it covered multiple variables regarding how fire severity in Southern Californian coastal hills and mountains. Check out <a href="https://aterui.github.io/biostats/piecewise-sem.html">this fun tutorial</a> on using it in SEM.</p>
+<p>Look at how many fun variables there are!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMB)</span>
+<span id="cb1-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(RTMBdist)</span>
+<span id="cb1-3"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(dplyr) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># for playing with coefficient tables</span></span>
+<span id="cb1-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># for viz</span></span>
+<span id="cb1-5"></span>
+<span id="cb1-6"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"keeley"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">package =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"piecewiseSEM"</span>)</span>
+<span id="cb1-7">GGally<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggpairs</span>(keeley)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/load_keeley-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="our-first-model" class="level2">
+<h2 class="anchored" data-anchor-id="our-first-model">Our First Model</h2>
+<p>We’re gonig to start with a simple well-worn model looking at species richness.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<svg width="672" height="480" viewbox="0.00 0.00 242.09 67.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 63)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-63 238.09,-63 238.09,4 -4,4"></polygon>
+<!-- firesev -->
+<g id="node1" class="node">
+<title>firesev</title>
+<polygon fill="none" stroke="black" points="54.13,-59 -0.04,-59 -0.04,-23 54.13,-23 54.13,-59"></polygon>
+<text text-anchor="middle" x="27.04" y="-36.8" font-family="Times,serif" font-size="14.00">firesev</text>
+</g>
+<!-- rich -->
+<g id="node2" class="node">
+<title>rich</title>
+<polygon fill="none" stroke="black" points="234.09,-59 180.09,-59 180.09,-23 234.09,-23 234.09,-59"></polygon>
+<text text-anchor="middle" x="207.09" y="-36.8" font-family="Times,serif" font-size="14.00">rich</text>
+</g>
+<!-- firesev&#45;&gt;rich -->
+<g id="edge1" class="edge">
+<title>firesev-&gt;rich</title>
+<path fill="none" stroke="black" d="M54.39,-41C85.24,-41 135.57,-41 169.96,-41"></path>
+<polygon fill="black" stroke="black" points="170.08,-44.5 180.08,-41 170.08,-37.5 170.08,-44.5"></polygon>
+</g>
+<!-- cover -->
+<g id="node3" class="node">
+<title>cover</title>
+<polygon fill="none" stroke="black" points="144.09,-36 90.09,-36 90.09,0 144.09,0 144.09,-36"></polygon>
+<text text-anchor="middle" x="117.09" y="-13.8" font-family="Times,serif" font-size="14.00">cover</text>
+</g>
+<!-- firesev&#45;&gt;cover -->
+<g id="edge3" class="edge">
+<title>firesev-&gt;cover</title>
+<path fill="none" stroke="black" d="M54.46,-34.1C62.54,-31.99 71.57,-29.63 80.18,-27.38"></path>
+<polygon fill="black" stroke="black" points="81.2,-30.73 90,-24.82 79.44,-23.96 81.2,-30.73"></polygon>
+</g>
+<!-- cover&#45;&gt;rich -->
+<g id="edge2" class="edge">
+<title>cover-&gt;rich</title>
+<path fill="none" stroke="black" d="M144.49,-24.9C152.57,-27.01 161.6,-29.37 170.19,-31.62"></path>
+<polygon fill="black" stroke="black" points="169.45,-35.04 180.01,-34.18 171.22,-28.27 169.45,-35.04"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Fire severity influences both plant cover and species richness, but cover also influences species richness. Let’s setup an RTMB objective function. In it, we’ll have to include every relationship. We’ll also build for the future and have it take in both data and parameters, and set it up so we can get new predictions. Let’s be robust from the start!</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">keeley_firesev_mod <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(data, params){</span>
+<span id="cb2-2">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># let's goooooooo!</span></span>
+<span id="cb2-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getAll</span>(data, params)</span>
+<span id="cb2-4">  </span>
+<span id="cb2-5">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># What are we observing for later sims and predictions</span></span>
+<span id="cb2-6">  rich <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(rich)</span>
+<span id="cb2-7">  cover_obs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cover</span>
+<span id="cb2-8">  cover <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">OBS</span>(cover)</span>
+<span id="cb2-9">  </span>
+<span id="cb2-10">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cover predictors</span></span>
+<span id="cb2-11">  cover_sigma <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_cover_sigma)</span>
+<span id="cb2-12">  cover_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> cover_int</span>
+<span id="cb2-13">  cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnorm</span>(cover_hat, cover_sigma)</span>
+<span id="cb2-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(cover_hat); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(cover_sigma);</span>
+<span id="cb2-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">REPORT</span>(cover_hat);</span>
+<span id="cb2-16">  </span>
+<span id="cb2-17">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># predictors of richness</span></span>
+<span id="cb2-18">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># GLM with a log link </span></span>
+<span id="cb2-19">  log_rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_obs <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rich_int</span>
+<span id="cb2-20">  rich_hat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_rich_hat) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># inverse link function!</span></span>
+<span id="cb2-21">  theta <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(log_theta)</span>
+<span id="cb2-22">  rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">%~%</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dnbinom2</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">mu =</span> rich_hat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> theta)</span>
+<span id="cb2-23"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  rich %~% dpois(rich_hat)</span></span>
+<span id="cb2-24">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(rich_hat); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">REPORT</span>(rich_hat)</span>
+<span id="cb2-25"></span>
+<span id="cb2-26"></span>
+<span id="cb2-27">}</span></code></pre></div></div>
+</div>
+<p>Notice I did one tricksy thing above - I made the effect on richness have a Negative Binomial error and log link. But, see how simple that was. Just like the glm notation! Note: I actually first wrote this with a poisson error, but, when I got to the quantile residual testing below, oopsies, that doesn’t work. I commented out the likelihood - try it yourself for funsies!</p>
+<p>What should the parameters be here? Let’s try ones.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">keeley_firesev_params <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(</span>
+<span id="cb3-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cover_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_rich =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rich_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-5">  </span>
+<span id="cb3-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev_cover =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cover_int =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb3-8">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_cover_sigma =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>cover)),</span>
+<span id="cb3-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">log_theta =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span></span>
+<span id="cb3-10">)</span></code></pre></div></div>
+</div>
+</section>
+<section id="fit-and-assumption-checks" class="level2">
+<h2 class="anchored" data-anchor-id="fit-and-assumption-checks">Fit and Assumption Checks</h2>
+<p>OK, let’ fit this wee beastie. Just like before, using <code>nlminb()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">cmb <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(f, d) <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">f</span>(p, d)</span>
+<span id="cb4-2"></span>
+<span id="cb4-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RTMB object</span></span>
+<span id="cb4-4">keeley_firesev_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(keeley_firesev_mod, keeley) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb4-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(keeley_firesev_params,</span>
+<span id="cb4-6">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb4-7"></span>
+<span id="cb4-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#optimize</span></span>
+<span id="cb4-9">keeley_firesev_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(keeley_firesev_fit,</span>
+<span id="cb4-10">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span>
+<span id="cb4-11"></span>
+<span id="cb4-12">keeley_firesev_opt<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>message</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "relative convergence (4)"</code></pre>
+</div>
+</div>
+<p>Because we assigned cover and richness as observed variables, we can use oneStepPredict to get their residuals. Note, we’re using <code>trace=FALSE</code> just to make there be no output, and the methods we use for richness are due to its discrete non-gaussian distribution as a variable.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Gaussian cover</span></span>
+<span id="cb6-2">cover_res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">oneStepPredict</span>(keeley_firesev_fit, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">observation.name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"cover"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"oneStepGaussian"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span>
+<span id="cb6-3"></span>
+<span id="cb6-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># NB richness</span></span>
+<span id="cb6-5">rich_res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">oneStepPredict</span>(keeley_firesev_fit, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">observation.name =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rich"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"oneStepGeneric"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">discrete =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">trace =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>)</span></code></pre></div></div>
+</div>
+<p>This is great for cover -</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qqnorm</span>(cover_res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residual)</span>
+<span id="cb7-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qqline</span>(cover_res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residual, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"red"</span>)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">hist</span>(cover_res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residual)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>BUT - richness is negative binomial. So, no longer appropriate. Indeed, let’s look at the residual’s density</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1">rich_res<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>residual <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">density</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">plot</span>()</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>RIGHT - we need quantile residuals. Which I showed how to do <a href="https://imachordata.com/posts/20261107_exploring_rtmb_linear_regression.html#plot-model-fit-and-prediction-interval">previously</a>. As we might use this again, let’s write a function (which, maybe should be in the RTMB package or elsewhere…)</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1">check_quantile_res <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(obj, term, dat, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">nsim =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e3</span>){</span>
+<span id="cb10-2">  sim_mat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">replicate</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1e3</span>, obj<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">simulate</span>()[[term]])</span>
+<span id="cb10-3">  qres <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> DHARMa<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">getQuantile</span>(sim_mat, dat[[term]])</span>
+<span id="cb10-4">  gap<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">qqunif</span>(qres, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">logscale =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"black"</span>)</span>
+<span id="cb10-5">}</span></code></pre></div></div>
+</div>
+<p>Where the above function gets simulations, then gets the quantiles of the observations versus the simulated values and plots then against a uniform distribution. And it works! You might have noticed I commented out a poisson above in the model - put it back in and try it out, you’ll see it DOES NOT work.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">check_quantile_res</span>(keeley_firesev_fit, </span>
+<span id="cb11-2">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">term =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"rich"</span>, </span>
+<span id="cb11-3">                   <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">dat =</span> keeley)</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="coefficients" class="level2">
+<h2 class="anchored" data-anchor-id="coefficients">Coefficients</h2>
+<p>By now, you should be feeling pretty comfortable. So, let’s see how well the coefficients match to what we get from fitting the two pieces separately:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(keeley_firesev_fit)</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sdreport(.) result
+                   Estimate Std. Error
+cover_rich       0.21582926 0.10859862
+firesev_rich    -0.05703019 0.02098951
+rich_int         3.99899169 0.14693328
+firesev_cover   -0.08392560 0.01820157
+cover_int        1.07435193 0.08830882
+log_cover_sigma -1.25973278 0.07453549
+log_theta        2.77631202 0.19997558
+Maximum gradient component: 0.002736626 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1">broom<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy</span>(MASS<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">glm.nb</span>(rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> firesev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> keeley))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  term        estimate std.error statistic   p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)   4.00      0.145      27.5  2.31e-166
+2 cover         0.216     0.107       2.03 4.28e-  2
+3 firesev      -0.0570    0.0206     -2.76 5.71e-  3</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1">broom<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tidy</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lm</span>(cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> firesev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> keeley))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+  term        estimate std.error statistic  p.value
+  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+1 (Intercept)   1.07      0.0893     12.0  2.79e-20
+2 firesev      -0.0839    0.0184     -4.56 1.65e- 5</code></pre>
+</div>
+</div>
+<p>Lovely! Now on to the fun stuff… Because, frankly, if you can stare at a coefficient table and tell me what a model means or answer questions about hypotheses, I worry about how big your brain is. Mine is not! I need to DO things.</p>
+</section>
+<section id="direct-indirect-and-total-effects" class="level2">
+<h2 class="anchored" data-anchor-id="direct-indirect-and-total-effects">Direct, Indirect, and Total Effects</h2>
+<p>We now run into one of the more interesting questions of nonlinear SEM - what does it mean to calculate a direct or indirect effect. In linear SEMs, we can just multiple coefficients, or calculate standardized coefficients and multiply them - or just look at ’em. But it’s wonkier when we have a nonlinear effect. We need to See <a href="https://doi.org/10.1111/brv.70011">Coreria et al.&nbsp;2025</a> for a great guide. I’m here drawing on (Pearl 2014)[<a href="https://pubmed.ncbi.nlm.nih.gov/24885338/" class="uri">https://pubmed.ncbi.nlm.nih.gov/24885338/</a>] for calculations. The core of evaluation of, say, a 1 unit change is the following. Let’s decompose the effect of fire severity on richness going from fire severity = 0 to fire severity = 1 (a 1 unit change). The following will just look like coefficients if you have all linear relationships, but for nonlinear relationships, it will produce much more meaningful results.</p>
+<ol type="1">
+<li><p><strong>Total Effect</strong>: Set fire severity = 0. Calculate cover. Then calculate richness based on fire severity and predicted cover. Repeat for fire severity = 1. Subtract one from the other. This is your total effect.</p></li>
+<li><p><strong>Direct effect</strong>: Set fire severity = 0. Calculate cover. Then calculate richness based on fire severity and predicted cover. Repeat for fire severity = 1, but, hold cover to the same value it was when fire severity = 0. Subtract one from the other. This is your direct effect.</p></li>
+<li><p><strong>Indirect effect</strong>: Set fire severity = 0. Calculate cover. Then calculate richness based on fire severity and predicted cover. Now, calculate cover for fire severity = 1. Now, with fire severity at 0 and cover at the value for fire severity = 1, calculate richness. Subtract one from the other. This is your indirect effect. If you want the summed indirect effect (lots of other mediators), you could also be sneaky and just subtract the direct effect from the total effect.</p></li>
+</ol>
+<p>The other piece to think about - here I have all 1s and 0s. When you have a nonlinear relationship, where you start matters, and hence it is worthwhile to look at all three of these quantities at different base values for fire severity - not just 0! What are some good values? Using quantiles of the observed fire severities is not a bad way to go. Nor are min/median/max approaches. What matters most is your biological question for which you wish to assess total, direct, and indirect effects.</p>
+<p>This is a lot of work to do from output. Fortunately, we can simply add these calculations into our model. Yes, we could go back and rewrite the whole model above. But let’s do something easier. Using some <a href="https://imachordata.com/posts/20261119_splice_to_a_function.html">recent musing</a> on splicing into a function, we can write this new TE/DE/ME bit into our model code and go from there.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1">add_to_end_of_function <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(f, new_stuff, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">lines_back =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>){</span>
+<span id="cb18-2">  s <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(f))</span>
+<span id="cb18-3">  n <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.list</span>(new_stuff)[<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]</span>
+<span id="cb18-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">body</span>(f) <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as.call</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(s[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span><span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">:</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>(s)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>lines_back)], n))</span>
+<span id="cb18-5">  f</span>
+<span id="cb18-6">}</span></code></pre></div></div>
+</div>
+<p>OK, so, this function let’s us smoosh a function and some new lines together. Let’s now write up a block of code that could go into a RTMB objective function to do all of those calculations. We’ll calculate cover under the observed fire severity and fire severity + 1, then calculate all of the richness values with different combinations of fire severity and cover as outlined above. We will use those values to calculate the total, direct, and indirect effects and <code>ADREPORT()</code> those out.</p>
+<p>Last, because these are nonlinear effects, we know that the effect size will vary across a gradient of fire severity (more on that soon). BUT - one thing we can do is look at the effect size of the direct versus indirect effects. The most straightforward way to do this would be ratios - but, nonadditivity and all that, so, let’s look at the log ratio of direct:total, indirect:total, and direct:indirect to get a sense of relative effect size. As all of this is negative and we’ll be using logs, we will have to write a little extra function for log(abs(x)), but that’s trivial.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1">calc_effects <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">quote</span>({</span>
+<span id="cb19-2">  </span>
+<span id="cb19-3">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cover with firesev is predicted already</span></span>
+<span id="cb19-4">  cover_0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> cover_hat</span>
+<span id="cb19-5">  </span>
+<span id="cb19-6">  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cover with firesev + 1 - needed = cover_hat_firesev_plus_1</span></span>
+<span id="cb19-7">  cover_1 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> firesev_cover <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (firesev<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> cover_int</span>
+<span id="cb19-8">  </span>
+<span id="cb19-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># richness at firesev and cover = cover_hat  </span></span>
+<span id="cb19-10">    rich_00 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb19-11">                    firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> firesev <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rich_int)</span>
+<span id="cb19-12"></span>
+<span id="cb19-13">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># richness at firesev and cover = cover_1 </span></span>
+<span id="cb19-14">    rich_11 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb19-15">                    firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (firesev<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rich_int)</span>
+<span id="cb19-16">    </span>
+<span id="cb19-17">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># richness at firesev = 1 and cover = cover_0 </span></span>
+<span id="cb19-18">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># for direct effect</span></span>
+<span id="cb19-19">    rich_10 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_0 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb19-20">                    firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (firesev<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rich_int)</span>
+<span id="cb19-21">    </span>
+<span id="cb19-22">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># richness at firesev and cover = cover_1 for mediation</span></span>
+<span id="cb19-23">    rich_01 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(cover_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> cover_1 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> </span>
+<span id="cb19-24">                    firesev_rich <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (firesev) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> rich_int)</span>
+<span id="cb19-25">  </span>
+<span id="cb19-26">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#Effects</span></span>
+<span id="cb19-27">    total_effect <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rich_11 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> rich_00</span>
+<span id="cb19-28">    direct_effect <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rich_10 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> rich_00</span>
+<span id="cb19-29">    indirect_effect <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> rich_01 <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> rich_00 </span>
+<span id="cb19-30">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(total_effect); <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(direct_effect)</span>
+<span id="cb19-31">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(indirect_effect)</span>
+<span id="cb19-32">    </span>
+<span id="cb19-33">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># log ratio of effects</span></span>
+<span id="cb19-34">    logabs <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(x) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(x))</span>
+<span id="cb19-35">    direct_total_log_ratio <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(direct_effect) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(total_effect)</span>
+<span id="cb19-36">    indirect_total_log_ratio <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(indirect_effect) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(total_effect)</span>
+<span id="cb19-37">    direct_indirect_log_ratio <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(direct_effect) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">logabs</span>(indirect_effect)</span>
+<span id="cb19-38">    </span>
+<span id="cb19-39">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(direct_total_log_ratio)</span>
+<span id="cb19-40">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(indirect_total_log_ratio)</span>
+<span id="cb19-41">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ADREPORT</span>(direct_indirect_log_ratio)</span>
+<span id="cb19-42">  </span>
+<span id="cb19-43">  </span>
+<span id="cb19-44">})</span></code></pre></div></div>
+</div>
+<p>WHEW! That’s a lot. Let’s make a new objective function with all of these calculation embedded in it.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># make a new objective function with calculations in it</span></span>
+<span id="cb20-2">keeley_mod_effects <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">add_to_end_of_function</span>(</span>
+<span id="cb20-3">  keeley_firesev_mod,</span>
+<span id="cb20-4">  calc_effects</span>
+<span id="cb20-5">)</span></code></pre></div></div>
+</div>
+<p>Time to get calculatin’. Now, we <em>could</em> go and make a data frame with a fire severity value of 0 and cover = 0, and then calculate all of this, BUT - because of the nonlinearity, let’s look at the effect sizes across a gradient of fire severity. Indeed, let’s look at the direct and indirect effect of fire severity across all observed fire severity values. We could do some gymnastics and get fixes parameters, etc., but, honestly, it’s easier just to refit this version of the model with our new effect calculations with our original data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># RTMB object</span></span>
+<span id="cb21-2">keeley_effects_fit <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cmb</span>(keeley_mod_effects, keeley) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb21-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">MakeADFun</span>(keeley_firesev_params,</span>
+<span id="cb21-4">                 <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">silent =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>)</span>
+<span id="cb21-5"></span>
+<span id="cb21-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#optimize</span></span>
+<span id="cb21-7">keeley_effects_opt <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">with</span>(keeley_effects_fit,</span>
+<span id="cb21-8">     <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">nlminb</span>(par, fn, gr))</span></code></pre></div></div>
+</div>
+<p>Oh, very nice. That was simple! To see the relative direct versus indirect effects, we can then visualize them all together based on estimates and SEs in <code>sdreport()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1">effects_table <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(keeley_effects_fit) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">select =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"report"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"effect_type"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">grepl</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_effect"</span>, effect_type)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-5">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb22-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>firesev, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span>
+<span id="cb22-7"></span>
+<span id="cb22-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(effects_table, </span>
+<span id="cb22-9">       <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> firesev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> estimate,</span>
+<span id="cb22-10">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> std_error,</span>
+<span id="cb22-11">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> std_error,</span>
+<span id="cb22-12">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> effect_type)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb22-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb22-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb22-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_linerange</span>()</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interesting! The effect is negative. You can see how the direct outweights the indirect. And, most interestingly, the effect size decreases as fire severity increases.</p>
+<p>What about the log-ratios?</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1">log_ratio_table <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sdreport</span>(keeley_effects_fit) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">summary</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">select =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"report"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">as_tibble</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">rownames =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ratio_type"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">filter</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">grepl</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"_ratio"</span>, ratio_type)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-5">  janitor<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean_names</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb23-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">firesev =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(keeley<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>firesev, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>))</span>
+<span id="cb23-7"></span>
+<span id="cb23-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(log_ratio_table, </span>
+<span id="cb23-9">       <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> firesev, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> estimate,</span>
+<span id="cb23-10">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymin =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> std_error,</span>
+<span id="cb23-11">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ymax =</span> estimate <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span> std_error,</span>
+<span id="cb23-12">           <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">color =</span> ratio_type)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb23-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb23-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb23-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_linerange</span>()</span></code></pre></div></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://imachordata.com/posts/20261120_piecewise_sem_rtmb_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Oh - those are constant! Right, even though the absolute effect size changes with the nonlinearity, the relative ratio of effects to one another does not. This is SUPER useful information when quantifying the relative importance of each effect. So, we can take each of these, and then back-transform it to look at the ratios between effect sizes.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1">log_ratio_table <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb24-2">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group_by</span>(ratio_type) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb24-3">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">slice</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>L) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb24-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ungroup</span>() <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb24-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">select</span>(<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span>firesev) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">|&gt;</span></span>
+<span id="cb24-6">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mutate</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">ratio =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(estimate))</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  ratio_type                estimate std_error ratio
+  &lt;chr&gt;                        &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+1 direct_indirect_log_ratio    1.13      0.754 3.09 
+2 direct_total_log_ratio      -0.267     0.180 0.766
+3 indirect_total_log_ratio    -1.39      0.574 0.248</code></pre>
+</div>
+</div>
+<p>This is perhaps one of the useful things yet. The direct effect is 3x stronger than the indirect. Indeed, there is a roughly 75% : 25% direct to indirect breakdown in terms of contribution to the total effect. This is <em>super</em> useful particularly when talking about the relative magnitude of different pathways.</p>
+</section>
+<section id="what-is-new-here-why-should-i-do-this" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-new-here-why-should-i-do-this">What is New Here? Why Should I Do This?</h2>
+<p>For practitioners of SEM, why should we do any of this? Well, if you have been using covariance-based SEM, with its assumptions of linearity and normality, and that’s good enough, don’t! Heck, <a href="https://lavaan.ugent.be">lavaan</a> even lets you have random intercepts now and has a few other tricks up its sleeve. So you might not need this. But….. you can see immediately how things like random slopes, truly multi-level SEMS might fit in very nicely here, even if gaussian and linear.</p>
+<p>For those who are interested in more nonlinear/non-gaussian SEMS, up to this point, you have likely been using <a href="https://jslefche.github.io/piecewiseSEM/">piecewiseSEM</a> - again, you might not need all of this. Except…… you can code anything in an RTMB model. It’s far more flexible in terms of error distribution, and though you have to implement things by hand, if you can dream it, you can include it. So, while this is a harder road to take, you can do a lot more in terms of more flexible systems models.</p>
+</section>
+<section id="the-road-forward" class="level2">
+<h2 class="anchored" data-anchor-id="the-road-forward">The Road Forward</h2>
+<p>I honestly thought I’d write one post on observed variable models and then go back to throw it all together for latents. But, I like that RTMB is fiddly enough that I’ve had to slow down here. Next up, I think I’ll cover assessing whole-model fit (a big goal in SEM) as that requires some rethinking of what you’re doing. Then a separate post on simulation and prediction, as it gets a wee bit trickier in terms of model structure, but, honestly, is kind of satisfying as the counterfactual world is your oyster. Then perhaps back to latents to bring it all together. I’ll ponder a good example for that if I can find one in the literature (or suggest your favorite below!)</p>
+
+
+</section>
+
+ ]]></description>
+  <category>R</category>
+  <category>statistics</category>
+  <category>RTMB</category>
+  <category>SEM</category>
+  <guid>https://imachordata.com/posts/20261120_piecewise_sem_rtmb.html</guid>
+  <pubDate>Fri, 20 Nov 2026 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Splice on to a Function!</title>
   <dc:creator>Jarrett Byrnes</dc:creator>
@@ -9048,270 +11617,6 @@ font-style: inherit;">2</span>)</span></code></pre></div></div>
   <category>statistics</category>
   <guid>https://imachordata.com/posts/20161018_linear-model-power-analysis-with-dplyr.html</guid>
   <pubDate>Tue, 18 Oct 2016 04:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>You Complete Me</title>
-  <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20160205_you-complete-me.html</link>
-  <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
-  <section class="header-text">
-    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
-    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
-    <div class="navbar-container">
-      <a class="header-btn" href="../about/">About</a>
-      <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
-      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
-    </div>
-  </section>
-</header>
-<script>
-/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
-(function () {
-  var h = document.querySelector('header.global-header');
-  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
-})();
-</script>
-
-
-
-
-<p>There’s a feature that is either new or I haven’t noticed before in the new release of <a href="http://blog.rstudio.org/2016/02/02/tidyr-0-4-0/">tidyr</a> that is making me giddy with giddiness. The <code>complete</code> function.</p>
-<p>This seems odd. Why would just one function make you giddy, Jarrett? Why not all of them?</p>
-<p>It’s making me so happy as it solves a problem that just took a substantial degree of thought and waaaay to many lines of code to solve in a massive meta-analysis of kelp abundances I’m working on with colleagues. See, when folk go out and sample multiple species, they often behave in funny ways. Sometimes, when they don’t see any individuals of a species, they’ll mark it off as a 0. Sometimes they won’t, and will just not record even the name of the species.</p>
-<p>The former case is great. The later case can be a pain in the touchus to fix, as all other identifying information for, say, a plot, site, year, etc. needs to be kept constant for the new blank value you are inserting. It took a few tries, but I ended up with a kludgy function that would fix this issue, but it was slow, particularly for data sets with hundreds of plots and 30-40 species (we were looking at other algae, too).</p>
-<p>But along comes <code>complete</code> to make it all quick, painless, and only take a line or so of code.</p>
-<p>So, let’s see an example of a ragged dataset where zeroes are just not included.</p>
-<pre><code>&lt;code lang="r"&gt;kelpdf &lt;- data.frame(
-  Year = c(1999, 2000, 2004, 1999, 2004),
-  Taxon = c("Saccharina", "Saccharina", "Saccharina", "Agarum", "Agarum"),
-  Abundance = c(4,5,2,1,8)
-
-)
-
-kelpdf
-
-##   Year      Taxon Abundance
-## 1 1999 Saccharina         4
-## 2 2000 Saccharina         5
-## 3 2004 Saccharina         2
-## 4 1999     Agarum         1
-## 5 2004     Agarum         8</code></pre>
-<p>So, <em>Agarum</em> wasn’t recorded in 2000. Maybe it was NA, maybe it was 0 - ask your data provider! Assuming it was 0, how do we fill it in?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">library</span>(tidyr)</span>
-<span id="cb2-2"></span>
-<span id="cb2-3">kelpdf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">complete</span>(Year, Taxon)</span>
-<span id="cb2-4"></span>
-<span id="cb2-5"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## Source: local data frame [6 x 3]</span></span>
-<span id="cb2-6"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##</span></span>
-<span id="cb2-7"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##    Year      Taxon Abundance</span></span>
-<span id="cb2-8"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##   (dbl)     (fctr)     (dbl)</span></span>
-<span id="cb2-9"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 1  1999     Agarum         1</span></span>
-<span id="cb2-10"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 2  1999 Saccharina         4</span></span>
-<span id="cb2-11"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 3  2000     Agarum        NA</span></span>
-<span id="cb2-12"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 4  2000 Saccharina         5</span></span>
-<span id="cb2-13"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 5  2004     Agarum         8</span></span>
-<span id="cb2-14"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 6  2004 Saccharina         2</span></span></code></pre></div></div>
-<p>OK, what happened there? Well, complete looked at all possible combinations of Year and Taxon. When there was a missing combination, the remaining columns got an NA.</p>
-<p>Cool!</p>
-<p>But, as I said before, we wanted to have zeroes, not NAs. Well, for that, we have a fill argument.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">kelpdf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">complete</span>(Year, Taxon, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">Abundance =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>))</span>
-<span id="cb3-2"></span>
-<span id="cb3-3"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## Source: local data frame [6 x 3]</span></span>
-<span id="cb3-4"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##</span></span>
-<span id="cb3-5"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##    Year      Taxon Abundance</span></span>
-<span id="cb3-6"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##   (dbl)     (fctr)     (dbl)</span></span>
-<span id="cb3-7"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 1  1999     Agarum         1</span></span>
-<span id="cb3-8"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 2  1999 Saccharina         4</span></span>
-<span id="cb3-9"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 3  2000     Agarum         0</span></span>
-<span id="cb3-10"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 4  2000 Saccharina         5</span></span>
-<span id="cb3-11"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 5  2004     Agarum         8</span></span>
-<span id="cb3-12"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 6  2004 Saccharina         2</span></span></code></pre></div></div>
-<p>Great! We can have different kinds of fills for different columns. This is perfect, as we often had 2-4 measurements of abundance, but only some should be zero. Others should have been NA, as they were never recorded.</p>
-<p>But, there’s another problem <code>complete</code> solves. Sometimes, we deal with subsets of data - say we’ve only pulled out certain taxa - but we know that there is more data there. Let’s say in 2001-2003, these sites were sampled, but there was no <em>Saccharina</em>. Yes, in this subset of a larger data frame we have no rows - but we know we should!</p>
-<p>For that, we can use the <code>full_seq</code> function in combination with complete. <code>full_seq</code> takes a vector of numbers, sorts them, and then based on the period you specify, fills out the sequence. In our case, this is 1 year. So, to fill in those zeroes…</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1">kelpdf <span class="sc" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">%&gt;%</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">complete</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">Year =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">full_seq</span>(Year, <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">period =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">1</span>),</span>
-<span id="cb4-2">                   Taxon,</span>
-<span id="cb4-3">                   <span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">fill =</span> <span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">list</span>(<span class="at" style="color: #657422;
-background-color: null;
-font-style: inherit;">Abundance =</span> <span class="dv" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">0</span>))</span>
-<span id="cb4-4"></span>
-<span id="cb4-5"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## Source: local data frame [12 x 3]</span></span>
-<span id="cb4-6"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##</span></span>
-<span id="cb4-7"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##     Year      Taxon Abundance</span></span>
-<span id="cb4-8"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">##    (dbl)     (fctr)     (dbl)</span></span>
-<span id="cb4-9"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 1   1999     Agarum         1</span></span>
-<span id="cb4-10"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 2   1999 Saccharina         4</span></span>
-<span id="cb4-11"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 3   2000     Agarum         0</span></span>
-<span id="cb4-12"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 4   2000 Saccharina         5</span></span>
-<span id="cb4-13"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 5   2001     Agarum         0</span></span>
-<span id="cb4-14"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 6   2001 Saccharina         0</span></span>
-<span id="cb4-15"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 7   2002     Agarum         0</span></span>
-<span id="cb4-16"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 8   2002 Saccharina         0</span></span>
-<span id="cb4-17"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 9   2003     Agarum         0</span></span>
-<span id="cb4-18"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 10  2003 Saccharina         0</span></span>
-<span id="cb4-19"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 11  2004     Agarum         8</span></span>
-<span id="cb4-20"><span class="do" style="color: #5E5E5E;
-background-color: null;
-font-style: italic;">## 12  2004 Saccharina         2</span></span></code></pre></div></div>
-<p>Note we had to define (or overwrite, really) our Year column, but no worries there. Now look at all of those lovely zeroes. Ah, so nice. I wish this had been around for the last two years… so much head bashing saved.</p>
-
-
-
- ]]></description>
-  <category>R</category>
-  <guid>https://imachordata.com/posts/20160205_you-complete-me.html</guid>
-  <pubDate>Fri, 05 Feb 2016 05:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Other Writings about Parenting &amp; Climate Change by Scientists</title>
-  <dc:creator>Jarrett Byrnes</dc:creator>
-  <link>https://imachordata.com/posts/20160121_other-writings-about-parenting-climate-change-by-scientists.html</link>
-  <description><![CDATA[ 
-<header class="global-header" style="background-image:url(/images/bg.jpg)">
-  <section class="header-text">
-    <div class="site-title"><a href="../">I'm a Chordata! Urochordata!</a></div>
-    <div class="tag-line">Marine Data Science for All, Regardless of Backbone!</div>
-    <div class="navbar-container">
-      <a class="header-btn" href="../about/">About</a>
-      <a class="header-btn" href="../categories/">Categories</a>
-      <a class="header-btn" href="https://bsky.app/profile/jebyrnes.bsky.social">Bluesky</a>
-      <a class="header-btn" href="https://celp-lab.org">Lab Site</a>
-    </div>
-  </section>
-</header>
-<script>
-/* Quarto injects this file inside <main>; move the banner to the top of <body> so it can be full width. */
-(function () {
-  var h = document.querySelector('header.global-header');
-  if (h && h.parentNode !== document.body) document.body.insertBefore(h, document.body.firstChild);
-})();
-</script>
-
-
-
-
-<p>OK, so, I spoke too soon. There are at least a few stabs by scientists writing about being a parent who studies climate/environmental change. As folk send me more, I’ll try and keep this list updated. While there’s some great stuff here, I feel like this is an empty niche for some great writing. Maybe you want to contribute, too? Towards that end, anyone who has a yen, I will be happy to post, repost, or link your own writings here under my <a href="http://www.imachordata.com/category/science-parent/">science parent</a> category.</p>
-<p>OK, the list:</p>
-<p><a href="http://caitlin-press.com/our-books/world-for-my-daughter-a/">A World for my Daughter</a> by Alejandro Frid (hat tip to <a href="https://twitter.com/burt_jenn">Jenn Burt</a>)</p>
-<p><a href="http://www.scilogs.com/mola_mola/a-rational-optimists-reluctant-case-for-panic/">A Rational Optimist’s Reluctant Case for Panic</a> by Tom Webb</p>
-<p><a href="http://conservationbytes.com/2013/01/21/scaring-our-children/">Scaring our children with the future</a> by CJA Bradshaw</p>
-<p><a href="https://www.vice.com/read/should-climate-change-stop-us-from-having-babies-305">Should Climate Change Stop Us from Having Babies?</a> by Eric Holthaus</p>
-
-
-
- ]]></description>
-  <category>climate change</category>
-  <category>science parent</category>
-  <guid>https://imachordata.com/posts/20160121_other-writings-about-parenting-climate-change-by-scientists.html</guid>
-  <pubDate>Thu, 21 Jan 2016 05:00:00 GMT</pubDate>
 </item>
 </channel>
 </rss>
