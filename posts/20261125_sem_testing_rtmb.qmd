@@ -285,13 +285,16 @@ mod_dag <- ggdag::dagify(
 impliedConditionalIndependencies(mod_dag)
 ```
 
-You can also plot the basis set with ggdag
+If you want the basis set... just add an argument
 
 ```{r}
-plot(mod_dag, type = "basis.set")
+impliedConditionalIndependencies(
+  mod_dag,
+  type = "basis.set"
+)
 ```
 
-to see what you'll need to test.
+and that is what you'll need to test.
 
 But, hey, NEAT - that is the *same* as the new parameters we have for the saturated model. It's almost as if, we can use those new parameters, fix each one to 0, then one at the time let them be free, and get the p-value each time. 
 
@@ -302,11 +305,15 @@ OK, so, let's make a new basis set parameter list and an accompanying map.
 
 ```{r}
 basis_params <- list(
+    # rich _||_ age, frsv | covr, dstn
     firesev_rich = 0,
     age_rich = 0,
     
+    # covr _||_ age, dstn | frsv
     age_cover = 0,
     distance_cover = 0,
+    
+    # frsv _||_ dstn | age
     distance_firesev = 0
     
   )
